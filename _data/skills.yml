@@ -1,0 +1,55 @@
+- name: Software Engineer Keywords
+  keywords:
+    - Java
+    - C++
+    - Python
+    - Objective-C
+    - Swift
+    - C#
+    - html
+    - JS
+    - CSS
+    - TypeScript
+    - Go
+    - QT
+    - Design Patterns
+
+- name: Backend Developer keywords
+  keywords:
+    - Spring
+    - Kubernetes
+    - Flink
+    - Docker
+    - Docker Swarm
+    - AWS
+    - Aliyun
+
+- name: Blockchain Developer keywords
+  keywords:
+    - Hyperledger
+    - Fabric
+    - Baas
+    - Smart contract
+
+- name: Mobile Developer Keywords
+  keywords:
+    - Android
+    - iOS
+    - Reverse Engineering
+
+- name: Web Developer Keywords
+  keywords:
+    - React
+    - Bootstrap
+    - Ant
+    - Redux
+
+- name: Game developer keywords
+  keywords:
+    - Unity3d
+    - Open Scene Graph
+    - OpenGL
+    - UGUI
+    - NGUI
+    
+
