@@ -1,0 +1,1721 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-01-21T17:35:34+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">spatialite-android-sdk的编译和使用</title><link href="https://pfcstyle.github.io/2016/12/29/spatialite-android/" rel="alternate" type="text/html" title="spatialite-android-sdk的编译和使用" /><published>2016-12-29T00:00:00+08:00</published><updated>2016-12-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/12/29/spatialite-android</id><content type="html" xml:base="https://pfcstyle.github.io/2016/12/29/spatialite-android/">&lt;blockquote&gt;
+  &lt;p&gt;好记性不如烂笔头&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;项目用到spatialite,记录下使用方法&lt;/p&gt;
+
+&lt;h1 id=&quot;准备工作&quot;&gt;准备工作&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;环境&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;有android studio就行了&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;源码下载&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果想使用最新版本，去google&lt;a href=&quot;https://code.google.com/archive/p/spatialite-android/&quot;&gt;下载&lt;/a&gt;源码吧。&lt;/p&gt;
+
+&lt;p&gt;我这里提供博客日期为止最新的&lt;a href=&quot;https://github.com/pfcstyle/spatialite-android&quot;&gt;源码&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这里还有已经把所有的坑填上了&lt;a href=&quot;https://github.com/pfcstyle/spatialite-android-gradle&quot;&gt;完整工程&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;开始编译&quot;&gt;开始编译&lt;/h1&gt;
+
+&lt;h2 id=&quot;使用android-studio打开项目&quot;&gt;使用android studio打开项目&lt;/h2&gt;
+
+&lt;p&gt;File=&amp;gt;New=&amp;gt;import project&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-29/open-spatialite.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;会报一些错误直接贴图&quot;&gt;会报一些错误，直接贴图&lt;/h3&gt;
+
+&lt;p&gt;缺少compile-sdk 版本&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-29/open-spatialite.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最小skd版本设置错误&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-29/sp-vmin-bug.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;package-name重复
+&lt;img src=&quot;/img/post/2016-12-29/package-name.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;缺少ndk编译模块&lt;/p&gt;
+
+&lt;p&gt;这个首先你应该已经安装了ndk,这个我就不多说了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;img/post/2016-12-29/sourceSets.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;img/post/2016-12-29/property.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这时候sync gradle应该就没有问题了&lt;/p&gt;
+
+&lt;h3 id=&quot;配置工程&quot;&gt;配置工程&lt;/h3&gt;
+
+&lt;p&gt;我没有重新去打包so文件，在&lt;a href=&quot;https://code.google.com/archive/p/spatialite-android/&quot;&gt;这里&lt;/a&gt;有具体的打包流程。但是我有尝试过，确实是很麻烦的一件事，工程中没有完整的make文件，依赖都需要自己去管理，我直接去网上找到了合适的&lt;a href=&quot;http://pan.baidu.com/s/1c25jTfi&quot;&gt;so文件&lt;/a&gt;。&lt;strong&gt;如果你是自己找的so文件，那么，一定要确定是ndk-r8以上版本编译的，否则会有text alloc…类似的错误&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;img/post/2016-12-29/sp-jnilibs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;删除掉demo app目录下的Google Map相关的类，因为需要配置api_key,而且现在google map好像都已经完全更新了，不知道接口变了没有，要验证spatialite 是否成功并不需要展示到map上，所以删除掉&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MappingActivity.java&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MapSelectionOverlay.java&lt;/code&gt;两个类文件,记得修改清单文件&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AndroidManifest.xml&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;img/post/2016-12-29/delete-java.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;现在已经可以编译成功并运行了。但是现在只能在32bit的安卓机上运行，因为so只有32bit的，64bit的机子会找错文件夹，需要再设置一下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;img/post/2016-12-29/abifilter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后再运行就没有任何问题了。&lt;/p&gt;
+
+&lt;h1 id=&quot;spatialite-android-sdk-的使用&quot;&gt;spatialite-android-sdk 的使用&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;首先在build/outputs中找到aar文件，具体aar怎么用可以参考我的&lt;a href=&quot;http://pfcstyle.me/2016/12/28/mapbox-compile/&quot;&gt;上篇&lt;/a&gt;博客。&lt;/li&gt;
+  &lt;li&gt;下载&lt;a href=&quot;http://www.gaia-gis.it/gaia-sins/windows-bin-amd64/&quot;&gt;spatialite-gui&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;普及一下spatialite的基础知识&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;spatialite&amp;gt; select spatialite_version();
+4.0.0
+spatialite&amp;gt; select proj4_version();
+Rel. 4.8.0, 6 March 2012
+spatialite&amp;gt; select geos_version();
+3.3.6-CAPI-1.7.6
+spatialite&amp;gt; select lwgeom_version();
+2.0.2
+spatialite&amp;gt; select HasIconv();
+1
+spatialite&amp;gt; select HasMathSQL();
+1
+spatialite&amp;gt; select HasGeoCallbacks();
+1
+spatialite&amp;gt; select HasProj();
+1
+spatialite&amp;gt; select HasGeos();
+1
+spatialite&amp;gt; select HasGeosAdvanced();
+1
+spatialite&amp;gt; select HasGeosTrunk();
+0
+spatialite&amp;gt; select HasLwGeom();
+1
+spatialite&amp;gt; select HasEpsg();
+1
+spatialite&amp;gt; select HasFreeXL();
+1
+
+輸入由 WGS84 為基準的經緯度（4326 是 WGS84 2D 的 EPSG CRS SRID 編號）：
+spatialite&amp;gt; select AsText(MakePoint(114.1689,22.4518,4326));
+POINT(114.1689 22.4518)
+
+將它轉換為 WGS84 UTM 50N 格網座標（32650 是 WGS84 / UTM zone 50N 的 EPSG CRS SRID 編號）：
+spatialite&amp;gt; select AsText(ST_Transform(MakePoint(114.1689,22.4518,4326),32650));
+POINT(208621.605201 2485587.067636)
+
+將它轉換為 HK1980 格網座標（2326 是 Hong Kong 1980 Grid System 的 EPSG CRS SRID 編號）：
+spatialite&amp;gt; select AsText(ST_Transform(MakePoint(114.1689,22.4518,4326),2326));
+POINT(835447.180293 834705.40192)
+
+利用格網座標計算大埔中心至九龍坑山的距離：
+spatialite&amp;gt; select ST_Distance(MakePoint(208838.738969, 2488246.942923), MakePoint(208621.605201, 2485587.067636));
+2668.72321824495
+
+利用經緯度計算大埔中心至九龍坑山的距離：
+spatialite&amp;gt; select ST_Length(MakeLine(MakePoint(114.17052, 22.475837,4326), MakePoint(114.1689,22.4518,4326)), 1);
+2666.99235712016
+
+
+計算大埔中心至九龍坑山的方位角：
+spatialite&amp;gt; select Degrees(ST_Azimuth(MakePoint(114.1689,22.4518,4326), MakePointZ(114.17052, 22.475837, 437.639187, 4326)));
+3.85568120514838
+
+輸出九龍坑山三角網測站的 KML：
+spatialite&amp;gt; select AsKml(&quot;Cloudy Hill&quot;, &quot;description&quot;, MakePointZ( 835614.056, 837367.172, 440.8, 2326));
+&amp;lt;Placemark&amp;gt;&amp;lt;name&amp;gt;Cloudy Hill&amp;lt;/name&amp;gt;&amp;lt;description&amp;gt;description&amp;lt;/description&amp;gt;&amp;lt;Point&amp;gt;&amp;lt;coordinates&amp;gt;114.170519962613,22.47583709798935,437.6391865937039&amp;lt;/coordinates&amp;gt;&amp;lt;/Point&amp;gt;&amp;lt;/Placemark&amp;gt;
+
+點的 Union：
+spatialite&amp;gt; select astext(ST_Union(MakePoint(114.17052, 22.475837,4326), MakePoint(114.1689,22.4518,4326)));
+MULTIPOINT(114.17052 22.475837, 114.1689 22.4518)
+
+創建有地理數據的表，先是一般格式的欄：
+spatialite&amp;gt; CREATE TABLE TestTable(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+Name TEXT NOT NULL);
+
+創建該地理數據欄，儲存以 WGS84 為基準的點：
+spatialite&amp;gt; SELECT AddGeometryColumn('TestTable', 'Geometry', 4326, 'POINT', 'XY');
+1
+
+加入 R* index，以加快檢索：(添加索引)
+spatialite&amp;gt; SELECT CreateSpatialIndex('TestTable', 'Geometry');
+1
+
+加入點數據：
+spatialite&amp;gt; insert into TestTable (Name, Geometry) VALUES (&quot;a&quot;, MakePoint(114.1689,22.4518,4326));
+spatialite&amp;gt; insert into TestTable (Name, Geometry) VALUES (&quot;b&quot;, MakePoint(114.17052,22.475837,4326));
+
+列出數據（Geometry 未能直接顯示）：
+spatialite&amp;gt; select * from TestTable;
+1|a|
+2|b|
+
+列出數據：
+spatialite&amp;gt; select id, Name, AsText(Geometry) from TestTable;
+1|a|POINT(114.1689 22.4518)
+2|b|POINT(114.17052 22.475837)
+
+利用 R* index 查出在 22.4518N 114.1689E, 22.4520N 114.1690E 內的點：
+spatialite&amp;gt; SELECT  id, Name, AsText(Geometry) FROM TestTable WHERE ROWID IN (SELECT pkid FROM idx_TestTable_Geometry WHERE pkid MATCH RTreeIntersects(114.1689,22.4518,114.1690,22.4520));
+1|a|POINT(114.1689 22.4518)
+
+將點數據轉成 GeoHash（可以文字方式儲存於一般資料庫，以方便查詢某一點附近的其他點）：
+spatialite&amp;gt; SELECT Name, GeoHash(Geometry) FROM TestTable;
+a|wecptzpr0ny5c1eeemw3
+b|wecpy587jztypffhy099
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;sdk的简单使用，我直接按照demo理一下。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//上面这些获取数据库路径的代码就省略了
+...
+
+// 1.
+//Open the database 打开数据库 
+jsqlite.Database db = new jsqlite.Database();
+db.open(dbFile.toString(), jsqlite.Constants.SQLITE_OPEN_READONLY);
+
+// 2.
+// Test prepare statements  测试下准备好了没有？我的理解就是查询一下数据库的基本状态和信息，可能真正使用时也是用不到的。 
+String query = &quot;SELECT name, peoples, AsText(Geometry) from Towns where peoples &amp;gt; 350000&quot;;
+Stmt st = db.prepare(query);
+st.step();
+st.close();
+
+// 3.测试各种查询  你们也可以把我上面简单介绍的其他命令拿来测试下
+// Test various queries
+db.exec(&quot;select Distance(PointFromText('point(-77.35368 39.04106)', 4326), PointFromText('point(-77.35581 39.01725)', 4326));&quot;,
+		cb);
+db.exec(&quot;SELECT name, peoples, AsText(Geometry), GeometryType(Geometry), NumPoints(Geometry), SRID(Geometry), IsValid(Geometry) from Towns where peoples &amp;gt; 350000;&quot;,
+		cb);
+db.exec(&quot;SELECT Distance( Transform(MakePoint(4.430174797, 51.01047063, 4326), 32631), Transform(MakePoint(4.43001276, 51.01041585, 4326),32631));&quot;,
+		cb);
+
+		
+// 4.
+// Close the database 搞完了就关闭 
+db.close();
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;最后，这里还有一个&lt;a href=&quot;https://www.gaia-gis.it/fossil/libspatialite/wiki?name=spatialite-android-tutorial&quot;&gt;官方的tutorial&lt;/a&gt;，虽然很老了，但是api基本没变化，大家可以找到更多关于使用spatialite的使用方法。感兴趣的可以看下。&lt;/p&gt;
+
+&lt;p&gt;好了，就到这里了。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><category term="spatialite-android" /><summary type="html">好记性不如烂笔头</summary></entry><entry><title type="html">记mapbox-android-sdk的修改编译过程</title><link href="https://pfcstyle.github.io/2016/12/28/mapbox-compile/" rel="alternate" type="text/html" title="记mapbox-android-sdk的修改编译过程" /><published>2016-12-28T00:00:00+08:00</published><updated>2016-12-28T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/12/28/mapbox-compile</id><content type="html" xml:base="https://pfcstyle.github.io/2016/12/28/mapbox-compile/">&lt;blockquote&gt;
+  &lt;p&gt;好记性不如烂笔头&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;接到一个android地图项目，准备使用&lt;a href=&quot;https://www.mapbox.com/&quot;&gt;mapbox&lt;/a&gt;作为底图。但是有些地方需要修改一下，主要是读取一些自己的数据等，所以这里得重新编译so及sdk。本篇不会记录如何修改，更不会去讲C++相关的任何知识，只是记录编译过程。
+如果你是需要编译其他平台的sdk,看完本篇，也是完全没有问题的。&lt;/p&gt;
+
+&lt;h1 id=&quot;准备工作&quot;&gt;准备工作&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;环境&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;mac OS X EI Capitan(Command)&lt;/li&gt;
+  &lt;li&gt;or Linux(Command)&lt;/li&gt;
+  &lt;li&gt;or windows Cygwin&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;本人使用的是环境1。&lt;/p&gt;
+
+&lt;p&gt;另外，一个建议是，mac的硬盘比较小，我的是128的固态，编译完成可能有10多G，所以，我最后是把工程放到了移动硬盘里，也建议大家这样做(在编译开始前你就该放到移动硬盘里，否则会因为路径的问题，导致下载的好的包及配置文件失效)。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;源码下载&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在&lt;a href=&quot;https://github.com/mapbox/mapbox-gl-native&quot;&gt;github&lt;/a&gt;下载源码。仓库tag和branch很多，clone的话很费时间，我个人的建议是选择一个tag或者分支就可以了，直接download zip比较快。
+我这里选择的是&lt;a href=&quot;https://github.com/mapbox/mapbox-gl-native/archive/release-android-v4.2.1.zip&quot;&gt;android-v4.2.1&lt;/a&gt;,这是当前最新的android分支。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;配置必要的环境&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;既然是要编译android sdk,那么，基础的android的环境配置是肯定要配置好的。主要是两个环境变量:&lt;/p&gt;
+
+&lt;p&gt;在主要是两个环境变量:&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ANDROID_HOME&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NDK&lt;/code&gt;的路径。&lt;/p&gt;
+
+&lt;p&gt;在&lt;em&gt;~/bash_profile&lt;/em&gt;的末尾添加：&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//当然  这里是我的路径  大家如果和我的不同  记得换啊
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ANDROID_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/Users/developer/Library/Android/sdk
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$ANDROID_HOME&lt;/span&gt;/tools:&lt;span class=&quot;nv&quot;&gt;$ANDROID_HOME&lt;/span&gt;/platform-tools
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:/Users/developer/Library/Android/sdk/ndk-bundle
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;开始编译&quot;&gt;开始编译&lt;/h1&gt;
+
+&lt;p&gt;可以开始编译了。使用终端进入&lt;em&gt;mapbox-gl-native&lt;/em&gt;(这个名字不是固定的，你下载源码的方式和版本不同，名称都是不一样的，新手不必纠结)的根目录。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Downloads/mapbox-gl-native-release-android-v4.2.1
+make android
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;不同make命令对应的cpu平台不同，如下：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;android=&amp;gt;armeabi-v7
+
+android-lib-$1:
+
+$1=&amp;gt;(arm-v5 arm-v7 arm-v8 x86 x86-64 mips)
+
+arm-v8 =&amp;gt; arm64-v8a
+
+arm-v7 =&amp;gt; armeabi-v7a
+
+arm-v5 =&amp;gt; armeabi
+
+x86 =&amp;gt; x86
+
+x86-64 =&amp;gt; x86_64
+
+mips =&amp;gt; mips
+
+如：make android-lib-x86
+
+如果想编译全部平台:
+
+make apackage (编译android所有cpu架构,建议使用这个)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这些都可以从根目录的&lt;strong&gt;makefile&lt;/strong&gt;文件里得到，这里粘贴makefile的一部分文件。&lt;/p&gt;
+
+&lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#### Android targets ###########################################################
+&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;ANDROID_ENV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; platform/android/scripts/toolchain.sh
+&lt;span class=&quot;nv&quot;&gt;ANDROID_ABIS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; arm-v5 arm-v7 arm-v8 x86 x86-64 mips
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;style-code-android&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;style-code-android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;$(BUILD_DEPS)&lt;/span&gt;
+	node platform/android/scripts/generate-style-code.js
+
+&lt;span class=&quot;err&quot;&gt;define&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;ANDROID_RULES&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;build/android-$1/$(BUILDTYPE)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;style-code-android&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;build/android-$1/$(BUILDTYPE)/toolchain.cmake&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;platform/android/scripts/toolchain.sh build/android-$1/$(BUILDTYPE)&lt;/span&gt;
+	&lt;span class=&quot;nv&quot;&gt;$(ANDROID_ENV)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;/toolchain.cmake
+
+&lt;span class=&quot;nl&quot;&gt;build/android-$1/$(BUILDTYPE)/Makefile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;build/android-$1/$(BUILDTYPE)/toolchain.cmake platform/android/config.cmake&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; cmake ../../.. &lt;span class=&quot;nt&quot;&gt;-G&lt;/span&gt; Ninja &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;-DCMAKE_TOOLCHAIN_FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;/toolchain.cmake &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;-DCMAKE_BUILD_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;-DCMAKE_EXPORT_COMPILE_COMMANDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+		&lt;span class=&quot;nt&quot;&gt;-DMBGL_PLATFORM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;android
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-lib-$1&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;android-lib-$1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;build/android-$1/$(BUILDTYPE)/Makefile&lt;/span&gt;
+	&lt;span class=&quot;nv&quot;&gt;$(NINJA)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$(NINJA_ARGS)&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$(JOBS)&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt; all
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-$1&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;android-$1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-lib-$1&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platform/android &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew &lt;span class=&quot;nt&quot;&gt;--parallel&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--max-workers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$(JOBS)&lt;/span&gt; assemble&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;apackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-lib-$1&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;endef&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;$(foreach&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;abi,$(ANDROID_ABIS),$(eval&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$(call&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;ANDROID_RULES,$(abi))))&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-arm-v7&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-test&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;android-test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platform/android &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew testDebugUnitTest &lt;span class=&quot;nt&quot;&gt;--continue&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-test-apk&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;android-test-apk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platform/android &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew assembleDebug &lt;span class=&quot;nt&quot;&gt;--continue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew assembleAndroidTest &lt;span class=&quot;nt&quot;&gt;--continue&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apackage&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;apackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platform/android &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew &lt;span class=&quot;nt&quot;&gt;--parallel-threads&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$(JOBS)&lt;/span&gt; assemble&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-generate-test&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;android-generate-test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+	node platform/android/scripts/generate-test-code.js
+
+&lt;span class=&quot;c&quot;&gt;#### Miscellaneous targets #####################################################
+&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;style-code&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;style-code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+	node scripts/generate-style-code.js
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clean&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;clean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ./build &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	        ./platform/android/MapboxGLAndroidSDK/build &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	        ./platform/android/MapboxGLAndroidSDKTestApp/build &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	        ./platform/android/MapboxGLAndroidSDK/src/main/jniLibs &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	        ./platform/android/MapboxGLAndroidSDKTestApp/src/main/jniLibs &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+	        ./platform/android/MapboxGLAndroidSDK/src/main/assets
+
+&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;distclean&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;distclean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clean&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ./mason_packages
+	&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ./node_modules
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以看到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.PHONY:&lt;/code&gt;后面的就是各种命令。其他平台类似。&lt;/p&gt;
+
+&lt;p&gt;先打针强心剂，在编译过程中，需要下载很多依赖，我在编译完成之后，整个文件夹有10.58G…我用了一整晚。&lt;/p&gt;
+
+&lt;p&gt;这样如果顺利的话，编译so就完成了。但是可能会有问题，看末尾问题解释。&lt;/p&gt;
+
+&lt;p&gt;另外说下，编译完成后，so文件在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mapbox-gl-native/platform/android/MapboxGLAndroidSDK/src/main/jniLibs&lt;/code&gt;下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/jniLibs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;mapbox-android-sdk-的打包和使用&quot;&gt;mapbox-android-sdk 的打包和使用&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;打包&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;使用android studio打开platform下的android工程&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/open-android.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后直接运行就好了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/open-android-after.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在build的output下就可以找到aar文件了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/cp-after.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用aar&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这里我直接还以上述android工程里的测试工程为例。&lt;/p&gt;
+
+&lt;p&gt;** 拷贝aar到目标工程的libs(没有自己创建)下&lt;/p&gt;
+
+&lt;p&gt;这里我将aar重命名了一下，大家随意，后有图。&lt;/p&gt;
+
+&lt;p&gt;** 配置builid.gradle&lt;/p&gt;
+
+&lt;div class=&quot;language-gradle highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;android&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;err&quot;&gt;···&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;repositories&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;flatDir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;dirs&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'libs'&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;dependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//    compile(project(':MapboxGLAndroidSDK')) {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//        transitive = true&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//    }&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mapbox-android-sdk-4.2.1'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;ext:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'aar'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;err&quot;&gt;···&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;//mapbox aar dependences&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.squareup.okhttp3:okhttp:3.4.1'&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Exclude Guava to avoid an unnecessary transitive dependency&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// See: https://github.com/mapbox/mapbox-gl-native/issues/7129&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'com.mapzen.android:lost:1.1.1'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;exclude&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.google.guava'&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Mapbox Android Services&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'com.mapbox.mapboxsdk:mapbox-java-services:1.3.1@jar'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;transitive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//mapbox aar dependences&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;···&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/cp-config.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;需要说下的是，打包的aar不会自动打包依赖，&lt;strong&gt;除非是你自己手动添加对应的依赖aar或者jar到目录下&lt;/strong&gt;，只是用gradle管理依赖的话，是不会自动打包到aar中的。&lt;/p&gt;
+
+&lt;p&gt;** 记得添加上access_token&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/access_token.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;问题解释&quot;&gt;问题解释&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;某个包总是下载失败&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我想说的是，多试几次，有代理，vpn什么的都连上，多试几次。从终端输出里可以看出来，这些包都是aws上的，但是亚马逊的服务器对我们来说太不稳定了，所以，试试vpn什么的，会好很多。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在x86等手机上提示找不到so&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果你是用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make android&lt;/code&gt;命令来编译的，那么就只有arm-v7的so,64bit的运行没有问题(没有全部测试，用三星S7 edge测试没有问题)，但其他32bit平台就不行了，所以建议你编译上其他平台的包。使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make apackage&lt;/code&gt;编译。&lt;/p&gt;
+
+&lt;p&gt;很多问题在前面步骤中已经自动避过了，现在反而没什么需要多说了，祝好运吧。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><category term="mapbox" /><category term="libmapbox-gl" /><summary type="html">好记性不如烂笔头</summary></entry><entry><title type="html">Android-Animation-Gesture</title><link href="https://pfcstyle.github.io/2016/11/17/Animation-Gesture/" rel="alternate" type="text/html" title="Android-Animation-Gesture" /><published>2016-11-17T00:00:00+08:00</published><updated>2016-11-17T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/11/17/Animation-Gesture</id><content type="html" xml:base="https://pfcstyle.github.io/2016/11/17/Animation-Gesture/">&lt;blockquote&gt;
+  &lt;p&gt;代码就像DNA,随机组合过程中总会出现毛病。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;animation&quot;&gt;Animation&lt;/h1&gt;
+
+&lt;p&gt;这里不会介绍动画的详细用法，只是记录一些小问题。&lt;/p&gt;
+
+&lt;h3 id=&quot;动画无效&quot;&gt;动画无效&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;c1&quot;&gt;//这里要时刻注意，你传进去要变化的动画纬度参数是否是正确的&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;TranslateAnimation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TranslateAnimation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;        
+&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAnimationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AnimationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;            
+  &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;                
+	&lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVisibility&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VISIBLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;            
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt;   
+   &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationEnd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt;   
+   &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationRepeat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;        
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;        
+&lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startAnimation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;注意上述代码，在动画开始时，使mEditView显示，在动画前，它是隐藏的。这里需要注意的是，如果你在xml文件中(或者使用代码)设置的是gone，而不是invisible，那么，你在设置动画参数时，传入的mEditView.getHeight()就是0，从而导致没有动画发生。&lt;/p&gt;
+
+&lt;h3 id=&quot;动画之后出现异常情况&quot;&gt;动画之后出现异常情况&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nc&quot;&gt;TranslateAnimation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TranslateAnimation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//注意这里，如果设为true，动画结束后，将会强制保持结束时的状态。 &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//animation.setFillAfter(true);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAnimationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AnimationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;	
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;  &lt;/span&gt;	
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;            
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationEnd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ 		&lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVisibility&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;INVISIBLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationRepeat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startAnimation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里是隐藏的动画，在上面&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;//animation.setFillAfter(true);&lt;/code&gt;这句，会导致&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onAnimationEnd&lt;/code&gt;中的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mEditView.setVisibility(View.INVISIBLE);&lt;/code&gt;无效，准确来说，mEditView保持了动画结束的状态，在屏幕外面。&lt;/p&gt;
+
+&lt;p&gt;但是，不仅如此，setFillAfter(true)这句，还使得事件与view分离了。所以，你往往会点到一些看起来诡异的东西。&lt;/p&gt;
+
+&lt;h1 id=&quot;gesture&quot;&gt;Gesture&lt;/h1&gt;
+
+&lt;h3 id=&quot;view自身具有的手势监听已经很全面了&quot;&gt;view自身具有的手势监听已经很全面了。&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mHeaderView.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+);
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    
+              	    final float y = motionEvent.getY();
+                    Log.d(&quot;downY:&quot;+y);
+                    // Remember where we started (for dragging)
+                    mLastTouchY = y;
+                    // Save the ID of this pointer (for dragging)
+                    break;
+                }
+                    
+                case MotionEvent.ACTION_MOVE: {
+                    // Find the index of the active pointer and fetch its position
+                    final float y = motionEvent.getY();
+                    Log.d(&quot;downY:&quot;+mLastTouchY+&quot;===moveY:&quot;+y);
+                    
+                    // Only move if the ScaleGestureDetector isn't processing a gesture.
+                    //                                        if (!mScaleDetector.isInProgress()) {
+                    // Calculate the distance moved
+                    //                                        final float dx = x - mLastTouchX;
+                    final float dy = y - mLastTouchY;
+                    
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mQueryListView.getLayoutParams();
+                    params.topMargin = (int) (params.topMargin+dy);
+                    mQueryListView.setLayoutParams(params);
+                    
+                    break;
+                }
+                    
+                case MotionEvent.ACTION_UP: {
+
+                    break;
+                }
+            }
+            return true;
+        }
+    });
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里展示的是使用一个手指上下拖动view的事例。注意，这里监听的是一个控件，而不是整个window。在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACTION_MOVE&lt;/code&gt;中，拿到的y是你的手指在目标view中的坐标，因此，这里只需要减去&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACTION_DOWN&lt;/code&gt;时的初始坐标，就能得到每次需要移动的距离。&lt;/p&gt;
+
+&lt;p&gt;注意，目标view随着你的手指在移动，所以，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACTION_MOVE&lt;/code&gt;中拿到的y一般波动很小，因为你的手指可能一直在目标view的同一个位置。&lt;/p&gt;
+
+&lt;p&gt;你的手指每移动1像素，目标view就会跟随移动1像素。&lt;/p&gt;
+
+&lt;h3 id=&quot;gesturedetector&quot;&gt;GestureDetector&lt;/h3&gt;
+
+&lt;p&gt;在遇到极其复杂的交互情况，可能会需要使用到这里的手势监听器。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mGestureDetector = new GestureDetector(mActivity,UpdateFeaturesProtocol.this);
+//这里需要注意，必须设置这一句，否则在GestureDetector的实现中，只能响应down,press,longpress三个事件 mHeaderView.setLongClickable(true);
+ mHeaderView.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+                return mGestureDetector.onTouchEvent(motionEvent);
+        }
+    });
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;下面是对&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OnGestureListener&lt;/code&gt;的实现&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private float startPointY;
+    
+    /**
+     * Gesture
+     * @param motionEvent
+     * @return
+     */
+    //点下时响应  第一个响应
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        Log.d(&quot;down==&amp;gt;e2.x:&quot;+motionEvent.getX()+&quot;====e2.y:&quot;+motionEvent.getY());
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mQueryListView.getLayoutParams();
+        startPointY = motionEvent.getY();
+        return false;
+    }
+    
+    //几乎跟down一样，但是在down后
+    //比如down响应需要0.1s,那么press需要0.2s
+    //如果你的手指接触屏幕时间不足0.2s，该事件不会响应
+    //这里的0.1s和0.2s皆为假设，没有测过
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+        Log.d(&quot;press==&amp;gt;e2.x:&quot;+motionEvent.getX()+&quot;====e2.y:&quot;+motionEvent.getY());
+        
+    }
+    
+    //单击
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        Log.d(&quot;singletap==&amp;gt;e2.x:&quot;+motionEvent.getX()+&quot;====e2.y:&quot;+motionEvent.getY());
+        return false;
+    }
+    
+    //滚动 在手指滑动过程中一直响应
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        Log.d(&quot;scroll==&amp;gt;e2.y:&quot;+motionEvent1.getY()+&quot;===e1.y:&quot;+motionEvent.getY()+&quot;distanceY:&quot;+v1);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mQueryListView.getLayoutParams();
+        params.topMargin = (int) (params.topMargin + (motionEvent1.getY()-startPointY));
+        mQueryListView.setLayoutParams(params);
+        return false;
+    }
+    
+    //长按
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+        Log.d(&quot;longpress==&amp;gt;e2.x:&quot;+motionEvent.getX()+&quot;====e2.y:&quot;+motionEvent.getY());
+    }
+    
+    //扔？
+    //此事件是指用手指快速滑动并快速抬起的情况
+    //注意，此事件在scoll后是不一定响应的。
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                           float velocityY) {
+        Log.d(&quot;fling==&amp;gt;e2.x:&quot;+e2.getX()+&quot;====e2.y:&quot;+e2.getY());
+        
+        return false;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;功能和直接使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mHeaderView.setOnTouchListener&lt;/code&gt;完全一样，思路也是完全一样的。解释都在代码注释里。&lt;/p&gt;
+
+&lt;p&gt;需要注意的是里面没有监听手指抬起的地方，所以你还需要回到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setOnTouchListener&lt;/code&gt;中使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACTION_UP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><category term="Animation" /><category term="Gesture" /><summary type="html">代码就像DNA,随机组合过程中总会出现毛病。</summary></entry><entry><title type="html">OOP-Six-Principles</title><link href="https://pfcstyle.github.io/2016/11/14/OOP-principles/" rel="alternate" type="text/html" title="OOP-Six-Principles" /><published>2016-11-14T00:00:00+08:00</published><updated>2016-11-14T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/11/14/OOP-principles</id><content type="html" xml:base="https://pfcstyle.github.io/2016/11/14/OOP-principles/">&lt;blockquote&gt;
+  &lt;p&gt;面对正确的事物，我们往往无法确定它是正确的&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;面向对象的六大原则&quot;&gt;面向对象的六大原则&lt;/h1&gt;
+
+&lt;h3 id=&quot;单一职责原则single-responsibility-principle&quot;&gt;单一职责原则(Single Responsibility Principle)&lt;/h3&gt;
+
+&lt;p&gt;这一原则虽然简单，但其实争议最大，也是最难以界定的。一个类只应该做自己职责范围内的事，这个职责本身就很难确定，是功能职责？是架构职责？还是其他什么职责？每一个程序员心中可能都有不同的界定。&lt;/p&gt;
+
+&lt;p&gt;假定我们以功能职责为标准，类比经理(一般manager类)，作为一把手，是不是什么事都要亲自去做？那么其实其他人(财务，市场等)的职能是否都属于经理呢？这样显然不合理，各种事都该各个部门分别去做，然后经理来同意指挥协调(manager去调用各个实现类的方法)。&lt;/p&gt;
+
+&lt;p&gt;其实这是六大原则中的另外一种原则了，我想说的事，这个原则，大家需要靠自己的实践经验去形成自己的风格，没有真正的对错，只要你的风格稳定不变。&lt;/p&gt;
+
+&lt;h3 id=&quot;开闭原则open-close-principle&quot;&gt;开闭原则(Open Close Principle)&lt;/h3&gt;
+
+&lt;p&gt;这也是一个很基础的设计原则，对扩展，开放；对修改，封闭。&lt;/p&gt;
+
+&lt;p&gt;一个项目，免不了维护和升级。而在维护升级时，为了避免引入新的bug，我们应该尽量扩展新的功能，而不是直接在旧代码中进行修改。&lt;/p&gt;
+
+&lt;p&gt;当然，这只是理想的情景，实际上我们很多时候都不得不去修改旧的代码。但我们也应该尽可能的避免。&lt;/p&gt;
+
+&lt;p&gt;避免的方法就是使用开闭原则，尽可能的去覆写父类的方法，或者尽可能的去设计公共接口，然后去实现它们。&lt;/p&gt;
+
+&lt;h3 id=&quot;里氏替换原则liskov-substitution-principle&quot;&gt;里氏替换原则(Liskov Substitution Principle)&lt;/h3&gt;
+
+&lt;p&gt;简单来说，在我们进行组合依赖时，应该尽可能的依赖的是借口或者父类(包括抽象类)，这样我们在覆写了父类或者是实现类借口的方法之后，就可以在使用时随意的替换。&lt;/p&gt;
+
+&lt;p&gt;比如现在经理辞职换了一个人，经理职权不变，但是每个人行使职权的风格和方式却是不同的，这个经理只需要重新实现接口，就可以用自己的风格去快速执掌公司类。&lt;/p&gt;
+
+&lt;h3 id=&quot;依赖倒置原则depedence-inversion-principle&quot;&gt;依赖倒置原则(Depedence Inversion Principle)&lt;/h3&gt;
+
+&lt;p&gt;这个，简单解释就是接口去决定细节实现。高层次的模块不去关心低层次的细节实现，而是设计类各种接口去掉用。而低层次模块则是根据高层次的调用的接口去实现细节。&lt;/p&gt;
+
+&lt;p&gt;比如，经理管理财务方面，要看财务报表，于是定义了一个看财务报表的接口，那么下面的财务部就得去实现这个接口，提供财务报表。至于这个财务报表，是机器统计的还是会计自己画的，经理是不会关心的。&lt;/p&gt;
+
+&lt;h3 id=&quot;接口隔离原则interfacesegregation-principles&quot;&gt;接口隔离原则(InterfaceSegregation Principles)&lt;/h3&gt;
+
+&lt;p&gt;这其实就是解决第一个原则中提出的问题，接口应该尽可能的小。&lt;/p&gt;
+
+&lt;p&gt;你不能设计一个大的经理的接口，里面声明类各个部门的所有方法，而是应该分成多个接口，每一个接口再去声明各自的功能。甚至，你应该再去进一步细分，比如每个部门有一个总管，下面各个职员，负责各个细节。&lt;/p&gt;
+
+&lt;h3 id=&quot;迪米特原则law-of-demeter-or-least-knowledge-principle&quot;&gt;迪米特原则(Law of Demeter or Least Knowledge Principle)&lt;/h3&gt;
+
+&lt;p&gt;一个对象，应该对所依赖的对象有最少的了解。简单来说，你最好就不要了解，各个功能都在对方的类中实现，你只管调用这个函数就好了。&lt;/p&gt;
+
+&lt;p&gt;比如，经理现在要市场部提供公司最大的客户的相关信息给他，市场部内有一个列表，保存了所有客户的信息。这时候，应该是市场部内部进行筛选拿到最大客户信息返给经理，而不是经理自己取出市场部的所有客户信息，自己遍历一遍拿出最大客户信息。&lt;/p&gt;
+
+&lt;h1 id=&quot;怎么看呢&quot;&gt;怎么看呢&lt;/h1&gt;
+
+&lt;p&gt;这些原则都是老生常谈了，今天我并不是为了再次介绍它们，而是想说说以前自己的困惑，自己的想法，但，只是自己的观点，谈不上对错。&lt;/p&gt;
+
+&lt;h2 id=&quot;维护与实现&quot;&gt;维护与实现&lt;/h2&gt;
+
+&lt;p&gt;这是我刚开始接触各种设计模式最大的困惑，我知道怎么去设计架构以符合设计模式，也知道，写出的代码，应该扩展性好，解耦好，健壮性好……可是，一味的去符合设计模式，导致的结果可能会是，代码可读性差，难以维护。这个可能有争论，实际上，这里讨论的是设计模式的使用的度的问题。&lt;/p&gt;
+
+&lt;p&gt;比如，你大量的使用接口，那么，你在调试代码时，可能并不知道它到底是那一个子类实现的功能，你还需要按图索骥，一层层的去寻找调用赋值的位置，去寻找到实现的位置，然后再去分析有没有bug。&lt;/p&gt;
+
+&lt;p&gt;比如，按照接口隔离原则，可能每一个功能，都要去单独设计一个接口，那么，不可避免的是，你将会分成很多很多类文件，这对于维护来说，也无疑是增加了很大难度。&lt;/p&gt;
+
+&lt;p&gt;……&lt;/p&gt;
+
+&lt;p&gt;所以，现在是一个如何适度的问题。到底是不是每一个功能都需要单独设计一个接口，到底是不是每一个地方都需要这么好的扩展性，都需要使用父类，接口，抽象类？&lt;/p&gt;
+
+&lt;p&gt;程序员都知道，我们应该根据需求来说事。虽然从来都没遇到不变的需求，但是，好在大方向总是不变的，所以需求还是具有一定的参考性的。&lt;/p&gt;
+
+&lt;p&gt;那么，根据需求，以及我们的经验，我觉得，模块化的东西，往往需要充分的解耦合，并且应该有好的扩展性。因为我们可能在很多地方使用，以及本项目之外；大而全的东西，可以牺牲这些特性，因为它们可重用的机会比较少，比如android的activity，ios的controller。&lt;/p&gt;
+
+&lt;p&gt;总之，需要变化的地方，才是导致工程覆灭的潜在因素，我们的设计模式，我们的软件工程，针对的，应该是这些地方。&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="OOP" /><category term="Principles" /><summary type="html">面对正确的事物，我们往往无法确定它是正确的</summary></entry><entry><title type="html">Read-Android-Blog</title><link href="https://pfcstyle.github.io/2016/11/07/Read-Android-Blog/" rel="alternate" type="text/html" title="Read-Android-Blog" /><published>2016-11-07T00:00:00+08:00</published><updated>2016-11-07T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/11/07/Read-Android-Blog</id><content type="html" xml:base="https://pfcstyle.github.io/2016/11/07/Read-Android-Blog/">&lt;blockquote&gt;
+  &lt;p&gt;站在巨人的肩膀上&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;最近在&lt;a href=&quot;http://gold.xitu.io/&quot;&gt;掘金&lt;/a&gt;上读了一些好的android blog,有些心得，总结一下。&lt;/p&gt;
+
+&lt;h1 id=&quot;译开发安卓apps我所努力学习到的三十多条宝贵经验&quot;&gt;&lt;a href=&quot;http://yifeng.studio/2016/10/27/android-develop-30-things-that-experience-made-me-learn-the-hard-way/&quot;&gt;［译］开发安卓Apps，我所努力学习到的三十多条宝贵经验&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;其中的某些推荐博客需要翻墙才可浏览。&lt;/p&gt;
+
+&lt;h3 id=&quot;选择与使用第三方库&quot;&gt;选择与使用第三方库&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;你应该选择大众的选择，一是因为经得起考验，二是因为用的人多，总会用贡献者加入，作者维护起来也会更加用心。&lt;/li&gt;
+  &lt;li&gt;选择可信的作者或者组织。&lt;/li&gt;
+  &lt;li&gt;选择文档比较全面的。&lt;/li&gt;
+  &lt;li&gt;选择专精某一功能的库，而不是大而全的库。否则这个库一旦停止维护，你可能要面临全部重构的危险。&lt;/li&gt;
+  &lt;li&gt;使用第三方库时，你应该对其再次封装，防止在你的工程需要替换这个库的时候导致的大范围代码修改。&lt;/li&gt;
+  &lt;li&gt;一定要理解第三方库的原理，但不到万不得已，一定不要修改第三方库！&lt;/li&gt;
+  &lt;li&gt;应该养成积累自己的轮子的习惯。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;避免过度绘制&quot;&gt;避免过度绘制&lt;/h3&gt;
+
+&lt;p&gt;首先你要学会使用android的一个检测工具：&lt;em&gt;android手机=&amp;gt;开发者选项=&amp;gt;调试GPU强制渲染(Debug GPU Overdraw)&lt;/em&gt; 打开此选项之后，你会发现自己的手机屏幕充满了各种色块,如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-11-07/overdraw.png&quot; alt=&quot;&quot; /&gt;
+本图来源于https://riggaroo.co.za/optimizing-layouts-in-android-reducing-overdraw/&lt;/p&gt;
+
+&lt;p&gt;各种颜色的含义：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;原色&lt;/strong&gt;：没有过度绘制&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;蓝色&lt;/strong&gt;：&lt;em&gt;1xOverdraw&lt;/em&gt;-绘制了2次&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;绿色&lt;/strong&gt;：&lt;em&gt;2xOverdraw&lt;/em&gt;-绘制了3次&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;粉色&lt;/strong&gt;：&lt;em&gt;3xOverdraw&lt;/em&gt;-绘制了4次&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;红色&lt;/strong&gt;：&lt;em&gt;4xOverdraw&lt;/em&gt;-绘制了5次&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ok,现在已经知道了如何绘制，那么接下来就是如何fix&lt;/p&gt;
+
+&lt;p&gt;这个要根据具体的项目来解决，其实无非是一个原则，重复绘制的地方看如何避免绘制。一些常见的问题，比如你设置的背景色是否真的需要？你设置的背景图片，你的某些空间是否真的需要一直显示？还有，很重要的一点，你得有一个好的产品设计。
+你可以从&lt;a href=&quot;https://riggaroo.co.za/portfolio/book-dash-android-app/&quot;&gt;这里&lt;/a&gt;得到更多关于过度绘制的信息&lt;/p&gt;
+
+&lt;h3 id=&quot;如何分包按功能&quot;&gt;如何分包(按功能)&lt;/h3&gt;
+&lt;p&gt;这个，怎么说呢，各执一词，我从android转到ios,又从ios转回android,就我的经验来说，我觉得应该按照功能来分包更加的科学，如何分包，解决的无非是维护时如何快速寻找到目标的问题。显然，如果你按照功能模块进行分包，可以快速的定位一个区域，然后，在功能模块的包内，你再根据你选用的设计模式来分包，这样就能很快的找到你的目标。如果你是刚开始就按照设计模式分包，甚至按照控件分包，那么，等待你的，就是眼花缭乱。&lt;/p&gt;
+
+&lt;h3 id=&quot;如何加快gradle的编译速度&quot;&gt;如何加快gradle的编译速度&lt;/h3&gt;
+&lt;p&gt;现在的android的开发者大多都已经转到android studio阵营了，而且不得不承认，android studio比eclipse要更加专业，功能也更强大。但是，当你的项目大到一定程度时，每次要启动一次应用都会变得异常煎熬。&lt;/p&gt;
+
+&lt;p&gt;在项目根目录下的gradle.properties中加入：&lt;/p&gt;
+
+&lt;div class=&quot;language-gradle highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//# The Gradle daemon aims to improve the startup and execution time of Gradle. &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//# When set to true the Gradle daemon is to run the build.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;daemon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# Specifies the JVM arguments used for the daemon process.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# The setting is particularly useful for tweaking memory settings.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# Default value: -Xmx10248m -XX:MaxPermSize=256m&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jvmargs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xmx2048m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;XX:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MaxPermSize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;XX:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HeapDumpOnOutOfMemoryError&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UTF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# When configured, Gradle will run in incubating parallel mode.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# This option should only be used with decoupled projects. More details, visit&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# http://www.gradle.org/docs/current/userguide/multi_project_builds.html&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//#sec:decoupled_projects&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parallel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# Enables new incubating mode that makes Gradle selective when configuring projects.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# Only relevant projects are configured which results in faster builds for large multi-projects.&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;configureondemand&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;具体的原理我就不再记录了，不是我想关注的，如果你想要了解，请看&lt;a href=&quot;https://medium.com/@cesarmcferreira/speeding-up-gradle-builds-619c442113cb#.n6fmf1pv6&quot;&gt;这里&lt;/a&gt;（需要梯子）&lt;/p&gt;
+
+&lt;h3 id=&quot;svg-代替-png&quot;&gt;SVG 代替 PNG&lt;/h3&gt;
+
+&lt;p&gt;当年xcode6开始支持pdf作为矢量图时，着实给我我们的UI省了一大把力，UI只需要确定一个屏幕尺寸，出一套pdf图给我们就可以了，xcode会自动生成3个尺寸的png给我们，而我们的调用仍然想以前一样简单。&lt;/p&gt;
+
+&lt;p&gt;现在我看到android也可以这样搞了，给我们一套svg或者psd的图，我们也可以自己生成其他尺寸的图，同样也是不会有任何锯齿的。不过遗憾的是4.4及以下的系统是不支持的，所以恐怕现在还是不能大范围使用的，毕竟5.0以下系统还不能直接抛弃。&lt;/p&gt;
+
+&lt;h1 id=&quot;android-app优化之内存优化序&quot;&gt;&lt;a href=&quot;http://www.jianshu.com/p/48475df838d9&quot;&gt;Android App优化之内存优化(序)&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;至于说GC机制以及系统切换APP的内存管理机制，这里都不会解释，不懂得可以参考上述博文，写的很详细生动。&lt;/p&gt;
+
+&lt;p&gt;我要总结的是：&lt;em&gt;为了不要让系统kill掉我们的App, 可以从进程级别, 内存消耗量等几个方面进行优化。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;内存监测工具memory-monitor&quot;&gt;内存监测工具Memory Monitor&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-11-07/memorymonitor.jpg&quot; alt=&quot;一图看懂Memory Monitor&quot; /&gt;
+此图来源于:http://blog.lmj.wiki/2016/10/25/app-opti/app_opt_mat/&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;① GC按钮, 点击执行一次GC操作.&lt;/li&gt;
+  &lt;li&gt;② Dump Java Heap按钮, 点击会在该调试工程的captures目录生成一个类似这样”com.anly.githubapp_2016.09.21_23.42.hprof”命名的hprof文件, 并打开Android Studio的HPROF Viewer显示该文件内容.&lt;/li&gt;
+  &lt;li&gt;③ Allocation Traking按钮, 点击一次开始, 再次点击结束, 同样会在captrures目录生成一个文件, 类似”com.anly.githubapp_2016.09.21_23.48.alloc”, alloc后缀的文件, 并打开Allocation Tracker视图展示该文件内容.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这里只简单提一下android studio自带的监测工具，具体使用，可以参照上面的博文系列。&lt;/p&gt;
+
+&lt;h3 id=&quot;内存泄漏的常见可能&quot;&gt;内存泄漏的常见可能&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Context泄漏&lt;/strong&gt;。某些全局对象没有使用Application级别的对象，而是使用的指定的activity的Context，导致activity难以回收。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;内部类泄漏&lt;/strong&gt;。当内部类持有当前类的引用，并且内部类的生命周期长与当前类，就会导致当前类的内存泄漏。如Handler泄露, Thread泄露等。其实，当我们发生这种错误时，一般lint会进行提示，并且建议我们使用使用Static + WeakReference的方式，这正是正确的解决方式，而不是使用@SuppressLint(“HandlerLeak”)来逃避提示。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Register泄漏&lt;/strong&gt;。对于观察者，广播，Listener等，添加与删除没有成对出现，从而导致的内存泄露，这个只能希望程序员们多长点心了。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;资源泄漏&lt;/strong&gt;。当你操作文件或者数据库等等时，打开资源之后，请一定记得关闭资源。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bitmap泄漏&lt;/strong&gt;。Bitmap没有及时的调用recycle()回收导致内存泄漏。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;有效使用内存的建议&quot;&gt;有效使用内存的建议&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;合理使用Service Service的及时关闭可以让我们节省内存消耗, 对于一次性的任务, 建议使用IntentService. &lt;/li&gt;
+  &lt;li&gt;使用优化后的数据容器 使用Android提供的SparseArray, SparseBooleanArray, LongSparseArray来代替HashMap的使用. 关于HashMap，ArrayMap，SparseArray, &lt;a href=&quot;http://www.jianshu.com/p/7b9a1b386265&quot;&gt;这篇文章&lt;/a&gt;有个比较直观的比较, 可以看下. &lt;/li&gt;
+  &lt;li&gt;少用枚举enum结构 相比于静态常量(static final), enum会耗费双倍的内存. &lt;/li&gt;
+  &lt;li&gt;避免创建不必要的对象 诸如一些临时对象, 特别是循环中的. &lt;/li&gt;
+  &lt;li&gt;考虑实现onTrimMemory(), 在此根据当前的内存状态做些处理. &lt;/li&gt;
+  &lt;li&gt;Bitmap的合理有效使用. 对于Bitmap的使用, 建议直接查看官方开发文档中的&lt;a href=&quot;https://developer.android.com/training/displaying-bitmaps/index.html&quot;&gt;高效显示Bitmap&lt;/a&gt;(需翻墙). &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>PfCStyle</name></author><category term="android" /><category term="blog" /><summary type="html">站在巨人的肩膀上</summary></entry><entry><title type="html">ESXi+vCenter6.0虚拟化集群配置(一)</title><link href="https://pfcstyle.github.io/2016/10/20/vsPhere-vCenter-etc1/" rel="alternate" type="text/html" title="ESXi+vCenter6.0虚拟化集群配置(一)" /><published>2016-10-20T00:00:00+08:00</published><updated>2016-10-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/10/20/vsPhere-vCenter-etc1</id><content type="html" xml:base="https://pfcstyle.github.io/2016/10/20/vsPhere-vCenter-etc1/">&lt;blockquote&gt;
+  &lt;p&gt;如果你在现实中遇到难以解决的问题，不妨尝试把问题虚拟化一下！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;esxi安装前准备&quot;&gt;ESXI安装前准备&lt;/h1&gt;
+
+&lt;p&gt;首先说下本次实验的物理的结构,画张图吧：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/v-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;解释一下，图中的master和client是准备部署puppet的server和agent的，但是本系列文章不会记录这些，只是纯粹介绍vsphere系列的部署，我会抽时间再写些文章记录puppet的使用。图中的Source是记录部署自己的yum仓库。&lt;/p&gt;
+
+&lt;h3 id=&quot;下载vsphere系列软件&quot;&gt;下载vsphere系列软件&lt;/h3&gt;
+
+&lt;p&gt;方法一，直接去&lt;a href=&quot;https://my.vmware.com/cn/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere_with_operations_management/6_0&quot;&gt;官网&lt;/a&gt;下载，但是比较麻烦，要注册账号什么的，你们可以自己搞搞。&lt;/p&gt;
+
+&lt;p&gt;方法二，提供&lt;a href=&quot;http://pan.baidu.com/s/1bQ8YeU&quot;&gt;百度云下载&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;下载ESXI和vCenter即可，其他的本系列文章不会介绍。另外vCenter本次实验使用的是linux版本，即VCSA(Vmware vCenter Server Appliance
+),但我也会介绍下windows版本的安装。&lt;/p&gt;
+
+&lt;h3 id=&quot;安装硬件说明&quot;&gt;安装硬件说明&lt;/h3&gt;
+
+&lt;p&gt;ESXI并不是兼容所有的硬件的，因此，如果你不是在使用虚拟机做实验，那么在配置硬件时，必须要选购ESXI支持的硬件，这里的硬件主要说的是cpu,网卡和存储设备。你可以在&lt;a href=&quot;http://www.vmware.com/resources/compatibility/search.php&quot;&gt;这里&lt;/a&gt;去查询你将要选购的硬件是否被ESXI兼容。如果你懒得麻烦，那么，英特尔系列的产品是确定兼容的。&lt;/p&gt;
+
+&lt;h1 id=&quot;安装esxi&quot;&gt;安装ESXI&lt;/h1&gt;
+
+&lt;p&gt;安装ESXI跟安装普通系统是没有什么区别的，制作一个启动U盘，然后U盘启动即可。下面直接看图吧，很简单：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;配置esxi主机&quot;&gt;配置ESXI主机&lt;/h1&gt;
+
+&lt;p&gt;配置ESXI主机主要是配置网络，按照规划好的来&lt;/p&gt;
+
+&lt;p&gt;ESXI主机开机后是这样的，这里下面的ip等网络信息都是已经配置好的。
+&lt;img src=&quot;/img/post/2016-10-20/esxi_home.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;F2进入设置界面
+&lt;img src=&quot;/img/post/2016-10-20/esxi_login.png&quot; alt=&quot;&quot; /&gt;
+进入界面后，选择&lt;strong&gt;Configure Management Network&lt;/strong&gt;,然后设置ipv4的地址
+&lt;img src=&quot;/img/post/2016-10-20/toIPv4.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/img/post/2016-10-20/IPv4-configure.png&quot; alt=&quot;&quot; /&gt;
+配置dns,这里dns我们还没有配置，按照规划先设置好就行，后续还会讲配置域控与dns
+&lt;img src=&quot;/img/post/2016-10-20/DNS-configure.png&quot; alt=&quot;&quot; /&gt;
+设置一下域
+&lt;img src=&quot;/img/post/2016-10-20/domain-name.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;设置shell和ssh选项
+&lt;img src=&quot;/img/post/2016-10-20/troubleshoot.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/troubleshoot-configure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi-shell.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;连接esxi主机&quot;&gt;连接ESXI主机&lt;/h1&gt;
+
+&lt;h3 id=&quot;web-client连接&quot;&gt;Web Client连接&lt;/h3&gt;
+
+&lt;p&gt;web页面管理还是最方便的，直接在浏览器输入ESXI主机的ip或者域名即可：
+&lt;img src=&quot;/img/post/2016-10-20/esxi_web_home.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_web_login.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_manage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;具体怎么使用下节说。&lt;/p&gt;
+
+&lt;h3 id=&quot;desktop-client连接&quot;&gt;desktop Client连接&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_desktop.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/desktop_manager.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;具体使用，下节介绍。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="ESXi6.0" /><category term="vCenter6.0" /><category term="vsPhere" /><summary type="html">如果你在现实中遇到难以解决的问题，不妨尝试把问题虚拟化一下！</summary></entry><entry><title type="html">Android一些小技巧及小知识点总结(持续更新)</title><link href="https://pfcstyle.github.io/2016/09/24/Android-Skills-Total/" rel="alternate" type="text/html" title="Android一些小技巧及小知识点总结(持续更新)" /><published>2016-09-24T00:00:00+08:00</published><updated>2016-09-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/09/24/Android-Skills-Total</id><content type="html" xml:base="https://pfcstyle.github.io/2016/09/24/Android-Skills-Total/">&lt;blockquote&gt;
+  &lt;p&gt;不积跬步，无以至千里；不积小流，无以成江海；&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其实早就想开一个这样的blog,这样每次写代码有感的时候就可以来记录一下。由于拖延等等问题，今天才补上这么个开始，那么，就开始吧，万事，总得有个开始才好继续。&lt;/p&gt;
+
+&lt;h1 id=&quot;android隐藏标题栏的区别&quot;&gt;Android隐藏标题栏的区别&lt;/h1&gt;
+
+&lt;p&gt;Android隐藏标题栏可以在清单文件里设置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-android&quot;&gt;&amp;lt;!--这种方式是直接移除了标题栏，不占位--&amp;gt;
+&amp;lt;activity android:name=&quot;.MainActivity&quot;
+            android:theme=&quot;@android:style/Theme.Black.NoTitleBar&quot;/&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也可以在onCreate方法中设置&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-android&quot;&gt;//这种方式只是隐藏了  但是还会占位
+requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;举例&quot;&gt;举例&lt;/h3&gt;
+
+&lt;p&gt;我们应该都遇到过适配华为等带有虚拟按键的屏幕，这些按键占据了屏幕的底部，使我们的底部布局被遮挡。按照网上大部分的说法是因为沉浸式布局导致的，只需要设置&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-android&quot;&gt;&amp;lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+                android:id=&quot;@+id/fl_main&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;match_parent&quot;
+             android:fitsSystemWindows=&quot;true&quot;&amp;gt;//设置这一句
+
+&amp;lt;/FrameLayout&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是这会导致虚拟按键虚拟按键背景色会变成透明色。必须关闭沉浸式布局才行（可能吧，没有研究）。&lt;/p&gt;
+
+&lt;p&gt;可是突然发现你有可能根本没有配置沉浸式布局，也出现了这种情况。这时候，就是我上面说的代码设置隐藏标题栏的占位的原因了。你改为使用xml设置即可更正。&lt;/p&gt;
+
+&lt;p&gt;#编译出的gradle问题&lt;/p&gt;
+
+&lt;h3 id=&quot;编译时出现errorno-service-of-type-factory-available-in-projectscopeservices&quot;&gt;编译时出现Error:No service of type Factory available in ProjectScopeServices.&lt;/h3&gt;
+
+&lt;p&gt;在根目录的build.gradle中，直接将’ classpath com.github.dcendents:android-maven-gradle-plugin:1.3’更新到1.4.1就可以解决问题了。&lt;/p&gt;
+
+&lt;p&gt;其实gradle出问题解决方式相对固定：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;查看gradle版本号&lt;/li&gt;
+  &lt;li&gt;查看build_tools版本号&lt;/li&gt;
+  &lt;li&gt;查看gradle/gradle-wrapper.properties是否是互联网路径(有些公司可能为了保持统一，将gradle的zip包下到本地，并在此文件中配置为本地路径)&lt;/li&gt;
+  &lt;li&gt;在settings的gradle中查看是否选择了&lt;em&gt;Use local gradle distribution&lt;/em&gt;  一般改为&lt;em&gt;Use default gradle wrapper&lt;/em&gt;即可&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;viewpager的数据更新&quot;&gt;viewPager的数据更新&lt;/h1&gt;
+
+&lt;p&gt;更新的函数就是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mPager.getAdapter().notifyDataSetChanged();&lt;/code&gt;。但是，并非任何情况都会生效。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Override getItemPosition in your PagerAdapter like this:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public int getItemPosition(Object object) {
+    return POSITION_NONE;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这是为了通知viewpager所有的view失效，此时调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;notifyDataSetChanged()&lt;/code&gt;函数就会触发更新。如果你需要使用到这个函数，那么，你应该再去写一个public函数去实现相同的功能。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;to setTag()method in instantiateItem() when instantiating a new view. Then instead of using notifyDataSetChanged(), you can use findViewWithTag() to find the view you want to update.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这种方式相当于你自己管理viewpager的view,然后手动去更新，但是显然不适合用于删除或者添加数据的情况。&lt;/p&gt;
+
+&lt;h1 id=&quot;as22及以后版本failed-to-crunch-file-&quot;&gt;AS2.2及以后版本，Failed to crunch file ！&lt;/h1&gt;
+
+&lt;p&gt;这个问题的根本原因是文件名（包括路径）太长了，AndroidStudio里路径名不能超过240个字符，所以，尝试把工程放到根目录试试。&lt;/p&gt;
+
+&lt;h1 id=&quot;unsatisfiedlinkerror&quot;&gt;UnsatisfiedLinkError&lt;/h1&gt;
+
+&lt;p&gt;你可以在&lt;a href=&quot;https://docs.oracle.com/javase/7/docs/api/java/lang/UnsatisfiedLinkError.html&quot;&gt;这里&lt;/a&gt; 看到这个错误的解释，简单来说，就是虚拟机找不到native函数的声明。这时候，你可以去看看你的library有没有load对，然后看看jni里面的命名是不是正确。&lt;/p&gt;
+
+&lt;h1 id=&quot;systemloadlibrary找不到&quot;&gt;System.Load(library)找不到&lt;/h1&gt;
+
+&lt;p&gt;首先，可能是笔误，名字弄错了。&lt;/p&gt;
+
+&lt;p&gt;其他隐蔽的可能就是，cpu平台的问题。&lt;/p&gt;
+
+&lt;p&gt;arm-v8 =&amp;gt; arm64-v8a&lt;/p&gt;
+
+&lt;p&gt;arm-v7 =&amp;gt; armeabi-v7a&lt;/p&gt;
+
+&lt;p&gt;arm-v5 =&amp;gt; armeabi&lt;/p&gt;
+
+&lt;p&gt;x86 =&amp;gt; x86&lt;/p&gt;
+
+&lt;p&gt;x86-64 =&amp;gt; x86_64&lt;/p&gt;
+
+&lt;p&gt;mips =&amp;gt; mips&lt;/p&gt;
+
+&lt;p&gt;mips-64 =&amp;gt; mips64&lt;/p&gt;
+
+&lt;p&gt;在编译so时，有时候需要你能选择正确的cpu平台。&lt;/p&gt;
+
+&lt;p&gt;或者去过滤你的cpu平台，下面的是删除了64bit平台，防止apk只去64bit中寻找so,导致一些so找不到。当然，这个需要看你具体需要的so包。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;android {
+    ....
+    defaultConfig {
+        ....
+        ndk {
+            abiFilters &quot;armeabi&quot;, &quot;armeabi-v7a&quot;, &quot;x86&quot;, &quot;mips&quot;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><category term="Java" /><category term="jNI" /><summary type="html">不积跬步，无以至千里；不积小流，无以成江海；</summary></entry><entry><title type="html">iOS一些小技巧及小知识点总结(持续更新)</title><link href="https://pfcstyle.github.io/2016/08/25/Ios-OC-Skills-Total/" rel="alternate" type="text/html" title="iOS一些小技巧及小知识点总结(持续更新)" /><published>2016-08-25T00:00:00+08:00</published><updated>2016-08-25T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/08/25/Ios-OC-Skills-Total</id><content type="html" xml:base="https://pfcstyle.github.io/2016/08/25/Ios-OC-Skills-Total/">&lt;blockquote&gt;
+  &lt;p&gt;不积跬步，无以至千里；不积小流，无以成江海；&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其实早就想开一个这样的blog,这样每次写代码有感的时候就可以来记录一下。由于拖延等等问题，今天才补上这么个开始，那么，就开始吧，万事，总得有个开始才好继续。&lt;/p&gt;
+
+&lt;h1 id=&quot;没有不能自定义的控件&quot;&gt;没有不能自定义的控件&lt;/h1&gt;
+
+&lt;p&gt;苹果官方提供了许多的精美控件，但是出于某些原因，一些控件给出的自定义接口不足，致使我们无法定制出符合自己需求的控件，从而不得不每次自己去构建控件，这不免让人感到遗憾与无力。接下来，我就总结几种修改官方控件的方式，有了这几种方式，在我看来，几乎没有无法修改的控件了。&lt;/p&gt;
+
+&lt;h3 id=&quot;最优雅的自定义方式重写&quot;&gt;最优雅的自定义方式（重写）&lt;/h3&gt;
+
+&lt;p&gt;最优雅的自定义方式，无非就是继承父控件进行重写了。这种方式对于大部分官方控件都是有效的，举个栗子：你现在要重写tablecell,满足表格距屏幕左右边界都是20pt.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;//继承tableviewcell
+@interface BaseCell : UITableViewCell
+
+@end
+//重写setframe
+@implemention BaseCell
+-(void)setFrame:(CGRect)frame{
+    frame.origin.x += 20;
+    frame.size.width -= 2 * 20;
+    [super setFrame:frame];
+}
+
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如何，是不是非常简单。当然，我相信大家对这种方式其实是非常熟悉的，因为这算是我们最为常用的了。这种方式对于那些特殊控件，比如UISwitch是没有作用的，无论你怎么修改frame，它都不会改变。但是，这并不是说没有办法了。&lt;/p&gt;
+
+&lt;h3 id=&quot;有点暴力的自定义方式transform&quot;&gt;有点暴力的自定义方式（transform)&lt;/h3&gt;
+
+&lt;p&gt;UISwitch控件，宽高都是固定不变的，而且，个人感觉，有点大啊，不是那么好看。那么，如何更改呢？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;UISwitch *switch = [[UISwitch alloc] init];
+switch.transform = CGAffineTransformMakeScale(0.75, 0.75);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;什么感觉？简单！而且这样基本不会有任何其他影响。不认识&lt;a href=&quot;http://www.cocoachina.com/ios/20150104/10816.html&quot;&gt;CGAffineTransform(变换)&lt;/a&gt;？ 认识一下，很强大，制作动画的利器。嗯，想优雅一点？结合继承：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;//继承UISwitch
+@interface MySwitch : UISwitch
+
+@end
+//重写setframe
+@implemention MySwitch
+-(void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+	//ios7以后 uiswitch大小更改为（51,31）
+	float scaleX = frame.size.width/51;
+	float scaleY = frame.size.height/31;
+	self.transform = CGAffineTransformMakeScale(scaleX,scaleY);
+}
+
+@end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ok，这样，你就可以任意的更改Uiswitch的大小了。我就不截图了，大家试一下就知道了，没有任何问题。&lt;/p&gt;
+
+&lt;h3 id=&quot;最暴力的自定义方式subview&quot;&gt;最暴力的自定义方式（subview）&lt;/h3&gt;
+
+&lt;p&gt;什么意思呢？之前使用父控件，这次又来折腾子view了！这次以什么为例呢？UIAlertController你怕不怕？到了ios9,uialertview已经废弃了，现在全面使用uialertcontroller。但是不管使用什么，最让开发者头疼的是，明明很好的一个控件，却大多数时候都需要自定义，因为主界面颜色完全无法自定义。。。。谁说的？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;//实例化alertcontroller
+UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot;message:message preferredStyle:UIAlertControllerStyleAlert];
+//添加按钮
+[alert addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:^(UIAlertAction*action) {NSLog(@&quot;点击了确定按钮&quot;);}]];
+//设置字体颜色（包括按钮的）
+[alert.view setTintColor:[UIColor redColor]];
+//获取alertview的主窗体子view
+UIView *view = alert.view.subviews[0];
+view = view.subviews[0];
+
+
+//这是uialertview没有字时的大小  注意alert的大小跟提示信息的多少是有关系的，所以，这里104不是固定的  但是可以自己动态计算
+UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 270, 104)];
+//圆角 经测试  只要小于13就不会露出背景白色
+imageView.layer.cornerRadius = 10.f;
+[imageView setBackgroundColor:[UIColor greenColor]];
+[view insertSubview:imageView atIndex:0];
+//嗯  一不小心又想起来一种更简单的方法  使用下面两句 上面的就不用了  core animation框架
+//还是很强大的  这样也不用去计算高度了 哈哈
+//view.layer.backgroundColor = [UIColor grayColor].CGColor;
+//view.layer.cornerRadius = 13.f;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ok,diy成功。&lt;/p&gt;
+
+&lt;h3 id=&quot;隐藏的自定义方式kvc&quot;&gt;隐藏的自定义方式（KVC)&lt;/h3&gt;
+
+&lt;p&gt;其实官方控件中，许多属性虽然没有开放出来，但是苹果其实提供了一种类似于java反射机制的编程方式：KVC。KVC应该不用介绍了，不懂得就直接去搜索吧，我这里只是介绍它在自定义界面上的应用。这次就说UITextField的PlaceHolder属性，你想要斜体，想换个字体，想换个颜色？看代码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;[_nameTF setValue:kTextViewPlaceHolderFont forKeyPath:@&quot;_placeholderLabel.font&quot;];
+[_nameTF setValue:kTextViewPlaceColor forKeyPath:@&quot;_placeholderLabel.textColor&quot;];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ok了，现在去看看你的placeholder什么样吧，那个字体和颜色自己自定义哈。&lt;/p&gt;
+
+&lt;h1 id=&quot;debug&quot;&gt;Debug&lt;/h1&gt;
+
+&lt;p&gt;为了开发方便，我们经常会有很多调试设置，但是这些设置在release模式下又是不需要，这时候我们往往会需要这些(例如)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#ifdef DEBUG
+//调试状态
+#define MyLog(...) NSLog(__VA_ARGS__)
+#else
+//发布状态
+#define MyLog(...)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么，这个DEBUG是在哪里设置的呢？在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;Target &amp;gt; Build Settings &amp;gt; Preprocessor Macros &amp;gt; Debug&quot;&lt;/code&gt; 里有一个”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DEBUG=1&lt;/code&gt;“。如果你把&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DEBUG&lt;/code&gt;改成&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;haha&lt;/code&gt;呢?试一下！&lt;/p&gt;
+
+&lt;h1 id=&quot;状态栏显示与隐藏&quot;&gt;状态栏显示与隐藏&lt;/h1&gt;
+
+&lt;h3 id=&quot;app启动时隐藏状态栏&quot;&gt;app启动时隐藏状态栏&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在&lt;em&gt;info.plist&lt;/em&gt;里面  &lt;em&gt;Status bar is initially hidden&lt;/em&gt; 设置为 &lt;em&gt;YES&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;如果你想启动后显示，在appdelegate.m中加入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;其他页面的状态栏的显示与隐藏&quot;&gt;其他页面的状态栏的显示与隐藏&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;//在对应的控制器实现下面的方法
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+	//状态栏样式
+    return UIStatusBarStyleLightContent;
+}
+- (BOOL)prefersStatusBarHidden
+{
+    return YES; // 返回NO表示要显示，返回YES将hiden
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;uiscrollview捏合手势关闭&quot;&gt;UIScrollView捏合手势关闭&lt;/h1&gt;
+
+&lt;p&gt;UIScrollView的自动缩放虽然方便，但也挡不住产品设计部的怪癖好，就是要停，要通过双击放大缩小，这就要求只关闭手势，而要保留缩放功能。通过查看&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIScrollView.h&lt;/code&gt;发现有&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pinchGestureRecognizer&lt;/code&gt;属性，很是兴奋，于是&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//在初始化函数中添加  但是并没有作用！！==！  我这里是继承的UIScrollView
+[self removeGestureRecognizer:self.pinchGestureRecognizer];
+self.pinchGestureRecognizer.enabled = NO;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;后来，我是这样解决的：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//在代理设置捏合手势失效
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    scrollView.pinchGestureRecognizer.enabled = NO;
+        return _photoImageView;
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这样就是可以的，我表示很方！！并不理解第一种方式为什么不行,猜测是在其他地方才初始化的pinch,不得而知。&lt;/p&gt;
+
+&lt;h3 id=&quot;双击放大缩小&quot;&gt;双击放大缩小&lt;/h3&gt;
+
+&lt;p&gt;既然说到了这个，就说一下如何通过双击实现放大缩小。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- (void)handleDoubleTap:(CGPoint)touchPoint {
+	
+	// Zoom
+	if (self.zoomScale != self.minimumZoomScale &amp;amp;&amp;amp; self.zoomScale != [self initialZoomScaleWithMinScale]) {
+		
+		// Zoom out  主要是这个函数
+		[self setZoomScale:self.minimumZoomScale animated:YES];
+		
+	} else {
+		
+		// Zoom in to twice the size
+        CGFloat newZoomScale = ((self.maximumZoomScale + self.minimumZoomScale) / 2);
+        CGFloat xsize = self.bounds.size.width / newZoomScale;
+        CGFloat ysize = self.bounds.size.height / newZoomScale;
+        [self zoomToRect:CGRectMake(touchPoint.x - xsize/2, touchPoint.y - ysize/2, xsize, ysize) animated:YES];
+
+	}
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;app前后台切换的状态保存与恢复&quot;&gt;App前后台切换的状态保存与恢复&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;//这些通知不只是在appdelegate中使用  每一个viewcontroller都是可以的
+//WillResignActive
+//DidEnterBackground
+//WillEnterForeground
+//WillResignActive
+//切换前后台时  上面四个依次执行
+//注册已经激活的通知   可以这里恢复状态
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+//注册将要进入后台的通知  可以这里保存状态  注意这里非激活状态不只是切换前后台才会出现，比如切换页面的时候也会响应
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+//注册将要进入前台通知   也可以这里恢复状态
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+//这侧已经进入后台通知    也可以这里保存状态  注意操作不要超过5s，否则会被杀死
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;thread-1-sinal-sigabrt&quot;&gt;thread 1: sinal sigabrt&lt;/h1&gt;
+
+&lt;p&gt;这个一般是因为你的xib或者storyboard与代码的连线有问题，或者是连多了，或者是连了之后改了名字又重连了一次，但是没有删除之前的。&lt;/p&gt;
+
+&lt;h1 id=&quot;uiscrollview与uicollectionview手势冲突&quot;&gt;UIScrollView与UICollectionView手势冲突&lt;/h1&gt;
+
+&lt;p&gt;之前在制作一个图集浏览的控件，使用UICollectionView作为载体，每一个Cell中加入UIImageView和UIScrollView.&lt;/p&gt;
+
+&lt;p&gt;UIImageView用来放图片与点击，双击，长按事件，UIScrollView主要是利用其放大缩小的功能。&lt;/p&gt;
+
+&lt;p&gt;UIScrollView的放大缩小本质是滑动手势的响应，这时，就偶尔会和UICollectionView的滑动事件冲突&lt;/p&gt;
+
+&lt;p&gt;解决方法是：&lt;/p&gt;
+
+&lt;p&gt;在cell上放一个UIView,比如contentView，然后把UIImageView和UIScrollView放到contentView上即可。&lt;/p&gt;
+
+&lt;h1 id=&quot;解决uiscrollview与navigationbar的冲突&quot;&gt;解决UIScrollview与NavigationBar的冲突&lt;/h1&gt;
+
+&lt;p&gt;iOS7之后，scrollview都会自动留白一个navigationbar的高度，直接在你的controller里的viewdidload中假如下述代码即可。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (DEVICE_OS_VERSION&amp;gt;7) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;需要注意的是，添加这些后，view的位置就是从navigationbar开始，即屏幕的Y:64的位置现在是view的0。当然，你的view的总高度已经变成了DEVICE_SIZE.HEIGHT-64。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Ios" /><category term="OC" /><category term="Skills" /><category term="custome view" /><category term="日期/字符串" /><category term="Debug" /><category term="Status bar" /><summary type="html">不积跬步，无以至千里；不积小流，无以成江海；</summary></entry><entry><title type="html">iOS项目总结(十)</title><link href="https://pfcstyle.github.io/2016/07/25/iOS-Project-Sumary10/" rel="alternate" type="text/html" title="iOS项目总结(十)" /><published>2016-07-25T00:00:00+08:00</published><updated>2016-07-25T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/07/25/iOS-Project-Sumary10</id><content type="html" xml:base="https://pfcstyle.github.io/2016/07/25/iOS-Project-Sumary10/">&lt;blockquote&gt;
+  &lt;p&gt;以小见大，不偏不倚&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;今天做项目遇到一个奇怪的问题，使用UITabBarController做主控制器，切换控制器然后返回时，下面的tabBar会比view切换慢了几秒，还自带动画，而且这个问题只是在切换特定界面时才会出现。具体描述：&lt;/p&gt;
+
+&lt;h3 id=&quot;1实例化uitabbarcontroller&quot;&gt;1.实例化UITabBarController&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;//....
+-(YSSJNavigationController *)thirdNav{
+    if (!_thirdNav) {
+        YSSJLivingViewController *livingViewController = [[YSSJLivingViewController alloc] init];
+        [livingViewController setHidesBottomBarWhenPushed:YES];
+        _thirdNav = [[YSSJNavigationController alloc] initWithRootViewController:livingViewController];
+        _thirdNav.navigationBar.hidden = YES;
+        [_thirdNav setHidesBottomBarWhenPushed:YES];
+
+    }
+    return _thirdNav;
+}
+//....
+self.thirdNav.tabBarItem = [self  itemWithTitle:[arrayName objectAtIndex:4] image:[UIImage imageNamed:[arrayName objectAtIndex:5]] selectedImage:[UIImage imageNamed:[arrayName objectAtIndex:4]] ];
+self.thirdNav.tabBarItem.tag = 2;
+//...此处略去了其他nav的实例化
+//主控制器是继承的UITabBarViewController
+self.viewControllers = @[firstNav,secondNav,self.thirdNav,fourthNav];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;2点击跳转到thirdnav&quot;&gt;2.点击跳转到thirdNav&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;//YSSJLivingViewController.m
+//从thirdnav的根控制器present到VLiveStreamViewController
+-(void)p_jumpToLivePage{
+    NSDictionary *options = @{
+                              @&quot;gid&quot; : @(-1),
+                              @&quot;gids&quot; : @[],
+                              @&quot;shortContent&quot; : @&quot;&quot;,
+                              @&quot;tags&quot; :@[],
+                              @&quot;title&quot; : @&quot;&quot;,
+                              @&quot;type&quot; : @&quot;live&quot;
+                              };
+    NSMutableDictionary *liveInfo = [[NSMutableDictionary alloc]initWithDictionary:options];
+    
+    //网上获取群组信息
+    liveInfo = [YSSJTop setLiveInfo:liveInfo];
+    NSMutableDictionary *createOption = [liveInfo[@&quot;creator&quot;] mutableCopy];
+    NSArray *joinedGroups = liveInfo[@&quot;joinedGroups&quot;];
+    
+    createOption[@&quot;liveId&quot;]= liveInfo[@&quot;liveId&quot;];
+    [createOption setValuesForKeysWithDictionary:liveInfo];
+    
+    
+    // 发起直播
+    
+    VLiveStreamViewController *liveStreamVC = [[VLiveStreamViewController alloc] initWithNibName:nil bundle:nil];
+    liveStreamVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    
+    liveStreamVC.fromChatGroup = @(-1);
+    liveStreamVC.createOption = [createOption copy];
+    liveStreamVC.joinedGroups = joinedGroups;
+    liveStreamVC.needSelectGroup = YES;
+    liveStreamVC.delegate = self;
+    
+    
+    [self presentViewController:liveStreamVC animated:YES completion:nil];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;3dismiss控制器vlivestreamviewcontroller&quot;&gt;3.dismiss控制器VLiveStreamViewController&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;//YSSJLivingViewController.m
+//dismiss之后会响应这个函数  发出一个通知
+-(void)viewWillAppear:(BOOL)animated{
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseLiveNotification object:nil];
+}
+
+//这是通知的函数  回到原始界面
+-(void)closeLive{
+    if (_lastSelectedIndex == 2) {
+        _lastSelectedIndex = _frontSelectedIndex;
+        [self setSelectedIndex:_frontSelectedIndex];
+    }else{
+        _lastSelectedIndex = _frontSelectedIndex;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;4问题出现&quot;&gt;4.问题出现&lt;/h3&gt;
+&lt;p&gt;此时在原始界面，随便push一个controller，然后pop,发现TabBar返回已经和根控制器不同步了&lt;/p&gt;
+
+&lt;h1 id=&quot;解决方式&quot;&gt;解决方式&lt;/h1&gt;
+
+&lt;p&gt;还记得上面发送通知的地方吗，之前在viewwillappear中，现在在viewdidappear中&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;-(void)viewDidAppear:(BOOL)animated{
+        [[NSNotificationCenter defaultCenter] postNotificationName:CloseLiveNotification object:nil];
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then all work nice!!!&lt;/p&gt;
+
+&lt;p&gt;解决方式很简单，但是我应该从这个问题里看到更多的问题：&lt;/p&gt;
+
+&lt;p&gt;当一些动画不是在同一个控制器，甚至是不是同一个view时，当这些动画显示会有冲突时，你必须让这些动画的时间错开，否则，将会真的产生冲突，从而产生各种奇葩的结果。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="iOS" /><category term="UITabBarController" /><category term="TabBar" /><category term="Show" /><summary type="html">以小见大，不偏不倚</summary></entry><entry><title type="html">H.264 NAL层解析(0x00000001,编码,打包,NALU)【转】</title><link href="https://pfcstyle.github.io/2016/07/11/H.264-NALU/" rel="alternate" type="text/html" title="H.264 NAL层解析(0x00000001,编码,打包,NALU)【转】" /><published>2016-07-11T00:00:00+08:00</published><updated>2016-07-11T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/07/11/H.264-NALU</id><content type="html" xml:base="https://pfcstyle.github.io/2016/07/11/H.264-NALU/">&lt;blockquote&gt;
+  &lt;p&gt;不积跬步，无以至千里；不积小流，无以成江海；&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;引言&quot;&gt;引言&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;H.264的主要目标：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;1．高的视频压缩比&lt;/p&gt;
+
+&lt;p&gt;2．良好的网络亲和性&lt;/p&gt;
+
+&lt;p&gt;解决方案：&lt;/p&gt;
+
+&lt;p&gt;VCL  video codinglayer       视频编码层&lt;/p&gt;
+
+&lt;p&gt;NAL  network abstraction layer  网络提取层&lt;/p&gt;
+
+&lt;p&gt;VCL：核心算法引擎，块，宏块及片的语法级别的定义&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NAL：片级以上的语法级别（如序列参数集和图像参数集）&lt;/strong&gt;，同时支持以下功能：独立片解码，起始码唯一保证，SEI以及流格式编码数据传送&lt;/p&gt;
+
+&lt;p&gt;VCL设计目标：尽可能地独立于网络的情况下进行高效的编解码&lt;/p&gt;
+
+&lt;p&gt;NAL设计目标：根据不同的网络把数据打包成相应的格式，将VCL产生的比特字符串适配到各种各样的网络和多元环境中。&lt;/p&gt;
+
+&lt;p&gt;NALU头结构：NALU类型(5bit)、重要性指示位(2bit)、禁止位(1bit)。&lt;/p&gt;
+
+&lt;p&gt;NALU类型：1～12由H.264使用，24～31由H.264以外的应用使用。&lt;/p&gt;
+
+&lt;p&gt;重要性指示：标志该NAL单元用于重建时的重要性，值越大，越重要。&lt;/p&gt;
+
+&lt;p&gt;禁止位：网络发现NAL单元有比特错误时可设置该比特为1，以便接收方丢掉该单元。&lt;/p&gt;
+
+&lt;h1 id=&quot;nal语法语义&quot;&gt;NAL语法语义&lt;/h1&gt;
+
+&lt;p&gt;NAL层句法：&lt;/p&gt;
+
+&lt;p&gt;在编码器输出的码流中，数据的基本单元是句法元素。&lt;/p&gt;
+
+&lt;p&gt;句法表征句法元素的组织结构。&lt;/p&gt;
+
+&lt;p&gt;语义阐述句法元素的具体含义。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;分组都有头部，解码器可以很方便的检测出NAL的分界&lt;/strong&gt;，依次取出NAL进行解码。&lt;/p&gt;
+
+&lt;p&gt;但为了节省码流，H.264没有另外在NAL的头部设立表示起始位置的句法元素。&lt;/p&gt;
+
+&lt;p&gt;如果编码数据是存储在介质上的，由于&lt;strong&gt;AL是依次紧密相连的，解码器就无法在数据流中分辨出每个NAL的起始位置和终止位置。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;解决方案：在每个NAL前添加起始码：0X000001&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在某些类型的介质上，为了寻址的方便，要求数据流在长度上对齐，或某个常数的整数倍。所以在起始码前添加若干字节的0来填充。&lt;/p&gt;
+
+&lt;p&gt;检测NAL的开始：&lt;/p&gt;
+
+&lt;p&gt;0X000001和0X00000001&lt;/p&gt;
+
+&lt;p&gt;我们必须考虑当NAL内部出现了0X000001和0X000000&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;如果NALU对应的Slice为一帧的开始，则用4字节表示，即0x00000001；否则用3字节表示，0x000001。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;解决方案：&lt;strong&gt;为了防止NAL内部出现0x000001的数据，h.264又提出’防止竞争 emulation prevention”机制.&lt;/strong&gt;在编码完一个NAL时，如果检测出有连续两个0x00字节，就在后面插入一个0x03，则在NAL数据内肯定不会存在NAL起始码0x000001。当解码器在NAL内部检测到0x000003的数据，就把0x03抛弃，恢复原始数据。 &lt;br /&gt;
+  0x000000  »»»  0x00000300(结束码)&lt;/p&gt;
+
+&lt;p&gt;0x000001 »»»  0x00000301(起始码)&lt;/p&gt;
+
+&lt;p&gt;0x000002 »»»  0x00000302(保留)&lt;/p&gt;
+
+&lt;p&gt;0x000003 »»»  0x00000303(保证解码器正常工作)&lt;/p&gt;
+
+&lt;p&gt;H.264提出了“防止竞争”机制：&lt;/p&gt;
+
+&lt;p&gt;0X000000——0X00000300&lt;/p&gt;
+
+&lt;p&gt;0X000001——0X00000301&lt;/p&gt;
+
+&lt;p&gt;0X000002——0X00000302&lt;/p&gt;
+
+&lt;p&gt;0X000003——0X00000303&lt;/p&gt;
+
+&lt;p&gt;为此，我们可以知道：&lt;/p&gt;
+
+&lt;p&gt;在NAL单元中，下面的三字节序列不应在任何字节对齐的位置出现&lt;/p&gt;
+
+&lt;p&gt;0X000000&lt;/p&gt;
+
+&lt;p&gt;0X000001&lt;/p&gt;
+
+&lt;p&gt;0X000002&lt;/p&gt;
+
+&lt;p&gt;Forbidden_zero_bit=0;&lt;/p&gt;
+
+&lt;p&gt;Nal_ref_idc：表示NAL的优先级。0～3，取值越大，表示当前NAL越重要，需要优先受到保护。如果当前NAL是属于参考帧的片，或是序列参数集，或是图像参数集这些重要的单位时，本句法元素必需大于0。&lt;/p&gt;
+
+&lt;p&gt;Nal_unit_type：当前NAL 单元的类型&lt;/p&gt;
+
+&lt;p&gt;标识NAL单元中的RBSP数据类型，其中，nal_unit_type为1， 2， 3， 4， 5的NAL单元称为VCL的NAL单元，其他类型的NAL单元为非VCL的NAL单元。&lt;/p&gt;
+
+&lt;p&gt;§    0：未规定&lt;/p&gt;
+
+&lt;p&gt;§    1：非IDR图像中不采用数据划分的片段&lt;/p&gt;
+
+&lt;p&gt;§    2：非IDR图像中A类数据划分片段&lt;/p&gt;
+
+&lt;p&gt;§    3：非IDR图像中B类数据划分片段&lt;/p&gt;
+
+&lt;p&gt;§    4：非IDR图像中C类数据划分片段&lt;/p&gt;
+
+&lt;p&gt;§    5：IDR图像的片段&lt;/p&gt;
+
+&lt;p&gt;§    6：补充增强信息（SEI）&lt;/p&gt;
+
+&lt;p&gt;§    7：&lt;strong&gt;序列参数集（SPS）&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;§    8：&lt;strong&gt;图像参数集（PPS）&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;§    9：分割符&lt;/p&gt;
+
+&lt;p&gt;§    10：序列结束符&lt;/p&gt;
+
+&lt;p&gt;§    11：流结束符&lt;/p&gt;
+
+&lt;p&gt;§    12：填充数据&lt;/p&gt;
+
+&lt;p&gt;§    13：序列参数集扩展&lt;/p&gt;
+
+&lt;p&gt;§    14：带前缀的NAL单元&lt;/p&gt;
+
+&lt;p&gt;§    15：子序列参数集&lt;/p&gt;
+
+&lt;p&gt;§    16 –18：保留&lt;/p&gt;
+
+&lt;p&gt;§    19：不采用数据划分的辅助编码图像片段&lt;/p&gt;
+
+&lt;p&gt;§    20：编码片段扩展&lt;/p&gt;
+
+&lt;p&gt;§    21 –23：保留&lt;/p&gt;
+
+&lt;p&gt;§    24 –31：未规定&lt;/p&gt;
+
+&lt;h1 id=&quot;h264的nal层处理&quot;&gt;H.264的NAL层处理&lt;/h1&gt;
+
+&lt;p&gt;结构示意图：&lt;/p&gt;
+
+&lt;p&gt;NAL以NALU（NAL unit）为单元来支持编码数据在基于分组交换技术网络中传输。它定义了符合传输层或存储介质要求的数据格式，同时给出头信息，从而提供了视频编码和外部世界的接口。&lt;/p&gt;
+
+&lt;p&gt;NALU：定义了可用于基于分组和基于比特流系统的基本格式&lt;/p&gt;
+
+&lt;p&gt;RTP封装：只针对基于NAL单元的本地NAL接口。&lt;/p&gt;
+
+&lt;p&gt;三种不同的数据形式：&lt;/p&gt;
+
+&lt;p&gt;SODB　数据比特串－－＞最原始的编码数据 （raw）&lt;/p&gt;
+
+&lt;p&gt;RBSP　原始字节序列载荷－－＞在SODB的后面填加了结尾比特（RBSP trailing bits一个bit“1”）若干比特“0”,以便字节对齐&lt;/p&gt;
+
+&lt;p&gt;EBSP　扩展字节序列载荷–&amp;gt;在RBSP基础上填加了仿校验字节（0X03）它的原因是：　在NALU加到Annexb上时，需要添加每组NALU之前的开始码StartCodePrefix,如果该NALU对应的slice为一帧的开始则用4位字节表示，0x00000001,否则用3位字节表示0x000001.为了使NALU主体中不包括与开始码相冲突的，在编码时，每遇到两个字节连续为0，就插入一个字节的0x03。解码时将0x03去掉。也称为脱壳操作&lt;/p&gt;
+
+&lt;p&gt;处理过程：&lt;/p&gt;
+
+&lt;p&gt;1．将VCL层输出的SODB封装成nal_unit， Nal_unit是一个通用封装格式，可以适用于有序字节流方式和IP包交换方式。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2．针对不同的传送网络（电路交换&lt;/td&gt;
+      &lt;td&gt;包交换），将nal_unit 封装成针对不同网络的封装格式。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;第一步的具体过程：&lt;/p&gt;
+
+&lt;p&gt;VCL层输出的比特流SODB（String OfData Bits），到nal_unit之间，经过了以下三步处理：&lt;/p&gt;
+
+&lt;p&gt;1.SODB字节对齐处理后封装成RBSP（RawByte Sequence Payload）。&lt;/p&gt;
+
+&lt;p&gt;2.为防止RBSP的字节流与有序字节流传送方式下的SCP（start_code_prefix_one_3bytes，0x000001）出现字节竞争情形，循环检测RBSP前三个字节，在出现字节竞争时在第三字节前加入emulation_prevention_three_byte（0x03）&lt;/p&gt;
+
+&lt;p&gt;具体方法：&lt;/p&gt;
+
+&lt;p&gt;nal_unit( NumBytesInNALunit ) {&lt;/p&gt;
+
+&lt;p&gt;forbidden_zero_bit&lt;/p&gt;
+
+&lt;p&gt;nal_ref_idc&lt;/p&gt;
+
+&lt;p&gt;nal_unit_type&lt;/p&gt;
+
+&lt;p&gt;NumBytesInRBSP = 0&lt;/p&gt;
+
+&lt;p&gt;for( i = 1; i &amp;lt; NumBytesInNALunit;i++ ) {&lt;/p&gt;
+
+&lt;p&gt;if( i + 2 &amp;lt; NumBytesInNALunit&amp;amp;&amp;amp; next_bits( 24 ) = = 0x000003 ) {&lt;/p&gt;
+
+&lt;p&gt;rbsp_byte[ NumBytesInRBSP++ ]&lt;/p&gt;
+
+&lt;p&gt;rbsp_byte[ NumBytesInRBSP++ ]&lt;/p&gt;
+
+&lt;p&gt;i += 2&lt;/p&gt;
+
+&lt;p&gt;emulation_prevention_three_byte /*equal to 0x03 */&lt;/p&gt;
+
+&lt;p&gt;} else&lt;/p&gt;
+
+&lt;p&gt;rbsp_byte[ NumBytesInRBSP++ ]&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;防字节竞争处理后的RBSP再加一个字节的header(forbidden_zero_bit+ nal_ref_idc+ nal_unit_type)，封装成nal_unit.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;第二步的具体过程：&lt;/p&gt;
+
+&lt;p&gt;case1：有序字节流的封装&lt;/p&gt;
+
+&lt;p&gt;byte_stream_nal_unit( NumBytesInNALunit ) {&lt;/p&gt;
+
+&lt;p&gt;while( next_bits( 24 ) != 0x000001 )&lt;/p&gt;
+
+&lt;p&gt;zero_byte /* equal to 0x00 */&lt;/p&gt;
+
+&lt;p&gt;if( more_data_in_byte_stream( ) ) {&lt;/p&gt;
+
+&lt;p&gt;start_code_prefix_one_3bytes /* equal to 0x000001 */nal_unit( NumBytesInNALunit )&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;类似H.320和MPEG-2/H.222.0等传输系统，传输NAL作为有序连续字节或比特流，同时要依靠数据本身识别NAL单元边界。在这样的应用系统中，H.264/AVC规范定义了字节流格式，每个NAL单元前面增加3个字节的前缀，即同步字节。在比特流应用中，每个图像需要增加一个附加字节作为边界定位。还有一种可选特性，在字节流中增加附加数据，用做扩充发送数据量，能实现快速边界定位，恢复同步&lt;/p&gt;
+
+&lt;p&gt;Case2：IP网络的RTP打包封装&lt;/p&gt;
+
+&lt;p&gt;分组打包的规则&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(1)额外开销要少，使MTU尺寸在100～64k字节范围都可以；
+
+(2)不用对分组内的数据解码就可以判别该分组的重要性；
+
+(3)载荷规范应当保证不用解码就可识别由于其他的比特丢失而造成的分组不可解码；
+
+(4)支持将NALU分割成多个RTP分组；
+
+(5)支持将多个NALU汇集在一个RTP分组中。
+
+RTP的头标可以是NALU的头标，并可以实现以上的打包规则。
+
+一个RTP分组里放入一个NALU，将NALU(包括同时作为载荷头标的NALU头)放入RTP的载荷中，设置RTP头标值。为了避免IP层对大分组的再一次分割，片分组的大小一般都要小于MTU尺寸。由于包传送的路径不同，解码端要重新对片分组排序，RTP包含的次序信息可以用来解决这一问题。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;NALU分割&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    对于预先已经编码的内容，NALU可能大于MTU尺寸的限制。虽然IP层的分割可以使数据块小于64千字节，但无法在应用层实现保护，从而降低了非等重保护方案的效果。由于UDP数据包小于64千字节，而且一个片的长度对某些应用场合来说太小，所以应用层打包是RTP打包方案的一部分。
+
+新的讨论方案(IETF)应当符合以下特征：
+
+(1)NALU的分块以按RTP次序号升序传输；
+
+(2)能够标记第一个和最后一个NALU分块；
+
+(3)可以检测丢失的分块。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;NALU合并&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;一些NALU如SEI、参数集等非常小，将它们合并在一起有利于减少头标开销。已有两种集合分组：
+
+(1)单一时间集合分组(STAP)，按时间戳进行组合；
+
+(2)多时间集合分组(MTAP)，不同时间戳也可以组合。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;NAL规范视频数据的格式，主要是提供头部信息，以适合各种媒体的传输和存储。NAL支持各种网络，包括：&lt;/p&gt;
+
+&lt;p&gt;1．任何使用RTP/IP协议的实时有线和无线Internet 服务&lt;/p&gt;
+
+&lt;p&gt;2．作为MP4文件存储和多媒体信息文件服务&lt;/p&gt;
+
+&lt;p&gt;3．MPEG-2系统&lt;/p&gt;
+
+&lt;p&gt;4．其它网&lt;/p&gt;
+
+&lt;p&gt;NAL规定一种通用的格式，既适合面向包传输，也适合流传送。实际上，包传输和流传输的方式是相同的，不同之处是传输前面增加了一个起始码前缀&lt;/p&gt;
+
+&lt;p&gt;在类似Internet/RTP面向包传送协议系统中，包结构中包含包边界识别字节，在这种情况下，不需要同步字节。&lt;/p&gt;
+
+&lt;p&gt;NAL单元分为VCL和非VCL两种&lt;/p&gt;
+
+&lt;p&gt;VCL NAL单元包含视频图像采样信息，&lt;/p&gt;
+
+&lt;p&gt;非VCL包含各种有关的附加信息，例如参数集（头部信息，应用到大量的VCL NAL单元）、提高性能的附加信息、定时信息等&lt;/p&gt;
+
+&lt;p&gt;参数集：&lt;/p&gt;
+
+&lt;p&gt;参数集是很少变化的信息，用于大量VCL NAL单元的解码，分为两种类型：&lt;/p&gt;
+
+&lt;p&gt;1．序列参数集，作用于一串连续的视频图像，即视频序列。两个IDR图像之间为序列参数集。IDR和I帧的区别见下面。&lt;/p&gt;
+
+&lt;p&gt;2．图像参数集，作用于视频序列中的一个或多个个别的图像序列和图像参数集机制，减少了重复参数的传送，每个VCL NAL单元包含一个标识，指向有关的图像参数集，每个图像参数集包含一个标识，指向有关的序列参数集的内容因此，只用少数的指针信息，引用大量的参数，大大减少每个VCL NAL单元重复传送的信息。&lt;/p&gt;
+
+&lt;p&gt;序列和图像参数集可以在发送VCL NAL单元以前发送，并且重复传送，大大提高纠错能力。序列和图像参数集可以在“带内”，也可以用更为可靠的其他“带外”通道传送。&lt;/p&gt;
+
+&lt;p&gt;存储单元：&lt;/p&gt;
+
+&lt;p&gt;一组指定格式的NAL单元称为存储单元，每个存储单元对应一个图像。每个存储单元包含一组VCL NAL单元，组成一个主编码图像，VCL NAL单元由表示视频图像采样的像条所组成。存储单元前面可以加一个前缀，分界存储单元，附加增强信息（SEI）（如图像定时信息）也可以放在主编码图像的前面。主编码图像后附加的VCL NAL单元，包含同一图像的冗余表示，称为冗余编码图像，当主编码图像数据丢失或损坏时，可用冗余编码图像解码。&lt;/p&gt;
+
+&lt;p&gt;编码视频序列:&lt;/p&gt;
+
+&lt;p&gt;一个编码视频序列由一串连续的存储单元组成，使用同一序列参数集。每个视频序列可独立解码。编码序列的开始是即时刷新存储单元（IDR）。IDR是一个I帧图像，表示后面的图像不用参考以前的图像。一个NAL单元流可包含一个或更多的编码视频序列。&lt;/p&gt;
+
+&lt;p&gt;I帧和IDR帧的区别：&lt;/p&gt;
+
+&lt;p&gt;1．在 H.264 中 I 帧并不具有随机访问的能力，这个功能由 IDR 承担。以前的标准中由 I 帧承担。&lt;/p&gt;
+
+&lt;p&gt;2．IDR 会导致 DPB （参考帧列表——这是关键所在）清空，而 I 不会。&lt;/p&gt;
+
+&lt;p&gt;3．I和IDR帧其实都是I帧,都是使用帧内预测的。但是IDR帧的作用是立刻刷新,使错误不致传播,从IDR帧开始,重新算一个新的序列开始编码。&lt;/p&gt;
+
+&lt;p&gt;4．IDR图像一定是I图像，但I图像不一定是IDR图像。一个序列中可以有很多的I图像，I图像之后的图像可以引用I图像之间的图像做运动参考。&lt;/p&gt;
+
+&lt;p&gt;关于h264拆包，按照FU-A方式说明：&lt;/p&gt;
+
+&lt;p&gt;1）第一个FU-A包的FU indicator：F应该为当前NALU头的F，而NRI应该为当前NALU头的NRI，Type则等于28，表明它是FU-A包。FU header生成方法：S = 1，E = 0，R = 0，Type则等于NALU头中的Type。
+     2）后续的N个FU-A包的FU indicator和第一个是完全一样的，如果不是最后一个包，则FU header应该为：S = 0，E= 0，R = 0，Type等于NALU头中的Type。
+     3）最后一个FU-A包FU header应该为：S = 0，E= 1，R = 0，Type等于NALU头中的Type。
+     因此总结就是：同一个NALU分包厚的FU indicator头是完全一致的，FU header只有S以及E位有区别，分别标记开始和结束，它们的RTP分包的序列号应该是依次递增的，并且它们的时间戳必须一致，而负载数据为NALU包去掉1个字节的NALU头后对剩余数据的拆分，这点很关键，你可以认为NALU头被拆分成了FU indicator和FU header，所以不再需要1字节的NALU头了。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="H.264" /><category term="NAL层解析" /><category term="NALU" /><summary type="html">不积跬步，无以至千里；不积小流，无以成江海；</summary></entry></feed>
