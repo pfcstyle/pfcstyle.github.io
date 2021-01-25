@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"spatialite-android-sdk的编译和使用"
-subtitle:	"填坑"
+description	"填坑"
 date:		2016-12-29
 author:		"PfCStyle"
 header-img:	"img/post/2016-12-29/head.jpg"
-tags:
+categories: "Android"
+keywords
     - Android
     - spatialite-android
 ---
@@ -189,12 +190,12 @@ b|wecpy587jztypffhy099
 ...
 
 // 1.
-//Open the database 打开数据库 
+//Open the database 打开数据库
 jsqlite.Database db = new jsqlite.Database();
 db.open(dbFile.toString(), jsqlite.Constants.SQLITE_OPEN_READONLY);
 
 // 2.
-// Test prepare statements  测试下准备好了没有？我的理解就是查询一下数据库的基本状态和信息，可能真正使用时也是用不到的。 
+// Test prepare statements  测试下准备好了没有？我的理解就是查询一下数据库的基本状态和信息，可能真正使用时也是用不到的。
 String query = "SELECT name, peoples, AsText(Geometry) from Towns where peoples > 350000";
 Stmt st = db.prepare(query);
 st.step();
@@ -211,7 +212,7 @@ db.exec("SELECT Distance( Transform(MakePoint(4.430174797, 51.01047063, 4326), 3
 
 		
 // 4.
-// Close the database 搞完了就关闭 
+// Close the database 搞完了就关闭
 db.close();
 
 

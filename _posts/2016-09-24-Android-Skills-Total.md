@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"Android一些小技巧及小知识点总结(持续更新)"
-subtitle:	"小技巧，大功能！"
+description	"小技巧，大功能！"
 date:		2016-09-24
 author:		"PfCStyle"
 header-img:	"img/post/2016-09-24/head.jpg"
-tags:
+categories: "Android"
+keywords
     - Android
     - Java
     - jNI

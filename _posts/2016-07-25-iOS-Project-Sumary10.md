@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(十)"
-subtitle:	"一个小问题引发的血案--动画冲突"
+description	"一个小问题引发的血案--动画冲突"
 date:		2016-07-25
 author:		"PfCStyle"
 header-img:	"img/post/2016-07-25/head.jpg"
-tags:
+categories: "iOS"
+keywords
     - iOS
     - UITabBarController
     - TabBar

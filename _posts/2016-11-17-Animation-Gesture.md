@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"Android-Animation-Gesture"
-subtitle:	"important point"
+description	"important point"
 date:		2016-11-17
 author:		"PfCStyle"
 header-img:	"img/post/2016-11-17/head.jpg"
-tags:
+categories: "Android"
+keywords
     - Android
     - Animation
     - Gesture
@@ -22,15 +23,15 @@ tags:
 ```java
 
 //这里要时刻注意，你传进去要变化的动画纬度参数是否是正确的
-TranslateAnimation animation = new TranslateAnimation(0, 0, mEditView.getHeight(), 0);         
-animation.setDuration(500); 
-animation.setAnimationListener(new Animation.AnimationListener() {             
-  @Override   public void onAnimationStart(Animation animation) {                 
-	mEditView.setVisibility(View.VISIBLE);             
-	}     
-   @Override    public void onAnimationEnd(Animation animation) {  }     
-   @Override    public void onAnimationRepeat(Animation animation){}         
-});         
+TranslateAnimation animation = new TranslateAnimation(0, 0, mEditView.getHeight(), 0);        
+animation.setDuration(500);
+animation.setAnimationListener(new Animation.AnimationListener() {            
+  @Override  public void onAnimationStart(Animation animation) {                
+	mEditView.setVisibility(View.VISIBLE);            
+	}   
+   @Override   public void onAnimationEnd(Animation animation) {}   
+   @Override   public void onAnimationRepeat(Animation animation){}        
+});        
 mEditView.startAnimation(animation);
 
 ```
@@ -43,16 +44,16 @@ mEditView.startAnimation(animation);
 ```java
 
 TranslateAnimation animation = new TranslateAnimation(0, 0, 0, mEditView.getHeight());
-//注意这里，如果设为true，动画结束后，将会强制保持结束时的状态。 
+//注意这里，如果设为true，动画结束后，将会强制保持结束时的状态。
 //animation.setFillAfter(true);
 animation.setDuration(500);
 animation.setAnimationListener(new Animation.AnimationListener() {
-   @Override 	
-	public void onAnimationStart(Animation animation) {        }  	
-	@Override             
+   @Override	
+	public void onAnimationStart(Animation animation) {      }	
+	@Override            
 	public void onAnimationEnd(Animation animation) {
  		mEditView.setVisibility(View.INVISIBLE);
-    } 
+    }
 	@Override
    public void onAnimationRepeat(Animation animation) {}
 });
@@ -125,8 +126,8 @@ mHeaderView.setOnTouchListener(new View.OnTouchListener() {
 
 ```
 mGestureDetector = new GestureDetector(mActivity,UpdateFeaturesProtocol.this);
-//这里需要注意，必须设置这一句，否则在GestureDetector的实现中，只能响应down,press,longpress三个事件 mHeaderView.setLongClickable(true);
- mHeaderView.setOnTouchListener(new View.OnTouchListener() {
+//这里需要注意，必须设置这一句，否则在GestureDetector的实现中，只能响应down,press,longpress三个事件mHeaderView.setLongClickable(true);
+mHeaderView.setOnTouchListener(new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
                 return mGestureDetector.onTouchEvent(motionEvent);
@@ -209,7 +210,7 @@ private float startPointY;
 
 
 
- 
+
 
 
 

@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(七)"
-subtitle:	"好用博客收集"
+description	"好用博客收集"
 date:		2016-06-24
 author:		"PfCStyle"
 header-img:	"img/post/2016-06-24/head.jpg"
-tags:
+categories: "iOS"
+keywords
     - iOS
     - OC
     - archive

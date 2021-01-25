@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"C盘清理小技巧"
-subtitle:	"必须要减肥了"
+description	"必须要减肥了"
 date:		2016-03-28
 author:		"PfCStyle"
 header-img:	"img/post/2016-03-28/head.jpg"
-tags:
+categories: "杂记"
+keywords
     - 磁盘清理
     - 系统盘瘦身
 ---

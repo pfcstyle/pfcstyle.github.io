@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"ESXi+vCenter6.0虚拟化集群配置(一)"
-subtitle:	"ESXi的安装与配置管理"
+description	"ESXi的安装与配置管理"
 date:		2016-10-20
 author:		"PfCStyle"
 header-img:	"img/post/2016-10-20/head.jpg"
-tags:
+categories: "Virtulized"
+keywords
     - ESXi6.0
     - vCenter6.0
     - vsPhere

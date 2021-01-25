@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"android source download on windows"
-subtitle:	"see through the appearance to perceive the essence"
+description	"see through the appearance to perceive the essence"
 date:		2016-03-29
 author:		"PfCStyle"
 header-img:	"img/post/2016-03-29/head.jpg"
-tags:
+categories: "Android"
+keywords
     - Android源码
     - windows
     - Android系统

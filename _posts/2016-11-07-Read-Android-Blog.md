@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"Read-Android-Blog"
-subtitle:	"the heart"
+description	"the heart"
 date:		2016-11-07
 author:		"PfCStyle"
 header-img:	"img/post/2016-11-07/head.jpg"
-tags:
+categories: "Android"
+keywords
     - android
     - blog
 ---
@@ -57,25 +58,25 @@ ok,现在已经知道了如何绘制，那么接下来就是如何fix
 
 
 ```gradle
-//# The Gradle daemon aims to improve the startup and execution time of Gradle. 
+//# The Gradle daemon aims to improve the startup and execution time of Gradle.
 //# When set to true the Gradle daemon is to run the build.
- org.gradle.daemon=true
+org.gradle.daemon=true
 
- //# Specifies the JVM arguments used for the daemon process.
- //# The setting is particularly useful for tweaking memory settings.
- //# Default value: -Xmx10248m -XX:MaxPermSize=256m
- org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+//# Specifies the JVM arguments used for the daemon process.
+//# The setting is particularly useful for tweaking memory settings.
+//# Default value: -Xmx10248m -XX:MaxPermSize=256m
+org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
 
- //# When configured, Gradle will run in incubating parallel mode.
- //# This option should only be used with decoupled projects. More details, visit
- //# http://www.gradle.org/docs/current/userguide/multi_project_builds.html
+//# When configured, Gradle will run in incubating parallel mode.
+//# This option should only be used with decoupled projects. More details, visit
+//# http://www.gradle.org/docs/current/userguide/multi_project_builds.html
 //#sec:decoupled_projects
- org.gradle.parallel=true
+org.gradle.parallel=true
 
- //# Enables new incubating mode that makes Gradle selective when configuring projects.
- //# Only relevant projects are configured which results in faster builds for large multi-projects.
- //# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand
- org.gradle.configureondemand=true
+//# Enables new incubating mode that makes Gradle selective when configuring projects.
+//# Only relevant projects are configured which results in faster builds for large multi-projects.
+//# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand
+org.gradle.configureondemand=true
 
 ```
 
@@ -114,12 +115,12 @@ ok,现在已经知道了如何绘制，那么接下来就是如何fix
 
 ### 有效使用内存的建议
 
-* 	合理使用Service Service的及时关闭可以让我们节省内存消耗, 对于一次性的任务, 建议使用IntentService. 
-* 	使用优化后的数据容器 使用Android提供的SparseArray, SparseBooleanArray, LongSparseArray来代替HashMap的使用. 关于HashMap，ArrayMap，SparseArray, [这篇文章](http://www.jianshu.com/p/7b9a1b386265)有个比较直观的比较, 可以看下. 
-* 	少用枚举enum结构 相比于静态常量(static final), enum会耗费双倍的内存. 
-* 	避免创建不必要的对象 诸如一些临时对象, 特别是循环中的. 
-* 	考虑实现onTrimMemory(), 在此根据当前的内存状态做些处理. 
-* 	Bitmap的合理有效使用. 对于Bitmap的使用, 建议直接查看官方开发文档中的[高效显示Bitmap](https://developer.android.com/training/displaying-bitmaps/index.html)(需翻墙). 
+* 	合理使用ServiceService的及时关闭可以让我们节省内存消耗, 对于一次性的任务, 建议使用IntentService.
+* 	使用优化后的数据容器使用Android提供的SparseArray, SparseBooleanArray, LongSparseArray来代替HashMap的使用.关于HashMap，ArrayMap，SparseArray, [这篇文章](http://www.jianshu.com/p/7b9a1b386265)有个比较直观的比较, 可以看下.
+* 	少用枚举enum结构相比于静态常量(static final), enum会耗费双倍的内存.
+* 	避免创建不必要的对象诸如一些临时对象, 特别是循环中的.
+* 	考虑实现onTrimMemory(), 在此根据当前的内存状态做些处理.
+* 	Bitmap的合理有效使用.对于Bitmap的使用, 建议直接查看官方开发文档中的[高效显示Bitmap](https://developer.android.com/training/displaying-bitmaps/index.html)(需翻墙).
 
 
 

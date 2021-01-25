@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(九)"
-subtitle:	"iOS监听网络状态变化"
+description	"iOS监听网络状态变化"
 date:		2016-07-04
 author:		"PfCStyle"
 header-img:	"img/post/2016-07-04/head.jpg"
-tags:
+categories: "iOS"
+keywords
     - iOS
     - 网络状态监听
     - Reachability

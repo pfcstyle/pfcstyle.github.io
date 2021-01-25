@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"OOP-Six-Principles"
-subtitle:	"Just my point"
+description	"Just my point"
 date:		2016-11-14
 author:		"PfCStyle"
 header-img:	"img/post/2016-11-14/head.jpg"
-tags:
+categories: "设计模式"
+keywords
     - OOP
     - Principles
 ---
@@ -78,7 +79,7 @@ tags:
 
 总之，需要变化的地方，才是导致工程覆灭的潜在因素，我们的设计模式，我们的软件工程，针对的，应该是这些地方。
 
- 
+
 
 
 

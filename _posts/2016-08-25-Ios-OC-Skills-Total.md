@@ -1,11 +1,12 @@
 ---
 layout:		post
 title:		"iOS一些小技巧及小知识点总结(持续更新)"
-subtitle:	"小技巧，大功能！"
+description	"小技巧，大功能！"
 date:		2016-08-25
 author:		"PfCStyle"
 header-img:	"img/post/2016-08-25/head.jpg"
-tags:
+categories: "iOS"
+keywords
     - Ios
     - OC
     - Skills
