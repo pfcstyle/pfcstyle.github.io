@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /><title>01手记</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/primer-css/css/primer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/collection.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/repo-card.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/sections/repo-list.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/boxed-group.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/common.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/responsive.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/posts/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/octicons/octicons/octicons.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mzlogin/rouge-themes@master/dist/github.css"><link rel="canonical" href="https://pfcstyle.github.io/2021/02/06/2016-08-25-Ios-OC-Skills-Total/"><link rel="alternate" type="application/atom+xml" title="01手记" href="https://pfcstyle.github.io/feed.xml"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/favicon.ico"><meta name="keywords" content="Will的手记, 技术博客, 王亚威, 王亚威的博客, 王亚威的手记"><meta name="description" content="Will的个人手记"><meta property="og:url" content="https://pfcstyle.github.io/2021/02/06/2016-08-25-Ios-OC-Skills-Total/"><meta property="og:site_name" content="01手记"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN" /><meta property="article:published_time" content="2021-02-06"> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/jquery/dist/jquery.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery-ui.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/main.js"></script></head><body class="" data-mz=""><header class="site-header"><div class="container"><h1><a href="https://pfcstyle.github.io/" title="01手记"><span class="octicon octicon-mark-github"></span> 01手记</a></h1><button class="collapsed mobile-visible" type="button" onclick="toggleMenu();"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button><nav class="site-header-nav" role="navigation"> <a href="https://pfcstyle.github.io/" class=" site-header-nav-item" target="" title="首页">首页</a> <a href="https://pfcstyle.github.io/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> <a href="https://pfcstyle.github.io/wiki/" class=" site-header-nav-item" target="" title="维基">维基</a> <a href="https://pfcstyle.github.io/links/" class=" site-header-nav-item" target="" title="链接">链接</a> <a href="https://pfcstyle.github.io/about/" class=" site-header-nav-item" target="" title="关于">关于</a></nav></div></header><section class="collection-head small geopattern" data-pattern-id=""><div class="container"><div class="columns"><div class="column three-fourths"><div class="collection-title"><h1 class="collection-header"></h1><div class="collection-info"> <span class="meta-info"> <span class="octicon octicon-calendar"></span> 2021/02/06 </span> <span class="meta-info"> <span class="octicon octicon-clock"></span> 共 6002 字，约 18 分钟 </span></div></div></div><div class="column one-fourth mobile-hidden"><div class="collection-title"></div></div></div></div></section><section class="container content"><div class="columns"><div class="column three-fourths" ><article class="article-content markdown-body"><blockquote><p>不积跬步，无以至千里；不积小流，无以成江海；</p></blockquote><p>其实早就想开一个这样的blog,这样每次写代码有感的时候就可以来记录一下。由于拖延等等问题，今天才补上这么个开始，那么，就开始吧，万事，总得有个开始才好继续。</p><h1 id="没有不能自定义的控件">没有不能自定义的控件</h1><p>苹果官方提供了许多的精美控件，但是出于某些原因，一些控件给出的自定义接口不足，致使我们无法定制出符合自己需求的控件，从而不得不每次自己去构建控件，这不免让人感到遗憾与无力。接下来，我就总结几种修改官方控件的方式，有了这几种方式，在我看来，几乎没有无法修改的控件了。</p><h3 id="最优雅的自定义方式重写">最优雅的自定义方式（重写）</h3><p>最优雅的自定义方式，无非就是继承父控件进行重写了。这种方式对于大部分官方控件都是有效的，举个栗子：你现在要重写tablecell,满足表格距屏幕左右边界都是20pt.</p><pre><code class="language-Object-C">//继承tableviewcell
+@interface BaseCell : UITableViewCell
+
+@end
+//重写setframe
+@implemention BaseCell
+-(void)setFrame:(CGRect)frame{
+    frame.origin.x += 20;
+    frame.size.width -= 2 * 20;
+    [super setFrame:frame];
+}
+
+@end
+</code></pre><p>如何，是不是非常简单。当然，我相信大家对这种方式其实是非常熟悉的，因为这算是我们最为常用的了。这种方式对于那些特殊控件，比如UISwitch是没有作用的，无论你怎么修改frame，它都不会改变。但是，这并不是说没有办法了。</p><h3 id="有点暴力的自定义方式transform">有点暴力的自定义方式（transform)</h3><p>UISwitch控件，宽高都是固定不变的，而且，个人感觉，有点大啊，不是那么好看。那么，如何更改呢？</p><pre><code class="language-Object-C">UISwitch *switch = [[UISwitch alloc] init];
+switch.transform = CGAffineTransformMakeScale(0.75, 0.75);
+</code></pre><p>什么感觉？简单！而且这样基本不会有任何其他影响。不认识<a href="http://www.cocoachina.com/ios/20150104/10816.html">CGAffineTransform(变换)</a>？ 认识一下，很强大，制作动画的利器。嗯，想优雅一点？结合继承：</p><pre><code class="language-Object-C">//继承UISwitch
+@interface MySwitch : UISwitch
+
+@end
+//重写setframe
+@implemention MySwitch
+-(void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+	//ios7以后 uiswitch大小更改为（51,31）
+	float scaleX = frame.size.width/51;
+	float scaleY = frame.size.height/31;
+	self.transform = CGAffineTransformMakeScale(scaleX,scaleY);
+}
+
+@end
+</code></pre><p>ok，这样，你就可以任意的更改Uiswitch的大小了。我就不截图了，大家试一下就知道了，没有任何问题。</p><h3 id="最暴力的自定义方式subview">最暴力的自定义方式（subview）</h3><p>什么意思呢？之前使用父控件，这次又来折腾子view了！这次以什么为例呢？UIAlertController你怕不怕？到了ios9,uialertview已经废弃了，现在全面使用uialertcontroller。但是不管使用什么，最让开发者头疼的是，明明很好的一个控件，却大多数时候都需要自定义，因为主界面颜色完全无法自定义。。。。谁说的？</p><pre><code class="language-Object-C">//实例化alertcontroller
+UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示"message:message preferredStyle:UIAlertControllerStyleAlert];
+//添加按钮
+[alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction*action) {NSLog(@"点击了确定按钮");}]];
+//设置字体颜色（包括按钮的）
+[alert.view setTintColor:[UIColor redColor]];
+//获取alertview的主窗体子view
+UIView *view = alert.view.subviews[0];
+view = view.subviews[0];
+
+
+//这是uialertview没有字时的大小  注意alert的大小跟提示信息的多少是有关系的，所以，这里104不是固定的  但是可以自己动态计算
+UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 270, 104)];
+//圆角 经测试  只要小于13就不会露出背景白色
+imageView.layer.cornerRadius = 10.f;
+[imageView setBackgroundColor:[UIColor greenColor]];
+[view insertSubview:imageView atIndex:0];
+//嗯  一不小心又想起来一种更简单的方法  使用下面两句 上面的就不用了  core animation框架
+//还是很强大的  这样也不用去计算高度了 哈哈
+//view.layer.backgroundColor = [UIColor grayColor].CGColor;
+//view.layer.cornerRadius = 13.f;
+
+</code></pre><p>ok,diy成功。</p><h3 id="隐藏的自定义方式kvc">隐藏的自定义方式（KVC)</h3><p>其实官方控件中，许多属性虽然没有开放出来，但是苹果其实提供了一种类似于java反射机制的编程方式：KVC。KVC应该不用介绍了，不懂得就直接去搜索吧，我这里只是介绍它在自定义界面上的应用。这次就说UITextField的PlaceHolder属性，你想要斜体，想换个字体，想换个颜色？看代码</p><pre><code class="language-Object-C">[_nameTF setValue:kTextViewPlaceHolderFont forKeyPath:@"_placeholderLabel.font"];
+[_nameTF setValue:kTextViewPlaceColor forKeyPath:@"_placeholderLabel.textColor"];
+</code></pre><p>ok了，现在去看看你的placeholder什么样吧，那个字体和颜色自己自定义哈。</p><h1 id="debug">Debug</h1><p>为了开发方便，我们经常会有很多调试设置，但是这些设置在release模式下又是不需要，这时候我们往往会需要这些(例如)：</p><pre><code class="language-C">#ifdef DEBUG
+//调试状态
+#define MyLog(...) NSLog(__VA_ARGS__)
+#else
+//发布状态
+#define MyLog(...)
+</code></pre><p>那么，这个DEBUG是在哪里设置的呢？在 <code class="language-plaintext highlighter-rouge">"Target &gt; Build Settings &gt; Preprocessor Macros &gt; Debug"</code> 里有一个”<code class="language-plaintext highlighter-rouge">DEBUG=1</code>“。如果你把<code class="language-plaintext highlighter-rouge">DEBUG</code>改成<code class="language-plaintext highlighter-rouge">haha</code>呢?试一下！</p><h1 id="状态栏显示与隐藏">状态栏显示与隐藏</h1><h3 id="app启动时隐藏状态栏">app启动时隐藏状态栏</h3><ol><li>在<em>info.plist</em>里面 <em>Status bar is initially hidden</em> 设置为 <em>YES</em></li><li>如果你想启动后显示，在appdelegate.m中加入<code class="language-plaintext highlighter-rouge">[application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];</code></li></ol><h3 id="其他页面的状态栏的显示与隐藏">其他页面的状态栏的显示与隐藏</h3><pre><code class="language-Objective-C">//在对应的控制器实现下面的方法
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+	//状态栏样式
+    return UIStatusBarStyleLightContent;
+}
+- (BOOL)prefersStatusBarHidden
+{
+    return YES; // 返回NO表示要显示，返回YES将hiden
+}
+</code></pre><h1 id="uiscrollview捏合手势关闭">UIScrollView捏合手势关闭</h1><p>UIScrollView的自动缩放虽然方便，但也挡不住产品设计部的怪癖好，就是要停，要通过双击放大缩小，这就要求只关闭手势，而要保留缩放功能。通过查看<code class="language-plaintext highlighter-rouge">UIScrollView.h</code>发现有<code class="language-plaintext highlighter-rouge">pinchGestureRecognizer</code>属性，很是兴奋，于是</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//在初始化函数中添加  但是并没有作用！！==！  我这里是继承的UIScrollView
+[self removeGestureRecognizer:self.pinchGestureRecognizer];
+self.pinchGestureRecognizer.enabled = NO;
+</code></pre></div></div><p>后来，我是这样解决的：</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//在代理设置捏合手势失效
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    scrollView.pinchGestureRecognizer.enabled = NO;
+        return _photoImageView;
+
+}
+</code></pre></div></div><p>这样就是可以的，我表示很方！！并不理解第一种方式为什么不行,猜测是在其他地方才初始化的pinch,不得而知。</p><h3 id="双击放大缩小">双击放大缩小</h3><p>既然说到了这个，就说一下如何通过双击实现放大缩小。</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)handleDoubleTap:(CGPoint)touchPoint {
+	
+	// Zoom
+	if (self.zoomScale != self.minimumZoomScale &amp;&amp; self.zoomScale != [self initialZoomScaleWithMinScale]) {
+		
+		// Zoom out  主要是这个函数
+		[self setZoomScale:self.minimumZoomScale animated:YES];
+		
+	} else {
+		
+		// Zoom in to twice the size
+        CGFloat newZoomScale = ((self.maximumZoomScale + self.minimumZoomScale) / 2);
+        CGFloat xsize = self.bounds.size.width / newZoomScale;
+        CGFloat ysize = self.bounds.size.height / newZoomScale;
+        [self zoomToRect:CGRectMake(touchPoint.x - xsize/2, touchPoint.y - ysize/2, xsize, ysize) animated:YES];
+
+	}
+
+}
+</code></pre></div></div><h1 id="app前后台切换的状态保存与恢复">App前后台切换的状态保存与恢复</h1><pre><code class="language-Objective-C">//这些通知不只是在appdelegate中使用  每一个viewcontroller都是可以的
+//WillResignActive
+//DidEnterBackground
+//WillEnterForeground
+//WillResignActive
+//切换前后台时  上面四个依次执行
+//注册已经激活的通知   可以这里恢复状态
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+//注册将要进入后台的通知  可以这里保存状态  注意这里非激活状态不只是切换前后台才会出现，比如切换页面的时候也会响应
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+//注册将要进入前台通知   也可以这里恢复状态
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
+//这侧已经进入后台通知    也可以这里保存状态  注意操作不要超过5s，否则会被杀死
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+</code></pre><h1 id="thread-1-sinal-sigabrt">thread 1: sinal sigabrt</h1><p>这个一般是因为你的xib或者storyboard与代码的连线有问题，或者是连多了，或者是连了之后改了名字又重连了一次，但是没有删除之前的。</p><h1 id="uiscrollview与uicollectionview手势冲突">UIScrollView与UICollectionView手势冲突</h1><p>之前在制作一个图集浏览的控件，使用UICollectionView作为载体，每一个Cell中加入UIImageView和UIScrollView.</p><p>UIImageView用来放图片与点击，双击，长按事件，UIScrollView主要是利用其放大缩小的功能。</p><p>UIScrollView的放大缩小本质是滑动手势的响应，这时，就偶尔会和UICollectionView的滑动事件冲突</p><p>解决方法是：</p><p>在cell上放一个UIView,比如contentView，然后把UIImageView和UIScrollView放到contentView上即可。</p><h1 id="解决uiscrollview与navigationbar的冲突">解决UIScrollview与NavigationBar的冲突</h1><p>iOS7之后，scrollview都会自动留白一个navigationbar的高度，直接在你的controller里的viewdidload中假如下述代码即可。</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (DEVICE_OS_VERSION&gt;7) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+</code></pre></div></div><p>需要注意的是，添加这些后，view的位置就是从navigationbar开始，即屏幕的Y:64的位置现在是view的0。当然，你的view的总高度已经变成了DEVICE_SIZE.HEIGHT-64。</p><div style="margin-top:2em;padding:0 1.5em;border:1px solid #d3d3d3;background-color:#deebf7"><h3>文档信息</h3><ul><li>本文作者：<a href="https://pfcstyle.github.io" target="_blank">Yawei Wang</a></li><li>本文链接：<a href="https://pfcstyle.github.io/2021/02/06/2016-08-25-Ios-OC-Skills-Total/" target="_blank">https://pfcstyle.github.io/2021/02/06/2016-08-25-Ios-OC-Skills-Total/</a></li><li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">创意共享3.0许可证</a>）</li></ul></div></article><div class="share"></div><div class="comment"><div id="gitalk-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/gitalk/gitalk.css"> <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> <script> var gitalk = new Gitalk({ id: '/2021/02/06/2016-08-25-Ios-OC-Skills-Total/', clientID: 'e1a31f938861348e8751', clientSecret: 'd911850947298eb91753591eeb8dba129cc7fd86', repo: 'bomment', owner: 'pfcstyle', admin: ['pfcstyle'], labels: ['gitment'], perPage: 50, }); gitalk.render('gitalk-container'); </script></div></div><div class="column one-fourth"><h3>Search</h3><div id="site_search"> <input style="width:96%" type="text" id="search_box" placeholder="Search"></div><ul id="search_results" style="font-size:14px;list-style-type:none;padding-top:10px;padding-left:10px;"></ul><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/simple-jekyll-search.min.js"></script> <script type="text/javascript"> SimpleJekyllSearch({ searchInput: document.getElementById('search_box'), resultsContainer: document.getElementById('search_results'), json: 'https://pfcstyle.github.io/assets/search_data.json', searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>', noResultsText: 'No results found', limit: 10, fuzzy: false, exclude: ['Welcome'] }) </script><h3 class="post-directory-title mobile-hidden">Table of Contents</h3><div id="post-directory-module" class="mobile-hidden"><section class="post-directory"><dl></dl></section></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery.toc.js"></script></div></div></section><footer class="container"><div class="site-footer" role="contentinfo"><div class="copyright left mobile-block"> © 2015 <span title="Yawei Wang">Yawei Wang</span> <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a></div><ul class="site-footer-links right mobile-hidden"><li> <a href="javascript:window.scrollTo(0,0)" >TOP</a></li></ul><a href="https://github.com/pfcstyle/pfcstyle.github.io" target="_blank" aria-label="view source code"> <span class="mega-octicon octicon-mark-github" title="GitHub"></span> </a><ul class="site-footer-links mobile-hidden"><li> <a href="https://pfcstyle.github.io/" title="首页" target="">首页</a></li><li> <a href="https://pfcstyle.github.io/categories/" title="分类" target="">分类</a></li><li> <a href="https://pfcstyle.github.io/wiki/" title="维基" target="">维基</a></li><li> <a href="https://pfcstyle.github.io/links/" title="链接" target="">链接</a></li><li> <a href="https://pfcstyle.github.io/about/" title="关于" target="">关于</a></li><li><a href="https://pfcstyle.github.io/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a></li></ul><script async src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="mobile-hidden" style="margin-top:8px"> <span id="busuanzi_container_site_pv" style="display:none"> 本站访问量<span id="busuanzi_value_site_pv"></span>次 </span> <span id="busuanzi_container_site_uv" style="display:none"> / 本站访客数<span id="busuanzi_value_site_uv"></span>人 </span> <span id="busuanzi_container_page_pv" style="display:none"> / 本页访问量<span id="busuanzi_value_page_pv"></span>次 / 统计始于2020-05-03 </span></div></div></footer><div class="tools-wrapper"> <a class="gotop" href="#" title="回到顶部"><span class="octicon octicon-arrow-up"></span></a></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/geopattern.js"></script> <script> jQuery(document).ready(function($) { $('.geopattern').each(function(){ $(this).geopattern($(this).data('pattern-id')); }); /* hljs.initHighlightingOnLoad(); */ }); </script><div style="display:none"> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-80669434-1', 'auto'); ga('send', 'pageview'); </script></div></body></html>

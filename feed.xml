@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-03-20-Hello-Blog/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-03-20-Hello-Blog</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-03-20-Hello-Blog/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-03-20-Hello-Blog/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-03-20-Hello-Blog</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-03-20-Hello-Blog/">&lt;blockquote&gt;
   &lt;p&gt;It’s My First Blog! Go down&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -210,7 +210,7 @@ _includes/themes中的主题一般包含default.html、post.html和page.html三�
 
 &lt;p&gt;&lt;img src=&quot;/img/post/2016-03-20/cname_config.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;ok,大功告成！&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-03-26-Android-Studio1/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-03-26-Android-Studio1</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-03-26-Android-Studio1/">&lt;blockquote&gt;
+&lt;p&gt;ok,大功告成！&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-03-26-Android-Studio1/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-03-26-Android-Studio1</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-03-26-Android-Studio1/">&lt;blockquote&gt;
   &lt;p&gt;工欲善其事，必先利其器&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -274,7 +274,7 @@ _includes/themes中的主题一般包含default.html、post.html和page.html三�
 
 &lt;p&gt;&lt;img src=&quot;/img/post/2016-03-26/device_manager.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;接下来，直接点击运行就好了，Hello World应该成功出现在你的手机上了。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-03-27-VS-WDK-SDK/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-03-27-VS-WDK-SDK</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-03-27-VS-WDK-SDK/">&lt;blockquote&gt;
+&lt;p&gt;接下来，直接点击运行就好了，Hello World应该成功出现在你的手机上了。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-03-27-VS-WDK-SDK/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-03-27-VS-WDK-SDK</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-03-27-VS-WDK-SDK/">&lt;blockquote&gt;
   &lt;p&gt;困难总是需要克服的&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -294,7 +294,7 @@ _includes/themes中的主题一般包含default.html、post.html和page.html三�
 
 &lt;p&gt;另外提一下啊，如果你还想研究xp的话，那么你需要下载&lt;a href=&quot;https://www.microsoft.com/en-us/download/details.aspx?id=11800&quot;&gt;WDK7&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;好吧，想不到折磨了我好几天，甚至让我重装了一次系统的问题，三言两语就写完了，洗过了，睡了。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-03-28-Clean-DiskC/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-03-28-Clean-DiskC</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-03-28-Clean-DiskC/">&lt;blockquote&gt;
+&lt;p&gt;好吧，想不到折磨了我好几天，甚至让我重装了一次系统的问题，三言两语就写完了，洗过了，睡了。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-03-28-Clean-DiskC/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-03-28-Clean-DiskC</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-03-28-Clean-DiskC/">&lt;blockquote&gt;
   &lt;p&gt;小记&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -303,7 +303,7 @@ _includes/themes中的主题一般包含default.html、post.html和page.html三�
 &lt;pre&gt;&lt;code class=&quot;language-path&quot;&gt;- C盘搜索FileRepository,这是windows自动推送的驱动更新，全选，删除。如果有些删不掉就跳过。
 - C:\Windows\SoftwareDistribution\Download
 - C:\Users\**user**\AppData\Local\Temp
-&lt;/code&gt;&lt;/pre&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-03-29-Android-sources-download/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-03-29-Android-sources-download</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-03-29-Android-sources-download/">&lt;blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-03-29-Android-sources-download/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-03-29-Android-sources-download</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-03-29-Android-sources-download/">&lt;blockquote&gt;
   &lt;p&gt;透过现象看本质&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -398,7 +398,7 @@ git checkout android-4.4.2_r1
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;需要注意的是要将里面的git和存放源代码路径都替换为你自己的。上面我使用的是清华的镜像，速度很快，推荐使用，如果不放心，可以自己替换为google的https://android.googlesource.com/，但是表示速度难以忍受。。。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-03-30-Android-Studio2/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-03-30-Android-Studio2</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-03-30-Android-Studio2/">&lt;blockquote&gt;
+&lt;p&gt;需要注意的是要将里面的git和存放源代码路径都替换为你自己的。上面我使用的是清华的镜像，速度很快，推荐使用，如果不放心，可以自己替换为google的https://android.googlesource.com/，但是表示速度难以忍受。。。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-03-30-Android-Studio2/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-03-30-Android-Studio2</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-03-30-Android-Studio2/">&lt;blockquote&gt;
   &lt;p&gt;工欲善其事，必先利其器&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -462,7 +462,7 @@ git checkout android-4.4.2_r1
 
 &lt;p&gt;&lt;img src=&quot;/img/post/2016-03-30/code_style.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;代码风格的定义选项非常多，建议大家自己点击多试试，在右侧的代码框中会即时响应你的修改。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-04-09-Android-Studio3/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-04-09-Android-Studio3</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-04-09-Android-Studio3/">&lt;blockquote&gt;
+&lt;p&gt;代码风格的定义选项非常多，建议大家自己点击多试试，在右侧的代码框中会即时响应你的修改。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-04-09-Android-Studio3/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-04-09-Android-Studio3</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-04-09-Android-Studio3/">&lt;blockquote&gt;
   &lt;p&gt;工欲善其事，必先利其器&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -510,7 +510,7 @@ git checkout android-4.4.2_r1
 
 &lt;p&gt;&lt;img src=&quot;/img/post/2016-03-30/code_style.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;代码风格的定义选项非常多，建议大家自己点击多试试，在右侧的代码框中会即时响应你的修改。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-04-25-VPS-softether/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-04-25-VPS-softether</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-04-25-VPS-softether/">&lt;blockquote&gt;
+&lt;p&gt;代码风格的定义选项非常多，建议大家自己点击多试试，在右侧的代码框中会即时响应你的修改。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-04-25-VPS-softether/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-04-25-VPS-softether</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-04-25-VPS-softether/">&lt;blockquote&gt;
   &lt;p&gt;所有的墙都是纸老虎-PfCStyle&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -798,7 +798,7 @@ git checkout android-4.4.2_r1
 
 &lt;p&gt;结束！&lt;/p&gt;
 
-&lt;p&gt;PS:说明一下啊，这个aws的流量并不是无限制的，一个月只有15g（上行和下行分别为15g）的，超过要扣费的。其他具体免费套餐内容参见&lt;a href=&quot;https://aws.amazon.com/cn/free/&quot;&gt;这里&lt;/a&gt;. 但是你们可以用aws练手，然后再去网上租VPS,也挺便宜的。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-05-26-Android-Studio4-Gradle/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-05-26-Android-Studio4-Gradle</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-05-26-Android-Studio4-Gradle/">&lt;blockquote&gt;
+&lt;p&gt;PS:说明一下啊，这个aws的流量并不是无限制的，一个月只有15g（上行和下行分别为15g）的，超过要扣费的。其他具体免费套餐内容参见&lt;a href=&quot;https://aws.amazon.com/cn/free/&quot;&gt;这里&lt;/a&gt;. 但是你们可以用aws练手，然后再去网上租VPS,也挺便宜的。&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-05-26-Android-Studio4-Gradle/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-05-26-Android-Studio4-Gradle</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-05-26-Android-Studio4-Gradle/">&lt;blockquote&gt;
   &lt;p&gt;如果你不够懒，那么，你就做不好一个程序员。&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -980,7 +980,7 @@ distributionUrl=gradle-2.10-all.zip
 
 &lt;p&gt;&lt;img src=&quot;/img/post/2016-05-26/config_use2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;参考博客：&lt;a href=&quot;http://stormzhang.com/android/2016/03/13/gradle-config/&quot;&gt;Gradle依赖的统一管理&lt;/a&gt;&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/01/25/2016-06-09-iOS-Project-Sumary1/" rel="alternate" type="text/html" title="" /><published>2021-01-25T22:17:20+08:00</published><updated>2021-01-25T22:17:20+08:00</updated><id>https://pfcstyle.github.io/2021/01/25/2016-06-09-iOS-Project-Sumary1</id><content type="html" xml:base="https://pfcstyle.github.io/2021/01/25/2016-06-09-iOS-Project-Sumary1/">&lt;blockquote&gt;
+&lt;p&gt;参考博客：&lt;a href=&quot;http://stormzhang.com/android/2016/03/13/gradle-config/&quot;&gt;Gradle依赖的统一管理&lt;/a&gt;&lt;/p&gt;</content><author><name>Yawei Wang</name></author></entry><entry><title type="html"></title><link href="https://pfcstyle.github.io/2021/02/06/2016-06-09-iOS-Project-Sumary1/" rel="alternate" type="text/html" title="" /><published>2021-02-06T17:29:40+08:00</published><updated>2021-02-06T17:29:40+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/2016-06-09-iOS-Project-Sumary1</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/2016-06-09-iOS-Project-Sumary1/">&lt;blockquote&gt;
   &lt;p&gt;不积跬步，无以至千里；不积小流，无以成江海；&lt;/p&gt;
 &lt;/blockquote&gt;
 

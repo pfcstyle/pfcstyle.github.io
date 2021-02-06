@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /><title>01手记</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/primer-css/css/primer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/collection.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/repo-card.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/sections/repo-list.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/boxed-group.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/common.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/responsive.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/posts/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/octicons/octicons/octicons.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mzlogin/rouge-themes@master/dist/github.css"><link rel="canonical" href="https://pfcstyle.github.io/2021/02/06/2016-12-28-mapbox-compile/"><link rel="alternate" type="application/atom+xml" title="01手记" href="https://pfcstyle.github.io/feed.xml"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/favicon.ico"><meta name="keywords" content="Will的手记, 技术博客, 王亚威, 王亚威的博客, 王亚威的手记"><meta name="description" content="Will的个人手记"><meta property="og:url" content="https://pfcstyle.github.io/2021/02/06/2016-12-28-mapbox-compile/"><meta property="og:site_name" content="01手记"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN" /><meta property="article:published_time" content="2021-02-06"> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/jquery/dist/jquery.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery-ui.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/main.js"></script></head><body class="" data-mz=""><header class="site-header"><div class="container"><h1><a href="https://pfcstyle.github.io/" title="01手记"><span class="octicon octicon-mark-github"></span> 01手记</a></h1><button class="collapsed mobile-visible" type="button" onclick="toggleMenu();"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button><nav class="site-header-nav" role="navigation"> <a href="https://pfcstyle.github.io/" class=" site-header-nav-item" target="" title="首页">首页</a> <a href="https://pfcstyle.github.io/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> <a href="https://pfcstyle.github.io/wiki/" class=" site-header-nav-item" target="" title="维基">维基</a> <a href="https://pfcstyle.github.io/links/" class=" site-header-nav-item" target="" title="链接">链接</a> <a href="https://pfcstyle.github.io/about/" class=" site-header-nav-item" target="" title="关于">关于</a></nav></div></header><section class="collection-head small geopattern" data-pattern-id=""><div class="container"><div class="columns"><div class="column three-fourths"><div class="collection-title"><h1 class="collection-header"></h1><div class="collection-info"> <span class="meta-info"> <span class="octicon octicon-calendar"></span> 2021/02/06 </span> <span class="meta-info"> <span class="octicon octicon-clock"></span> 共 4832 字，约 14 分钟 </span></div></div></div><div class="column one-fourth mobile-hidden"><div class="collection-title"></div></div></div></div></section><section class="container content"><div class="columns"><div class="column three-fourths" ><article class="article-content markdown-body"><blockquote><p>好记性不如烂笔头</p></blockquote><p>接到一个android地图项目，准备使用<a href="https://www.mapbox.com/">mapbox</a>作为底图。但是有些地方需要修改一下，主要是读取一些自己的数据等，所以这里得重新编译so及sdk。本篇不会记录如何修改，更不会去讲C++相关的任何知识，只是记录编译过程。 如果你是需要编译其他平台的sdk,看完本篇，也是完全没有问题的。</p><h1 id="准备工作">准备工作</h1><ul><li>环境</li></ul><ol><li>mac OS X EI Capitan(Command)</li><li>or Linux(Command)</li><li>or windows Cygwin</li></ol><p>本人使用的是环境1。</p><p>另外，一个建议是，mac的硬盘比较小，我的是128的固态，编译完成可能有10多G，所以，我最后是把工程放到了移动硬盘里，也建议大家这样做(在编译开始前你就该放到移动硬盘里，否则会因为路径的问题，导致下载的好的包及配置文件失效)。</p><ul><li>源码下载</li></ul><p>在<a href="https://github.com/mapbox/mapbox-gl-native">github</a>下载源码。仓库tag和branch很多，clone的话很费时间，我个人的建议是选择一个tag或者分支就可以了，直接download zip比较快。 我这里选择的是<a href="https://github.com/mapbox/mapbox-gl-native/archive/release-android-v4.2.1.zip">android-v4.2.1</a>,这是当前最新的android分支。</p><ul><li>配置必要的环境</li></ul><p>既然是要编译android sdk,那么，基础的android的环境配置是肯定要配置好的。主要是两个环境变量:</p><p>在主要是两个环境变量:<code class="language-plaintext highlighter-rouge">ANDROID_HOME</code>和<code class="language-plaintext highlighter-rouge">NDK</code>的路径。</p><p>在<em>~/bash_profile</em>的末尾添加：</p><div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//当然  这里是我的路径  大家如果和我的不同  记得换啊
+<span class="nb">export </span><span class="nv">ANDROID_HOME</span><span class="o">=</span>/Users/developer/Library/Android/sdk
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$ANDROID_HOME</span>/tools:<span class="nv">$ANDROID_HOME</span>/platform-tools
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/Users/developer/Library/Android/sdk/ndk-bundle
+</code></pre></div></div><h1 id="开始编译">开始编译</h1><p>可以开始编译了。使用终端进入<em>mapbox-gl-native</em>(这个名字不是固定的，你下载源码的方式和版本不同，名称都是不一样的，新手不必纠结)的根目录。</p><div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/Downloads/mapbox-gl-native-release-android-v4.2.1
+make android
+</code></pre></div></div><p>不同make命令对应的cpu平台不同，如下：</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>android=&gt;armeabi-v7
+
+android-lib-$1:
+
+$1=&gt;(arm-v5 arm-v7 arm-v8 x86 x86-64 mips)
+
+arm-v8 =&gt; arm64-v8a
+
+arm-v7 =&gt; armeabi-v7a
+
+arm-v5 =&gt; armeabi
+
+x86 =&gt; x86
+
+x86-64 =&gt; x86_64
+
+mips =&gt; mips
+
+如：make android-lib-x86
+
+如果想编译全部平台:
+
+make apackage (编译android所有cpu架构,建议使用这个)
+</code></pre></div></div><p>这些都可以从根目录的<strong>makefile</strong>文件里得到，这里粘贴makefile的一部分文件。</p><div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#### Android targets ###########################################################
+</span>
+<span class="nv">ANDROID_ENV</span> <span class="o">=</span> platform/android/scripts/toolchain.sh
+<span class="nv">ANDROID_ABIS</span> <span class="o">=</span> arm-v5 arm-v7 arm-v8 x86 x86-64 mips
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">style-code-android</span>
+<span class="nl">style-code-android</span><span class="o">:</span> <span class="nf">$(BUILD_DEPS)</span>
+	node platform/android/scripts/generate-style-code.js
+
+<span class="err">define</span> <span class="err">ANDROID_RULES</span>
+
+<span class="nl">build/android-$1/$(BUILDTYPE)</span><span class="o">:</span> <span class="nf">style-code-android</span>
+	<span class="nb">mkdir</span> <span class="nt">-p</span> build/android-<span class="nv">$1</span>/<span class="nv">$(BUILDTYPE)</span>
+
+<span class="nl">build/android-$1/$(BUILDTYPE)/toolchain.cmake</span><span class="o">:</span> <span class="nf">platform/android/scripts/toolchain.sh build/android-$1/$(BUILDTYPE)</span>
+	<span class="nv">$(ANDROID_ENV)</span> <span class="nv">$1</span> <span class="o">&gt;</span> build/android-<span class="nv">$1</span>/<span class="nv">$(BUILDTYPE)</span>/toolchain.cmake
+
+<span class="nl">build/android-$1/$(BUILDTYPE)/Makefile</span><span class="o">:</span> <span class="nf">build/android-$1/$(BUILDTYPE)/toolchain.cmake platform/android/config.cmake</span>
+	<span class="nb">cd </span>build/android-<span class="nv">$1</span>/<span class="nv">$(BUILDTYPE)</span> <span class="o">&amp;&amp;</span> cmake ../../.. <span class="nt">-G</span> Ninja <span class="se">\</span>
+		<span class="nt">-DCMAKE_TOOLCHAIN_FILE</span><span class="o">=</span>build/android-<span class="nv">$1</span>/<span class="nv">$(BUILDTYPE)</span>/toolchain.cmake <span class="se">\</span>
+		<span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="nv">$(BUILDTYPE)</span> <span class="se">\</span>
+		<span class="nt">-DCMAKE_EXPORT_COMPILE_COMMANDS</span><span class="o">=</span>ON <span class="se">\</span>
+		<span class="nt">-DMBGL_PLATFORM</span><span class="o">=</span>android
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">android-lib-$1</span>
+<span class="nl">android-lib-$1</span><span class="o">:</span> <span class="nf">build/android-$1/$(BUILDTYPE)/Makefile</span>
+	<span class="nv">$(NINJA)</span> <span class="nv">$(NINJA_ARGS)</span> <span class="nt">-j</span><span class="nv">$(JOBS)</span> <span class="nt">-C</span> build/android-<span class="nv">$1</span>/<span class="nv">$(BUILDTYPE)</span> all
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">android-$1</span>
+<span class="nl">android-$1</span><span class="o">:</span> <span class="nf">android-lib-$1</span>
+	<span class="nb">cd </span>platform/android <span class="o">&amp;&amp;</span> ./gradlew <span class="nt">--parallel</span> <span class="nt">--max-workers</span><span class="o">=</span><span class="nv">$(JOBS)</span> assemble<span class="nv">$(BUILDTYPE)</span>
+
+<span class="nl">apackage</span><span class="o">:</span> <span class="nf">android-lib-$1</span>
+<span class="err">endef</span>
+
+<span class="err">$(foreach</span> <span class="err">abi,$(ANDROID_ABIS),$(eval</span> <span class="err">$(call</span> <span class="err">ANDROID_RULES,$(abi))))</span>
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">android</span>
+<span class="nl">android</span><span class="o">:</span> <span class="nf">android-arm-v7</span>
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">android-test</span>
+<span class="nl">android-test</span><span class="o">:</span>
+	<span class="nb">cd </span>platform/android <span class="o">&amp;&amp;</span> ./gradlew testDebugUnitTest <span class="nt">--continue</span>
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">android-test-apk</span>
+<span class="nl">android-test-apk</span><span class="o">:</span>
+	<span class="nb">cd </span>platform/android <span class="o">&amp;&amp;</span> ./gradlew assembleDebug <span class="nt">--continue</span> <span class="o">&amp;&amp;</span> ./gradlew assembleAndroidTest <span class="nt">--continue</span>
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">apackage</span>
+<span class="nl">apackage</span><span class="o">:</span>
+	<span class="nb">cd </span>platform/android <span class="o">&amp;&amp;</span> ./gradlew <span class="nt">--parallel-threads</span><span class="o">=</span><span class="nv">$(JOBS)</span> assemble<span class="nv">$(BUILDTYPE)</span>
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">android-generate-test</span>
+<span class="nl">android-generate-test</span><span class="o">:</span>
+	node platform/android/scripts/generate-test-code.js
+
+<span class="c">#### Miscellaneous targets #####################################################
+</span>
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">style-code</span>
+<span class="nl">style-code</span><span class="o">:</span>
+	node scripts/generate-style-code.js
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">clean</span>
+<span class="nl">clean</span><span class="o">:</span>
+	<span class="p">-</span><span class="nb">rm</span> <span class="nt">-rf</span> ./build <span class="se">\</span>
+	        ./platform/android/MapboxGLAndroidSDK/build <span class="se">\</span>
+	        ./platform/android/MapboxGLAndroidSDKTestApp/build <span class="se">\</span>
+	        ./platform/android/MapboxGLAndroidSDK/src/main/jniLibs <span class="se">\</span>
+	        ./platform/android/MapboxGLAndroidSDKTestApp/src/main/jniLibs <span class="se">\</span>
+	        ./platform/android/MapboxGLAndroidSDK/src/main/assets
+
+<span class="nl">.PHONY</span><span class="o">:</span> <span class="nf">distclean</span>
+<span class="nl">distclean</span><span class="o">:</span> <span class="nf">clean</span>
+	<span class="p">-</span><span class="nb">rm</span> <span class="nt">-rf</span> ./mason_packages
+	<span class="p">-</span><span class="nb">rm</span> <span class="nt">-rf</span> ./node_modules
+
+</code></pre></div></div><p>可以看到<code class="language-plaintext highlighter-rouge">.PHONY:</code>后面的就是各种命令。其他平台类似。</p><p>先打针强心剂，在编译过程中，需要下载很多依赖，我在编译完成之后，整个文件夹有10.58G…我用了一整晚。</p><p>这样如果顺利的话，编译so就完成了。但是可能会有问题，看末尾问题解释。</p><p>另外说下，编译完成后，so文件在<code class="language-plaintext highlighter-rouge">mapbox-gl-native/platform/android/MapboxGLAndroidSDK/src/main/jniLibs</code>下</p><p><img src="/img/post/2016-12-28/jniLibs.png" alt="" /></p><h1 id="mapbox-android-sdk-的打包和使用">mapbox-android-sdk 的打包和使用</h1><ul><li>打包</li></ul><p>使用android studio打开platform下的android工程</p><p><img src="/img/post/2016-12-28/open-android.png" alt="" /></p><p>然后直接运行就好了。</p><p><img src="/img/post/2016-12-28/open-android-after.png" alt="" /></p><p>在build的output下就可以找到aar文件了。</p><p><img src="/img/post/2016-12-28/cp-after.png" alt="" /></p><ul><li>使用aar</li></ul><p>这里我直接还以上述android工程里的测试工程为例。</p><p>** 拷贝aar到目标工程的libs(没有自己创建)下</p><p>这里我将aar重命名了一下，大家随意，后有图。</p><p>** 配置builid.gradle</p><div class="language-gradle highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">android</span> <span class="o">{</span>
+
+    <span class="err">···</span>
+
+    <span class="k">repositories</span> <span class="o">{</span>
+        <span class="n">flatDir</span> <span class="o">{</span>
+            <span class="n">dirs</span> <span class="s1">'libs'</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">dependencies</span> <span class="o">{</span>
+<span class="c1">//    compile(project(':MapboxGLAndroidSDK')) {</span>
+<span class="c1">//        transitive = true</span>
+<span class="c1">//    }</span>
+
+    <span class="n">compile</span><span class="o">(</span><span class="nl">name:</span> <span class="s1">'mapbox-android-sdk-4.2.1'</span><span class="o">,</span> <span class="nl">ext:</span> <span class="s1">'aar'</span><span class="o">)</span>
+
+    <span class="err">···</span>
+
+    <span class="c1">//mapbox aar dependences</span>
+    <span class="n">compile</span> <span class="s1">'com.squareup.okhttp3:okhttp:3.4.1'</span>
+
+    <span class="c1">// Exclude Guava to avoid an unnecessary transitive dependency</span>
+    <span class="c1">// See: https://github.com/mapbox/mapbox-gl-native/issues/7129</span>
+    <span class="n">compile</span> <span class="o">(</span><span class="s1">'com.mapzen.android:lost:1.1.1'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">exclude</span> <span class="nl">group:</span> <span class="s1">'com.google.guava'</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Mapbox Android Services</span>
+    <span class="n">compile</span><span class="o">(</span><span class="s1">'com.mapbox.mapboxsdk:mapbox-java-services:1.3.1@jar'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">transitive</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="o">}</span>
+    <span class="c1">//mapbox aar dependences</span>
+    <span class="err">···</span>
+<span class="o">}</span>
+</code></pre></div></div><p><img src="/img/post/2016-12-28/cp-config.png" alt="" /></p><p>需要说下的是，打包的aar不会自动打包依赖，<strong>除非是你自己手动添加对应的依赖aar或者jar到目录下</strong>，只是用gradle管理依赖的话，是不会自动打包到aar中的。</p><p>** 记得添加上access_token</p><p><img src="/img/post/2016-12-28/access_token.png" alt="" /></p><h1 id="问题解释">问题解释</h1><ul><li>某个包总是下载失败</li></ul><p>我想说的是，多试几次，有代理，vpn什么的都连上，多试几次。从终端输出里可以看出来，这些包都是aws上的，但是亚马逊的服务器对我们来说太不稳定了，所以，试试vpn什么的，会好很多。</p><ul><li>在x86等手机上提示找不到so</li></ul><p>如果你是用<code class="language-plaintext highlighter-rouge">make android</code>命令来编译的，那么就只有arm-v7的so,64bit的运行没有问题(没有全部测试，用三星S7 edge测试没有问题)，但其他32bit平台就不行了，所以建议你编译上其他平台的包。使用<code class="language-plaintext highlighter-rouge">make apackage</code>编译。</p><p>很多问题在前面步骤中已经自动避过了，现在反而没什么需要多说了，祝好运吧。</p><div style="margin-top:2em;padding:0 1.5em;border:1px solid #d3d3d3;background-color:#deebf7"><h3>文档信息</h3><ul><li>本文作者：<a href="https://pfcstyle.github.io" target="_blank">Yawei Wang</a></li><li>本文链接：<a href="https://pfcstyle.github.io/2021/02/06/2016-12-28-mapbox-compile/" target="_blank">https://pfcstyle.github.io/2021/02/06/2016-12-28-mapbox-compile/</a></li><li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">创意共享3.0许可证</a>）</li></ul></div></article><div class="share"></div><div class="comment"><div id="gitalk-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/gitalk/gitalk.css"> <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> <script> var gitalk = new Gitalk({ id: '/2021/02/06/2016-12-28-mapbox-compile/', clientID: 'e1a31f938861348e8751', clientSecret: 'd911850947298eb91753591eeb8dba129cc7fd86', repo: 'bomment', owner: 'pfcstyle', admin: ['pfcstyle'], labels: ['gitment'], perPage: 50, }); gitalk.render('gitalk-container'); </script></div></div><div class="column one-fourth"><h3>Search</h3><div id="site_search"> <input style="width:96%" type="text" id="search_box" placeholder="Search"></div><ul id="search_results" style="font-size:14px;list-style-type:none;padding-top:10px;padding-left:10px;"></ul><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/simple-jekyll-search.min.js"></script> <script type="text/javascript"> SimpleJekyllSearch({ searchInput: document.getElementById('search_box'), resultsContainer: document.getElementById('search_results'), json: 'https://pfcstyle.github.io/assets/search_data.json', searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>', noResultsText: 'No results found', limit: 10, fuzzy: false, exclude: ['Welcome'] }) </script><h3 class="post-directory-title mobile-hidden">Table of Contents</h3><div id="post-directory-module" class="mobile-hidden"><section class="post-directory"><dl></dl></section></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery.toc.js"></script></div></div></section><footer class="container"><div class="site-footer" role="contentinfo"><div class="copyright left mobile-block"> © 2015 <span title="Yawei Wang">Yawei Wang</span> <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a></div><ul class="site-footer-links right mobile-hidden"><li> <a href="javascript:window.scrollTo(0,0)" >TOP</a></li></ul><a href="https://github.com/pfcstyle/pfcstyle.github.io" target="_blank" aria-label="view source code"> <span class="mega-octicon octicon-mark-github" title="GitHub"></span> </a><ul class="site-footer-links mobile-hidden"><li> <a href="https://pfcstyle.github.io/" title="首页" target="">首页</a></li><li> <a href="https://pfcstyle.github.io/categories/" title="分类" target="">分类</a></li><li> <a href="https://pfcstyle.github.io/wiki/" title="维基" target="">维基</a></li><li> <a href="https://pfcstyle.github.io/links/" title="链接" target="">链接</a></li><li> <a href="https://pfcstyle.github.io/about/" title="关于" target="">关于</a></li><li><a href="https://pfcstyle.github.io/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a></li></ul><script async src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="mobile-hidden" style="margin-top:8px"> <span id="busuanzi_container_site_pv" style="display:none"> 本站访问量<span id="busuanzi_value_site_pv"></span>次 </span> <span id="busuanzi_container_site_uv" style="display:none"> / 本站访客数<span id="busuanzi_value_site_uv"></span>人 </span> <span id="busuanzi_container_page_pv" style="display:none"> / 本页访问量<span id="busuanzi_value_page_pv"></span>次 / 统计始于2020-05-03 </span></div></div></footer><div class="tools-wrapper"> <a class="gotop" href="#" title="回到顶部"><span class="octicon octicon-arrow-up"></span></a></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/geopattern.js"></script> <script> jQuery(document).ready(function($) { $('.geopattern').each(function(){ $(this).geopattern($(this).data('pattern-id')); }); /* hljs.initHighlightingOnLoad(); */ }); </script><div style="display:none"> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-80669434-1', 'auto'); ga('send', 'pageview'); </script></div></body></html>
