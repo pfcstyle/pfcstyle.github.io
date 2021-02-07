@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"Android Studio for Beginer(四)之Gradle示例 "
-description	"Gradle实现多渠道打包"
+description: "Gradle实现多渠道打包"
 date:		2016-05-26
 author:		"PfCStyle"
 header-img:	"img/post/2016-05-26/head.jpg"
 categories: "Android"
-keywords
+keywords:
     - Android
     - Gradle
     - 多渠道打包

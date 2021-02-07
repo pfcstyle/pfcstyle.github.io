@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"史上最简单的VPN搭建-softether"
-description	"在VPS上搭建自己的VPN"
+description: "在VPS上搭建自己的VPN"
 date:		2016-04-25
 author:		"PfCStyle"
 header-img:	"img/post/2016-04-25/head.png"
 categories: "VPN"
-keywords
+keywords:
     - VPN
     - VPS
     - SoftEhter

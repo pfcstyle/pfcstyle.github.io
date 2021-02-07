@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(三)"
-description	"为你的iOS项目添加Google和Facebook第三方登陆"
+description: "为你的iOS项目添加Google和Facebook第三方登陆"
 date:		2016-06-11
 author:		"PfCStyle"
 header-img:	"img/post/2016-06-11/head.jpg"
 categories: "iOS"
-keywords
+keywords:
     - iOS
     - OC
     - 第三方登陆

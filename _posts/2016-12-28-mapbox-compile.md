@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"记mapbox-android-sdk的修改编译过程"
-description	"填坑"
+description: "填坑"
 date:		2016-12-28
 author:		"PfCStyle"
 header-img:	"img/post/2016-12-28/head.jpg"
 categories: "Android"
-keywords
+keywords:
     - Android
     - mapbox
     - libmapbox-gl

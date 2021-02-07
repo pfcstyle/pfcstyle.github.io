@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(一)"
-description	"iOS本地持久化总结1"
+description: "iOS本地持久化总结1"
 date:		2016-06-09
 author:		"PfCStyle"
 header-img:	"img/post/2016-06-09/head.jpg"
 categories: "iOS"
-keywords
+keywords:
     - iOS
     - OC
     - 本地持久化

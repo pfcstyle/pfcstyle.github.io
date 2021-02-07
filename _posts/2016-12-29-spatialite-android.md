@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"spatialite-android-sdk的编译和使用"
-description	"填坑"
+description: "填坑"
 date:		2016-12-29
 author:		"PfCStyle"
 header-img:	"img/post/2016-12-29/head.jpg"
 categories: "Android"
-keywords
+keywords:
     - Android
     - spatialite-android
 ---

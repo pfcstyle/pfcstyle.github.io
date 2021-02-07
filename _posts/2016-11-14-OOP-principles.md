@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"OOP-Six-Principles"
-description	"Just my point"
+description: "Just my point"
 date:		2016-11-14
 author:		"PfCStyle"
 header-img:	"img/post/2016-11-14/head.jpg"
 categories: "设计模式"
-keywords
+keywords:
     - OOP
     - Principles
 ---

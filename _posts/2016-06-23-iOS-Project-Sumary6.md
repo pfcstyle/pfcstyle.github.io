@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(六)"
-description	"iOS被拒"
+description: "iOS被拒"
 date:		2016-06-23
 author:		"PfCStyle"
 header-img:	"img/post/2016-06-23/head.jpg"
 categories: "iOS"
-keywords
+keywords:
     - iOS
     - OC
     - app store

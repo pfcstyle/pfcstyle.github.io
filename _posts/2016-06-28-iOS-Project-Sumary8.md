@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(八)"
-description	"解决4s启动图黑屏"
+description: "解决4s启动图黑屏"
 date:		2016-06-28
 author:		"PfCStyle"
 header-img:	"img/post/2016-06-28/head.jpg"
 categories: "iOS"
-keywords
+keywords:
     - iOS
     - Xcode
     - LaunchScreen

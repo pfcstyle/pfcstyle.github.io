@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"Create and Open My Blog"
-description	"Hello Blog"
+description: "Hello Blog"
 date:		2016-03-21
 author:		"PfCStyle"
 header-img:	"img/post/2016-03-20/head.jpg"
 categories: "杂记"
-keywords
+keywords:
     - Blog
     - Github
     - Jekyll
@@ -236,10 +236,10 @@ layout即是你的blog的样式和布局，网上有许多精美的主题供[下
 ---
 layout:		post
 title:		"Create and Open My Blog"
-description	"Hello Blog"
+description: "Hello Blog"
 date:		2016-03-20 17:45:00
 author:		"PfCStyle"
-keywords
+keywords:
 	- Github
 	- Blog
 	- Jekyll

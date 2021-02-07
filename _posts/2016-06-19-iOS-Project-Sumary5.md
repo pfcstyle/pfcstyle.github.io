@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(五)"
-description	"教你怎么设置Architectures"
+description: "教你怎么设置Architectures"
 date:		2016-06-19
 author:		"PfCStyle"
 header-img:	"img/post/2016-06-19/head.jpg"
 categories: "iOS"
-keywords
+keywords:
     - iOS
     - OC
     - architectures

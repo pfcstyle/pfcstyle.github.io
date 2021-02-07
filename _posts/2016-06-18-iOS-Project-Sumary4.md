@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"iOS项目总结(四)"
-description	"让你的应用回光返照-signal"
+description: "让你的应用回光返照-signal"
 date:		2016-06-18
 author:		"PfCStyle"
 header-img:	"img/post/2016-06-18/head.jpg"
 categories: "iOS"
-keywords
+keywords:
     - iOS
     - OC
     - signal

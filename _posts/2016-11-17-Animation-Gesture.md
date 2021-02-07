@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"Android-Animation-Gesture"
-description	"important point"
+description: "important point"
 date:		2016-11-17
 author:		"PfCStyle"
 header-img:	"img/post/2016-11-17/head.jpg"
 categories: "Android"
-keywords
+keywords:
     - Android
     - Animation
     - Gesture

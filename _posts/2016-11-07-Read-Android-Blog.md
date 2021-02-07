@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"Read-Android-Blog"
-description	"the heart"
+description: "the heart"
 date:		2016-11-07
 author:		"PfCStyle"
 header-img:	"img/post/2016-11-07/head.jpg"
 categories: "Android"
-keywords
+keywords:
     - android
     - blog
 ---

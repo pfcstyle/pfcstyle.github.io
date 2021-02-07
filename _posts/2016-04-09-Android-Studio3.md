@@ -1,12 +1,12 @@
 ---
 layout:		post
 title:		"Android Studio for Beginer(三) 之初识Gradle"
-description	"The Best Android Tool"
+description: "The Best Android Tool"
 date:		2016-04-09
 author:		"PfCStyle"
 header-img:	"img/post/2016-04-09/head.jpg"
 categories: "Android"
-keywords
+keywords:
     - Android
     - Tool
     - Android studio
