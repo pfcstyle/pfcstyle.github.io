@@ -1,4 +1,265 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-02-07T14:35:44+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Effective presentations</title><link href="https://pfcstyle.github.io/2021/02/06/Effective-Presentations/" rel="alternate" type="text/html" title="Effective presentations" /><published>2021-02-06T00:00:00+08:00</published><updated>2021-02-06T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/Effective-Presentations</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/Effective-Presentations/">&lt;h1 id=&quot;progress&quot;&gt;progress&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-02-07T15:02:38+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?</title><link href="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/" rel="alternate" type="text/html" title="What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?" /><published>2021-02-07T00:00:00+08:00</published><updated>2021-02-07T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/">&lt;h2 id=&quot;state&quot;&gt;@State&lt;/h2&gt;
+
+&lt;p&gt;只在view内部发生改变和使用，且是较为简单的数据类型。@State将变量的内存管理交给了SwiftUI。所有的view都是结构体，是标量，这意味着它们无法修改（只能重新赋值）。因此，当我们使用@State时， 我们将变量的控制权交给了SwiftUI，只要view存在，他就会一直在内存中存在。当变量发生改变时，SwiftUI也会自动重新加载。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;struct ContentView: View {
+    @State private var score = 0
+    init() {
+        score = 1
+    }
+    // more code
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;binding&quot;&gt;@Binding&lt;/h2&gt;
+
+&lt;p&gt;当需要读写祖先view的@State或@ObservableObject(可能其中某个属性)的属性时&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;
+struct MyView: View {
+    @State var isPresentingAlert = false
+
+    var body: some View {
+        Button(action: {
+            self.isPresentingAlert = true
+        }, label: {
+            Text(&quot;Present an Alert&quot;)
+        })
+        .customAlert(isPresented: $isPresentingAlert) {
+            CustomAlertView(title: Text(&quot;Alert!&quot;))
+        }
+    }}
+
+struct CustomAlertView: View {
+    let title: Text
+    
+    /// it needs read/write access to a State-
+    /// wrapped property of an ancestor view
+    @Binding var isBeingPresented: Bool
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swfit&quot;&gt;
+struct MyView: View {
+
+    /// it needs to provide read/write access of 
+    /// one of its properties to a descendant view
+    @State var isPresentingAlert = false
+
+    var body: some View {
+        Button(action: {
+            self.isPresentingAlert = true
+        }, label: {
+            Text(&quot;Present an Alert&quot;)
+        })
+        .alert(isPresented: $isPresentingAlert) {
+            Alert(title: Text(&quot;Alert!&quot;))
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;observedobject&quot;&gt;@ObservedObject&lt;/h2&gt;
+
+&lt;p&gt;适用于自定义类型，具备多个属性和方法，或者需要跨view使用的情况。大部分情况和@State相同，只是结构更复杂。需要实现ObservableObject protocol，这意味着其内部的属性可以被SwiftUI binding. 大多数情况，我们直接使用@Published来声明内部属性，当然也可以使用combine框架实现自定义的Publisher&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;# 自己内部初始化
+class MovieViewModel: ObservableObject {
+    
+    @Published var movies: [Movie] = [] // 1
+    
+    // more code
+    
+}
+
+
+struct MoviesView: View {
+    
+    // 1
+    @ObservedObject var viewModel = MovieViewModel()
+    
+    var body: some View {
+        List(viewModel.movies) { movie in // 2
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(movie.title) // 3a
+                        .font(.headline)
+                    Text(movie.originalTitle) // 3b
+                        .font(.subheadline)
+                }
+            }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;# 外部初始化（view init时）
+
+struct MyView: View {
+
+    /// it is dependent on an object that can
+    /// easily be passed to its initializer
+    @ObservedObject var dessertFetcher: DessertFetcher
+
+    var body: some View {
+        List(dessertFetcher.desserts) {
+            Text($0.name)
+        }.onAppear {
+            self.dessertFetcher.fetch()
+        }
+    }}
+
+extension UIViewController {
+
+    func observedObjectExampleTwo() -&amp;gt; UIViewController {
+        let fetcher = DessertFetcher(preferences: .init(toleratesMint: false))
+        let view = ObservedObjectExampleTwo(dessertFetcher: fetcher)
+        let host = UIHostingController(rootView: view)
+        return host
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Warning: When you use a custom publisher to announce that your object has changed, this must happen on the main thread.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;environmentobject&quot;&gt;@EnvironmentObject&lt;/h2&gt;
+
+&lt;p&gt;ObservedObject当需要跨view共享或者是内嵌很深的view需要但又不适合自己初始化时，需要使用@EnvironmentObject。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;@EnvironmentObject只支持1个实例&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;
+struct SomeChildView: View {
+
+    /// it would be too cumbersome to pass that 
+    /// observed object through all the initializers 
+    /// of all your view's ancestors
+    @EnvironmentObject var veggieFetcher: VegetableFetcher
+
+    var body: some View {
+        List(veggieFetcher.veggies) {
+            Text($0.name)
+        }.onAppear {
+            self.veggieFetcher.fetch()
+        }
+    }}
+
+struct SomeParentView: View {
+    var body: some View {
+        SomeChildView()
+    }}
+
+struct SomeGrandparentView: View {
+    var body: some View {
+        SomeParentView()
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;environment&quot;&gt;@Environment&lt;/h2&gt;
+
+&lt;p&gt;当view依赖的不能满足ObservableObject协议时，可能是以下几种情况：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;依赖的是一个值类型&lt;/li&gt;
+  &lt;li&gt;依赖项仅作为协议而不是具体类型公开&lt;/li&gt;
+  &lt;li&gt;依赖是一个闭包&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;@Environment 支持多实例
+修改@Published的属性，不会引发view的重绘&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;
+struct MyView: View {
+
+    /// it is dependent on a type that cannot 
+    /// conform to ObservableObject
+    @Environment(\.theme) var theme: Theme
+
+    var body: some View {
+        Text(&quot;Me and my dad make models of clipper ships.&quot;)
+            .foregroundColor(theme.foregroundColor)
+            .background(theme.backgroundColor)
+    }}
+
+// MARK: - Dependencies
+
+protocol Theme {
+    var foregroundColor: Color { get }
+    var backgroundColor: Color { get }
+}
+
+struct PinkTheme: Theme {
+    var foregroundColor: Color { .white }
+    var backgroundColor: Color { .pink }
+}
+
+// MARK: - Environment Boilerplate
+
+struct ThemeKey: EnvironmentKey {
+    static var defaultValue: Theme {
+        return PinkTheme()
+    }}
+
+extension EnvironmentValues {
+    var theme: Theme {
+        get { return self[ThemeKey.self]  }
+        set { self[ThemeKey.self] = newValue }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;workaround-for-multiple-instances-of-an-environmentobject&quot;&gt;Workaround for Multiple Instances of an EnvironmentObject&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;
+struct MyView: View {
+
+    @DistinctEnvironmentObject(\.posts) var postsService: Microservice
+    @DistinctEnvironmentObject(\.users) var usersService: Microservice
+    @DistinctEnvironmentObject(\.channels) var channelsService: Microservice
+
+    var body: some View {
+        Form {
+            Section(header: Text(&quot;Posts&quot;)) {
+                List(postsService.content, id: \.self) {
+                    Text($0)
+                }
+            }
+            Section(header: Text(&quot;Users&quot;)) {
+                List(usersService.content, id: \.self) {
+                    Text($0)
+                }
+            }
+            Section(header: Text(&quot;Channels&quot;)) {
+                List(channelsService.content, id: \.self) {
+                    Text($0)
+                }
+            }
+        }.onAppear(perform: fetchContent)
+    }}
+
+// MARK: - Property Wrapper To Make This All Work
+
+@propertyWrapperstruct DistinctEnvironmentObject&amp;lt;Wrapped&amp;gt;: DynamicProperty where Wrapped : ObservableObject {
+    var wrappedValue: Wrapped { _wrapped }
+    @ObservedObject private var _wrapped: Wrapped
+
+    init(_ keypath: KeyPath&amp;lt;EnvironmentValues, Wrapped&amp;gt;) {
+        _wrapped = Environment&amp;lt;Wrapped&amp;gt;(keypath).wrappedValue
+    }}
+
+// MARK: - Wherever You Create Your View Hierarchy
+
+MyView()
+    .environment(\.posts, Microservice.posts)
+    .environment(\.users, Microservice.users)
+    .environment(\.channels, Microservice.channels)
+&lt;/code&gt;&lt;/pre&gt;</content><author><name>Yawei</name></author><category term="iOS," /><category term="Swift," /><category term="SwiftUI" /><summary type="html">@State</summary></entry><entry><title type="html">Effective presentations</title><link href="https://pfcstyle.github.io/2021/02/06/Effective-Presentations/" rel="alternate" type="text/html" title="Effective presentations" /><published>2021-02-06T00:00:00+08:00</published><updated>2021-02-06T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/06/Effective-Presentations</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/06/Effective-Presentations/">&lt;h1 id=&quot;progress&quot;&gt;progress&lt;/h1&gt;
 &lt;h2 id=&quot;welcome-your-audience&quot;&gt;Welcome your audience&lt;/h2&gt;
 
 &lt;p&gt;Good morning, everyone. Thanks for coming.&lt;/p&gt;
@@ -81,7 +342,67 @@ Any other questions?&lt;/p&gt;
 
 &lt;p&gt;Prof. Goldman: Once we start making changes to human DNA, &lt;strong&gt;who knows what terrible results it could have on our health in the future?&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Prof. Goldman: We really shouldn’t be &lt;strong&gt;playing around&lt;/strong&gt; with technology we don’t fully understand yes.&lt;/p&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Prof. Gilbert: Making use of this technology will instantly benefit some of the poorest people on Earth. Drought-resistant crops will solve the problem of hunger in the developing world.</summary></entry><entry><title type="html">spatialite-android-sdk的编译和使用</title><link href="https://pfcstyle.github.io/2016/12/29/spatialite-android/" rel="alternate" type="text/html" title="spatialite-android-sdk的编译和使用" /><published>2016-12-29T00:00:00+08:00</published><updated>2016-12-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/12/29/spatialite-android</id><content type="html" xml:base="https://pfcstyle.github.io/2016/12/29/spatialite-android/">&lt;blockquote&gt;
+&lt;p&gt;Prof. Goldman: We really shouldn’t be &lt;strong&gt;playing around&lt;/strong&gt; with technology we don’t fully understand yes.&lt;/p&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Prof. Gilbert: Making use of this technology will instantly benefit some of the poorest people on Earth. Drought-resistant crops will solve the problem of hunger in the developing world.</summary></entry><entry><title type="html">Negotiating a better deal</title><link href="https://pfcstyle.github.io/2021/02/04/Negotiating-A-Better-Deal/" rel="alternate" type="text/html" title="Negotiating a better deal" /><published>2021-02-04T00:00:00+08:00</published><updated>2021-02-04T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/04/Negotiating-A-Better-Deal</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/04/Negotiating-A-Better-Deal/">&lt;ul&gt;
+  &lt;li&gt;Target point: The Best result to make a deal.&lt;/li&gt;
+  &lt;li&gt;Benchmark: The middle result to make a deal.&lt;/li&gt;
+  &lt;li&gt;Resistance point: The worst result to make a deal.&lt;/li&gt;
+  &lt;li&gt;Bargaining range: From resistance point to target point.&lt;/li&gt;
+  &lt;li&gt;Interests: The foundamental reason of a negotiation.&lt;/li&gt;
+  &lt;li&gt;Position: Current level.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Target point: The Best result to make a deal. Benchmark: The middle result to make a deal. Resistance point: The worst result to make a deal. Bargaining range: From resistance point to target point. Interests: The foundamental reason of a negotiation. Position: Current level.</summary></entry><entry><title type="html">Describing our job skills</title><link href="https://pfcstyle.github.io/2021/02/03/Describing-Our-Job-Skills/" rel="alternate" type="text/html" title="Describing our job skills" /><published>2021-02-03T00:00:00+08:00</published><updated>2021-02-03T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/03/Describing-Our-Job-Skills</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/03/Describing-Our-Job-Skills/">&lt;h1 id=&quot;skills&quot;&gt;Skills&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;People skills&lt;/p&gt;
+
+    &lt;p&gt;John is extremely likeable and he gets along well with his colleagues.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Speaking skills&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Teamwork&lt;/p&gt;
+
+    &lt;p&gt;He is happy to cooperate with others.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Writing skills&lt;/p&gt;
+
+    &lt;p&gt;His reports are well organized and easy to understand.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Budget management&lt;/p&gt;
+
+    &lt;p&gt;He finishes his project without exceeding his budget.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Organization&lt;/p&gt;
+
+    &lt;p&gt;He finishes his project without going beyond his spending limit.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Creativity&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Problem solving&lt;/p&gt;
+
+    &lt;p&gt;When things go wrong, he relies on his teammates to find the answers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Stress management&lt;/p&gt;
+
+    &lt;p&gt;He has difficulty working under pressure, and this can affect his work.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;some-describes&quot;&gt;Some describes&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;You get along well with some of your colleague, but not all of them.&lt;/li&gt;
+  &lt;li&gt;Being confident is something that comes naturally to you.&lt;/li&gt;
+  &lt;li&gt;Your boss encourages you to think outside the box.&lt;/li&gt;
+  &lt;li&gt;You don’t usually take the initiative at work: you wait for the boss to tell you what to do.&lt;/li&gt;
+  &lt;li&gt;You need to become more efficient in your work.&lt;/li&gt;
+  &lt;li&gt;You have a skill that give you the ability to communicate effectively.&lt;/li&gt;
+  &lt;li&gt;You can cooperate with others, but you don’t like to rely on them.&lt;/li&gt;
+  &lt;li&gt;I am trying to stay up to date with the latest developments in my field.&lt;/li&gt;
+  &lt;li&gt;I’m behind on answering my emails, now I’m trying to get up to date.&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Skills</summary></entry><entry><title type="html">spatialite-android-sdk的编译和使用</title><link href="https://pfcstyle.github.io/2016/12/29/spatialite-android/" rel="alternate" type="text/html" title="spatialite-android-sdk的编译和使用" /><published>2016-12-29T00:00:00+08:00</published><updated>2016-12-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/12/29/spatialite-android</id><content type="html" xml:base="https://pfcstyle.github.io/2016/12/29/spatialite-android/">&lt;blockquote&gt;
   &lt;p&gt;好记性不如烂笔头&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -927,443 +1248,4 @@ mHeaderView.setOnTouchListener(new View.OnTouchListener() {
   &lt;li&gt;避免创建不必要的对象诸如一些临时对象, 特别是循环中的.&lt;/li&gt;
   &lt;li&gt;考虑实现onTrimMemory(), 在此根据当前的内存状态做些处理.&lt;/li&gt;
   &lt;li&gt;Bitmap的合理有效使用.对于Bitmap的使用, 建议直接查看官方开发文档中的&lt;a href=&quot;https://developer.android.com/training/displaying-bitmaps/index.html&quot;&gt;高效显示Bitmap&lt;/a&gt;(需翻墙).&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><summary type="html">站在巨人的肩膀上</summary></entry><entry><title type="html">ESXi+vCenter6.0虚拟化集群配置(一)</title><link href="https://pfcstyle.github.io/2016/10/20/vsPhere-vCenter-etc1/" rel="alternate" type="text/html" title="ESXi+vCenter6.0虚拟化集群配置(一)" /><published>2016-10-20T00:00:00+08:00</published><updated>2016-10-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/10/20/vsPhere-vCenter-etc1</id><content type="html" xml:base="https://pfcstyle.github.io/2016/10/20/vsPhere-vCenter-etc1/">&lt;blockquote&gt;
-  &lt;p&gt;如果你在现实中遇到难以解决的问题，不妨尝试把问题虚拟化一下！&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;esxi安装前准备&quot;&gt;ESXI安装前准备&lt;/h1&gt;
-
-&lt;p&gt;首先说下本次实验的物理的结构,画张图吧：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/v-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;解释一下，图中的master和client是准备部署puppet的server和agent的，但是本系列文章不会记录这些，只是纯粹介绍vsphere系列的部署，我会抽时间再写些文章记录puppet的使用。图中的Source是记录部署自己的yum仓库。&lt;/p&gt;
-
-&lt;h3 id=&quot;下载vsphere系列软件&quot;&gt;下载vsphere系列软件&lt;/h3&gt;
-
-&lt;p&gt;方法一，直接去&lt;a href=&quot;https://my.vmware.com/cn/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere_with_operations_management/6_0&quot;&gt;官网&lt;/a&gt;下载，但是比较麻烦，要注册账号什么的，你们可以自己搞搞。&lt;/p&gt;
-
-&lt;p&gt;方法二，提供&lt;a href=&quot;http://pan.baidu.com/s/1bQ8YeU&quot;&gt;百度云下载&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;下载ESXI和vCenter即可，其他的本系列文章不会介绍。另外vCenter本次实验使用的是linux版本，即VCSA(Vmware vCenter Server Appliance
-),但我也会介绍下windows版本的安装。&lt;/p&gt;
-
-&lt;h3 id=&quot;安装硬件说明&quot;&gt;安装硬件说明&lt;/h3&gt;
-
-&lt;p&gt;ESXI并不是兼容所有的硬件的，因此，如果你不是在使用虚拟机做实验，那么在配置硬件时，必须要选购ESXI支持的硬件，这里的硬件主要说的是cpu,网卡和存储设备。你可以在&lt;a href=&quot;http://www.vmware.com/resources/compatibility/search.php&quot;&gt;这里&lt;/a&gt;去查询你将要选购的硬件是否被ESXI兼容。如果你懒得麻烦，那么，英特尔系列的产品是确定兼容的。&lt;/p&gt;
-
-&lt;h1 id=&quot;安装esxi&quot;&gt;安装ESXI&lt;/h1&gt;
-
-&lt;p&gt;安装ESXI跟安装普通系统是没有什么区别的，制作一个启动U盘，然后U盘启动即可。下面直接看图吧，很简单：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install9.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_install11.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;配置esxi主机&quot;&gt;配置ESXI主机&lt;/h1&gt;
-
-&lt;p&gt;配置ESXI主机主要是配置网络，按照规划好的来&lt;/p&gt;
-
-&lt;p&gt;ESXI主机开机后是这样的，这里下面的ip等网络信息都是已经配置好的。
-&lt;img src=&quot;/img/post/2016-10-20/esxi_home.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;F2进入设置界面
-&lt;img src=&quot;/img/post/2016-10-20/esxi_login.png&quot; alt=&quot;&quot; /&gt;
-进入界面后，选择&lt;strong&gt;Configure Management Network&lt;/strong&gt;,然后设置ipv4的地址
-&lt;img src=&quot;/img/post/2016-10-20/toIPv4.png&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/img/post/2016-10-20/IPv4-configure.png&quot; alt=&quot;&quot; /&gt;
-配置dns,这里dns我们还没有配置，按照规划先设置好就行，后续还会讲配置域控与dns
-&lt;img src=&quot;/img/post/2016-10-20/DNS-configure.png&quot; alt=&quot;&quot; /&gt;
-设置一下域
-&lt;img src=&quot;/img/post/2016-10-20/domain-name.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;设置shell和ssh选项
-&lt;img src=&quot;/img/post/2016-10-20/troubleshoot.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/troubleshoot-configure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi-shell.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;连接esxi主机&quot;&gt;连接ESXI主机&lt;/h1&gt;
-
-&lt;h3 id=&quot;web-client连接&quot;&gt;Web Client连接&lt;/h3&gt;
-
-&lt;p&gt;web页面管理还是最方便的，直接在浏览器输入ESXI主机的ip或者域名即可：
-&lt;img src=&quot;/img/post/2016-10-20/esxi_web_home.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_web_login.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_manage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;具体怎么使用下节说。&lt;/p&gt;
-
-&lt;h3 id=&quot;desktop-client连接&quot;&gt;desktop Client连接&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/esxi_desktop.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-10-20/desktop_manager.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;具体使用，下节介绍。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Virtulized" /><summary type="html">如果你在现实中遇到难以解决的问题，不妨尝试把问题虚拟化一下！</summary></entry><entry><title type="html">Android一些小技巧及小知识点总结(持续更新)</title><link href="https://pfcstyle.github.io/2016/09/24/Android-Skills-Total/" rel="alternate" type="text/html" title="Android一些小技巧及小知识点总结(持续更新)" /><published>2016-09-24T00:00:00+08:00</published><updated>2016-09-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/09/24/Android-Skills-Total</id><content type="html" xml:base="https://pfcstyle.github.io/2016/09/24/Android-Skills-Total/">&lt;blockquote&gt;
-  &lt;p&gt;不积跬步，无以至千里；不积小流，无以成江海；&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;其实早就想开一个这样的blog,这样每次写代码有感的时候就可以来记录一下。由于拖延等等问题，今天才补上这么个开始，那么，就开始吧，万事，总得有个开始才好继续。&lt;/p&gt;
-
-&lt;h1 id=&quot;android隐藏标题栏的区别&quot;&gt;Android隐藏标题栏的区别&lt;/h1&gt;
-
-&lt;p&gt;Android隐藏标题栏可以在清单文件里设置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-android&quot;&gt;&amp;lt;!--这种方式是直接移除了标题栏，不占位--&amp;gt;
-&amp;lt;activity android:name=&quot;.MainActivity&quot;
-            android:theme=&quot;@android:style/Theme.Black.NoTitleBar&quot;/&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;也可以在onCreate方法中设置&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-android&quot;&gt;//这种方式只是隐藏了  但是还会占位
-requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;举例&quot;&gt;举例&lt;/h3&gt;
-
-&lt;p&gt;我们应该都遇到过适配华为等带有虚拟按键的屏幕，这些按键占据了屏幕的底部，使我们的底部布局被遮挡。按照网上大部分的说法是因为沉浸式布局导致的，只需要设置&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-android&quot;&gt;&amp;lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-                android:id=&quot;@+id/fl_main&quot;
-                android:layout_width=&quot;match_parent&quot;
-                android:layout_height=&quot;match_parent&quot;
-             android:fitsSystemWindows=&quot;true&quot;&amp;gt;//设置这一句
-
-&amp;lt;/FrameLayout&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;但是这会导致虚拟按键虚拟按键背景色会变成透明色。必须关闭沉浸式布局才行（可能吧，没有研究）。&lt;/p&gt;
-
-&lt;p&gt;可是突然发现你有可能根本没有配置沉浸式布局，也出现了这种情况。这时候，就是我上面说的代码设置隐藏标题栏的占位的原因了。你改为使用xml设置即可更正。&lt;/p&gt;
-
-&lt;p&gt;#编译出的gradle问题&lt;/p&gt;
-
-&lt;h3 id=&quot;编译时出现errorno-service-of-type-factory-available-in-projectscopeservices&quot;&gt;编译时出现Error:No service of type Factory available in ProjectScopeServices.&lt;/h3&gt;
-
-&lt;p&gt;在根目录的build.gradle中，直接将’ classpath com.github.dcendents:android-maven-gradle-plugin:1.3’更新到1.4.1就可以解决问题了。&lt;/p&gt;
-
-&lt;p&gt;其实gradle出问题解决方式相对固定：&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;查看gradle版本号&lt;/li&gt;
-  &lt;li&gt;查看build_tools版本号&lt;/li&gt;
-  &lt;li&gt;查看gradle/gradle-wrapper.properties是否是互联网路径(有些公司可能为了保持统一，将gradle的zip包下到本地，并在此文件中配置为本地路径)&lt;/li&gt;
-  &lt;li&gt;在settings的gradle中查看是否选择了&lt;em&gt;Use local gradle distribution&lt;/em&gt;  一般改为&lt;em&gt;Use default gradle wrapper&lt;/em&gt;即可&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;viewpager的数据更新&quot;&gt;viewPager的数据更新&lt;/h1&gt;
-
-&lt;p&gt;更新的函数就是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mPager.getAdapter().notifyDataSetChanged();&lt;/code&gt;。但是，并非任何情况都会生效。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Override getItemPosition in your PagerAdapter like this:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public int getItemPosition(Object object) {
-    return POSITION_NONE;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;这是为了通知viewpager所有的view失效，此时调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;notifyDataSetChanged()&lt;/code&gt;函数就会触发更新。如果你需要使用到这个函数，那么，你应该再去写一个public函数去实现相同的功能。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;to setTag()method in instantiateItem() when instantiating a new view. Then instead of using notifyDataSetChanged(), you can use findViewWithTag() to find the view you want to update.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这种方式相当于你自己管理viewpager的view,然后手动去更新，但是显然不适合用于删除或者添加数据的情况。&lt;/p&gt;
-
-&lt;h1 id=&quot;as22及以后版本failed-to-crunch-file-&quot;&gt;AS2.2及以后版本，Failed to crunch file ！&lt;/h1&gt;
-
-&lt;p&gt;这个问题的根本原因是文件名（包括路径）太长了，AndroidStudio里路径名不能超过240个字符，所以，尝试把工程放到根目录试试。&lt;/p&gt;
-
-&lt;h1 id=&quot;unsatisfiedlinkerror&quot;&gt;UnsatisfiedLinkError&lt;/h1&gt;
-
-&lt;p&gt;你可以在&lt;a href=&quot;https://docs.oracle.com/javase/7/docs/api/java/lang/UnsatisfiedLinkError.html&quot;&gt;这里&lt;/a&gt; 看到这个错误的解释，简单来说，就是虚拟机找不到native函数的声明。这时候，你可以去看看你的library有没有load对，然后看看jni里面的命名是不是正确。&lt;/p&gt;
-
-&lt;h1 id=&quot;systemloadlibrary找不到&quot;&gt;System.Load(library)找不到&lt;/h1&gt;
-
-&lt;p&gt;首先，可能是笔误，名字弄错了。&lt;/p&gt;
-
-&lt;p&gt;其他隐蔽的可能就是，cpu平台的问题。&lt;/p&gt;
-
-&lt;p&gt;arm-v8 =&amp;gt; arm64-v8a&lt;/p&gt;
-
-&lt;p&gt;arm-v7 =&amp;gt; armeabi-v7a&lt;/p&gt;
-
-&lt;p&gt;arm-v5 =&amp;gt; armeabi&lt;/p&gt;
-
-&lt;p&gt;x86 =&amp;gt; x86&lt;/p&gt;
-
-&lt;p&gt;x86-64 =&amp;gt; x86_64&lt;/p&gt;
-
-&lt;p&gt;mips =&amp;gt; mips&lt;/p&gt;
-
-&lt;p&gt;mips-64 =&amp;gt; mips64&lt;/p&gt;
-
-&lt;p&gt;在编译so时，有时候需要你能选择正确的cpu平台。&lt;/p&gt;
-
-&lt;p&gt;或者去过滤你的cpu平台，下面的是删除了64bit平台，防止apk只去64bit中寻找so,导致一些so找不到。当然，这个需要看你具体需要的so包。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;android {
-    ....
-    defaultConfig {
-        ....
-        ndk {
-            abiFilters &quot;armeabi&quot;, &quot;armeabi-v7a&quot;, &quot;x86&quot;, &quot;mips&quot;
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><summary type="html">不积跬步，无以至千里；不积小流，无以成江海；</summary></entry><entry><title type="html">iOS一些小技巧及小知识点总结(持续更新)</title><link href="https://pfcstyle.github.io/2016/08/25/Ios-OC-Skills-Total/" rel="alternate" type="text/html" title="iOS一些小技巧及小知识点总结(持续更新)" /><published>2016-08-25T00:00:00+08:00</published><updated>2016-08-25T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/08/25/Ios-OC-Skills-Total</id><content type="html" xml:base="https://pfcstyle.github.io/2016/08/25/Ios-OC-Skills-Total/">&lt;blockquote&gt;
-  &lt;p&gt;不积跬步，无以至千里；不积小流，无以成江海；&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;其实早就想开一个这样的blog,这样每次写代码有感的时候就可以来记录一下。由于拖延等等问题，今天才补上这么个开始，那么，就开始吧，万事，总得有个开始才好继续。&lt;/p&gt;
-
-&lt;h1 id=&quot;没有不能自定义的控件&quot;&gt;没有不能自定义的控件&lt;/h1&gt;
-
-&lt;p&gt;苹果官方提供了许多的精美控件，但是出于某些原因，一些控件给出的自定义接口不足，致使我们无法定制出符合自己需求的控件，从而不得不每次自己去构建控件，这不免让人感到遗憾与无力。接下来，我就总结几种修改官方控件的方式，有了这几种方式，在我看来，几乎没有无法修改的控件了。&lt;/p&gt;
-
-&lt;h3 id=&quot;最优雅的自定义方式重写&quot;&gt;最优雅的自定义方式（重写）&lt;/h3&gt;
-
-&lt;p&gt;最优雅的自定义方式，无非就是继承父控件进行重写了。这种方式对于大部分官方控件都是有效的，举个栗子：你现在要重写tablecell,满足表格距屏幕左右边界都是20pt.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;//继承tableviewcell
-@interface BaseCell : UITableViewCell
-
-@end
-//重写setframe
-@implemention BaseCell
--(void)setFrame:(CGRect)frame{
-    frame.origin.x += 20;
-    frame.size.width -= 2 * 20;
-    [super setFrame:frame];
-}
-
-@end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如何，是不是非常简单。当然，我相信大家对这种方式其实是非常熟悉的，因为这算是我们最为常用的了。这种方式对于那些特殊控件，比如UISwitch是没有作用的，无论你怎么修改frame，它都不会改变。但是，这并不是说没有办法了。&lt;/p&gt;
-
-&lt;h3 id=&quot;有点暴力的自定义方式transform&quot;&gt;有点暴力的自定义方式（transform)&lt;/h3&gt;
-
-&lt;p&gt;UISwitch控件，宽高都是固定不变的，而且，个人感觉，有点大啊，不是那么好看。那么，如何更改呢？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;UISwitch *switch = [[UISwitch alloc] init];
-switch.transform = CGAffineTransformMakeScale(0.75, 0.75);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;什么感觉？简单！而且这样基本不会有任何其他影响。不认识&lt;a href=&quot;http://www.cocoachina.com/ios/20150104/10816.html&quot;&gt;CGAffineTransform(变换)&lt;/a&gt;？ 认识一下，很强大，制作动画的利器。嗯，想优雅一点？结合继承：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;//继承UISwitch
-@interface MySwitch : UISwitch
-
-@end
-//重写setframe
-@implemention MySwitch
--(void)setFrame:(CGRect)frame{
-    [super setFrame:frame];
-	//ios7以后 uiswitch大小更改为（51,31）
-	float scaleX = frame.size.width/51;
-	float scaleY = frame.size.height/31;
-	self.transform = CGAffineTransformMakeScale(scaleX,scaleY);
-}
-
-@end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ok，这样，你就可以任意的更改Uiswitch的大小了。我就不截图了，大家试一下就知道了，没有任何问题。&lt;/p&gt;
-
-&lt;h3 id=&quot;最暴力的自定义方式subview&quot;&gt;最暴力的自定义方式（subview）&lt;/h3&gt;
-
-&lt;p&gt;什么意思呢？之前使用父控件，这次又来折腾子view了！这次以什么为例呢？UIAlertController你怕不怕？到了ios9,uialertview已经废弃了，现在全面使用uialertcontroller。但是不管使用什么，最让开发者头疼的是，明明很好的一个控件，却大多数时候都需要自定义，因为主界面颜色完全无法自定义。。。。谁说的？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;//实例化alertcontroller
-UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot;message:message preferredStyle:UIAlertControllerStyleAlert];
-//添加按钮
-[alert addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleCancel handler:^(UIAlertAction*action) {NSLog(@&quot;点击了确定按钮&quot;);}]];
-//设置字体颜色（包括按钮的）
-[alert.view setTintColor:[UIColor redColor]];
-//获取alertview的主窗体子view
-UIView *view = alert.view.subviews[0];
-view = view.subviews[0];
-
-
-//这是uialertview没有字时的大小  注意alert的大小跟提示信息的多少是有关系的，所以，这里104不是固定的  但是可以自己动态计算
-UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 270, 104)];
-//圆角 经测试  只要小于13就不会露出背景白色
-imageView.layer.cornerRadius = 10.f;
-[imageView setBackgroundColor:[UIColor greenColor]];
-[view insertSubview:imageView atIndex:0];
-//嗯  一不小心又想起来一种更简单的方法  使用下面两句 上面的就不用了  core animation框架
-//还是很强大的  这样也不用去计算高度了 哈哈
-//view.layer.backgroundColor = [UIColor grayColor].CGColor;
-//view.layer.cornerRadius = 13.f;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ok,diy成功。&lt;/p&gt;
-
-&lt;h3 id=&quot;隐藏的自定义方式kvc&quot;&gt;隐藏的自定义方式（KVC)&lt;/h3&gt;
-
-&lt;p&gt;其实官方控件中，许多属性虽然没有开放出来，但是苹果其实提供了一种类似于java反射机制的编程方式：KVC。KVC应该不用介绍了，不懂得就直接去搜索吧，我这里只是介绍它在自定义界面上的应用。这次就说UITextField的PlaceHolder属性，你想要斜体，想换个字体，想换个颜色？看代码&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Object-C&quot;&gt;[_nameTF setValue:kTextViewPlaceHolderFont forKeyPath:@&quot;_placeholderLabel.font&quot;];
-[_nameTF setValue:kTextViewPlaceColor forKeyPath:@&quot;_placeholderLabel.textColor&quot;];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;ok了，现在去看看你的placeholder什么样吧，那个字体和颜色自己自定义哈。&lt;/p&gt;
-
-&lt;h1 id=&quot;debug&quot;&gt;Debug&lt;/h1&gt;
-
-&lt;p&gt;为了开发方便，我们经常会有很多调试设置，但是这些设置在release模式下又是不需要，这时候我们往往会需要这些(例如)：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#ifdef DEBUG
-//调试状态
-#define MyLog(...) NSLog(__VA_ARGS__)
-#else
-//发布状态
-#define MyLog(...)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;那么，这个DEBUG是在哪里设置的呢？在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;Target &amp;gt; Build Settings &amp;gt; Preprocessor Macros &amp;gt; Debug&quot;&lt;/code&gt; 里有一个”&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DEBUG=1&lt;/code&gt;“。如果你把&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DEBUG&lt;/code&gt;改成&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;haha&lt;/code&gt;呢?试一下！&lt;/p&gt;
-
-&lt;h1 id=&quot;状态栏显示与隐藏&quot;&gt;状态栏显示与隐藏&lt;/h1&gt;
-
-&lt;h3 id=&quot;app启动时隐藏状态栏&quot;&gt;app启动时隐藏状态栏&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在&lt;em&gt;info.plist&lt;/em&gt;里面  &lt;em&gt;Status bar is initially hidden&lt;/em&gt; 设置为 &lt;em&gt;YES&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;如果你想启动后显示，在appdelegate.m中加入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;其他页面的状态栏的显示与隐藏&quot;&gt;其他页面的状态栏的显示与隐藏&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;//在对应的控制器实现下面的方法
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-	//状态栏样式
-    return UIStatusBarStyleLightContent;
-}
-- (BOOL)prefersStatusBarHidden
-{
-    return YES; // 返回NO表示要显示，返回YES将hiden
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&quot;uiscrollview捏合手势关闭&quot;&gt;UIScrollView捏合手势关闭&lt;/h1&gt;
-
-&lt;p&gt;UIScrollView的自动缩放虽然方便，但也挡不住产品设计部的怪癖好，就是要停，要通过双击放大缩小，这就要求只关闭手势，而要保留缩放功能。通过查看&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIScrollView.h&lt;/code&gt;发现有&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pinchGestureRecognizer&lt;/code&gt;属性，很是兴奋，于是&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//在初始化函数中添加  但是并没有作用！！==！  我这里是继承的UIScrollView
-[self removeGestureRecognizer:self.pinchGestureRecognizer];
-self.pinchGestureRecognizer.enabled = NO;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;后来，我是这样解决的：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//在代理设置捏合手势失效
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    scrollView.pinchGestureRecognizer.enabled = NO;
-        return _photoImageView;
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这样就是可以的，我表示很方！！并不理解第一种方式为什么不行,猜测是在其他地方才初始化的pinch,不得而知。&lt;/p&gt;
-
-&lt;h3 id=&quot;双击放大缩小&quot;&gt;双击放大缩小&lt;/h3&gt;
-
-&lt;p&gt;既然说到了这个，就说一下如何通过双击实现放大缩小。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- (void)handleDoubleTap:(CGPoint)touchPoint {
-	
-	// Zoom
-	if (self.zoomScale != self.minimumZoomScale &amp;amp;&amp;amp; self.zoomScale != [self initialZoomScaleWithMinScale]) {
-		
-		// Zoom out  主要是这个函数
-		[self setZoomScale:self.minimumZoomScale animated:YES];
-		
-	} else {
-		
-		// Zoom in to twice the size
-        CGFloat newZoomScale = ((self.maximumZoomScale + self.minimumZoomScale) / 2);
-        CGFloat xsize = self.bounds.size.width / newZoomScale;
-        CGFloat ysize = self.bounds.size.height / newZoomScale;
-        [self zoomToRect:CGRectMake(touchPoint.x - xsize/2, touchPoint.y - ysize/2, xsize, ysize) animated:YES];
-
-	}
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;app前后台切换的状态保存与恢复&quot;&gt;App前后台切换的状态保存与恢复&lt;/h1&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;//这些通知不只是在appdelegate中使用  每一个viewcontroller都是可以的
-//WillResignActive
-//DidEnterBackground
-//WillEnterForeground
-//WillResignActive
-//切换前后台时  上面四个依次执行
-//注册已经激活的通知   可以这里恢复状态
-[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-//注册将要进入后台的通知  可以这里保存状态  注意这里非激活状态不只是切换前后台才会出现，比如切换页面的时候也会响应
-[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
-//注册将要进入前台通知   也可以这里恢复状态
-[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
-//这侧已经进入后台通知    也可以这里保存状态  注意操作不要超过5s，否则会被杀死
-[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&quot;thread-1-sinal-sigabrt&quot;&gt;thread 1: sinal sigabrt&lt;/h1&gt;
-
-&lt;p&gt;这个一般是因为你的xib或者storyboard与代码的连线有问题，或者是连多了，或者是连了之后改了名字又重连了一次，但是没有删除之前的。&lt;/p&gt;
-
-&lt;h1 id=&quot;uiscrollview与uicollectionview手势冲突&quot;&gt;UIScrollView与UICollectionView手势冲突&lt;/h1&gt;
-
-&lt;p&gt;之前在制作一个图集浏览的控件，使用UICollectionView作为载体，每一个Cell中加入UIImageView和UIScrollView.&lt;/p&gt;
-
-&lt;p&gt;UIImageView用来放图片与点击，双击，长按事件，UIScrollView主要是利用其放大缩小的功能。&lt;/p&gt;
-
-&lt;p&gt;UIScrollView的放大缩小本质是滑动手势的响应，这时，就偶尔会和UICollectionView的滑动事件冲突&lt;/p&gt;
-
-&lt;p&gt;解决方法是：&lt;/p&gt;
-
-&lt;p&gt;在cell上放一个UIView,比如contentView，然后把UIImageView和UIScrollView放到contentView上即可。&lt;/p&gt;
-
-&lt;h1 id=&quot;解决uiscrollview与navigationbar的冲突&quot;&gt;解决UIScrollview与NavigationBar的冲突&lt;/h1&gt;
-
-&lt;p&gt;iOS7之后，scrollview都会自动留白一个navigationbar的高度，直接在你的controller里的viewdidload中假如下述代码即可。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (DEVICE_OS_VERSION&amp;gt;7) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-        self.automaticallyAdjustsScrollViewInsets = NO;
-    }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;需要注意的是，添加这些后，view的位置就是从navigationbar开始，即屏幕的Y:64的位置现在是view的0。当然，你的view的总高度已经变成了DEVICE_SIZE.HEIGHT-64。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="iOS" /><summary type="html">不积跬步，无以至千里；不积小流，无以成江海；</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><summary type="html">站在巨人的肩膀上</summary></entry></feed>
