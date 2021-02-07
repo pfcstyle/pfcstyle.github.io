@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /><title>iOS项目总结(二) &mdash; 01手记</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/primer-css/css/primer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/collection.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/repo-card.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/sections/repo-list.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/boxed-group.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/common.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/responsive.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/posts/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/octicons/octicons/octicons.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mzlogin/rouge-themes@master/dist/github.css"><link rel="canonical" href="https://pfcstyle.github.io/2016/06/10/iOS-Project-Sumary2/"><link rel="alternate" type="application/atom+xml" title="01手记" href="https://pfcstyle.github.io/feed.xml"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/favicon.ico"><meta property="og:title" content="iOS项目总结(二)"><meta name="keywords" content="["iOS", "OC", "本地持久化", "plist", "Preference", "NSKeyedArchiver", "sqllite", "Core Data"]"><meta name="og:keywords" content="["iOS", "OC", "本地持久化", "plist", "Preference", "NSKeyedArchiver", "sqllite", "Core Data"]"><meta name="description" content=" 不积跬步，无以至千里；不积小流，无以成江海；"><meta name="og:description" content=" 不积跬步，无以至千里；不积小流，无以成江海；"><meta property="og:url" content="https://pfcstyle.github.io/2016/06/10/iOS-Project-Sumary2/"><meta property="og:site_name" content="01手记"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN" /><meta property="article:published_time" content="2016-06-10"> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/jquery/dist/jquery.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery-ui.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/main.js"></script></head><body class="" data-mz=""><header class="site-header"><div class="container"><h1><a href="https://pfcstyle.github.io/" title="01手记"><span class="octicon octicon-mark-github"></span> 01手记</a></h1><button class="collapsed mobile-visible" type="button" onclick="toggleMenu();"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button><nav class="site-header-nav" role="navigation"> <a href="https://pfcstyle.github.io/" class=" site-header-nav-item" target="" title="首页">首页</a> <a href="https://pfcstyle.github.io/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> <a href="https://pfcstyle.github.io/wiki/" class=" site-header-nav-item" target="" title="维基">维基</a> <a href="https://pfcstyle.github.io/links/" class=" site-header-nav-item" target="" title="链接">链接</a> <a href="https://pfcstyle.github.io/about/" class=" site-header-nav-item" target="" title="关于">关于</a></nav></div></header><section class="collection-head small geopattern" data-pattern-id="iOS项目总结(二)"><div class="container"><div class="columns"><div class="column three-fourths"><div class="collection-title"><h1 class="collection-header">iOS项目总结(二)</h1><div class="collection-info"> <span class="meta-info"> <span class="octicon octicon-calendar"></span> 2016/06/10 </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#iOS" title="iOS">iOS</a> </span> <span class="meta-info"> <span class="octicon octicon-clock"></span> 共 6393 字，约 19 分钟 </span></div></div></div><div class="column one-fourth mobile-hidden"><div class="collection-title"></div></div></div></div></section><section class="container content"><div class="columns"><div class="column three-fourths" ><article class="article-content markdown-body"><blockquote><p>不积跬步，无以至千里；不积小流，无以成江海；</p></blockquote><h1 id="ios开发的本地存储主要有五种形式">iOS开发的本地存储主要有五种形式</h1><ul><li><strong>XML属性列表（plist)归档</strong></li><li><strong>Preference(偏好设置NSUserDefaults)</strong></li><li><strong>NSKeyedArchiver归档(NSCoding)</strong></li><li><strong>SqlLite（本地数据库）</strong></li><li><strong>Core Data（苹果官方封装的SqlLite数据库操作接口）</strong></li></ul><p>上述五种本地的存储方式在我们日常编码中都非常常用，前三种已经在上篇博文<a href="http://pfcstyle.me/2016/06/09/iOS-Project-Sumary1/">iOS项目总结(一)-iOS本地持久化总结1</a>中介绍了，今天开始说后两种SqlLite和Core Data.</p><h1 id="sqllite本地数据库">SqlLite（本地数据库）</h1><p>SQLite作为一中小型数据库，主要应用在移动端中，跟前三种保存方式相比，使用相对比较复杂一些，但如果你有数据库基础，这个其实也是小菜一碟了。下面看一下如何使用</p><p>1.添加libsqlite3.tbd依赖，并在对应的操作文件中导入#import “sqlite3.h”</p><p>2.打开数据库</p><pre><code class="language-Objective-C">- (void)openDB{
+    sqlite3 *db; //声明一个sqlite3数据库 这个其实要全局的  就这样写吧，大家知道就好
+    ///文件是否存在
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    //这里filePath是自己定义的路径，一般在沙箱的Documents里面操作，不明白沙箱的请移步我的上篇博文
+    NSString *dbpath=[self filePath];
+    //文件是否存在
+    BOOL success = [fileManager fileExistsAtPath:dbpath];
+    if (!success) {//不存在就复制过来一个
+        NSString *resourcePath=[[NSBundle mainBundle]resourcePath];
+        //复制
+        NSString *sourceDBPath=[resourcePath stringByAppendingPathComponent:@"app.bundle/datas.sqlite"];
+
+        NSError *error;
+        success = [fileManager copyItemAtPath:sourceDBPath toPath:dbpath error:&amp;error];
+        if(!success)
+        NSAssert1(0,@"数据库附加失败！'%@'.", [error localizedDescription]);
+        else
+        NSLog(@"数据库附加成功:%@",dbpath);
+    }
+    //打开数据库
+    if (sqlite3_open([[self filePath] UTF8String], &amp;db) != SQLITE_OK) {
+        sqlite3_close(db);
+        NSAssert(0, @"数据库打开失败。");
+    }
+}
+</code></pre><p>3.执行sql语句</p><pre><code class="language-Objective-C">sqlite3 *db; //声明一个sqlite3数据库 这个是全局的 跟上同
+//这里是模拟写了一个查找所有类型的操作
+NSString *sql = @"SELECT * FROM km_types";
+sqlite3_stmt *statement;
+//执行sql语句  返回成功或者失败
+if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &amp;statement, nil) == SQLITE_OK) {
+    //指针一行行下行
+    while (sqlite3_step(statement) == SQLITE_ROW) {
+    KMTypes* k= [[KMTypes alloc]init];
+    //按照类型取出对应字段
+    int type_id = (int)sqlite3_column_int(statement,0);
+    int parent_id = (int)sqlite3_column_int(statement,1);
+    char *type_title = (char *)sqlite3_column_text(statement, 2);
+    int type_order = (int)sqlite3_column_int(statement,3);
+    int topic_count=(int)sqlite3_column_int(statement,4);
+    //这里注意转换字符串编码
+    NSString *type_titleStr = [[NSString alloc] initWithUTF8String:type_title];
+    k.type_title = type_titleStr;
+    k.type_id=type_id;
+    k.parent_id = parent_id;
+    k.type_order = type_order;
+    k.topic_count=topic_count;
+
+    [array addObject:k];
+
+}
+//完成操作
+sqlite3_finalize(statement);
+}
+//最后一定要关闭数据库
+sqlite3_close(db)
+</code></pre><p>这就是SQLite的基础操作了，其实挺简单的，但是可能数据存取，表的创建等还是有点繁琐，我们看下Core Data。</p><h1 id="core-data使用">Core Data使用</h1><p>Core Data实际上是对SQLite的操作封装，让我们更加易用，它完全不需要sql语句，因此，哪怕你没有数据库基础，用起来也是毫不费力。</p><p>1.添加实体和模型</p><p>首先你在创建项目的时候应该选在使用Core Data，这个就不再贴图了。如果你想在现成的项目中添加Core Data,你需要添加一下CoreData.framework的依赖，在pch文件中添加#import&lt;CoreData/CoreData.h&gt;，然后添加appdelegata的相关内容，你可以自己重新创建一个带有Core Data的工程，直接复制过来就行。最后再手动添加一个Core Data Model文件</p><p><img src="/img/post/2016-06-10/CoreData.png" alt="" /></p><p>创建Data Model文件时需要注意，文件名称要与AppDelegate.m中managedObjectModel方法中提到的文件名称相匹配，一般是你的工程名.momd</p><p>有了Data Model文件后，就可以在里面添加实体和关系，实际上就是向数据库中添加表格和建立表格之间的关联。添加实体如图所示：</p><p><img src="/img/post/2016-06-10/datamodel1.png" alt="" /></p><p>每个学生有一个所在的班级，每个班级中有多个学生，因此，学生和班级之间可以建立关系。建立关系如图所示：</p><p><img src="/img/post/2016-06-10/datamodel2.png" alt="" /></p><p>建立关系之后，可以切换显示的样式，以图表的方式查看实体之间的关系，如图所示：</p><p><img src="/img/post/2016-06-10/datamodel3.png" alt="" /></p><p>这样就创建好了表格以及字段了，省却了sql语句。接下来自动创建数据模型类。</p><p>2.生成数据模型类</p><p>创建好实体后，可以通过添加NSManagedObject subclass文件，系统可以自动添加实体对应的数据模型类，如图所示：</p><p><img src="/img/post/2016-06-10/datamanager1.png" alt="" /></p><p><img src="/img/post/2016-06-10/datamanager2.png" alt="" /></p><p><img src="/img/post/2016-06-10/datamanager3.png" alt="" /></p><p><img src="/img/post/2016-06-10/datamanager4.png" alt="" /></p><p>3.CoreData的代码操作</p><h3 id="介绍一下appdeldgate中自动生成的代码">介绍一下appdeldgate中自动生成的代码</h3><pre><code class="language-Objective-C">- (void)applicationWillTerminate:(UIApplication *)application
+{
+    //保存数据到持久层
+    [self saveContext];
+}
+</code></pre><pre><code class="language-Objective-C">- (void)saveContext
+{
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] &amp;&amp; ![managedObjectContext save:&amp;error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        } 
+    }
+}
+</code></pre><pre><code class="language-Objective-C">- (NSURL *)applicationDocumentsDirectory
+{
+//获取Documents的目录路径
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+</code></pre><pre><code class="language-Objective-C">/**
+*被管理的数据上下文
+*初始化的后，必须设置持久化存储助理
+*/
+- (NSManagedObjectContext *)managedObjectContext
+{
+    if (__managedObjectContext != nil) {
+        return __managedObjectContext;
+    }
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        __managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return __managedObjectContext;
+}
+</code></pre><pre><code class="language-Objective-C">/**
+被管理的数据模型
+初始化必须依赖.momd文件路径，而.momd文件由.xcdatamodeld文件编译而来
+*/
+- (NSManagedObjectModel *)managedObjectModel
+{
+    if (__managedObjectModel != nil) {
+        return __managedObjectModel;
+    }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"TestApp" withExtension:@"momd"];
+    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return __managedObjectModel;
+}
+</code></pre><pre><code class="language-Objective-C">/**
+持久化存储助理
+
+初始化必须依赖NSManagedObjectModel，之后要指定持久化存储的数据类型，默认的是NSSQLiteStoreType，即SQLite数据库；并指定存储路径为Documents目录下，以及数据库名称
+*/
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (__persistentStoreCoordinator != nil) {
+        return __persistentStoreCoordinator;
+    }
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"TestApp.sqlite"];
+
+    NSError *error = nil;
+    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+
+    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&amp;error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }    
+    return __persistentStoreCoordinator;
+}
+</code></pre><h2 id="没有生成数据模型类的时候可以使用kvc来插入和查找">没有生成数据模型类的时候可以使用KVC来插入和查找</h2><h3 id="插入数据">插入数据</h3><pre><code class="language-Objective-C">- (void)insertCoreData
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+
+    NSManagedObject *student = [NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:context];
+    [student setValue:@"1" forKey:@"id"];
+    [student setValue:@"name A" forKey:@"name"];
+
+    NSManagedObject *Class = [NSEntityDescription insertNewObjectForEntityForName:@"Class" inManagedObjectContext:context];
+    [Class setValue:@"1" forKey:@"id"];
+    [Class setValue:@"name B" forKey:@"name"];
+    
+    [Class setValue:student forKey:@"student"];
+
+    NSError *error;
+    if(![context save:&amp;error])
+    {
+        NSLog(@"不能保存：%@",[error localizedDescription]);
+    }
+}
+</code></pre><h3 id="查找数据">查找数据</h3><pre><code class="language-Objective-C">- (void)dataFetchRequest
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ContactInfo" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&amp;error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"name:%@", [info valueForKey:@"name"]);
+    }
+}
+</code></pre><h2 id="生成数据模型类之后">生成数据模型类之后</h2><h3 id="插入数据-1">插入数据</h3><pre><code class="language-Objective-C">- (void)insertCoreData
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+
+    Student *student = [NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:context];
+    student.id = 1;
+    student.name = @"name A";
+
+    Class *class = [NSEntityDescription insertNewObjectForEntityForName:@"Class" inManagedObjectContext:context];
+    class.id = 1;
+    class.name = @"name B";
+
+    class.student = student;
+
+    NSError *error;
+    if(![context save:&amp;error])
+    {
+    NSLog(@"不能保存：%@",[error localizedDescription]);
+    }
+}
+</code></pre><p>查找数据也是类似，这里就不再赘述了。</p><p>参考博文：</p><p><a href="http://www.th7.cn/Program/IOS/201506/490903.shtml">IOS 数据存储之 Core Data详解</a></p><p><a href="http://www.cnblogs.com/xiaodao/archive/2012/10/08/2715477.html">iphone数据存储之－－ Core Data的使用（一）</a></p><div style="margin-top:2em;padding:0 1.5em;border:1px solid #d3d3d3;background-color:#deebf7"><h3>文档信息</h3><ul><li>本文作者：<a href="https://pfcstyle.github.io" target="_blank">Yawei Wang</a></li><li>本文链接：<a href="https://pfcstyle.github.io/2016/06/10/iOS-Project-Sumary2/" target="_blank">https://pfcstyle.github.io/2016/06/10/iOS-Project-Sumary2/</a></li><li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">创意共享3.0许可证</a>）</li></ul></div></article><div class="share"></div><div class="comment"><div id="gitalk-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/gitalk/gitalk.css"> <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> <script> var gitalk = new Gitalk({ id: '/2016/06/10/iOS-Project-Sumary2/', clientID: 'e1a31f938861348e8751', clientSecret: 'd911850947298eb91753591eeb8dba129cc7fd86', repo: 'bomment', owner: 'pfcstyle', admin: ['pfcstyle'], labels: ['gitment'], perPage: 50, }); gitalk.render('gitalk-container'); </script></div></div><div class="column one-fourth"><h3>Search</h3><div id="site_search"> <input style="width:96%" type="text" id="search_box" placeholder="Search"></div><ul id="search_results" style="font-size:14px;list-style-type:none;padding-top:10px;padding-left:10px;"></ul><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/simple-jekyll-search.min.js"></script> <script type="text/javascript"> SimpleJekyllSearch({ searchInput: document.getElementById('search_box'), resultsContainer: document.getElementById('search_results'), json: 'https://pfcstyle.github.io/assets/search_data.json', searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>', noResultsText: 'No results found', limit: 10, fuzzy: false, exclude: ['Welcome'] }) </script><h3 class="post-directory-title mobile-hidden">Table of Contents</h3><div id="post-directory-module" class="mobile-hidden"><section class="post-directory"><dl></dl></section></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery.toc.js"></script></div></div></section><footer class="container"><div class="site-footer" role="contentinfo"><div class="copyright left mobile-block"> © 2015 <span title="Yawei Wang">Yawei Wang</span> <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a></div><ul class="site-footer-links right mobile-hidden"><li> <a href="javascript:window.scrollTo(0,0)" >TOP</a></li></ul><a href="https://github.com/pfcstyle/pfcstyle.github.io" target="_blank" aria-label="view source code"> <span class="mega-octicon octicon-mark-github" title="GitHub"></span> </a><ul class="site-footer-links mobile-hidden"><li> <a href="https://pfcstyle.github.io/" title="首页" target="">首页</a></li><li> <a href="https://pfcstyle.github.io/categories/" title="分类" target="">分类</a></li><li> <a href="https://pfcstyle.github.io/wiki/" title="维基" target="">维基</a></li><li> <a href="https://pfcstyle.github.io/links/" title="链接" target="">链接</a></li><li> <a href="https://pfcstyle.github.io/about/" title="关于" target="">关于</a></li><li><a href="https://pfcstyle.github.io/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a></li></ul><script async src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="mobile-hidden" style="margin-top:8px"> <span id="busuanzi_container_site_pv" style="display:none"> 本站访问量<span id="busuanzi_value_site_pv"></span>次 </span> <span id="busuanzi_container_site_uv" style="display:none"> / 本站访客数<span id="busuanzi_value_site_uv"></span>人 </span> <span id="busuanzi_container_page_pv" style="display:none"> / 本页访问量<span id="busuanzi_value_page_pv"></span>次 / 统计始于2020-05-03 </span></div></div></footer><div class="tools-wrapper"> <a class="gotop" href="#" title="回到顶部"><span class="octicon octicon-arrow-up"></span></a></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/geopattern.js"></script> <script> jQuery(document).ready(function($) { $('.geopattern').each(function(){ $(this).geopattern($(this).data('pattern-id')); }); /* hljs.initHighlightingOnLoad(); */ }); </script><div style="display:none"> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-80669434-1', 'auto'); ga('send', 'pageview'); </script></div></body></html>
