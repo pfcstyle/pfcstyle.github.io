@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-02-08T17:12:54+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">kubernetes 教程（一）</title><link href="https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept/" rel="alternate" type="text/html" title="kubernetes 教程（一）" /><published>2021-02-08T00:00:00+08:00</published><updated>2021-02-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept/">&lt;h1 id=&quot;kubernetes能提供什么&quot;&gt;Kubernetes能提供什么&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-02-08T18:36:37+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">kubernetes 教程（一）</title><link href="https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept/" rel="alternate" type="text/html" title="kubernetes 教程（一）" /><published>2021-02-08T00:00:00+08:00</published><updated>2021-02-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept/">&lt;h1 id=&quot;kubernetes能提供什么&quot;&gt;Kubernetes能提供什么&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;服务发现和负载均衡&lt;/li&gt;
   &lt;li&gt;
@@ -84,7 +84,106 @@
 &lt;h3 id=&quot;仪表盘&quot;&gt;仪表盘&lt;/h3&gt;
 &lt;p&gt;Kubernetes集群通用的、基于WEb的用户界面，可以管理集群&lt;/p&gt;
 &lt;h3 id=&quot;容器资源监控&quot;&gt;容器资源监控&lt;/h3&gt;
-&lt;h3 id=&quot;集群级别日志&quot;&gt;集群级别日志&lt;/h3&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">Kubernetes能提供什么 服务发现和负载均衡 存储编排</summary></entry><entry><title type="html">What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?</title><link href="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/" rel="alternate" type="text/html" title="What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?" /><published>2021-02-07T00:00:00+08:00</published><updated>2021-02-07T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/">&lt;h2 id=&quot;state&quot;&gt;@State&lt;/h2&gt;
+&lt;h3 id=&quot;集群级别日志&quot;&gt;集群级别日志&lt;/h3&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">Kubernetes能提供什么 服务发现和负载均衡 存储编排</summary></entry><entry><title type="html">kubernetes 组件版本偏差策略</title><link href="https://pfcstyle.github.io/2021/02/08/kubernetes-components-version-strategy/" rel="alternate" type="text/html" title="kubernetes 组件版本偏差策略" /><published>2021-02-08T00:00:00+08:00</published><updated>2021-02-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/08/kubernetes-components-version-strategy</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/08/kubernetes-components-version-strategy/">&lt;h1 id=&quot;版本偏差&quot;&gt;版本偏差&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;多个 kube-apiserver 实例小版本号最多差1&lt;/li&gt;
+  &lt;li&gt;kubelet 版本号不能高于 kube-apiserver，最多可以比 kube-apiserver 低两个小版本。&lt;/li&gt;
+  &lt;li&gt;kube-controller-manager、kube-scheduler 和 cloud-controller-manager 版本不能高于 kube-apiserver 版本号&lt;/li&gt;
+  &lt;li&gt;kubectl 可以比 kube-apiserver 高一个小版本，也可以低一个小版本。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;组件升级顺序&quot;&gt;组件升级顺序&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;kube-apiserver&lt;/li&gt;
+  &lt;li&gt;kube-controller-manager、kube-scheduler 和 cloud-controller-manager&lt;/li&gt;
+  &lt;li&gt;Kubelet&lt;/li&gt;
+  &lt;li&gt;Kube-proxy&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">版本偏差</summary></entry><entry><title type="html">kubernetes Daemonset</title><link href="https://pfcstyle.github.io/2021/02/08/kubernetes-daemonset/" rel="alternate" type="text/html" title="kubernetes Daemonset" /><published>2021-02-08T00:00:00+08:00</published><updated>2021-02-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/08/kubernetes-daemonset</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/08/kubernetes-daemonset/">&lt;p&gt;守护进程集包含存储进程、日志收集进程、节点监控进程、和Pods管理（创建与回收）进程。&lt;/p&gt;
+
+&lt;p&gt;DaemonSet可以只有一个，也可以根据不同的daemon划分为多个。这些进程都以Pods的形式运行&lt;/p&gt;
+
+&lt;h2 id=&quot;spec&quot;&gt;Spec&lt;/h2&gt;
+&lt;h3 id=&quot;必需字段&quot;&gt;必需字段&lt;/h3&gt;
+&lt;p&gt;apiVersion, kind, metadata等通用字段&lt;/p&gt;
+
+&lt;p&gt;template, 这是一个pod template,其配置与pod几乎完全一样，除了没有apiVersion和kind&lt;/p&gt;
+
+&lt;p&gt;selector,1.8开始，必须指定来匹配template的label，否则会报错&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;matchLabels - 匹配template的label&lt;/li&gt;
+  &lt;li&gt;matchExpressions - 通过指定key, values列表和关联key-value的操作，来构建更复杂的匹配&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;在指定的node上运行pods&quot;&gt;在指定的node上运行Pods&lt;/h3&gt;
+&lt;p&gt;如果你指定一个.spec.template.spec.nodeSelector, 那么DaemonSet controller会在匹配的node上创建相关的Pods。如果指定spec.template.spec.affinity，那么会在亲和度匹配的node上创建Pods。如果什么都没有指定，那么将会在所有的node上创建。&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;Spec Example&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;apiVersion&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;apps/v1&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;DaemonSet&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-elasticsearch&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;kube-system&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;k8s-app&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-logging&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;matchLabels&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-elasticsearch&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-elasticsearch&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;tolerations&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# this toleration is to have the daemonset runnable on master nodes&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# remove it if your masters can't run pods&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node-role.kubernetes.io/master&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;effect&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;NoSchedule&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;containers&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-elasticsearch&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;quay.io/fluentd_elasticsearch/fluentd:v2.5.2&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;resources&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;limits&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;200Mi&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;cpu&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;100m&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;200Mi&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;volumeMounts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;varlog&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;mountPath&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/log&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;varlibdockercontainers&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;mountPath&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/lib/docker/containers&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;readOnly&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;terminationGracePeriodSeconds&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;varlog&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;hostPath&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/log&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;varlibdockercontainers&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;hostPath&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/lib/docker/containers&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;daemon-pods如何调度&quot;&gt;Daemon Pods如何调度&lt;/h2&gt;
+&lt;p&gt;一般情况下，pods由Kubernetes调度器调度，但是Daemon pods被DaemonSet controller创建并调度。这会导致两个问题：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;不一致的Pod表现：一般的Pods会以Pending的状态创建，但是DaemonSet pods不会&lt;/li&gt;
+  &lt;li&gt;Pod preemption被默认的调度器控制。当抢占启用时，DaemonSet controller会做出调度决定，而不考虑pod的优先级和抢占逻辑
+可以通过添加NodeAffinity项到DaemonSet Pods可以让其使用默认的调度器&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;nodeAffinity&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;requiredDuringSchedulingIgnoredDuringExecution&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;nodeSelectorTerms&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;matchFields&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;metadata.name&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;In&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;target-host-name&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;另外，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node.kubernetes.io/unschedulable:NoSchedule&lt;/code&gt; &lt;strong&gt;toleration&lt;/strong&gt;会自动添加到DaemonSet Pods上，从而使默认的调度器忽略unschedulable的Nodes&lt;/p&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">守护进程集包含存储进程、日志收集进程、节点监控进程、和Pods管理（创建与回收）进程。</summary></entry><entry><title type="html">What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?</title><link href="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/" rel="alternate" type="text/html" title="What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?" /><published>2021-02-07T00:00:00+08:00</published><updated>2021-02-07T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/">&lt;h2 id=&quot;state&quot;&gt;@State&lt;/h2&gt;
 
 &lt;p&gt;只在view内部发生改变和使用，且是较为简单的数据类型。@State将变量的内存管理交给了SwiftUI。所有的view都是结构体，是标量，这意味着它们无法修改（只能重新赋值）。因此，当我们使用@State时， 我们将变量的控制权交给了SwiftUI，只要view存在，他就会一直在内存中存在。当变量发生改变时，SwiftUI也会自动重新加载。&lt;/p&gt;
 
@@ -716,448 +815,4 @@ db.close();
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;最后，这里还有一个&lt;a href=&quot;https://www.gaia-gis.it/fossil/libspatialite/wiki?name=spatialite-android-tutorial&quot;&gt;官方的tutorial&lt;/a&gt;，虽然很老了，但是api基本没变化，大家可以找到更多关于使用spatialite的使用方法。感兴趣的可以看下。&lt;/p&gt;
 
-&lt;p&gt;好了，就到这里了。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><summary type="html">好记性不如烂笔头</summary></entry><entry><title type="html">记mapbox-android-sdk的修改编译过程</title><link href="https://pfcstyle.github.io/2016/12/28/mapbox-compile/" rel="alternate" type="text/html" title="记mapbox-android-sdk的修改编译过程" /><published>2016-12-28T00:00:00+08:00</published><updated>2016-12-28T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/12/28/mapbox-compile</id><content type="html" xml:base="https://pfcstyle.github.io/2016/12/28/mapbox-compile/">&lt;blockquote&gt;
-  &lt;p&gt;好记性不如烂笔头&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;接到一个android地图项目，准备使用&lt;a href=&quot;https://www.mapbox.com/&quot;&gt;mapbox&lt;/a&gt;作为底图。但是有些地方需要修改一下，主要是读取一些自己的数据等，所以这里得重新编译so及sdk。本篇不会记录如何修改，更不会去讲C++相关的任何知识，只是记录编译过程。
-如果你是需要编译其他平台的sdk,看完本篇，也是完全没有问题的。&lt;/p&gt;
-
-&lt;h1 id=&quot;准备工作&quot;&gt;准备工作&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;环境&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;mac OS X EI Capitan(Command)&lt;/li&gt;
-  &lt;li&gt;or Linux(Command)&lt;/li&gt;
-  &lt;li&gt;or windows Cygwin&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;本人使用的是环境1。&lt;/p&gt;
-
-&lt;p&gt;另外，一个建议是，mac的硬盘比较小，我的是128的固态，编译完成可能有10多G，所以，我最后是把工程放到了移动硬盘里，也建议大家这样做(在编译开始前你就该放到移动硬盘里，否则会因为路径的问题，导致下载的好的包及配置文件失效)。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;源码下载&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;在&lt;a href=&quot;https://github.com/mapbox/mapbox-gl-native&quot;&gt;github&lt;/a&gt;下载源码。仓库tag和branch很多，clone的话很费时间，我个人的建议是选择一个tag或者分支就可以了，直接download zip比较快。
-我这里选择的是&lt;a href=&quot;https://github.com/mapbox/mapbox-gl-native/archive/release-android-v4.2.1.zip&quot;&gt;android-v4.2.1&lt;/a&gt;,这是当前最新的android分支。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;配置必要的环境&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;既然是要编译android sdk,那么，基础的android的环境配置是肯定要配置好的。主要是两个环境变量:&lt;/p&gt;
-
-&lt;p&gt;在主要是两个环境变量:&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ANDROID_HOME&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NDK&lt;/code&gt;的路径。&lt;/p&gt;
-
-&lt;p&gt;在&lt;em&gt;~/bash_profile&lt;/em&gt;的末尾添加：&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//当然  这里是我的路径  大家如果和我的不同  记得换啊
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ANDROID_HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/Users/developer/Library/Android/sdk
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:&lt;span class=&quot;nv&quot;&gt;$ANDROID_HOME&lt;/span&gt;/tools:&lt;span class=&quot;nv&quot;&gt;$ANDROID_HOME&lt;/span&gt;/platform-tools
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:/Users/developer/Library/Android/sdk/ndk-bundle
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;开始编译&quot;&gt;开始编译&lt;/h1&gt;
-
-&lt;p&gt;可以开始编译了。使用终端进入&lt;em&gt;mapbox-gl-native&lt;/em&gt;(这个名字不是固定的，你下载源码的方式和版本不同，名称都是不一样的，新手不必纠结)的根目录。&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Downloads/mapbox-gl-native-release-android-v4.2.1
-make android
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;不同make命令对应的cpu平台不同，如下：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;android=&amp;gt;armeabi-v7
-
-android-lib-$1:
-
-$1=&amp;gt;(arm-v5 arm-v7 arm-v8 x86 x86-64 mips)
-
-arm-v8 =&amp;gt; arm64-v8a
-
-arm-v7 =&amp;gt; armeabi-v7a
-
-arm-v5 =&amp;gt; armeabi
-
-x86 =&amp;gt; x86
-
-x86-64 =&amp;gt; x86_64
-
-mips =&amp;gt; mips
-
-如：make android-lib-x86
-
-如果想编译全部平台:
-
-make apackage (编译android所有cpu架构,建议使用这个)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这些都可以从根目录的&lt;strong&gt;makefile&lt;/strong&gt;文件里得到，这里粘贴makefile的一部分文件。&lt;/p&gt;
-
-&lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#### Android targets ###########################################################
-&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;ANDROID_ENV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; platform/android/scripts/toolchain.sh
-&lt;span class=&quot;nv&quot;&gt;ANDROID_ABIS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; arm-v5 arm-v7 arm-v8 x86 x86-64 mips
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;style-code-android&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;style-code-android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;$(BUILD_DEPS)&lt;/span&gt;
-	node platform/android/scripts/generate-style-code.js
-
-&lt;span class=&quot;err&quot;&gt;define&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;ANDROID_RULES&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;build/android-$1/$(BUILDTYPE)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;style-code-android&lt;/span&gt;
-	&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;build/android-$1/$(BUILDTYPE)/toolchain.cmake&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;platform/android/scripts/toolchain.sh build/android-$1/$(BUILDTYPE)&lt;/span&gt;
-	&lt;span class=&quot;nv&quot;&gt;$(ANDROID_ENV)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;/toolchain.cmake
-
-&lt;span class=&quot;nl&quot;&gt;build/android-$1/$(BUILDTYPE)/Makefile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;build/android-$1/$(BUILDTYPE)/toolchain.cmake platform/android/config.cmake&lt;/span&gt;
-	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; cmake ../../.. &lt;span class=&quot;nt&quot;&gt;-G&lt;/span&gt; Ninja &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;-DCMAKE_TOOLCHAIN_FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;/toolchain.cmake &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;-DCMAKE_BUILD_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;-DCMAKE_EXPORT_COMPILE_COMMANDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-		&lt;span class=&quot;nt&quot;&gt;-DMBGL_PLATFORM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;android
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-lib-$1&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;android-lib-$1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;build/android-$1/$(BUILDTYPE)/Makefile&lt;/span&gt;
-	&lt;span class=&quot;nv&quot;&gt;$(NINJA)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$(NINJA_ARGS)&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$(JOBS)&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; build/android-&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;/&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt; all
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-$1&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;android-$1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-lib-$1&lt;/span&gt;
-	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platform/android &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew &lt;span class=&quot;nt&quot;&gt;--parallel&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--max-workers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$(JOBS)&lt;/span&gt; assemble&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;apackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-lib-$1&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;endef&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;$(foreach&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;abi,$(ANDROID_ABIS),$(eval&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$(call&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;ANDROID_RULES,$(abi))))&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-arm-v7&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-test&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;android-test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platform/android &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew testDebugUnitTest &lt;span class=&quot;nt&quot;&gt;--continue&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-test-apk&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;android-test-apk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platform/android &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew assembleDebug &lt;span class=&quot;nt&quot;&gt;--continue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew assembleAndroidTest &lt;span class=&quot;nt&quot;&gt;--continue&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;apackage&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;apackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;platform/android &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./gradlew &lt;span class=&quot;nt&quot;&gt;--parallel-threads&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$(JOBS)&lt;/span&gt; assemble&lt;span class=&quot;nv&quot;&gt;$(BUILDTYPE)&lt;/span&gt;
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;android-generate-test&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;android-generate-test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	node platform/android/scripts/generate-test-code.js
-
-&lt;span class=&quot;c&quot;&gt;#### Miscellaneous targets #####################################################
-&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;style-code&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;style-code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	node scripts/generate-style-code.js
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clean&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;clean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ./build &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-	        ./platform/android/MapboxGLAndroidSDK/build &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-	        ./platform/android/MapboxGLAndroidSDKTestApp/build &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-	        ./platform/android/MapboxGLAndroidSDK/src/main/jniLibs &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-	        ./platform/android/MapboxGLAndroidSDKTestApp/src/main/jniLibs &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-	        ./platform/android/MapboxGLAndroidSDK/src/main/assets
-
-&lt;span class=&quot;nl&quot;&gt;.PHONY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;distclean&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;distclean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clean&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ./mason_packages
-	&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ./node_modules
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;可以看到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.PHONY:&lt;/code&gt;后面的就是各种命令。其他平台类似。&lt;/p&gt;
-
-&lt;p&gt;先打针强心剂，在编译过程中，需要下载很多依赖，我在编译完成之后，整个文件夹有10.58G…我用了一整晚。&lt;/p&gt;
-
-&lt;p&gt;这样如果顺利的话，编译so就完成了。但是可能会有问题，看末尾问题解释。&lt;/p&gt;
-
-&lt;p&gt;另外说下，编译完成后，so文件在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mapbox-gl-native/platform/android/MapboxGLAndroidSDK/src/main/jniLibs&lt;/code&gt;下&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/jniLibs.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;mapbox-android-sdk-的打包和使用&quot;&gt;mapbox-android-sdk 的打包和使用&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;打包&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;使用android studio打开platform下的android工程&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/open-android.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后直接运行就好了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/open-android-after.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在build的output下就可以找到aar文件了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/cp-after.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使用aar&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这里我直接还以上述android工程里的测试工程为例。&lt;/p&gt;
-
-&lt;p&gt;** 拷贝aar到目标工程的libs(没有自己创建)下&lt;/p&gt;
-
-&lt;p&gt;这里我将aar重命名了一下，大家随意，后有图。&lt;/p&gt;
-
-&lt;p&gt;** 配置builid.gradle&lt;/p&gt;
-
-&lt;div class=&quot;language-gradle highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;android&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;err&quot;&gt;···&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;repositories&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;flatDir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;dirs&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'libs'&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;dependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//    compile(project(':MapboxGLAndroidSDK')) {&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//        transitive = true&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//    }&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mapbox-android-sdk-4.2.1'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;ext:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'aar'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;err&quot;&gt;···&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;//mapbox aar dependences&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.squareup.okhttp3:okhttp:3.4.1'&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Exclude Guava to avoid an unnecessary transitive dependency&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// See: https://github.com/mapbox/mapbox-gl-native/issues/7129&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'com.mapzen.android:lost:1.1.1'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;exclude&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;group:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.google.guava'&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Mapbox Android Services&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'com.mapbox.mapboxsdk:mapbox-java-services:1.3.1@jar'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;transitive&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//mapbox aar dependences&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;···&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/cp-config.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;需要说下的是，打包的aar不会自动打包依赖，&lt;strong&gt;除非是你自己手动添加对应的依赖aar或者jar到目录下&lt;/strong&gt;，只是用gradle管理依赖的话，是不会自动打包到aar中的。&lt;/p&gt;
-
-&lt;p&gt;** 记得添加上access_token&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-12-28/access_token.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;问题解释&quot;&gt;问题解释&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;某个包总是下载失败&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;我想说的是，多试几次，有代理，vpn什么的都连上，多试几次。从终端输出里可以看出来，这些包都是aws上的，但是亚马逊的服务器对我们来说太不稳定了，所以，试试vpn什么的，会好很多。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在x86等手机上提示找不到so&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果你是用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make android&lt;/code&gt;命令来编译的，那么就只有arm-v7的so,64bit的运行没有问题(没有全部测试，用三星S7 edge测试没有问题)，但其他32bit平台就不行了，所以建议你编译上其他平台的包。使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;make apackage&lt;/code&gt;编译。&lt;/p&gt;
-
-&lt;p&gt;很多问题在前面步骤中已经自动避过了，现在反而没什么需要多说了，祝好运吧。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><summary type="html">好记性不如烂笔头</summary></entry><entry><title type="html">Android-Animation-Gesture</title><link href="https://pfcstyle.github.io/2016/11/17/Animation-Gesture/" rel="alternate" type="text/html" title="Android-Animation-Gesture" /><published>2016-11-17T00:00:00+08:00</published><updated>2016-11-17T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/11/17/Animation-Gesture</id><content type="html" xml:base="https://pfcstyle.github.io/2016/11/17/Animation-Gesture/">&lt;blockquote&gt;
-  &lt;p&gt;代码就像DNA,随机组合过程中总会出现毛病。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;animation&quot;&gt;Animation&lt;/h1&gt;
-
-&lt;p&gt;这里不会介绍动画的详细用法，只是记录一些小问题。&lt;/p&gt;
-
-&lt;h3 id=&quot;动画无效&quot;&gt;动画无效&lt;/h3&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;c1&quot;&gt;//这里要时刻注意，你传进去要变化的动画纬度参数是否是正确的&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;TranslateAnimation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TranslateAnimation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;        
-&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAnimationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AnimationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;            
-  &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;                
-	&lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVisibility&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;VISIBLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;            
-	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;   
-   &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationEnd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;   
-   &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationRepeat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){}&lt;/span&gt;        
-&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;        
-&lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startAnimation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;注意上述代码，在动画开始时，使mEditView显示，在动画前，它是隐藏的。这里需要注意的是，如果你在xml文件中(或者使用代码)设置的是gone，而不是invisible，那么，你在设置动画参数时，传入的mEditView.getHeight()就是0，从而导致没有动画发生。&lt;/p&gt;
-
-&lt;h3 id=&quot;动画之后出现异常情况&quot;&gt;动画之后出现异常情况&lt;/h3&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;nc&quot;&gt;TranslateAnimation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TranslateAnimation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//注意这里，如果设为true，动画结束后，将会强制保持结束时的状态。&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//animation.setFillAfter(true);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setDuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAnimationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AnimationListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;	
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationStart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;	
-	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;            
-	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationEnd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
- 		&lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setVisibility&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;INVISIBLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAnimationRepeat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Animation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;mEditView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startAnimation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这里是隐藏的动画，在上面&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;//animation.setFillAfter(true);&lt;/code&gt;这句，会导致&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onAnimationEnd&lt;/code&gt;中的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mEditView.setVisibility(View.INVISIBLE);&lt;/code&gt;无效，准确来说，mEditView保持了动画结束的状态，在屏幕外面。&lt;/p&gt;
-
-&lt;p&gt;但是，不仅如此，setFillAfter(true)这句，还使得事件与view分离了。所以，你往往会点到一些看起来诡异的东西。&lt;/p&gt;
-
-&lt;h1 id=&quot;gesture&quot;&gt;Gesture&lt;/h1&gt;
-
-&lt;h3 id=&quot;view自身具有的手势监听已经很全面了&quot;&gt;view自身具有的手势监听已经很全面了。&lt;/h3&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mHeaderView.setOnTouchListener(new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-);
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_DOWN: {
-                    
-              	    final float y = motionEvent.getY();
-                    Log.d(&quot;downY:&quot;+y);
-                    // Remember where we started (for dragging)
-                    mLastTouchY = y;
-                    // Save the ID of this pointer (for dragging)
-                    break;
-                }
-                    
-                case MotionEvent.ACTION_MOVE: {
-                    // Find the index of the active pointer and fetch its position
-                    final float y = motionEvent.getY();
-                    Log.d(&quot;downY:&quot;+mLastTouchY+&quot;===moveY:&quot;+y);
-                    
-                    // Only move if the ScaleGestureDetector isn't processing a gesture.
-                    //                                        if (!mScaleDetector.isInProgress()) {
-                    // Calculate the distance moved
-                    //                                        final float dx = x - mLastTouchX;
-                    final float dy = y - mLastTouchY;
-                    
-                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mQueryListView.getLayoutParams();
-                    params.topMargin = (int) (params.topMargin+dy);
-                    mQueryListView.setLayoutParams(params);
-                    
-                    break;
-                }
-                    
-                case MotionEvent.ACTION_UP: {
-
-                    break;
-                }
-            }
-            return true;
-        }
-    });
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这里展示的是使用一个手指上下拖动view的事例。注意，这里监听的是一个控件，而不是整个window。在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACTION_MOVE&lt;/code&gt;中，拿到的y是你的手指在目标view中的坐标，因此，这里只需要减去&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACTION_DOWN&lt;/code&gt;时的初始坐标，就能得到每次需要移动的距离。&lt;/p&gt;
-
-&lt;p&gt;注意，目标view随着你的手指在移动，所以，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACTION_MOVE&lt;/code&gt;中拿到的y一般波动很小，因为你的手指可能一直在目标view的同一个位置。&lt;/p&gt;
-
-&lt;p&gt;你的手指每移动1像素，目标view就会跟随移动1像素。&lt;/p&gt;
-
-&lt;h3 id=&quot;gesturedetector&quot;&gt;GestureDetector&lt;/h3&gt;
-
-&lt;p&gt;在遇到极其复杂的交互情况，可能会需要使用到这里的手势监听器。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mGestureDetector = new GestureDetector(mActivity,UpdateFeaturesProtocol.this);
-//这里需要注意，必须设置这一句，否则在GestureDetector的实现中，只能响应down,press,longpress三个事件mHeaderView.setLongClickable(true);
-mHeaderView.setOnTouchListener(new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-                return mGestureDetector.onTouchEvent(motionEvent);
-        }
-    });
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;下面是对&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OnGestureListener&lt;/code&gt;的实现&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private float startPointY;
-    
-    /**
-     * Gesture
-     * @param motionEvent
-     * @return
-     */
-    //点下时响应  第一个响应
-    @Override
-    public boolean onDown(MotionEvent motionEvent) {
-        Log.d(&quot;down==&amp;gt;e2.x:&quot;+motionEvent.getX()+&quot;====e2.y:&quot;+motionEvent.getY());
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mQueryListView.getLayoutParams();
-        startPointY = motionEvent.getY();
-        return false;
-    }
-    
-    //几乎跟down一样，但是在down后
-    //比如down响应需要0.1s,那么press需要0.2s
-    //如果你的手指接触屏幕时间不足0.2s，该事件不会响应
-    //这里的0.1s和0.2s皆为假设，没有测过
-    @Override
-    public void onShowPress(MotionEvent motionEvent) {
-        Log.d(&quot;press==&amp;gt;e2.x:&quot;+motionEvent.getX()+&quot;====e2.y:&quot;+motionEvent.getY());
-        
-    }
-    
-    //单击
-    @Override
-    public boolean onSingleTapUp(MotionEvent motionEvent) {
-        Log.d(&quot;singletap==&amp;gt;e2.x:&quot;+motionEvent.getX()+&quot;====e2.y:&quot;+motionEvent.getY());
-        return false;
-    }
-    
-    //滚动 在手指滑动过程中一直响应
-    @Override
-    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        Log.d(&quot;scroll==&amp;gt;e2.y:&quot;+motionEvent1.getY()+&quot;===e1.y:&quot;+motionEvent.getY()+&quot;distanceY:&quot;+v1);
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mQueryListView.getLayoutParams();
-        params.topMargin = (int) (params.topMargin + (motionEvent1.getY()-startPointY));
-        mQueryListView.setLayoutParams(params);
-        return false;
-    }
-    
-    //长按
-    @Override
-    public void onLongPress(MotionEvent motionEvent) {
-        Log.d(&quot;longpress==&amp;gt;e2.x:&quot;+motionEvent.getX()+&quot;====e2.y:&quot;+motionEvent.getY());
-    }
-    
-    //扔？
-    //此事件是指用手指快速滑动并快速抬起的情况
-    //注意，此事件在scoll后是不一定响应的。
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-                           float velocityY) {
-        Log.d(&quot;fling==&amp;gt;e2.x:&quot;+e2.getX()+&quot;====e2.y:&quot;+e2.getY());
-        
-        return false;
-    }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;功能和直接使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mHeaderView.setOnTouchListener&lt;/code&gt;完全一样，思路也是完全一样的。解释都在代码注释里。&lt;/p&gt;
-
-&lt;p&gt;需要注意的是里面没有监听手指抬起的地方，所以你还需要回到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setOnTouchListener&lt;/code&gt;中使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACTION_UP&lt;/code&gt;&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><summary type="html">代码就像DNA,随机组合过程中总会出现毛病。</summary></entry></feed>
+&lt;p&gt;好了，就到这里了。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><summary type="html">好记性不如烂笔头</summary></entry></feed>
