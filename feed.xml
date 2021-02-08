@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-02-07T15:02:38+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?</title><link href="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/" rel="alternate" type="text/html" title="What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?" /><published>2021-02-07T00:00:00+08:00</published><updated>2021-02-07T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/">&lt;h2 id=&quot;state&quot;&gt;@State&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-02-08T11:18:22+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?</title><link href="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/" rel="alternate" type="text/html" title="What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?" /><published>2021-02-07T00:00:00+08:00</published><updated>2021-02-07T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/07/Diff-Of-SwiftUI-Property-Wrapper/">&lt;h2 id=&quot;state&quot;&gt;@State&lt;/h2&gt;
 
 &lt;p&gt;只在view内部发生改变和使用，且是较为简单的数据类型。@State将变量的内存管理交给了SwiftUI。所有的view都是结构体，是标量，这意味着它们无法修改（只能重新赋值）。因此，当我们使用@State时， 我们将变量的控制权交给了SwiftUI，只要view存在，他就会一直在内存中存在。当变量发生改变时，SwiftUI也会自动重新加载。&lt;/p&gt;
 
@@ -402,7 +402,20 @@ Any other questions?&lt;/p&gt;
   &lt;li&gt;You can cooperate with others, but you don’t like to rely on them.&lt;/li&gt;
   &lt;li&gt;I am trying to stay up to date with the latest developments in my field.&lt;/li&gt;
   &lt;li&gt;I’m behind on answering my emails, now I’m trying to get up to date.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Skills</summary></entry><entry><title type="html">spatialite-android-sdk的编译和使用</title><link href="https://pfcstyle.github.io/2016/12/29/spatialite-android/" rel="alternate" type="text/html" title="spatialite-android-sdk的编译和使用" /><published>2016-12-29T00:00:00+08:00</published><updated>2016-12-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/12/29/spatialite-android</id><content type="html" xml:base="https://pfcstyle.github.io/2016/12/29/spatialite-android/">&lt;blockquote&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Skills</summary></entry><entry><title type="html">Talking about career paths</title><link href="https://pfcstyle.github.io/2021/02/02/Talking-about-career-paths/" rel="alternate" type="text/html" title="Talking about career paths" /><published>2021-02-02T00:00:00+08:00</published><updated>2021-02-02T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/02/Talking-about-career-paths</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/02/Talking-about-career-paths/">&lt;ol&gt;
+  &lt;li&gt;Mark: Hey, Jane! Can I ask you a question?&lt;/li&gt;
+  &lt;li&gt;Jane: Sure, What’s up?&lt;/li&gt;
+  &lt;li&gt;Mark: Well, I’m going to be graduating soon, so I’ll be applying for jobs, but I’m not sure which jobs to choose. My parents say I should choose the company that pays the most but …&lt;/li&gt;
+  &lt;li&gt;Jane: But your’re worried that &lt;strong&gt;you’re going to end up with a boss you hate?&lt;/strong&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;you’re going to get the result in the end with…&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Mark: Yeah! Do you have any suggestions?&lt;/li&gt;
+  &lt;li&gt;Jane: Sure. Several things to &lt;strong&gt;keep in mind&lt;/strong&gt;. First, do some research about the company. What are the chances that you’ll get a promotion if you &lt;strong&gt;stay with the company long-term&lt;/strong&gt;? Also, where’s the company located? How long will the &lt;strong&gt;commute&lt;/strong&gt; be? And of course the salary is important. &lt;strong&gt;Rather than&lt;/strong&gt; thinking about which company pays the most &lt;strong&gt;though&lt;/strong&gt;, find out which company pays you enough to live the life you want to live. However, &lt;strong&gt;none of this guarantees(there’s no promise)&lt;/strong&gt; that you’re going to like your boss, but at least you’ll like everything else about the job if that happens.&lt;/li&gt;
+  &lt;li&gt;Mark: Wow! &lt;strong&gt;You’ve given me a lot to think about.&lt;/strong&gt; Thanks!&lt;/li&gt;
+  &lt;li&gt;Jane: Glad I could be of help!&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Mark: Hey, Jane! Can I ask you a question? Jane: Sure, What’s up? Mark: Well, I’m going to be graduating soon, so I’ll be applying for jobs, but I’m not sure which jobs to choose. My parents say I should choose the company that pays the most but … Jane: But your’re worried that you’re going to end up with a boss you hate? you’re going to get the result in the end with… Mark: Yeah! Do you have any suggestions? Jane: Sure. Several things to keep in mind. First, do some research about the company. What are the chances that you’ll get a promotion if you stay with the company long-term? Also, where’s the company located? How long will the commute be? And of course the salary is important. Rather than thinking about which company pays the most though, find out which company pays you enough to live the life you want to live. However, none of this guarantees(there’s no promise) that you’re going to like your boss, but at least you’ll like everything else about the job if that happens. Mark: Wow! You’ve given me a lot to think about. Thanks! Jane: Glad I could be of help!</summary></entry><entry><title type="html">spatialite-android-sdk的编译和使用</title><link href="https://pfcstyle.github.io/2016/12/29/spatialite-android/" rel="alternate" type="text/html" title="spatialite-android-sdk的编译和使用" /><published>2016-12-29T00:00:00+08:00</published><updated>2016-12-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/12/29/spatialite-android</id><content type="html" xml:base="https://pfcstyle.github.io/2016/12/29/spatialite-android/">&lt;blockquote&gt;
   &lt;p&gt;好记性不如烂笔头&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -1129,123 +1142,4 @@ mHeaderView.setOnTouchListener(new View.OnTouchListener() {
 
 &lt;p&gt;那么，根据需求，以及我们的经验，我觉得，模块化的东西，往往需要充分的解耦合，并且应该有好的扩展性。因为我们可能在很多地方使用，以及本项目之外；大而全的东西，可以牺牲这些特性，因为它们可重用的机会比较少，比如android的activity，ios的controller。&lt;/p&gt;
 
-&lt;p&gt;总之，需要变化的地方，才是导致工程覆灭的潜在因素，我们的设计模式，我们的软件工程，针对的，应该是这些地方。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="设计模式" /><summary type="html">面对正确的事物，我们往往无法确定它是正确的</summary></entry><entry><title type="html">Read-Android-Blog</title><link href="https://pfcstyle.github.io/2016/11/07/Read-Android-Blog/" rel="alternate" type="text/html" title="Read-Android-Blog" /><published>2016-11-07T00:00:00+08:00</published><updated>2016-11-07T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2016/11/07/Read-Android-Blog</id><content type="html" xml:base="https://pfcstyle.github.io/2016/11/07/Read-Android-Blog/">&lt;blockquote&gt;
-  &lt;p&gt;站在巨人的肩膀上&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;最近在&lt;a href=&quot;http://gold.xitu.io/&quot;&gt;掘金&lt;/a&gt;上读了一些好的android blog,有些心得，总结一下。&lt;/p&gt;
-
-&lt;h1 id=&quot;译开发安卓apps我所努力学习到的三十多条宝贵经验&quot;&gt;&lt;a href=&quot;http://yifeng.studio/2016/10/27/android-develop-30-things-that-experience-made-me-learn-the-hard-way/&quot;&gt;［译］开发安卓Apps，我所努力学习到的三十多条宝贵经验&lt;/a&gt;&lt;/h1&gt;
-
-&lt;p&gt;其中的某些推荐博客需要翻墙才可浏览。&lt;/p&gt;
-
-&lt;h3 id=&quot;选择与使用第三方库&quot;&gt;选择与使用第三方库&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;你应该选择大众的选择，一是因为经得起考验，二是因为用的人多，总会用贡献者加入，作者维护起来也会更加用心。&lt;/li&gt;
-  &lt;li&gt;选择可信的作者或者组织。&lt;/li&gt;
-  &lt;li&gt;选择文档比较全面的。&lt;/li&gt;
-  &lt;li&gt;选择专精某一功能的库，而不是大而全的库。否则这个库一旦停止维护，你可能要面临全部重构的危险。&lt;/li&gt;
-  &lt;li&gt;使用第三方库时，你应该对其再次封装，防止在你的工程需要替换这个库的时候导致的大范围代码修改。&lt;/li&gt;
-  &lt;li&gt;一定要理解第三方库的原理，但不到万不得已，一定不要修改第三方库！&lt;/li&gt;
-  &lt;li&gt;应该养成积累自己的轮子的习惯。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;避免过度绘制&quot;&gt;避免过度绘制&lt;/h3&gt;
-
-&lt;p&gt;首先你要学会使用android的一个检测工具：&lt;em&gt;android手机=&amp;gt;开发者选项=&amp;gt;调试GPU强制渲染(Debug GPU Overdraw)&lt;/em&gt; 打开此选项之后，你会发现自己的手机屏幕充满了各种色块,如下图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-11-07/overdraw.png&quot; alt=&quot;&quot; /&gt;
-本图来源于https://riggaroo.co.za/optimizing-layouts-in-android-reducing-overdraw/&lt;/p&gt;
-
-&lt;p&gt;各种颜色的含义：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;原色&lt;/strong&gt;：没有过度绘制&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;蓝色&lt;/strong&gt;：&lt;em&gt;1xOverdraw&lt;/em&gt;-绘制了2次&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;绿色&lt;/strong&gt;：&lt;em&gt;2xOverdraw&lt;/em&gt;-绘制了3次&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;粉色&lt;/strong&gt;：&lt;em&gt;3xOverdraw&lt;/em&gt;-绘制了4次&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;红色&lt;/strong&gt;：&lt;em&gt;4xOverdraw&lt;/em&gt;-绘制了5次&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ok,现在已经知道了如何绘制，那么接下来就是如何fix&lt;/p&gt;
-
-&lt;p&gt;这个要根据具体的项目来解决，其实无非是一个原则，重复绘制的地方看如何避免绘制。一些常见的问题，比如你设置的背景色是否真的需要？你设置的背景图片，你的某些空间是否真的需要一直显示？还有，很重要的一点，你得有一个好的产品设计。
-你可以从&lt;a href=&quot;https://riggaroo.co.za/portfolio/book-dash-android-app/&quot;&gt;这里&lt;/a&gt;得到更多关于过度绘制的信息&lt;/p&gt;
-
-&lt;h3 id=&quot;如何分包按功能&quot;&gt;如何分包(按功能)&lt;/h3&gt;
-&lt;p&gt;这个，怎么说呢，各执一词，我从android转到ios,又从ios转回android,就我的经验来说，我觉得应该按照功能来分包更加的科学，如何分包，解决的无非是维护时如何快速寻找到目标的问题。显然，如果你按照功能模块进行分包，可以快速的定位一个区域，然后，在功能模块的包内，你再根据你选用的设计模式来分包，这样就能很快的找到你的目标。如果你是刚开始就按照设计模式分包，甚至按照控件分包，那么，等待你的，就是眼花缭乱。&lt;/p&gt;
-
-&lt;h3 id=&quot;如何加快gradle的编译速度&quot;&gt;如何加快gradle的编译速度&lt;/h3&gt;
-&lt;p&gt;现在的android的开发者大多都已经转到android studio阵营了，而且不得不承认，android studio比eclipse要更加专业，功能也更强大。但是，当你的项目大到一定程度时，每次要启动一次应用都会变得异常煎熬。&lt;/p&gt;
-
-&lt;p&gt;在项目根目录下的gradle.properties中加入：&lt;/p&gt;
-
-&lt;div class=&quot;language-gradle highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//# The Gradle daemon aims to improve the startup and execution time of Gradle.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//# When set to true the Gradle daemon is to run the build.&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;daemon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//# Specifies the JVM arguments used for the daemon process.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//# The setting is particularly useful for tweaking memory settings.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//# Default value: -Xmx10248m -XX:MaxPermSize=256m&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jvmargs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xmx2048m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;XX:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MaxPermSize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;XX:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HeapDumpOnOutOfMemoryError&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UTF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//# When configured, Gradle will run in incubating parallel mode.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//# This option should only be used with decoupled projects. More details, visit&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//# http://www.gradle.org/docs/current/userguide/multi_project_builds.html&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//#sec:decoupled_projects&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parallel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//# Enables new incubating mode that makes Gradle selective when configuring projects.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//# Only relevant projects are configured which results in faster builds for large multi-projects.&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;configureondemand&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;具体的原理我就不再记录了，不是我想关注的，如果你想要了解，请看&lt;a href=&quot;https://medium.com/@cesarmcferreira/speeding-up-gradle-builds-619c442113cb#.n6fmf1pv6&quot;&gt;这里&lt;/a&gt;（需要梯子）&lt;/p&gt;
-
-&lt;h3 id=&quot;svg-代替-png&quot;&gt;SVG 代替 PNG&lt;/h3&gt;
-
-&lt;p&gt;当年xcode6开始支持pdf作为矢量图时，着实给我我们的UI省了一大把力，UI只需要确定一个屏幕尺寸，出一套pdf图给我们就可以了，xcode会自动生成3个尺寸的png给我们，而我们的调用仍然想以前一样简单。&lt;/p&gt;
-
-&lt;p&gt;现在我看到android也可以这样搞了，给我们一套svg或者psd的图，我们也可以自己生成其他尺寸的图，同样也是不会有任何锯齿的。不过遗憾的是4.4及以下的系统是不支持的，所以恐怕现在还是不能大范围使用的，毕竟5.0以下系统还不能直接抛弃。&lt;/p&gt;
-
-&lt;h1 id=&quot;android-app优化之内存优化序&quot;&gt;&lt;a href=&quot;http://www.jianshu.com/p/48475df838d9&quot;&gt;Android App优化之内存优化(序)&lt;/a&gt;&lt;/h1&gt;
-
-&lt;p&gt;至于说GC机制以及系统切换APP的内存管理机制，这里都不会解释，不懂得可以参考上述博文，写的很详细生动。&lt;/p&gt;
-
-&lt;p&gt;我要总结的是：&lt;em&gt;为了不要让系统kill掉我们的App, 可以从进程级别, 内存消耗量等几个方面进行优化。&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;内存监测工具memory-monitor&quot;&gt;内存监测工具Memory Monitor&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2016-11-07/memorymonitor.jpg&quot; alt=&quot;一图看懂Memory Monitor&quot; /&gt;
-此图来源于:http://blog.lmj.wiki/2016/10/25/app-opti/app_opt_mat/&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;① GC按钮, 点击执行一次GC操作.&lt;/li&gt;
-  &lt;li&gt;② Dump Java Heap按钮, 点击会在该调试工程的captures目录生成一个类似这样”com.anly.githubapp_2016.09.21_23.42.hprof”命名的hprof文件, 并打开Android Studio的HPROF Viewer显示该文件内容.&lt;/li&gt;
-  &lt;li&gt;③ Allocation Traking按钮, 点击一次开始, 再次点击结束, 同样会在captrures目录生成一个文件, 类似”com.anly.githubapp_2016.09.21_23.48.alloc”, alloc后缀的文件, 并打开Allocation Tracker视图展示该文件内容.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这里只简单提一下android studio自带的监测工具，具体使用，可以参照上面的博文系列。&lt;/p&gt;
-
-&lt;h3 id=&quot;内存泄漏的常见可能&quot;&gt;内存泄漏的常见可能&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Context泄漏&lt;/strong&gt;。某些全局对象没有使用Application级别的对象，而是使用的指定的activity的Context，导致activity难以回收。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;内部类泄漏&lt;/strong&gt;。当内部类持有当前类的引用，并且内部类的生命周期长与当前类，就会导致当前类的内存泄漏。如Handler泄露, Thread泄露等。其实，当我们发生这种错误时，一般lint会进行提示，并且建议我们使用使用Static + WeakReference的方式，这正是正确的解决方式，而不是使用@SuppressLint(“HandlerLeak”)来逃避提示。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Register泄漏&lt;/strong&gt;。对于观察者，广播，Listener等，添加与删除没有成对出现，从而导致的内存泄露，这个只能希望程序员们多长点心了。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;资源泄漏&lt;/strong&gt;。当你操作文件或者数据库等等时，打开资源之后，请一定记得关闭资源。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Bitmap泄漏&lt;/strong&gt;。Bitmap没有及时的调用recycle()回收导致内存泄漏。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;有效使用内存的建议&quot;&gt;有效使用内存的建议&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;合理使用ServiceService的及时关闭可以让我们节省内存消耗, 对于一次性的任务, 建议使用IntentService.&lt;/li&gt;
-  &lt;li&gt;使用优化后的数据容器使用Android提供的SparseArray, SparseBooleanArray, LongSparseArray来代替HashMap的使用.关于HashMap，ArrayMap，SparseArray, &lt;a href=&quot;http://www.jianshu.com/p/7b9a1b386265&quot;&gt;这篇文章&lt;/a&gt;有个比较直观的比较, 可以看下.&lt;/li&gt;
-  &lt;li&gt;少用枚举enum结构相比于静态常量(static final), enum会耗费双倍的内存.&lt;/li&gt;
-  &lt;li&gt;避免创建不必要的对象诸如一些临时对象, 特别是循环中的.&lt;/li&gt;
-  &lt;li&gt;考虑实现onTrimMemory(), 在此根据当前的内存状态做些处理.&lt;/li&gt;
-  &lt;li&gt;Bitmap的合理有效使用.对于Bitmap的使用, 建议直接查看官方开发文档中的&lt;a href=&quot;https://developer.android.com/training/displaying-bitmaps/index.html&quot;&gt;高效显示Bitmap&lt;/a&gt;(需翻墙).&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>PfCStyle</name></author><category term="Android" /><summary type="html">站在巨人的肩膀上</summary></entry></feed>
+&lt;p&gt;总之，需要变化的地方，才是导致工程覆灭的潜在因素，我们的设计模式，我们的软件工程，针对的，应该是这些地方。&lt;/p&gt;</content><author><name>PfCStyle</name></author><category term="设计模式" /><summary type="html">面对正确的事物，我们往往无法确定它是正确的</summary></entry></feed>
