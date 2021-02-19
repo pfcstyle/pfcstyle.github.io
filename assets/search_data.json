@@ -84,6 +84,8 @@
   
   
   
+  
+  
 
   
     {
@@ -394,7 +396,7 @@
       "title"    : "",
       "category" : "",
       "content": "Prof. Gilbert: Making use of this technology will instantly benefit some of the poorest people on Earth. Drought-resistant crops will solve the problem of hunger in the developing world. Prof. Gilbert: Fine-tuning the genes of mosquitos so that they spread vaccines instead of malaria will eliminate many terrible diseases. Prof. Gilbert: And, closer to home, gene screening will enable us to find and fix health problems before a person is even born. Prof. Gilbert: Who wouldn’t want the ability to prevent their child from developing cancer? Prof. Gilbert: Being able to change the DNA of plants, animals and ourseleves will trigger a chain reaction of technological advancements, all of which will help us to overcome the challenges the future will throw at us. A: But not all the experts are so optimistic. A: Professor Goldman, fro Queen’s College, is more cautionary. Prof. Goldman: This is untested technology, and I’d warn against taking a leap into the unknown Manipulating DNA for our benefit really is ‘Playing God’, and could come back to haunt us. Prof. Goldman: Imagine we genetically engineer some crops and the changes lead to undesirable results; those changes might be impossible to reverse, and have a disastrous effect on the environment. Prof. Goldman: It’s a slippery slope, with serious consequences. Prof. Goldman: Once we start making changes to human DNA, who knows what terrible results it could have on our health in the future? Prof. Goldman: We really shouldn’t be playing around with technology we don’t fully understand yes. ",
-      "url"      : "https://pfcstyle.github.io/2021/02/09/2021-02-06-Future-Technology/",
+      "url"      : "https://pfcstyle.github.io/2021/02/19/2021-02-06-Future-Technology/",
       "keywords" : ""
     } ,
   
@@ -402,7 +404,15 @@
       "title"    : "",
       "category" : "",
       "content": "key vocabulary  Don’t let negative people get in the way of your dream - if you really want it, go for it. Their marriage has been in a bad way recently, and I’m worried they might divorce. I have way too many problems of my own to deal with right now - I can’t promise I’ll be able to help. I can’t tell you the way forward, you need to find it for yourself.  Her parents spoil her, and she always gets her own way. John: You’ve all heard of a midlife crisis, but what about a quarter-life crisis? Youth counsellor Helen Fern says more young people are experiencing one. Helen, what does a quarter-life crisis look like? Helen: Well it varies, John, but what we typically see is someone around 24, 25, recently graduated and usually in their first job. And things are tougher than they expected. Their finances are in a bad way with the student loan and rent increases, their jobs are often a lot less creative or enjoyable than they’d hoped for, and then of course with no children yet and no sense of career, they might be feeling quite… well, lost. So it’s a time of facing up to reality-you thought you’d have your own way with life, and now it’s not all happenging, or centainly not the way you imagined. John: So there you are - you’re 25, these things are all getting in the way of your dreams - how do you get through it? Helen: So, unlike mid-life crises - which tend to come from looking back on our lives - with a quarter-life crisis people are often comparing themselves, whether that’s to TV characters, or our friends, or even our own ideas about what our twenties should have been like. And so the way forward, is firstly to stop doing that, and start with your life as it is now. think about your true values - many young people want the freedom to travel, but if you’d rather focus on family and home, that’s fine too. John: And then do it. Helen: And do it -but start with small steps. If your goal is to see the world , you can begin by researching travel routes and saving a little money each week. But I will say, if you feel it’s time you made a big change - now’s the moment to do it. There are way too many people out there with regrets about their twenties, and they usually regret the things they didn’t do, not the things they did. ",
-      "url"      : "https://pfcstyle.github.io/2021/02/09/2021-02-09-solving-problems-dealing-with-life-changes/",
+      "url"      : "https://pfcstyle.github.io/2021/02/19/2021-02-09-solving-problems-dealing-with-life-changes/",
+      "keywords" : ""
+    } ,
+  
+    {
+      "title"    : "",
+      "category" : "",
+      "content": "公司准备推出一个具备类似微信小程序的Mobile平台类APP, 经过调研，小程序架构都是渲染层与逻辑层分离的（小程序技术单开文章进行分析），而逻辑层其实就是一个JS引擎，那么JS引擎的选择就显得至关重要。因此，特别对目前Android平台上比较流行的JS引擎做一个对比。 比较对象  js-evaluator-for-android: 对native android webview的封装 J2V8: 对Google V8引擎做的java封装 duktape-android:基于Duktape JS引擎做的封装 测试条目  初始化：循环初始化创建各个JS引擎，比较初始化效率 循环：循环执行字符串比较，对比执行效率 加载：加载一个大小为174k的json文件，比较加载效率 模型：执行一个复杂的计算模型，对比执行效率 坑点：js-evaluator-for-android是懒加载，在初始化时没有做任何事情，只有当执行js时才会真正初始化webview，而这也会导致后续所有的测试都不准确。因此，在初始化测试时，需要手动调用getWebViewWrapper并计入初始化时间；在进行其他测试时，也都需要手动调用getWebViewWrapper之后再开始执行。 完整测试代码在Github 测试结果 对比总结       优点  缺点  大小(默认全ABI)     Webview  没有依赖，不增加额外大小  效率低，不能执行大JS代码（大于1M）  0    J2V8  效率最高，使用方便  初始化较慢，对于apk大小增幅较大，目前仅有x64,x86,armv7和arm64v8类型ABI  92M    Duktape  初始化快，体积小，具备全平台类型ABI  运行较J2V8慢  2.45M   ",
+      "url"      : "https://pfcstyle.github.io/2021/02/19/2021-02-19-compare-v8-webview-duktape-android/",
       "keywords" : ""
     } ,
   
