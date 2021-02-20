@@ -10,13 +10,15 @@ keywords:
 	- Solving problems
 ---
 
-# key vocabulary
+# Key vocabulary
 
 1. Don't let negative people **get in the way** of your dream - if you really want it, go for it.
 2. Their marriage has been **in a bad way** recently, and I'm worried they might divorce.
 3. I have **way too many** problems of my own to deal with right now - I can't promise I'll be able to help.
 4. I can't tell you **the way forward**, you need to find it for yourself.
 5. Her parents spoil her, and she always **gets her own way**.
+
+# Dialogue
 
 1. John: You've all heard of a **midlife crisis**, but what about a quarter-life crisis? Youth counsellor Helen Fern says more young people are experiencing one. Helen, what does a **quarter-life crisis** look like?
 2. Helen: Well it varies, John, but what we typically see is someone around 24, 25, recently graduated and usually in their first job. And things are tougher than they expected. Their finances are **in a bad way** with the student loan and rent increases, their jobs are often a lot less creative or enjoyable than they'd hoped for, and then of course with no children yet and no sense of career, they might be feeling quite... well, lost. So it's a time of facing up to reality-you thought you'd **have your own way** with life, and now it's not all happenging, or centainly not the way you imagined.
