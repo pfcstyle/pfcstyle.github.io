@@ -7,7 +7,7 @@ author:		"Yawei"
 categories: "English"
 keywords:
     - English
-    - Solving problems
+    - Communicating
 ---
 
 # Key vocabulary
