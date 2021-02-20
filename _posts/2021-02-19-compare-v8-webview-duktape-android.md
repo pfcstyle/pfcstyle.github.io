@@ -6,12 +6,12 @@ date:		2021-02-19
 author:		"Yawei"
 categories: "Android"
 keywords:
-	- JS Engine
-	- J2V8
-	- V8
-	- Android
-	- Webview
-	- Duktape
+    - JS Engine
+    - J2V8
+    - V8
+    - Android
+    - Webview
+    - Duktape
 ---
 
 公司准备推出一个具备类似微信小程序的Mobile平台类APP, 经过调研，小程序架构都是渲染层与逻辑层分离的（小程序技术单开文章进行分析），而逻辑层其实就是一个JS引擎，那么JS引擎的选择就显得至关重要。因此，特别对目前Android平台上比较流行的JS引擎做一个对比。
