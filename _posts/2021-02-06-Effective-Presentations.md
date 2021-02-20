@@ -7,8 +7,7 @@ author:		"Yawei"
 categories: "English"
 keywords:
     - English
-    - Bussiness
-    - Effective presentations
+    - Communicating
 ---
 
 # progress 

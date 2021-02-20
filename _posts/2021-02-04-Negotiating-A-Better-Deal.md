@@ -7,8 +7,7 @@ author:		"Yawei"
 categories: "English"
 keywords:
     - English
-    - Bussiness
-    - Negotiating
+    - Communicating
 ---
 
 * Target point: The Best result to make a deal.

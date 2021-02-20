@@ -7,8 +7,7 @@ author:		"Yawei"
 categories: "English"
 keywords:
     - English
-    - Common
-    - Career
+    - Communicating
 ---
 
 1. Mark: Hey, Jane! Can I ask you a question?

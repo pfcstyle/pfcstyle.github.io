@@ -7,8 +7,7 @@ author:		"Yawei"
 categories: "English"
 keywords:
     - English
-    - Common
-    - Future Technology
+    - Communicating
 ---
 
 Prof. Gilbert: Making use of this technology will **instantly benefit** some of the poorest people on Earth. Drought-resistant crops will **solve** the problem of hunger in the developing world.
