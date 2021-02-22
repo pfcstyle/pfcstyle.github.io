@@ -4,7 +4,7 @@ title:		"What’s the difference between @ObservedObject, @State, @Environment a
 description: ""
 date:		2021-02-07
 author:		"Yawei"
-categories: "iOS, Swift, SwiftUI"
+categories: [iOS, Swift, SwiftUI]
 keywords:
     - iOS
     - Swift
