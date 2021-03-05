@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /><title>Combine详解（1） &mdash; 01手记</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/primer-css/css/primer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/collection.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/repo-card.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/sections/repo-list.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/boxed-group.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/common.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/responsive.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/posts/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/octicons/octicons/octicons.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mzlogin/rouge-themes@master/dist/github.css"><link rel="canonical" href="https://pfcstyle.github.io/2021/02/24/iOS-combine1/"><link rel="alternate" type="application/atom+xml" title="01手记" href="https://pfcstyle.github.io/feed.xml"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/favicon.ico"><meta property="og:title" content="Combine详解（1）"><meta name="keywords" content="["iOS", "Swift", "Combine"]"><meta name="og:keywords" content="["iOS", "Swift", "Combine"]"><meta name="description" content="Combine基础"><meta name="og:description" content="Combine基础"><meta property="og:url" content="https://pfcstyle.github.io/2021/02/24/iOS-combine1/"><meta property="og:site_name" content="01手记"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN" /><meta property="article:published_time" content="2021-02-24"> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/jquery/dist/jquery.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery-ui.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/main.js"></script></head><body class="" data-mz=""><header class="site-header"><div class="container">
+<h1><a href="https://pfcstyle.github.io/" title="01手记"><span class="octicon octicon-mark-github"></span> 01手记</a></h1>
+<button class="collapsed mobile-visible" type="button" onclick="toggleMenu();"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button><nav class="site-header-nav" role="navigation"> <a href="https://pfcstyle.github.io/" class=" site-header-nav-item" target="" title="首页">首页</a> <a href="https://pfcstyle.github.io/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> <a href="https://pfcstyle.github.io/wiki/" class=" site-header-nav-item" target="" title="维基">维基</a> <a href="https://pfcstyle.github.io/links/" class=" site-header-nav-item" target="" title="链接">链接</a> <a href="https://pfcstyle.github.io/about/" class=" site-header-nav-item" target="" title="关于">关于</a></nav>
+</div></header><section class="collection-head small geopattern" data-pattern-id="Combine详解（1）"><div class="container"><div class="columns">
+<div class="column three-fourths"><div class="collection-title">
+<h1 class="collection-header">Combine详解（1）</h1>
+<div class="collection-info"> <span class="meta-info"> <span class="octicon octicon-calendar"></span> 2021/02/24 </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#iOS" title="iOS">iOS</a> </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#Swift" title="Swift">Swift</a> </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#Combine" title="Combine">Combine</a> </span> <span class="meta-info"> <span class="octicon octicon-clock"></span> 共 4525 字，约 13 分钟 </span>
+</div>
+</div></div>
+<div class="column one-fourth mobile-hidden"><div class="collection-title"></div></div>
+</div></div></section><section class="container content"><div class="columns">
+<div class="column three-fourths">
+<article class="article-content markdown-body"><h1 id="combine基础">Combine基础</h1>
+<ul>
+<li>Publisher是发布者，作为数据生产者，会定义一个Output和Failure类型。</li>
+<li>Subscriber是订阅者，作为数据消费者，会定义一个Input合Failure类型。</li>
+<li>Operator是操作者，可以更改Publisher Output类型，产生新的Publisher。</li>
+<li>Publisher的Output类型和Subsciber的Input类型需要相同</li>
+</ul>
+<blockquote><p>订阅操作是通过<code class="language-plaintext highlighter-rouge">Publisher.subscribe(Subscriber)</code>来完成的 获取到Subscribtion(Publisher.subscibe()返回)实例，可以调用<code class="language-plaintext highlighter-rouge">.cancel()</code>取消</p></blockquote>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sub?.cancel()
+</code></pre></div></div>
+<h1 id="内置subscriber">内置Subscriber</h1>
+<ul>
+<li>
+<strong>sink(receiveCompletion:receiveValue:)</strong>: 常用于publisher和sink一起执行的时候，比如request请求，返回的response会在sink中处理</li>
+<li>
+<strong>assign(to<img class="emoji" title=":on:" alt=":on:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f51b.png" height="20" width="20">)</strong>: 通过key path将收到的值赋值到model</li>
+</ul>
+<pre><code class="language-Swift">// publisher之后直接sink
+let sub = NotificationCenter.default
+    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
+    .sink(receiveCompletion: { print ($0) },
+          receiveValue: { print ($0) })
+
+</code></pre>
+<pre><code class="language-Swift">let sub = NotificationCenter.default
+    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
+    .map( { ($0.object as! NSTextField).stringValue } )
+    .assign(to: \MyViewModel.filterString, on: myViewModel)
+</code></pre>
+<h1 id="通过operator定制publisher">通过operator定制publisher</h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let sub = NotificationCenter.default
+    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
+    .map( { ($0.object as! NSTextField).stringValue } )
+    // 过滤非字母和数字字符
+    .filter( { $0.unicodeScalars.allSatisfy({CharacterSet.alphanumerics.contains($0)}) } )
+    // 防抖
+    .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+    // receive方法可以让combine在指定线程里调用subscriber
+    .receive(on: RunLoop.main)
+    .assign(to:\MyViewModel.filterString, on: myViewModel)
+</code></pre></div></div>
+<h1 id="share-operator">share() operator</h1>
+<p>大多publishers都是struct, 是值类型，每一次订阅，实际上都是订阅了一个副本。share operator则可以赋予它们引用语义。</p>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// PassthroughSubject是class类型，但是经过scan operator之后生成的是struct类型</span>
+<span class="k">let</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">PassthroughSubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="c1">// 这里每次emit value, 第一个参数都会累加</span>
+<span class="k">let</span> <span class="nv">publisher</span> <span class="o">=</span> <span class="n">subject</span><span class="o">.</span><span class="nf">scan</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="o">.</span><span class="mi">0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">})</span>
+<span class="c1">// subscribe一个</span>
+<span class="k">let</span> <span class="nv">c1</span> <span class="o">=</span> <span class="n">publisher</span><span class="o">.</span><span class="n">sink</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"c1:"</span><span class="p">,</span> <span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">subject</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="s">"a"</span><span class="p">)</span>
+<span class="n">subject</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="s">"b"</span><span class="p">)</span>
+
+<span class="c1">// output</span>
+<span class="nv">c1</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span>
+<span class="nv">c1</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">"b"</span><span class="p">)</span>
+<span class="c1">// 再次subscribe</span>
+<span class="k">let</span> <span class="nv">c2</span> <span class="o">=</span> <span class="n">publisher</span><span class="o">.</span><span class="n">sink</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="s">"c2:"</span><span class="p">,</span> <span class="nv">$0</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">subject</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="s">"c"</span><span class="p">)</span>
+
+<span class="c1">// output  可以发现，对两个subscriber来说，是两个struct, 上述的第一个参数会从0重新开始累加</span>
+<span class="nv">c1</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">"c"</span><span class="p">)</span>
+<span class="nv">c2</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">"c"</span><span class="p">)</span>
+
+<span class="c1">// 如果加上share</span>
+<span class="n">publisher</span> <span class="o">=</span> <span class="n">subject</span><span class="o">.</span><span class="nf">scan</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="s">""</span><span class="p">),</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="o">.</span><span class="mi">0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">})</span><span class="o">.</span><span class="nf">share</span><span class="p">()</span>
+
+<span class="c1">// output</span>
+<span class="nv">c1</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">"c"</span><span class="p">)</span>
+<span class="nv">c2</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">"c"</span><span class="p">)</span>
+</code></pre></div></div>
+<h1 id="connectable-publishers">Connectable Publishers</h1>
+<p>有时会遇到如下图的问题，多个subscriber订阅同一个publisher，新的subscriber在订阅时，publisher可能已经emit一部分数据了。为了保证所有的subsciber都订阅以后publisher再开始执行，这就需要用到Connectable Publishers.</p>
+<p><img src="../img/post/2021-02-24/connectable-publisher.png" alt=""></p>
+<p>想要生成Connectable Publishers，只需要让publisher执行<code class="language-plaintext highlighter-rouge">makeConnectable()</code>operator即可，如下代码所示。当所有的subscriber都注册好之后，执行<code class="language-plaintext highlighter-rouge">.connect</code>函数即可让publisher开始执行</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let url = URL(string: "https://example.com/")!
+let connectable = URLSession.shared
+    .dataTaskPublisher(for: url)
+    .map() { $0.data }
+    .catch() { _ in Just(Data() )}
+    .share()
+    .makeConnectable()
+
+cancellable1 = connectable
+    .sink(receiveCompletion: { print("Received completion 1: \($0).") },
+          receiveValue: { print("Received data 1: \($0.count) bytes.") })
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+    self.cancellable2 = connectable
+        .sink(receiveCompletion: { print("Received completion 2: \($0).") },
+              receiveValue: { print("Received data 2: \($0.count) bytes.") })
+}
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+    self.connection = connectable.connect()
+}
+</code></pre></div></div>
+<p>另外有一些内置的Connectable Publisher, 如<code class="language-plaintext highlighter-rouge">Publishers.Multicast</code>和<code class="language-plaintext highlighter-rouge">Timer.TimerPublisher</code>, 这些必须手动调用<code class="language-plaintext highlighter-rouge">.connect()</code>才可以执行，有时也会造成问题。这时，可以调用<code class="language-plaintext highlighter-rouge">.autoconnect()</code>, 那么subscriber可以立刻执行。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let cancellable = Timer.publish(every: 1, on: .main, in: .default)
+    .autoconnect()
+    .sink() { date in
+        print ("Date now: \(date)")
+     }
+</code></pre></div></div>
+<blockquote><p>可以调用<code class="language-plaintext highlighter-rouge">.cancel()</code>取消publisher</p></blockquote>
+<h1 id="subscriber控制接收publisher-elements的数量">Subscriber控制接收Publisher elements的数量</h1>
+<p>有两种方法</p>
+<ul>
+<li>request(_:)</li>
+<li>当publisher调用subscriber的receive(:)方法时返回一个新的demand</li>
+</ul>
+<p>常用的<code class="language-plaintext highlighter-rouge">sink</code>和<code class="language-plaintext highlighter-rouge">assign</code>默认是声明了<code class="language-plaintext highlighter-rouge">unlimited</code>demand， 一旦声明了<code class="language-plaintext highlighter-rouge">unlimited</code>就无法再更改了。</p>
+<pre><code class="language-Swift">// Publisher: Uses a timer to emit the date once per second.
+let timerPub = Timer.publish(every: 1, on: .main, in: .default)
+    .autoconnect()
+
+// Subscriber: Waits 5 seconds after subscription, then requests a
+// maximum of 3 values.
+class MySubscriber: Subscriber {
+    typealias Input = Date
+    typealias Failure = Never
+    var subscription: Subscription?
+    
+    func receive(subscription: Subscription) {
+        print("published                             received")
+        self.subscription = subscription
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            // request请求新的demand, 可以累加
+            subscription.request(.max(3))
+        }
+    }
+    
+    func receive(_ input: Date) -&gt; Subscribers.Demand {
+        print("\(input)             \(Date())")
+        // 直接返回新的Demand
+        return Subscribers.Demand.none
+    }
+    
+    func receive(completion: Subscribers.Completion&lt;Never&gt;) {
+        print ("--done--")
+    }
+}
+
+// Subscribe to timerPub.
+let mySub = MySubscriber()
+print ("Subscribing at \(Date())")
+timerPub.subscribe(mySub)
+
+// Output
+
+Subscribing at 2019-12-09 18:57:06 +0000
+published                             received
+2019-12-09 18:57:11 +0000             2019-12-09 18:57:11 +0000
+2019-12-09 18:57:12 +0000             2019-12-09 18:57:12 +0000
+2019-12-09 18:57:13 +0000             2019-12-09 18:57:13 +0000
+</code></pre>
+<h2 id="通过back-pressure反压-operator控制unlimited-demand">通过Back-Pressure(反压) Operator控制Unlimited Demand</h2>
+<p>不自定义Subscriber也是可以控制需求的（作用到publisher上）</p>
+<ul>
+<li><p>buffer(size:prefetch:whenFull:)： 控制到一个固定数量，当数量满了之后，可以选择报错，丢弃等操作</p></li>
+<li><p>debounce(for:scheduler:options:)： 防抖，当publisher停止publish达到某个时间后才会收到数据</p></li>
+<li><p>throttle(for:scheduler:latest:)： 减流，会有一个最大产生数据的速率，如果收到太多，会只发送最新或最老的数据</p></li>
+<li><p>collect(<em>:)和collect(</em>:options:)： 将指定数量或时间的所有元素打包成一个数组一次性发送给订阅者</p></li>
+</ul>
+<div style="margin-top:2em;padding:0 1.5em;border:1px solid #d3d3d3;background-color:#deebf7">
+<h3>文档信息</h3>
+<ul>
+<li>本文作者：<a href="https://pfcstyle.github.io" target="_blank">Yawei Wang</a>
+</li>
+<li>本文链接：<a href="https://pfcstyle.github.io/2021/02/24/iOS-combine1/" target="_blank">https://pfcstyle.github.io/2021/02/24/iOS-combine1/</a>
+</li>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">创意共享3.0许可证</a>）</li>
+</ul>
+</div></article><div class="share"></div>
+<div class="comment">
+<div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/gitalk/gitalk.css"> <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> <script> var gitalk = new Gitalk({ id: '/2021/02/24/iOS-combine1/', clientID: 'e1a31f938861348e8751', clientSecret: 'd911850947298eb91753591eeb8dba129cc7fd86', repo: 'bomment', owner: 'pfcstyle', admin: ['pfcstyle'], labels: ['gitment'], perPage: 50, }); gitalk.render('gitalk-container'); </script>
+</div>
+</div>
+<div class="column one-fourth">
+<h3>Search</h3>
+<div id="site_search"> <input style="width:96%" type="text" id="search_box" placeholder="Search">
+</div>
+<ul id="search_results" style="font-size:14px;list-style-type:none;padding-top:10px;padding-left:10px;"></ul>
+<script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/simple-jekyll-search.min.js"></script> <script type="text/javascript"> SimpleJekyllSearch({ searchInput: document.getElementById('search_box'), resultsContainer: document.getElementById('search_results'), json: 'https://pfcstyle.github.io/assets/search_data.json', searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>', noResultsText: 'No results found', limit: 10, fuzzy: false, exclude: ['Welcome'] }) </script><h3 class="post-directory-title mobile-hidden">Table of Contents</h3>
+<div id="post-directory-module" class="mobile-hidden"><section class="post-directory"><dl></dl></section></div>
+<script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery.toc.js"></script>
+</div>
+</div></section><footer class="container"><div class="site-footer" role="contentinfo">
+<div class="copyright left mobile-block"> © 2015 <span title="Yawei Wang">Yawei Wang</span> <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+</div>
+<ul class="site-footer-links right mobile-hidden"><li> <a href="javascript:window.scrollTo(0,0)">TOP</a>
+</li></ul>
+<a href="https://github.com/pfcstyle/pfcstyle.github.io" target="_blank" aria-label="view source code"> <span class="mega-octicon octicon-mark-github" title="GitHub"></span> </a><ul class="site-footer-links mobile-hidden">
+<li> <a href="https://pfcstyle.github.io/" title="首页" target="">首页</a>
+</li>
+<li> <a href="https://pfcstyle.github.io/categories/" title="分类" target="">分类</a>
+</li>
+<li> <a href="https://pfcstyle.github.io/wiki/" title="维基" target="">维基</a>
+</li>
+<li> <a href="https://pfcstyle.github.io/links/" title="链接" target="">链接</a>
+</li>
+<li> <a href="https://pfcstyle.github.io/about/" title="关于" target="">关于</a>
+</li>
+<li><a href="https://pfcstyle.github.io/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a></li>
+</ul>
+<script async src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="mobile-hidden" style="margin-top:8px"> <span id="busuanzi_container_site_pv" style="display:none"> 本站访问量<span id="busuanzi_value_site_pv"></span>次 </span> <span id="busuanzi_container_site_uv" style="display:none"> / 本站访客数<span id="busuanzi_value_site_uv"></span>人 </span> <span id="busuanzi_container_page_pv" style="display:none"> / 本页访问量<span id="busuanzi_value_page_pv"></span>次 / 统计始于2020-05-03 </span>
+</div>
+</div></footer><div class="tools-wrapper"> <a class="gotop" href="#" title="回到顶部"><span class="octicon octicon-arrow-up"></span></a>
+</div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/geopattern.js"></script> <script> jQuery(document).ready(function($) { $('.geopattern').each(function(){ $(this).geopattern($(this).data('pattern-id')); }); /* hljs.initHighlightingOnLoad(); */ }); </script><div style="display:none"> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-80669434-1', 'auto'); ga('send', 'pageview'); </script>
+</div></body></html>

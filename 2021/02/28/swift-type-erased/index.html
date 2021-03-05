@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /><title>Swift Type-Erasure(类型抹除) &mdash; 01手记</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/primer-css/css/primer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/collection.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/repo-card.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/sections/repo-list.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/boxed-group.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/common.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/responsive.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/posts/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/octicons/octicons/octicons.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mzlogin/rouge-themes@master/dist/github.css"><link rel="canonical" href="https://pfcstyle.github.io/2021/02/28/swift-type-erased/"><link rel="alternate" type="application/atom+xml" title="01手记" href="https://pfcstyle.github.io/feed.xml"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/favicon.ico"><meta property="og:title" content="Swift Type-Erasure(类型抹除)"><meta name="keywords" content="["iOS", "Swift", "type-erasure"]"><meta name="og:keywords" content="["iOS", "Swift", "type-erasure"]"><meta name="description" content="什么是Type-Erasure"><meta name="og:description" content="什么是Type-Erasure"><meta property="og:url" content="https://pfcstyle.github.io/2021/02/28/swift-type-erased/"><meta property="og:site_name" content="01手记"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN" /><meta property="article:published_time" content="2021-02-28"> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/jquery/dist/jquery.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery-ui.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/main.js"></script></head><body class="" data-mz=""><header class="site-header"><div class="container"><h1><a href="https://pfcstyle.github.io/" title="01手记"><span class="octicon octicon-mark-github"></span> 01手记</a></h1><button class="collapsed mobile-visible" type="button" onclick="toggleMenu();"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button><nav class="site-header-nav" role="navigation"> <a href="https://pfcstyle.github.io/" class=" site-header-nav-item" target="" title="首页">首页</a> <a href="https://pfcstyle.github.io/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> <a href="https://pfcstyle.github.io/wiki/" class=" site-header-nav-item" target="" title="维基">维基</a> <a href="https://pfcstyle.github.io/links/" class=" site-header-nav-item" target="" title="链接">链接</a> <a href="https://pfcstyle.github.io/about/" class=" site-header-nav-item" target="" title="关于">关于</a></nav></div></header><section class="collection-head small geopattern" data-pattern-id="Swift Type-Eras"><div class="container"><div class="columns"><div class="column three-fourths"><div class="collection-title"><h1 class="collection-header">Swift Type-Erasure(类型抹除)</h1><div class="collection-info"> <span class="meta-info"> <span class="octicon octicon-calendar"></span> 2021/02/28 </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#iOS" title="iOS">iOS</a> </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#Swift" title="Swift">Swift</a> </span> <span class="meta-info"> <span class="octicon octicon-clock"></span> 共 4880 字，约 14 分钟 </span></div></div></div><div class="column one-fourth mobile-hidden"><div class="collection-title"></div></div></div></div></section><section class="container content"><div class="columns"><div class="column three-fourths" ><article class="article-content markdown-body"><h1 id="什么是type-erasure">什么是Type-Erasure</h1><p>swift中在引用一些通用协议时，往往需要用到<code class="language-plaintext highlighter-rouge">type erasure</code>。它使我们能够更轻松地与通用协议进行交互，这些通用协议对将要实现它们的各种类型具有特定的要求。</p><p>常见的：</p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">AnyView</span> <span class="p">{</span>
+        <span class="kt">AnyView</span><span class="p">(</span><span class="kt">Text</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="c1">// 当然，5.1之后有更简单的写法(Opaque return types)</span>
+<span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kt">Text</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div><h1 id="实例">实例</h1><p>以Equatable标准库中的协议为例。由于都是为了使相等类型的两个值能够按相等性进行比较，因此它使用元Self类型作为其唯一方法要求的参数</p><pre><code class="language-Swift">protocol Equatable {
+    static func ==(lhs: Self, rhs: Self) -&gt; Bool
+}
+
+</code></pre><p>这种方法的优点在于，它不可能意外地比较两个不相关的相等类型（例如User和String），但是，它也使得它不可能被引用Equatable为独立协议（例如创建类似的数组[Equatable]），因为为了能够使用它，编译器需要知道确切的确切类型实际上符合该协议。</p><p>当协议包含关联类型时，也是如此。例如，在这里我们定义了一个Request协议，使我们能够在单个统一的实现后隐藏各种形式的数据请求（例如网络调用，数据库查询和缓存提取）：</p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Request</span> <span class="p">{</span>
+    <span class="kd">associatedtype</span> <span class="kt">Response</span>
+    <span class="kd">associatedtype</span> <span class="kt">Error</span><span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span>
+
+    <span class="kd">typealias</span> <span class="kt">Handler</span> <span class="o">=</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+
+    <span class="kd">func</span> <span class="nf">perform</span><span class="p">(</span><span class="n">then</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">Handler</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div><p>上面的方法为我们提供了相同的权衡方法，Equatable它非常强大，因为它使我们能够为任何类型的请求创建通用的抽象，但是这也使得无法直接引用Request协议本身，如下所示：</p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">RequestQueue</span> <span class="p">{</span>
+    <span class="c1">// Error: protocol 'Request' can only be used as a generic</span>
+    <span class="c1">// constraint because it has Self or associated type requirements</span>
+    <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">Request</span><span class="p">,</span>
+             <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">Request</span><span class="o">.</span><span class="kt">Handler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div><p>解决上述问题的一种方法是准确执行错误消息中所说的内容，而不是Request直接引用，而是将其用作一般约束：</p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">RequestQueue</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="n">add</span><span class="o">&lt;</span><span class="kt">R</span><span class="p">:</span> <span class="kt">Request</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">R</span><span class="p">,</span>
+                         <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">R</span><span class="o">.</span><span class="kt">Handler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div><p>上面的方法起作用了，因为现在编译器能够保证传递handler的确实与Request传递的实现兼容request—因为它们都基于泛型R，而泛型又被限制为与一致Request。</p><p>但是，尽管我们解决了方法签名问题，但实际上仍然无法对传递的请求做很多工作，因为我们无法将其存储为Request属性或[Request]数组的一部分，这将使得继续建立RequestQueue。那么，type-erasure该出场了。</p><h2 id="通用包装器类型">通用包装器类型</h2><p>我们将探讨的第一种类型擦除实际上并不涉及擦除任何类型，而是将它们包装在一个我们可以更容易引用的泛型类型中。继续构建RequestQueue，我们将首先创建该包装器类型，该包装器类型将捕获每个请求的perform方法作为闭包，以及在请求完成后应调用的handler方法：</p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This will let us wrap a Request protocol implementation in a</span>
+<span class="c1">// generic has the same Response and Error types as the protocol.</span>
+<span class="kd">struct</span> <span class="kt">AnyRequest</span><span class="o">&lt;</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">typealias</span> <span class="kt">Handler</span> <span class="o">=</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+
+    <span class="k">let</span> <span class="nv">perform</span><span class="p">:</span> <span class="p">(</span><span class="kd">@escaping</span> <span class="kt">Handler</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="k">let</span> <span class="nv">handler</span><span class="p">:</span> <span class="kt">Handler</span>
+<span class="p">}</span>
+</code></pre></div></div><p>接下来，实现RequestQueue，为其添加Response和Error类型的泛型，这样编译器可以将泛型类型和associatetype对齐，从而允许我们对Request存储和引用。</p><blockquote><p>这个实现时线程不安全的，我们只用来说明类型抹除的问题</p></blockquote><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">RequestQueue</span><span class="o">&lt;</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="p">:</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">typealias</span> <span class="kt">TypeErasedRequest</span> <span class="o">=</span> <span class="kt">AnyRequest</span><span class="o">&lt;</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span>
+
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">queue</span> <span class="o">=</span> <span class="p">[</span><span class="kt">TypeErasedRequest</span><span class="p">]()</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">ongoing</span><span class="p">:</span> <span class="kt">TypeErasedRequest</span><span class="p">?</span>
+
+    <span class="c1">// We modify our 'add' method to include a 'where' clause that</span>
+    <span class="c1">// gives us a guarantee that the passed request's associated</span>
+    <span class="c1">// types match our queue's generic types.</span>
+    <span class="kd">func</span> <span class="n">add</span><span class="o">&lt;</span><span class="kt">R</span><span class="p">:</span> <span class="kt">Request</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">R</span><span class="p">,</span>
+        <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">R</span><span class="o">.</span><span class="kt">Handler</span>
+    <span class="p">)</span> <span class="k">where</span> <span class="kt">R</span><span class="o">.</span><span class="kt">Response</span> <span class="o">==</span> <span class="kt">Response</span><span class="p">,</span> <span class="kt">R</span><span class="o">.</span><span class="kt">Error</span> <span class="o">==</span> <span class="kt">Error</span> <span class="p">{</span>
+        <span class="c1">// To perform our type erasure, we simply create an instance</span>
+        <span class="c1">// of 'AnyRequest' and pass it the underlying request's</span>
+        <span class="c1">// 'perform' method as a closure, along with the handler.</span>
+        <span class="k">let</span> <span class="nv">typeErased</span> <span class="o">=</span> <span class="kt">AnyRequest</span><span class="p">(</span>
+            <span class="nv">perform</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">perform</span><span class="p">,</span>
+            <span class="nv">handler</span><span class="p">:</span> <span class="n">handler</span>
+        <span class="p">)</span>
+
+        <span class="c1">// Since we're implementing a queue, we don't want to perform</span>
+        <span class="c1">// two requests at once, but rather save the request for</span>
+        <span class="c1">// later in case there's already an ongoing one.</span>
+        <span class="k">guard</span> <span class="n">ongoing</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">queue</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">typeErased</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+
+        <span class="nf">perform</span><span class="p">(</span><span class="n">typeErased</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">perform</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">TypeErasedRequest</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ongoing</span> <span class="o">=</span> <span class="n">request</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="n">perform</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">result</span> <span class="k">in</span>
+            <span class="n">request</span><span class="o">.</span><span class="nf">handler</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">ongoing</span> <span class="o">=</span> <span class="kc">nil</span>
+
+            <span class="c1">// Perform the next request if the queue isn't empty</span>
+            <span class="o">...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div><h2 id="闭包实现">闭包实现</h2><p>使用闭包擦除类型时，其思想是捕获在闭包内部执行操作所需的所有类型信息，并使闭包仅接受非通用（甚至Void）输入。这样一来，我们就可以引用，存储和传递该功能，而无需实际知道其内部发生了什么—从而为我们提供了更大的灵活性。当然，这样实现会让代码变得难以调试，但优点是方便，而且可以完全封装类型信息。</p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">RequestQueue</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">queue</span> <span class="o">=</span> <span class="p">[()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">]()</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">isPerformingRequest</span> <span class="o">=</span> <span class="kc">false</span>
+
+    <span class="kd">func</span> <span class="n">add</span><span class="o">&lt;</span><span class="kt">R</span><span class="p">:</span> <span class="kt">Request</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">R</span><span class="p">,</span>
+                         <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">R</span><span class="o">.</span><span class="kt">Handler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// This closure will capture both the request and its</span>
+        <span class="c1">// handler, without exposing any of that type information</span>
+        <span class="c1">// outside of it, providing full type erasure.</span>
+        <span class="k">let</span> <span class="nv">typeErased</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">perform</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="n">result</span> <span class="k">in</span>
+                <span class="nf">handler</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">isPerformingRequest</span> <span class="o">=</span> <span class="kc">false</span>
+                <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="nf">performNextIfNeeded</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">queue</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">typeErased</span><span class="p">)</span>
+        <span class="nf">performNextIfNeeded</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">performNextIfNeeded</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="o">!</span><span class="n">isPerformingRequest</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">queue</span><span class="o">.</span><span class="n">isEmpty</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+
+        <span class="n">isPerformingRequest</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="k">let</span> <span class="nv">closure</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="nf">removeFirst</span><span class="p">()</span>
+        <span class="nf">closure</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div><h2 id="外部类型抹除">外部类型抹除</h2><p>目前，我们都是在内部实现类型抹除，外部调用者不会关心到这个问题。但是，有时在将协议实现传递给API之前进行一些轻量级转换，可以简化更多工作，而且可以更整齐的封装抹除代码。</p><p>对我们这个例子来说，可以要求每一个request在添加到队列之前进行专门化管理，这就衍变出了<code class="language-plaintext highlighter-rouge">RequestOperation</code></p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">RequestOperation</span> <span class="p">{</span>
+    <span class="kd">fileprivate</span> <span class="k">let</span> <span class="nv">closure</span><span class="p">:</span> <span class="p">(</span><span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+
+    <span class="kd">func</span> <span class="nf">perform</span><span class="p">(</span><span class="n">then</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">closure</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div><p>类似于闭包实现，我们将其放在extension中</p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Request</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">makeOperation</span><span class="p">(</span><span class="n">with</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">Handler</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RequestOperation</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">RequestOperation</span> <span class="p">{</span> <span class="n">finisher</span> <span class="k">in</span>
+            <span class="c1">// We actually want to capture 'self' here, since otherwise</span>
+            <span class="c1">// we risk not retaining the underlying request anywhere.</span>
+            <span class="k">self</span><span class="o">.</span><span class="n">perform</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+                <span class="nf">handler</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="nf">finisher</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div><p>那么，我们的RequestQueue就可以更加专注于队列的实现，不用关心类型擦除了：</p><div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">RequestQueue</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">queue</span> <span class="o">=</span> <span class="p">[</span><span class="kt">RequestOperation</span><span class="p">]()</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">ongoing</span><span class="p">:</span> <span class="kt">RequestOperation</span><span class="p">?</span>
+
+    <span class="c1">// Since the type erasure now happens before a request is</span>
+    <span class="c1">// passed to the queue, it can simply accept a concrete</span>
+    <span class="c1">// instance of 'RequestOperation'.</span>
+    <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="n">_</span> <span class="nv">operation</span><span class="p">:</span> <span class="kt">RequestOperation</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="n">ongoing</span> <span class="o">==</span> <span class="kc">nil</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">queue</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">operation</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+
+        <span class="nf">perform</span><span class="p">(</span><span class="n">operation</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">perform</span><span class="p">(</span><span class="n">_</span> <span class="nv">operation</span><span class="p">:</span> <span class="kt">RequestOperation</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ongoing</span> <span class="o">=</span> <span class="n">operation</span>
+
+        <span class="n">operation</span><span class="o">.</span><span class="n">perform</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="k">in</span>
+            <span class="k">self</span><span class="p">?</span><span class="o">.</span><span class="n">ongoing</span> <span class="o">=</span> <span class="kc">nil</span>
+
+            <span class="c1">// Perform the next request if the queue isn't empty</span>
+            <span class="o">...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div><p>当然，在调用RequestQueue时，就要求我们手动将Request转换为RequestOption了。</p><div style="margin-top:2em;padding:0 1.5em;border:1px solid #d3d3d3;background-color:#deebf7"><h3>文档信息</h3><ul><li>本文作者：<a href="https://pfcstyle.github.io" target="_blank">Yawei Wang</a></li><li>本文链接：<a href="https://pfcstyle.github.io/2021/02/28/swift-type-erased/" target="_blank">https://pfcstyle.github.io/2021/02/28/swift-type-erased/</a></li><li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">创意共享3.0许可证</a>）</li></ul></div></article><div class="share"></div><div class="comment"><div id="gitalk-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/gitalk/gitalk.css"> <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> <script> var gitalk = new Gitalk({ id: '/2021/02/28/swift-type-erased/', clientID: 'e1a31f938861348e8751', clientSecret: 'd911850947298eb91753591eeb8dba129cc7fd86', repo: 'bomment', owner: 'pfcstyle', admin: ['pfcstyle'], labels: ['gitment'], perPage: 50, }); gitalk.render('gitalk-container'); </script></div></div><div class="column one-fourth"><h3>Search</h3><div id="site_search"> <input style="width:96%" type="text" id="search_box" placeholder="Search"></div><ul id="search_results" style="font-size:14px;list-style-type:none;padding-top:10px;padding-left:10px;"></ul><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/simple-jekyll-search.min.js"></script> <script type="text/javascript"> SimpleJekyllSearch({ searchInput: document.getElementById('search_box'), resultsContainer: document.getElementById('search_results'), json: 'https://pfcstyle.github.io/assets/search_data.json', searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>', noResultsText: 'No results found', limit: 10, fuzzy: false, exclude: ['Welcome'] }) </script><h3 class="post-directory-title mobile-hidden">Table of Contents</h3><div id="post-directory-module" class="mobile-hidden"><section class="post-directory"><dl></dl></section></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery.toc.js"></script></div></div></section><footer class="container"><div class="site-footer" role="contentinfo"><div class="copyright left mobile-block"> © 2015 <span title="Yawei Wang">Yawei Wang</span> <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a></div><ul class="site-footer-links right mobile-hidden"><li> <a href="javascript:window.scrollTo(0,0)" >TOP</a></li></ul><a href="https://github.com/pfcstyle/pfcstyle.github.io" target="_blank" aria-label="view source code"> <span class="mega-octicon octicon-mark-github" title="GitHub"></span> </a><ul class="site-footer-links mobile-hidden"><li> <a href="https://pfcstyle.github.io/" title="首页" target="">首页</a></li><li> <a href="https://pfcstyle.github.io/categories/" title="分类" target="">分类</a></li><li> <a href="https://pfcstyle.github.io/wiki/" title="维基" target="">维基</a></li><li> <a href="https://pfcstyle.github.io/links/" title="链接" target="">链接</a></li><li> <a href="https://pfcstyle.github.io/about/" title="关于" target="">关于</a></li><li><a href="https://pfcstyle.github.io/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a></li></ul><script async src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="mobile-hidden" style="margin-top:8px"> <span id="busuanzi_container_site_pv" style="display:none"> 本站访问量<span id="busuanzi_value_site_pv"></span>次 </span> <span id="busuanzi_container_site_uv" style="display:none"> / 本站访客数<span id="busuanzi_value_site_uv"></span>人 </span> <span id="busuanzi_container_page_pv" style="display:none"> / 本页访问量<span id="busuanzi_value_page_pv"></span>次 / 统计始于2020-05-03 </span></div></div></footer><div class="tools-wrapper"> <a class="gotop" href="#" title="回到顶部"><span class="octicon octicon-arrow-up"></span></a></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/geopattern.js"></script> <script> jQuery(document).ready(function($) { $('.geopattern').each(function(){ $(this).geopattern($(this).data('pattern-id')); }); /* hljs.initHighlightingOnLoad(); */ }); </script><div style="display:none"> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-80669434-1', 'auto'); ga('send', 'pageview'); </script></div></body></html>

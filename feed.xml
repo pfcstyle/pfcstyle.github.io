@@ -1,4 +1,434 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-02-22T15:35:28+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Communicating Clearly</title><link href="https://pfcstyle.github.io/2021/02/20/communicating-clearly/" rel="alternate" type="text/html" title="Communicating Clearly" /><published>2021-02-20T00:00:00+08:00</published><updated>2021-02-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/20/communicating-clearly</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/20/communicating-clearly/">&lt;h1 id=&quot;example&quot;&gt;Example&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-05T16:06:54+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Swift Type-Erasure(类型抹除)</title><link href="https://pfcstyle.github.io/2021/02/28/swift-type-erased/" rel="alternate" type="text/html" title="Swift Type-Erasure(类型抹除)" /><published>2021-02-28T00:00:00+08:00</published><updated>2021-02-28T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/28/swift-type-erased</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/28/swift-type-erased/">&lt;h1 id=&quot;什么是type-erasure&quot;&gt;什么是Type-Erasure&lt;/h1&gt;
+
+&lt;p&gt;swift中在引用一些通用协议时，往往需要用到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;type erasure&lt;/code&gt;。它使我们能够更轻松地与通用协议进行交互，这些通用协议对将要实现它们的各种类型具有特定的要求。&lt;/p&gt;
+
+&lt;p&gt;常见的：&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ContentView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;AnyView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, world!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ 
+&lt;span class=&quot;c1&quot;&gt;// 当然，5.1之后有更简单的写法(Opaque return types)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ContentView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, world!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;实例&quot;&gt;实例&lt;/h1&gt;
+&lt;p&gt;以Equatable标准库中的协议为例。由于都是为了使相等类型的两个值能够按相等性进行比较，因此它使用元Self类型作为其唯一方法要求的参数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;protocol Equatable {
+    static func ==(lhs: Self, rhs: Self) -&amp;gt; Bool
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这种方法的优点在于，它不可能意外地比较两个不相关的相等类型（例如User和String），但是，它也使得它不可能被引用Equatable为独立协议（例如创建类似的数组[Equatable]），因为为了能够使用它，编译器需要知道确切的确切类型实际上符合该协议。&lt;/p&gt;
+
+&lt;p&gt;当协议包含关联类型时，也是如此。例如，在这里我们定义了一个Request协议，使我们能够在单个统一的实现后隐藏各种形式的数据请求（例如网络调用，数据库查询和缓存提取）：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;associatedtype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;associatedtype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;typealias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面的方法为我们提供了相同的权衡方法，Equatable它非常强大，因为它使我们能够为任何类型的请求创建通用的抽象，但是这也使得无法直接引用Request协议本身，如下所示：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestQueue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Error: protocol 'Request' can only be used as a generic&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// constraint because it has Self or associated type requirements&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;解决上述问题的一种方法是准确执行错误消息中所说的内容，而不是Request直接引用，而是将其用作一般约束：&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestQueue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                         &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面的方法起作用了，因为现在编译器能够保证传递handler的确实与Request传递的实现兼容request—因为它们都基于泛型R，而泛型又被限制为与一致Request。&lt;/p&gt;
+
+&lt;p&gt;但是，尽管我们解决了方法签名问题，但实际上仍然无法对传递的请求做很多工作，因为我们无法将其存储为Request属性或[Request]数组的一部分，这将使得继续建立RequestQueue。那么，type-erasure该出场了。&lt;/p&gt;
+
+&lt;h2 id=&quot;通用包装器类型&quot;&gt;通用包装器类型&lt;/h2&gt;
+
+&lt;p&gt;我们将探讨的第一种类型擦除实际上并不涉及擦除任何类型，而是将它们包装在一个我们可以更容易引用的泛型类型中。继续构建RequestQueue，我们将首先创建该包装器类型，该包装器类型将捕获每个请求的perform方法作为闭包，以及在请求完成后应调用的handler方法：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// This will let us wrap a Request protocol implementation in a&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// generic has the same Response and Error types as the protocol.&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;typealias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;接下来，实现RequestQueue，为其添加Response和Error类型的泛型，这样编译器可以将泛型类型和associatetype对齐，从而允许我们对Request存储和引用。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这个实现时线程不安全的，我们只用来说明类型抹除的问题&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Swift&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;typealias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TypeErasedRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;TypeErasedRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]()&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ongoing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TypeErasedRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// We modify our 'add' method to include a 'where' clause that&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// gives us a guarantee that the passed request's associated&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// types match our queue's generic types.&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// To perform our type erasure, we simply create an instance&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// of 'AnyRequest' and pass it the underlying request's&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 'perform' method as a closure, along with the handler.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;typeErased&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// Since we're implementing a queue, we don't want to perform&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// two requests at once, but rather save the request for&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// later in case there's already an ongoing one.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ongoing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeErased&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;nf&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeErased&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;TypeErasedRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ongoing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ongoing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+
+            &lt;span class=&quot;c1&quot;&gt;// Perform the next request if the queue isn't empty&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;闭包实现&quot;&gt;闭包实现&lt;/h2&gt;
+
+&lt;p&gt;使用闭包擦除类型时，其思想是捕获在闭包内部执行操作所需的所有类型信息，并使闭包仅接受非通用（甚至Void）输入。这样一来，我们就可以引用，存储和传递该功能，而无需实际知道其内部发生了什么—从而为我们提供了更大的灵活性。当然，这样实现会让代码变得难以调试，但优点是方便，而且可以完全封装类型信息。&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestQueue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]()&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isPerformingRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                         &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// This closure will capture both the request and its&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// handler, without exposing any of that type information&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// outside of it, providing full type erasure.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;typeErased&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isPerformingRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;performNextIfNeeded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeErased&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;performNextIfNeeded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;performNextIfNeeded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isPerformingRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEmpty&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;isPerformingRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;closure&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;removeFirst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;closure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;外部类型抹除&quot;&gt;外部类型抹除&lt;/h2&gt;
+&lt;p&gt;目前，我们都是在内部实现类型抹除，外部调用者不会关心到这个问题。但是，有时在将协议实现传递给API之前进行一些轻量级转换，可以简化更多工作，而且可以更整齐的封装抹除代码。&lt;/p&gt;
+
+&lt;p&gt;对我们这个例子来说，可以要求每一个request在添加到队列之前进行专门化管理，这就衍变出了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RequestOperation&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestOperation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;fileprivate&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;closure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;closure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;类似于闭包实现，我们将其放在extension中&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;makeOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestOperation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestOperation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;finisher&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// We actually want to capture 'self' here, since otherwise&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// we risk not retaining the underlying request anywhere.&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;finisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;那么，我们的RequestQueue就可以更加专注于队列的实现，不用关心类型擦除了：&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestQueue&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;RequestOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]()&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ongoing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Since the type erasure now happens before a request is&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// passed to the queue, it can simply accept a concrete&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// instance of 'RequestOperation'.&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ongoing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;nf&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;RequestOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ongoing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;operation&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;operation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ongoing&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+
+            &lt;span class=&quot;c1&quot;&gt;// Perform the next request if the queue isn't empty&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;当然，在调用RequestQueue时，就要求我们手动将Request转换为RequestOption了。&lt;/p&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><summary type="html">什么是Type-Erasure</summary></entry><entry><title type="html">SwiftUI布局基础</title><link href="https://pfcstyle.github.io/2021/02/26/iOS-swiftui-layout-base-rule/" rel="alternate" type="text/html" title="SwiftUI布局基础" /><published>2021-02-26T00:00:00+08:00</published><updated>2021-02-26T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/26/iOS-swiftui-layout-base-rule</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/26/iOS-swiftui-layout-base-rule/">&lt;h1 id=&quot;布局基础规则&quot;&gt;布局基础规则&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;默认，SwiftUI允许每个视图根据其渲染的容器选择自己的大小，然后将其居中于其父对象中。&lt;/li&gt;
+  &lt;li&gt;Modifier实际上是将调用的视图包装到了另外一个视图中&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><summary type="html">布局基础规则</summary></entry><entry><title type="html">Combine详解（1）</title><link href="https://pfcstyle.github.io/2021/02/24/iOS-combine1/" rel="alternate" type="text/html" title="Combine详解（1）" /><published>2021-02-24T00:00:00+08:00</published><updated>2021-02-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/24/iOS-combine1</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/24/iOS-combine1/">&lt;h1 id=&quot;combine基础&quot;&gt;Combine基础&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Publisher是发布者，作为数据生产者，会定义一个Output和Failure类型。&lt;/li&gt;
+  &lt;li&gt;Subscriber是订阅者，作为数据消费者，会定义一个Input合Failure类型。&lt;/li&gt;
+  &lt;li&gt;Operator是操作者，可以更改Publisher Output类型，产生新的Publisher。&lt;/li&gt;
+  &lt;li&gt;Publisher的Output类型和Subsciber的Input类型需要相同&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;订阅操作是通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Publisher.subscribe(Subscriber)&lt;/code&gt;来完成的
+获取到Subscribtion(Publisher.subscibe()返回)实例，可以调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.cancel()&lt;/code&gt;取消&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sub?.cancel()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;内置subscriber&quot;&gt;内置Subscriber&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;sink(receiveCompletion:receiveValue:)&lt;/strong&gt;: 常用于publisher和sink一起执行的时候，比如request请求，返回的response会在sink中处理&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;assign(to:on:)&lt;/strong&gt;: 通过key path将收到的值赋值到model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;// publisher之后直接sink
+let sub = NotificationCenter.default
+    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
+    .sink(receiveCompletion: { print ($0) },
+          receiveValue: { print ($0) })
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;let sub = NotificationCenter.default
+    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
+    .map( { ($0.object as! NSTextField).stringValue } )
+    .assign(to: \MyViewModel.filterString, on: myViewModel)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;通过operator定制publisher&quot;&gt;通过operator定制publisher&lt;/h1&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let sub = NotificationCenter.default
+    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
+    .map( { ($0.object as! NSTextField).stringValue } )
+    // 过滤非字母和数字字符
+    .filter( { $0.unicodeScalars.allSatisfy({CharacterSet.alphanumerics.contains($0)}) } )
+    // 防抖
+    .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+    // receive方法可以让combine在指定线程里调用subscriber
+    .receive(on: RunLoop.main)
+    .assign(to:\MyViewModel.filterString, on: myViewModel)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;share-operator&quot;&gt;share() operator&lt;/h1&gt;
+
+&lt;p&gt;大多publishers都是struct, 是值类型，每一次订阅，实际上都是订阅了一个副本。share operator则可以赋予它们引用语义。&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// PassthroughSubject是class类型，但是经过scan operator之后生成的是struct类型&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PassthroughSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 这里每次emit value, 第一个参数都会累加&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;publisher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// subscribe一个&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sink&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c1:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// output&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 再次subscribe&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;c2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sink&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c2:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// output  可以发现，对两个subscriber来说，是两个struct, 上述的第一个参数会从0重新开始累加&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;c2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 如果加上share&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;publisher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;share&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// output&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;c2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;connectable-publishers&quot;&gt;Connectable Publishers&lt;/h1&gt;
+
+&lt;p&gt;有时会遇到如下图的问题，多个subscriber订阅同一个publisher，新的subscriber在订阅时，publisher可能已经emit一部分数据了。为了保证所有的subsciber都订阅以后publisher再开始执行，这就需要用到Connectable Publishers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../img/post/2021-02-24/connectable-publisher.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;想要生成Connectable Publishers，只需要让publisher执行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;makeConnectable()&lt;/code&gt;operator即可，如下代码所示。当所有的subscriber都注册好之后，执行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.connect&lt;/code&gt;函数即可让publisher开始执行&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let url = URL(string: &quot;https://example.com/&quot;)!
+let connectable = URLSession.shared
+    .dataTaskPublisher(for: url)
+    .map() { $0.data }
+    .catch() { _ in Just(Data() )}
+    .share()
+    .makeConnectable()
+
+cancellable1 = connectable
+    .sink(receiveCompletion: { print(&quot;Received completion 1: \($0).&quot;) },
+          receiveValue: { print(&quot;Received data 1: \($0.count) bytes.&quot;) })
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+    self.cancellable2 = connectable
+        .sink(receiveCompletion: { print(&quot;Received completion 2: \($0).&quot;) },
+              receiveValue: { print(&quot;Received data 2: \($0.count) bytes.&quot;) })
+}
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+    self.connection = connectable.connect()
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;另外有一些内置的Connectable Publisher, 如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Publishers.Multicast&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Timer.TimerPublisher&lt;/code&gt;, 这些必须手动调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.connect()&lt;/code&gt;才可以执行，有时也会造成问题。这时，可以调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.autoconnect()&lt;/code&gt;, 那么subscriber可以立刻执行。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let cancellable = Timer.publish(every: 1, on: .main, in: .default)
+    .autoconnect()
+    .sink() { date in
+        print (&quot;Date now: \(date)&quot;)
+     }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;可以调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.cancel()&lt;/code&gt;取消publisher&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;subscriber控制接收publisher-elements的数量&quot;&gt;Subscriber控制接收Publisher elements的数量&lt;/h1&gt;
+&lt;p&gt;有两种方法&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;request(_:)&lt;/li&gt;
+  &lt;li&gt;当publisher调用subscriber的receive(:)方法时返回一个新的demand&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;常用的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sink&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assign&lt;/code&gt;默认是声明了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unlimited&lt;/code&gt;demand， 一旦声明了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unlimited&lt;/code&gt;就无法再更改了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;// Publisher: Uses a timer to emit the date once per second.
+let timerPub = Timer.publish(every: 1, on: .main, in: .default)
+    .autoconnect()
+
+// Subscriber: Waits 5 seconds after subscription, then requests a
+// maximum of 3 values.
+class MySubscriber: Subscriber {
+    typealias Input = Date
+    typealias Failure = Never
+    var subscription: Subscription?
+    
+    func receive(subscription: Subscription) {
+        print(&quot;published                             received&quot;)
+        self.subscription = subscription
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            // request请求新的demand, 可以累加
+            subscription.request(.max(3))
+        }
+    }
+    
+    func receive(_ input: Date) -&amp;gt; Subscribers.Demand {
+        print(&quot;\(input)             \(Date())&quot;)
+        // 直接返回新的Demand
+        return Subscribers.Demand.none
+    }
+    
+    func receive(completion: Subscribers.Completion&amp;lt;Never&amp;gt;) {
+        print (&quot;--done--&quot;)
+    }
+}
+
+// Subscribe to timerPub.
+let mySub = MySubscriber()
+print (&quot;Subscribing at \(Date())&quot;)
+timerPub.subscribe(mySub)
+
+// Output
+
+Subscribing at 2019-12-09 18:57:06 +0000
+published                             received
+2019-12-09 18:57:11 +0000             2019-12-09 18:57:11 +0000
+2019-12-09 18:57:12 +0000             2019-12-09 18:57:12 +0000
+2019-12-09 18:57:13 +0000             2019-12-09 18:57:13 +0000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;通过back-pressure反压-operator控制unlimited-demand&quot;&gt;通过Back-Pressure(反压) Operator控制Unlimited Demand&lt;/h2&gt;
+&lt;p&gt;不自定义Subscriber也是可以控制需求的（作用到publisher上）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;buffer(size:prefetch:whenFull:)： 控制到一个固定数量，当数量满了之后，可以选择报错，丢弃等操作&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;debounce(for:scheduler:options:)： 防抖，当publisher停止publish达到某个时间后才会收到数据&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;throttle(for:scheduler:latest:)： 减流，会有一个最大产生数据的速率，如果收到太多，会只发送最新或最老的数据&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;collect(&lt;em&gt;:)和collect(&lt;/em&gt;:options:)： 将指定数量或时间的所有元素打包成一个数组一次性发送给订阅者&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><category term="Combine" /><summary type="html">Combine基础</summary></entry><entry><title type="html">Communicating Clearly</title><link href="https://pfcstyle.github.io/2021/02/20/communicating-clearly/" rel="alternate" type="text/html" title="Communicating Clearly" /><published>2021-02-20T00:00:00+08:00</published><updated>2021-02-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/20/communicating-clearly</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/20/communicating-clearly/">&lt;h1 id=&quot;example&quot;&gt;Example&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;A po’boy
@@ -249,189 +679,4 @@
   &lt;li&gt;Helen: So, unlike mid-life crises - which tend to come from looking back on our lives - with a quarter-life crisis people are often comparing themselves, whether that’s to TV characters, or our friends, or even our own ideas about what our twenties should have been like. And so &lt;strong&gt;the way forward&lt;/strong&gt;, is firstly to stop doing that, and start with your life as it is now. think about your true values - many young people want the freedom to travel, but if you’d rather focus on family and home, that’s fine too.&lt;/li&gt;
   &lt;li&gt;John: And then do it.&lt;/li&gt;
   &lt;li&gt;Helen: And do it -but start with small steps. If your goal is to see the world , you can begin by researching travel routes and saving a little money each week. But I will say, if you feel it’s time you made a big change - now’s the moment to do it. There are &lt;em&gt;way too many&lt;/em&gt; people out there with regrets about their twenties, and they usually regret the things they didn’t do, not the things they did.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key vocabulary</summary></entry><entry><title type="html">kubernetes 教程（一）</title><link href="https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept/" rel="alternate" type="text/html" title="kubernetes 教程（一）" /><published>2021-02-08T00:00:00+08:00</published><updated>2021-02-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/08/kubernetes-1-core-concept/">&lt;h1 id=&quot;kubernetes能提供什么&quot;&gt;Kubernetes能提供什么&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;服务发现和负载均衡&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;存储编排&lt;/p&gt;
-
-    &lt;p&gt;Kubernetes 允许你自动挂载你选择的存储系统，例如本地存储、公共云提供商等。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;自动部署和回滚&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;自动完成装箱计算&lt;/p&gt;
-
-    &lt;p&gt;Kubernetes 允许你指定每个容器所需 CPU 和内存（RAM）。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;自我修复&lt;/p&gt;
-
-    &lt;p&gt;Kubernetes 重新启动失败的容器、替换容器、杀死不响应用户定义的 运行状况检查的容器&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;密钥与配置管理&lt;/p&gt;
-
-    &lt;p&gt;Kubernetes 允许你存储和管理敏感信息，例如密码、OAuth 令牌和 ssh 密钥。 你可以在不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;kubernetes集群部署图&quot;&gt;Kubernetes集群部署图&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2021-02-08/k8s-cluster-deploy.jpg&quot; alt=&quot;k8s-cluster-deploy&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Pod：最小的调度分配单元，可包含一组容器和卷组成，同一个Pod的容器组共享同一个网络命名空间;&lt;/li&gt;
-  &lt;li&gt;ReplicationController/ReplicateSet: 用于控制Pod副本数量，保证Pod始终运行;&lt;/li&gt;
-  &lt;li&gt;StatefulSet：类似ReplicateSet，但StatefulSet提供Pod状态保持，在重新调度后保留他们的标识和状态，适合数据库等有状态应用场景;&lt;/li&gt;
-  &lt;li&gt;DeamonSet： 保证在所有群集节点上运行一个Pod;&lt;/li&gt;
-  &lt;li&gt;Service: 为一组功能相同的Pods提供单一不变的接入点，解耦Pods伸缩能力;&lt;/li&gt;
-  &lt;li&gt;Deployment：类似ReplicationController/ReplicateSet， 增加滚动升降级策略和能力;&lt;/li&gt;
-  &lt;li&gt;ConfigMap：配置选项，支持配置从Pod解耦分离;&lt;/li&gt;
-  &lt;li&gt;Secret：类似ConfigMap，用于敏感数据保存;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;重要组件&quot;&gt;重要组件&lt;/h1&gt;
-
-&lt;p&gt;集群中包含多个节点，分为主节点和工作节点。&lt;/p&gt;
-
-&lt;p&gt;工作节点上用于负载应用的单元称为Pod,主节点用来管理工作节点和Pod.&lt;/p&gt;
-
-&lt;h2 id=&quot;控制面板组件主节点&quot;&gt;控制面板组件（主节点）&lt;/h2&gt;
-&lt;p&gt;对集群做出全局决策，以及检测和响应集群事件。每一个主节点同时也是node&lt;/p&gt;
-&lt;h3 id=&quot;kube-apiserver&quot;&gt;kube-apiserver&lt;/h3&gt;
-&lt;p&gt;Kubernetes的api服务，可以用来动态操作kubernetes，支持伸缩扩展。&lt;/p&gt;
-&lt;h3 id=&quot;etcd&quot;&gt;etcd&lt;/h3&gt;
-&lt;p&gt;保存Kubernetes集群数据的后台键值数据库&lt;/p&gt;
-&lt;h3 id=&quot;kube-scheduler&quot;&gt;kube-scheduler&lt;/h3&gt;
-&lt;p&gt;用来调度Pod及Pod的资源&lt;/p&gt;
-&lt;h3 id=&quot;kube-controller-manager&quot;&gt;kube-controller-manager&lt;/h3&gt;
-&lt;p&gt;每一个控制器应该是一个进程，但为了降低复杂性，他们被编译到一个应用中，并运行在一个进程中&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;节点控制器（Node Controller）: 负责在节点出现故障时进行通知和响应。&lt;/li&gt;
-  &lt;li&gt;副本控制器（Replication Controller）: 负责为系统中的每个副本控制器对象维护正确数量的 Pod。&lt;/li&gt;
-  &lt;li&gt;端点控制器（Endpoints Controller）: 填充端点(Endpoints)对象(即加入 Service 与 Pod)。&lt;/li&gt;
-  &lt;li&gt;服务帐户和令牌控制器（Service Account &amp;amp; Token Controllers）: 为新的命名空间创建默认帐户和 API 访问令牌
-    &lt;h3 id=&quot;cloud-controller-manager&quot;&gt;cloud-controller-manager&lt;/h3&gt;
-    &lt;p&gt;用于链接管理云提供商的应用编程接口，本地集群不需要&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;节点控制器（Node Controller）: 用于在节点终止响应后检查云提供商以确定节点是否已被删除&lt;/li&gt;
-  &lt;li&gt;路由控制器（Route Controller）: 用于在底层云基础架构中设置路由&lt;/li&gt;
-  &lt;li&gt;服务控制器（Service Controller）: 用于创建、更新和删除云提供商负载均衡器&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;node组件&quot;&gt;Node组件&lt;/h2&gt;
-&lt;h3 id=&quot;kubelet&quot;&gt;Kubelet&lt;/h3&gt;
-&lt;p&gt;每个工作节点上的代理，通过接收PodSpecs来管理容器，并保证安全的运行在Pod中&lt;/p&gt;
-&lt;h3 id=&quot;kube-proxy&quot;&gt;Kube-proxy&lt;/h3&gt;
-&lt;p&gt;每个工作节点上运行的网络代理，维护节点网络规则&lt;/p&gt;
-&lt;h3 id=&quot;container-runtime&quot;&gt;Container Runtime&lt;/h3&gt;
-&lt;p&gt;负责运行容器的软件，如Docker、Containerd等任何实现Kubernetes CRI（容器运行环境接口）的容器软件&lt;/p&gt;
-
-&lt;h2 id=&quot;插件&quot;&gt;插件&lt;/h2&gt;
-&lt;p&gt;使用Kubernetes资源提供集群级别功能，其命名空间域属于kubu-system命名空间。常用插件：&lt;/p&gt;
-&lt;h3 id=&quot;dns&quot;&gt;DNS&lt;/h3&gt;
-&lt;p&gt;几乎所有Kubernetes集群都应该有集群DNS用于做域名服务&lt;/p&gt;
-&lt;h3 id=&quot;仪表盘&quot;&gt;仪表盘&lt;/h3&gt;
-&lt;p&gt;Kubernetes集群通用的、基于WEb的用户界面，可以管理集群&lt;/p&gt;
-&lt;h3 id=&quot;容器资源监控&quot;&gt;容器资源监控&lt;/h3&gt;
-&lt;h3 id=&quot;集群级别日志&quot;&gt;集群级别日志&lt;/h3&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">Kubernetes能提供什么 服务发现和负载均衡 存储编排</summary></entry><entry><title type="html">kubernetes 组件版本偏差策略</title><link href="https://pfcstyle.github.io/2021/02/08/kubernetes-components-version-strategy/" rel="alternate" type="text/html" title="kubernetes 组件版本偏差策略" /><published>2021-02-08T00:00:00+08:00</published><updated>2021-02-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/08/kubernetes-components-version-strategy</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/08/kubernetes-components-version-strategy/">&lt;h1 id=&quot;版本偏差&quot;&gt;版本偏差&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;多个 kube-apiserver 实例小版本号最多差1&lt;/li&gt;
-  &lt;li&gt;kubelet 版本号不能高于 kube-apiserver，最多可以比 kube-apiserver 低两个小版本。&lt;/li&gt;
-  &lt;li&gt;kube-controller-manager、kube-scheduler 和 cloud-controller-manager 版本不能高于 kube-apiserver 版本号&lt;/li&gt;
-  &lt;li&gt;kubectl 可以比 kube-apiserver 高一个小版本，也可以低一个小版本。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;组件升级顺序&quot;&gt;组件升级顺序&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;kube-apiserver&lt;/li&gt;
-  &lt;li&gt;kube-controller-manager、kube-scheduler 和 cloud-controller-manager&lt;/li&gt;
-  &lt;li&gt;Kubelet&lt;/li&gt;
-  &lt;li&gt;Kube-proxy&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">版本偏差</summary></entry><entry><title type="html">kubernetes Daemonset</title><link href="https://pfcstyle.github.io/2021/02/08/kubernetes-daemonset/" rel="alternate" type="text/html" title="kubernetes Daemonset" /><published>2021-02-08T00:00:00+08:00</published><updated>2021-02-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/08/kubernetes-daemonset</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/08/kubernetes-daemonset/">&lt;p&gt;守护进程集包含存储进程、日志收集进程、节点监控进程、和Pods管理（创建与回收）进程。&lt;/p&gt;
-
-&lt;p&gt;DaemonSet可以只有一个，也可以根据不同的daemon划分为多个。这些进程都以Pods的形式运行&lt;/p&gt;
-
-&lt;h2 id=&quot;spec&quot;&gt;Spec&lt;/h2&gt;
-&lt;h3 id=&quot;必需字段&quot;&gt;必需字段&lt;/h3&gt;
-&lt;p&gt;apiVersion, kind, metadata等通用字段&lt;/p&gt;
-
-&lt;p&gt;template, 这是一个pod template,其配置与pod几乎完全一样，除了没有apiVersion和kind&lt;/p&gt;
-
-&lt;p&gt;selector,1.8开始，必须指定来匹配template的label，否则会报错&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;matchLabels - 匹配template的label&lt;/li&gt;
-  &lt;li&gt;matchExpressions - 通过指定key, values列表和关联key-value的操作，来构建更复杂的匹配&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;在指定的node上运行pods&quot;&gt;在指定的node上运行Pods&lt;/h3&gt;
-&lt;p&gt;如果你指定一个.spec.template.spec.nodeSelector, 那么DaemonSet controller会在匹配的node上创建相关的Pods。如果指定spec.template.spec.affinity，那么会在亲和度匹配的node上创建Pods。如果什么都没有指定，那么将会在所有的node上创建。&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;Spec Example&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;apiVersion&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;apps/v1&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;DaemonSet&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-elasticsearch&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;kube-system&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;k8s-app&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-logging&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;selector&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;matchLabels&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-elasticsearch&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-elasticsearch&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;tolerations&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;# this toleration is to have the daemonset runnable on master nodes&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;# remove it if your masters can't run pods&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;node-role.kubernetes.io/master&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;effect&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;NoSchedule&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;containers&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;fluentd-elasticsearch&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;quay.io/fluentd_elasticsearch/fluentd:v2.5.2&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;resources&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;limits&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;200Mi&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;cpu&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;100m&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;200Mi&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;volumeMounts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;varlog&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;mountPath&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/log&lt;/span&gt;
-        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;varlibdockercontainers&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;mountPath&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/lib/docker/containers&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;readOnly&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;terminationGracePeriodSeconds&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;varlog&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;hostPath&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/log&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;varlibdockercontainers&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;hostPath&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/lib/docker/containers&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;daemon-pods如何调度&quot;&gt;Daemon Pods如何调度&lt;/h2&gt;
-&lt;p&gt;一般情况下，pods由Kubernetes调度器调度，但是Daemon pods被DaemonSet controller创建并调度。这会导致两个问题：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;不一致的Pod表现：一般的Pods会以Pending的状态创建，但是DaemonSet pods不会&lt;/li&gt;
-  &lt;li&gt;Pod preemption被默认的调度器控制。当抢占启用时，DaemonSet controller会做出调度决定，而不考虑pod的优先级和抢占逻辑
-可以通过添加NodeAffinity项到DaemonSet Pods可以让其使用默认的调度器&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;nodeAffinity&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;requiredDuringSchedulingIgnoredDuringExecution&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;nodeSelectorTerms&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;matchFields&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;metadata.name&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;In&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;target-host-name&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;另外，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node.kubernetes.io/unschedulable:NoSchedule&lt;/code&gt; &lt;strong&gt;toleration&lt;/strong&gt;会自动添加到DaemonSet Pods上，从而使默认的调度器忽略unschedulable的Nodes&lt;/p&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">守护进程集包含存储进程、日志收集进程、节点监控进程、和Pods管理（创建与回收）进程。</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key vocabulary</summary></entry></feed>

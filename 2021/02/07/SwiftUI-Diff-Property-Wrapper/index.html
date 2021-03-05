@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /><title>What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding? &mdash; 01手记</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/primer-css/css/primer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/collection.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/repo-card.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/sections/repo-list.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/components/boxed-group.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/common.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/globals/responsive.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/css/posts/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/octicons/octicons/octicons.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mzlogin/rouge-themes@master/dist/github.css"><link rel="canonical" href="https://pfcstyle.github.io/2021/02/07/SwiftUI-Diff-Property-Wrapper/"><link rel="alternate" type="application/atom+xml" title="01手记" href="https://pfcstyle.github.io/feed.xml"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/favicon.ico"><meta property="og:title" content="What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?"><meta name="keywords" content="["iOS", "Swift", "SwiftUI", "Property Wrapper", "@ObservedObject", "@State", "@Environment", "@EnvironmentObject", "@Binding"]"><meta name="og:keywords" content="["iOS", "Swift", "SwiftUI", "Property Wrapper", "@ObservedObject", "@State", "@Environment", "@EnvironmentObject", "@Binding"]"><meta name="description" content="@State"><meta name="og:description" content="@State"><meta property="og:url" content="https://pfcstyle.github.io/2021/02/07/SwiftUI-Diff-Property-Wrapper/"><meta property="og:site_name" content="01手记"><meta property="og:type" content="article"><meta property="og:locale" content="zh_CN" /><meta property="article:published_time" content="2021-02-07"> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/jquery/dist/jquery.min.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery-ui.js"></script> <script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/main.js"></script></head><body class="" data-mz=""><header class="site-header"><div class="container"><h1><a href="https://pfcstyle.github.io/" title="01手记"><span class="octicon octicon-mark-github"></span> 01手记</a></h1><button class="collapsed mobile-visible" type="button" onclick="toggleMenu();"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button><nav class="site-header-nav" role="navigation"> <a href="https://pfcstyle.github.io/" class=" site-header-nav-item" target="" title="首页">首页</a> <a href="https://pfcstyle.github.io/categories/" class=" site-header-nav-item" target="" title="分类">分类</a> <a href="https://pfcstyle.github.io/wiki/" class=" site-header-nav-item" target="" title="维基">维基</a> <a href="https://pfcstyle.github.io/links/" class=" site-header-nav-item" target="" title="链接">链接</a> <a href="https://pfcstyle.github.io/about/" class=" site-header-nav-item" target="" title="关于">关于</a></nav></div></header><section class="collection-head small geopattern" data-pattern-id="What’s the diff"><div class="container"><div class="columns"><div class="column three-fourths"><div class="collection-title"><h1 class="collection-header">What’s the difference between @ObservedObject, @State, @Environment and @EnvironmentObject and @Binding?</h1><div class="collection-info"> <span class="meta-info"> <span class="octicon octicon-calendar"></span> 2021/02/07 </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#iOS" title="iOS">iOS</a> </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#Swift" title="Swift">Swift</a> </span> <span class="meta-info"> <span class="octicon octicon-file-directory"></span> <a href="https://pfcstyle.github.io/categories/#SwiftUI" title="SwiftUI">SwiftUI</a> </span> <span class="meta-info"> <span class="octicon octicon-clock"></span> 共 4451 字，约 13 分钟 </span></div></div></div><div class="column one-fourth mobile-hidden"><div class="collection-title"></div></div></div></div></section><section class="container content"><div class="columns"><div class="column three-fourths" ><article class="article-content markdown-body"><h2 id="state">@State</h2><p>只在view内部发生改变和使用，且是较为简单的数据类型。@State将变量的内存管理交给了SwiftUI。所有的view都是结构体，是标量，这意味着它们无法修改（只能重新赋值）。因此，当我们使用@State时， 我们将变量的控制权交给了SwiftUI，只要view存在，他就会一直在内存中存在。当变量发生改变时，SwiftUI也会自动重新加载。</p><pre><code class="language-Swift">struct ContentView: View {
+    @State private var score = 0
+    init() {
+        score = 1
+    }
+    // more code
+}
+</code></pre><h2 id="binding">@Binding</h2><p>当需要读写祖先view的@State或@ObservableObject(可能其中某个属性)的属性时</p><pre><code class="language-Swift">
+struct MyView: View {
+    @State var isPresentingAlert = false
+
+    var body: some View {
+        Button(action: {
+            self.isPresentingAlert = true
+        }, label: {
+            Text("Present an Alert")
+        })
+        .customAlert(isPresented: $isPresentingAlert) {
+            CustomAlertView(title: Text("Alert!"))
+        }
+    }}
+
+struct CustomAlertView: View {
+    let title: Text
+    
+    /// it needs read/write access to a State-
+    /// wrapped property of an ancestor view
+    @Binding var isBeingPresented: Bool
+}
+</code></pre><pre><code class="language-Swfit">
+struct MyView: View {
+
+    /// it needs to provide read/write access of 
+    /// one of its properties to a descendant view
+    @State var isPresentingAlert = false
+
+    var body: some View {
+        Button(action: {
+            self.isPresentingAlert = true
+        }, label: {
+            Text("Present an Alert")
+        })
+        .alert(isPresented: $isPresentingAlert) {
+            Alert(title: Text("Alert!"))
+        }
+    }
+}
+</code></pre><h2 id="observedobject">@ObservedObject</h2><p>适用于自定义类型，具备多个属性和方法，或者需要跨view使用的情况。大部分情况和@State相同，只是结构更复杂。需要实现ObservableObject protocol，这意味着其内部的属性可以被SwiftUI binding. 大多数情况，我们直接使用@Published来声明内部属性，当然也可以使用combine框架实现自定义的Publisher</p><pre><code class="language-Swift"># 自己内部初始化
+class MovieViewModel: ObservableObject {
+    
+    @Published var movies: [Movie] = [] // 1
+    
+    // more code
+    
+}
+
+
+struct MoviesView: View {
+    
+    // 1
+    @ObservedObject var viewModel = MovieViewModel()
+    
+    var body: some View {
+        List(viewModel.movies) { movie in // 2
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(movie.title) // 3a
+                        .font(.headline)
+                    Text(movie.originalTitle) // 3b
+                        .font(.subheadline)
+                }
+            }
+        }
+    }
+}
+</code></pre><pre><code class="language-Swift"># 外部初始化（view init时）
+
+struct MyView: View {
+
+    /// it is dependent on an object that can
+    /// easily be passed to its initializer
+    @ObservedObject var dessertFetcher: DessertFetcher
+
+    var body: some View {
+        List(dessertFetcher.desserts) {
+            Text($0.name)
+        }.onAppear {
+            self.dessertFetcher.fetch()
+        }
+    }}
+
+extension UIViewController {
+
+    func observedObjectExampleTwo() -&gt; UIViewController {
+        let fetcher = DessertFetcher(preferences: .init(toleratesMint: false))
+        let view = ObservedObjectExampleTwo(dessertFetcher: fetcher)
+        let host = UIHostingController(rootView: view)
+        return host
+    }
+}
+</code></pre><blockquote><p>Warning: When you use a custom publisher to announce that your object has changed, this must happen on the main thread.</p></blockquote><h2 id="environmentobject">@EnvironmentObject</h2><p>ObservedObject当需要跨view共享或者是内嵌很深的view需要但又不适合自己初始化时，需要使用@EnvironmentObject。</p><blockquote><p>@EnvironmentObject只支持1个实例</p></blockquote><pre><code class="language-Swift">
+struct SomeChildView: View {
+
+    /// it would be too cumbersome to pass that 
+    /// observed object through all the initializers 
+    /// of all your view's ancestors
+    @EnvironmentObject var veggieFetcher: VegetableFetcher
+
+    var body: some View {
+        List(veggieFetcher.veggies) {
+            Text($0.name)
+        }.onAppear {
+            self.veggieFetcher.fetch()
+        }
+    }}
+
+struct SomeParentView: View {
+    var body: some View {
+        SomeChildView()
+    }}
+
+struct SomeGrandparentView: View {
+    var body: some View {
+        SomeParentView()
+    }
+}
+</code></pre><h2 id="environment">@Environment</h2><p>当view依赖的不能满足ObservableObject协议时，可能是以下几种情况：</p><ul><li>依赖的是一个值类型</li><li>依赖项仅作为协议而不是具体类型公开</li><li>依赖是一个闭包</li></ul><blockquote><p>@Environment 支持多实例 修改@Published的属性，不会引发view的重绘</p></blockquote><pre><code class="language-Swift">
+struct MyView: View {
+
+    /// it is dependent on a type that cannot 
+    /// conform to ObservableObject
+    @Environment(\.theme) var theme: Theme
+
+    var body: some View {
+        Text("Me and my dad make models of clipper ships.")
+            .foregroundColor(theme.foregroundColor)
+            .background(theme.backgroundColor)
+    }}
+
+// MARK: - Dependencies
+
+protocol Theme {
+    var foregroundColor: Color { get }
+    var backgroundColor: Color { get }
+}
+
+struct PinkTheme: Theme {
+    var foregroundColor: Color { .white }
+    var backgroundColor: Color { .pink }
+}
+
+// MARK: - Environment Boilerplate
+
+struct ThemeKey: EnvironmentKey {
+    static var defaultValue: Theme {
+        return PinkTheme()
+    }}
+
+extension EnvironmentValues {
+    var theme: Theme {
+        get { return self[ThemeKey.self]  }
+        set { self[ThemeKey.self] = newValue }
+    }
+}
+</code></pre><h1 id="workaround-for-multiple-instances-of-an-environmentobject">Workaround for Multiple Instances of an EnvironmentObject</h1><pre><code class="language-Swift">
+struct MyView: View {
+
+    @DistinctEnvironmentObject(\.posts) var postsService: Microservice
+    @DistinctEnvironmentObject(\.users) var usersService: Microservice
+    @DistinctEnvironmentObject(\.channels) var channelsService: Microservice
+
+    var body: some View {
+        Form {
+            Section(header: Text("Posts")) {
+                List(postsService.content, id: \.self) {
+                    Text($0)
+                }
+            }
+            Section(header: Text("Users")) {
+                List(usersService.content, id: \.self) {
+                    Text($0)
+                }
+            }
+            Section(header: Text("Channels")) {
+                List(channelsService.content, id: \.self) {
+                    Text($0)
+                }
+            }
+        }.onAppear(perform: fetchContent)
+    }}
+
+// MARK: - Property Wrapper To Make This All Work
+
+@propertyWrapperstruct DistinctEnvironmentObject&lt;Wrapped&gt;: DynamicProperty where Wrapped : ObservableObject {
+    var wrappedValue: Wrapped { _wrapped }
+    @ObservedObject private var _wrapped: Wrapped
+
+    init(_ keypath: KeyPath&lt;EnvironmentValues, Wrapped&gt;) {
+        _wrapped = Environment&lt;Wrapped&gt;(keypath).wrappedValue
+    }}
+
+// MARK: - Wherever You Create Your View Hierarchy
+
+MyView()
+    .environment(\.posts, Microservice.posts)
+    .environment(\.users, Microservice.users)
+    .environment(\.channels, Microservice.channels)
+</code></pre><div style="margin-top:2em;padding:0 1.5em;border:1px solid #d3d3d3;background-color:#deebf7"><h3>文档信息</h3><ul><li>本文作者：<a href="https://pfcstyle.github.io" target="_blank">Yawei Wang</a></li><li>本文链接：<a href="https://pfcstyle.github.io/2021/02/07/SwiftUI-Diff-Property-Wrapper/" target="_blank">https://pfcstyle.github.io/2021/02/07/SwiftUI-Diff-Property-Wrapper/</a></li><li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">创意共享3.0许可证</a>）</li></ul></div></article><div class="share"></div><div class="comment"><div id="gitalk-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/gitalk/gitalk.css"> <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script> <script> var gitalk = new Gitalk({ id: '/2021/02/07/SwiftUI-Diff-Property-Wrapper/', clientID: 'e1a31f938861348e8751', clientSecret: 'd911850947298eb91753591eeb8dba129cc7fd86', repo: 'bomment', owner: 'pfcstyle', admin: ['pfcstyle'], labels: ['gitment'], perPage: 50, }); gitalk.render('gitalk-container'); </script></div></div><div class="column one-fourth"><h3>Search</h3><div id="site_search"> <input style="width:96%" type="text" id="search_box" placeholder="Search"></div><ul id="search_results" style="font-size:14px;list-style-type:none;padding-top:10px;padding-left:10px;"></ul><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/simple-jekyll-search.min.js"></script> <script type="text/javascript"> SimpleJekyllSearch({ searchInput: document.getElementById('search_box'), resultsContainer: document.getElementById('search_results'), json: 'https://pfcstyle.github.io/assets/search_data.json', searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>', noResultsText: 'No results found', limit: 10, fuzzy: false, exclude: ['Welcome'] }) </script><h3 class="post-directory-title mobile-hidden">Table of Contents</h3><div id="post-directory-module" class="mobile-hidden"><section class="post-directory"><dl></dl></section></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/jquery.toc.js"></script></div></div></section><footer class="container"><div class="site-footer" role="contentinfo"><div class="copyright left mobile-block"> © 2015 <span title="Yawei Wang">Yawei Wang</span> <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a></div><ul class="site-footer-links right mobile-hidden"><li> <a href="javascript:window.scrollTo(0,0)" >TOP</a></li></ul><a href="https://github.com/pfcstyle/pfcstyle.github.io" target="_blank" aria-label="view source code"> <span class="mega-octicon octicon-mark-github" title="GitHub"></span> </a><ul class="site-footer-links mobile-hidden"><li> <a href="https://pfcstyle.github.io/" title="首页" target="">首页</a></li><li> <a href="https://pfcstyle.github.io/categories/" title="分类" target="">分类</a></li><li> <a href="https://pfcstyle.github.io/wiki/" title="维基" target="">维基</a></li><li> <a href="https://pfcstyle.github.io/links/" title="链接" target="">链接</a></li><li> <a href="https://pfcstyle.github.io/about/" title="关于" target="">关于</a></li><li><a href="https://pfcstyle.github.io/feed.xml"><span class="octicon octicon-rss" style="color:orange;"></span></a></li></ul><script async src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/vendor/busuanzi/2.3/busuanzi.pure.mini.js"></script><div class="mobile-hidden" style="margin-top:8px"> <span id="busuanzi_container_site_pv" style="display:none"> 本站访问量<span id="busuanzi_value_site_pv"></span>次 </span> <span id="busuanzi_container_site_uv" style="display:none"> / 本站访客数<span id="busuanzi_value_site_uv"></span>人 </span> <span id="busuanzi_container_page_pv" style="display:none"> / 本页访问量<span id="busuanzi_value_page_pv"></span>次 / 统计始于2020-05-03 </span></div></div></footer><div class="tools-wrapper"> <a class="gotop" href="#" title="回到顶部"><span class="octicon octicon-arrow-up"></span></a></div><script src="https://cdn.jsdelivr.net/gh/pfcstyle/pfcstyle.github.io@master/assets/js/geopattern.js"></script> <script> jQuery(document).ready(function($) { $('.geopattern').each(function(){ $(this).geopattern($(this).data('pattern-id')); }); /* hljs.initHighlightingOnLoad(); */ }); </script><div style="display:none"> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-80669434-1', 'auto'); ga('send', 'pageview'); </script></div></body></html>
