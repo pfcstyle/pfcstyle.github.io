@@ -473,6 +473,14 @@
     } ,
   
     {
+      "title"    : "Re-Add storyboard",
+      "category" : "iOS",
+      "content": " AppDelegate可以什么逻辑都没有 SceneDelegate可以什么相关逻辑都没有 Info.plist Storyboard设置 ",
+      "url"      : "https://pfcstyle.github.io/2021/03/08/readd-storyboard/",
+      "keywords" : "[&quot;iOS&quot;, &quot;Swift&quot;, &quot;Storyboard&quot;]"
+    } ,
+  
+    {
       "title"    : "Badminton",
       "category" : "Hobbies",
       "content": "视频  李在福《Play To Win》完整版   李在福《追球》全集 图文  超全羽毛球技术图解 公众号  和蔡赟聊羽毛球 微信号：caiyunliaoyumaoqiu   羽毛球 微信号：yu-mao-qiu  ",

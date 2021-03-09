@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-05T16:06:54+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Swift Type-Erasure(类型抹除)</title><link href="https://pfcstyle.github.io/2021/02/28/swift-type-erased/" rel="alternate" type="text/html" title="Swift Type-Erasure(类型抹除)" /><published>2021-02-28T00:00:00+08:00</published><updated>2021-02-28T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/28/swift-type-erased</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/28/swift-type-erased/">&lt;h1 id=&quot;什么是type-erasure&quot;&gt;什么是Type-Erasure&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-09T15:14:13+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Re-Add storyboard</title><link href="https://pfcstyle.github.io/2021/03/08/readd-storyboard/" rel="alternate" type="text/html" title="Re-Add storyboard" /><published>2021-03-08T00:00:00+08:00</published><updated>2021-03-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/08/readd-storyboard</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/08/readd-storyboard/">&lt;ol&gt;
+  &lt;li&gt;AppDelegate可以什么逻辑都没有&lt;/li&gt;
+  &lt;li&gt;SceneDelegate可以什么相关逻辑都没有&lt;/li&gt;
+  &lt;li&gt;Info.plist
+&lt;img src=&quot;../img/post/2021-03-08/main.storyboard.jpg&quot; alt=&quot;info.plist&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Storyboard设置
+&lt;img src=&quot;../img/post/2021-03-08/viewcontroller.jpg&quot; alt=&quot;viewcontroller&quot; /&gt;
+&lt;img src=&quot;../img/post/2021-03-08/entrypoint.jpg&quot; alt=&quot;entrypoint&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><summary type="html">AppDelegate可以什么逻辑都没有 SceneDelegate可以什么相关逻辑都没有 Info.plist Storyboard设置</summary></entry><entry><title type="html">Swift Type-Erasure(类型抹除)</title><link href="https://pfcstyle.github.io/2021/02/28/swift-type-erased/" rel="alternate" type="text/html" title="Swift Type-Erasure(类型抹除)" /><published>2021-02-28T00:00:00+08:00</published><updated>2021-02-28T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/28/swift-type-erased</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/28/swift-type-erased/">&lt;h1 id=&quot;什么是type-erasure&quot;&gt;什么是Type-Erasure&lt;/h1&gt;
 
 &lt;p&gt;swift中在引用一些通用协议时，往往需要用到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;type erasure&lt;/code&gt;。它使我们能够更轻松地与通用协议进行交互，这些通用协议对将要实现它们的各种类型具有特定的要求。&lt;/p&gt;
 
@@ -660,23 +668,4 @@ published                             received
   &lt;li&gt;They want to open their phone and check their finances at 2: 00am, and change their investment settings too if they feel like it.&lt;/li&gt;
   &lt;li&gt;And we can expect to see new apps that help them with this.&lt;/li&gt;
   &lt;li&gt;Over time, the companies that rely on the older methods will quite simply go out of business.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key vocabulary</summary></entry><entry><title type="html">Solving problem</title><link href="https://pfcstyle.github.io/2021/02/09/solving-problems-dealing-with-life-changes/" rel="alternate" type="text/html" title="Solving problem" /><published>2021-02-09T00:00:00+08:00</published><updated>2021-02-09T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/09/solving-problems-dealing-with-life-changes</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/09/solving-problems-dealing-with-life-changes/">&lt;h1 id=&quot;key-vocabulary&quot;&gt;Key vocabulary&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Don’t let negative people &lt;strong&gt;get in the way&lt;/strong&gt; of your dream - if you really want it, go for it.&lt;/li&gt;
-  &lt;li&gt;Their marriage has been &lt;strong&gt;in a bad way&lt;/strong&gt; recently, and I’m worried they might divorce.&lt;/li&gt;
-  &lt;li&gt;I have &lt;strong&gt;way too many&lt;/strong&gt; problems of my own to deal with right now - I can’t promise I’ll be able to help.&lt;/li&gt;
-  &lt;li&gt;I can’t tell you &lt;strong&gt;the way forward&lt;/strong&gt;, you need to find it for yourself.&lt;/li&gt;
-  &lt;li&gt;Her parents spoil her, and she always &lt;strong&gt;gets her own way&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;John: You’ve all heard of a &lt;strong&gt;midlife crisis&lt;/strong&gt;, but what about a quarter-life crisis? Youth counsellor Helen Fern says more young people are experiencing one. Helen, what does a &lt;strong&gt;quarter-life crisis&lt;/strong&gt; look like?&lt;/li&gt;
-  &lt;li&gt;Helen: Well it varies, John, but what we typically see is someone around 24, 25, recently graduated and usually in their first job. And things are tougher than they expected. Their finances are &lt;strong&gt;in a bad way&lt;/strong&gt; with the student loan and rent increases, their jobs are often a lot less creative or enjoyable than they’d hoped for, and then of course with no children yet and no sense of career, they might be feeling quite… well, lost. So it’s a time of facing up to reality-you thought you’d &lt;strong&gt;have your own way&lt;/strong&gt; with life, and now it’s not all happenging, or centainly not the way you imagined.&lt;/li&gt;
-  &lt;li&gt;John: So there you are - you’re 25, these things are all getting &lt;strong&gt;in the way of&lt;/strong&gt; your dreams - how do you get through it?&lt;/li&gt;
-  &lt;li&gt;Helen: So, unlike mid-life crises - which tend to come from looking back on our lives - with a quarter-life crisis people are often comparing themselves, whether that’s to TV characters, or our friends, or even our own ideas about what our twenties should have been like. And so &lt;strong&gt;the way forward&lt;/strong&gt;, is firstly to stop doing that, and start with your life as it is now. think about your true values - many young people want the freedom to travel, but if you’d rather focus on family and home, that’s fine too.&lt;/li&gt;
-  &lt;li&gt;John: And then do it.&lt;/li&gt;
-  &lt;li&gt;Helen: And do it -but start with small steps. If your goal is to see the world , you can begin by researching travel routes and saving a little money each week. But I will say, if you feel it’s time you made a big change - now’s the moment to do it. There are &lt;em&gt;way too many&lt;/em&gt; people out there with regrets about their twenties, and they usually regret the things they didn’t do, not the things they did.&lt;/li&gt;
 &lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key vocabulary</summary></entry></feed>
