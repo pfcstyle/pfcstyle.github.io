@@ -1,4 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-16T10:08:56+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Loading states of SwiftUI views</title><link href="https://pfcstyle.github.io/2021/03/14/handling-loading-states-within-swiftui-views/" rel="alternate" type="text/html" title="Loading states of SwiftUI views" /><published>2021-03-14T00:00:00+08:00</published><updated>2021-03-14T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/14/handling-loading-states-within-swiftui-views</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/14/handling-loading-states-within-swiftui-views/">&lt;h1 id=&quot;自加载view&quot;&gt;自加载View&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-18T10:21:45+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Doing a SWOT analysis</title><link href="https://pfcstyle.github.io/2021/03/18/doing-a-swot-analysis/" rel="alternate" type="text/html" title="Doing a SWOT analysis" /><published>2021-03-18T00:00:00+08:00</published><updated>2021-03-18T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/18/doing-a-swot-analysis</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/18/doing-a-swot-analysis/">&lt;ul&gt;
+  &lt;li&gt;Strengths
+    &lt;ul&gt;
+      &lt;li&gt;locally owned&lt;/li&gt;
+      &lt;li&gt;low employee turnover&lt;/li&gt;
+      &lt;li&gt;good locations for store within the city&lt;/li&gt;
+      &lt;li&gt;fast delivery times&lt;/li&gt;
+      &lt;li&gt;good customer service&lt;/li&gt;
+      &lt;li&gt;positive reputation&lt;/li&gt;
+      &lt;li&gt;What advantages does your organization have?&lt;/li&gt;
+      &lt;li&gt;What strengths would others say your company has?&lt;/li&gt;
+      &lt;li&gt;What specialized markets or innovative technology can your company take advantage of?&lt;/li&gt;
+      &lt;li&gt;What do you do better than your competitors?&lt;/li&gt;
+      &lt;li&gt;What unique resources can you draw on that others can’t?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Weakness
+    &lt;ul&gt;
+      &lt;li&gt;not the market leader&lt;/li&gt;
+      &lt;li&gt;not well known compared to competitors&lt;/li&gt;
+      &lt;li&gt;more expensive prices, smaller selection&lt;/li&gt;
+      &lt;li&gt;relies on word of mouth for advertising&lt;/li&gt;
+      &lt;li&gt;what could be better about your company?&lt;/li&gt;
+      &lt;li&gt;What are some of your competrors’’ weaknesses?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Opportunities
+    &lt;ul&gt;
+      &lt;li&gt;the two major competitors attack each other intheir ads&lt;/li&gt;
+      &lt;li&gt;overall the econonmy is doing well&lt;/li&gt;
+      &lt;li&gt;small increase in home-buyers in recent years&lt;/li&gt;
+      &lt;li&gt;What are some market trends you could take advantage of?&lt;/li&gt;
+      &lt;li&gt;What are some challenges your&lt;/li&gt;
+      &lt;li&gt;What might be changing about your company? Your competitor?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Threats
+    &lt;ul&gt;
+      &lt;li&gt;all companies target the same demographics&lt;/li&gt;
+      &lt;li&gt;competitors are stable&lt;/li&gt;
+      &lt;li&gt;What are your competitors doing?&lt;/li&gt;
+      &lt;li&gt;What are some challenges your company faces?&lt;/li&gt;
+      &lt;li&gt;What does your company need to avoid?&lt;/li&gt;
+      &lt;li&gt;What might be some effects that your company has no control over&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;Taylor:okay, so that covers opportunities box, now on to our weaknesses.&lt;/li&gt;
+  &lt;li&gt;Jade: Um, I’m sorry but where do I put eco-friendly appliances?&lt;/li&gt;
+  &lt;li&gt;Dylan: Oh that’s a strength, you should put it here.&lt;/li&gt;
+  &lt;li&gt;Jade: Great, thanks!&lt;/li&gt;
+  &lt;li&gt;Taylor: Wait, that isn’t really a strength. It’s more like an opportunity.&lt;/li&gt;
+  &lt;li&gt;Dylan: Hmmm .. I see what you mean.&lt;/li&gt;
+  &lt;li&gt;Jade: Why?&lt;/li&gt;
+  &lt;li&gt;Taylor: Strengths are more internal opportunities are external.&lt;/li&gt;
+  &lt;li&gt;Dylan: Yeah, put it here instead.&lt;/li&gt;
+  &lt;li&gt;Jade: Okay. But aren’t we selling those appliances? That’s internal, isn’t it?&lt;/li&gt;
+  &lt;li&gt;Dylan: That is one way of looking at it, but ask yourself- do we ultimately have any control of how eco-friendly the appliances are? Are we the ones making those appliances?&lt;/li&gt;
+  &lt;li&gt;Jade: No, I guess not… So external things are things we have no control over?&lt;/li&gt;
+  &lt;li&gt;Taylor: That’s right. Okay, now how about our weaknesses?&lt;/li&gt;
+  &lt;li&gt;Dylan: Our loans?&lt;/li&gt;
+  &lt;li&gt;Taylor: Yep, and let’s not forget that we’ve only been in business for two years so that also affects things.&lt;/li&gt;
+  &lt;li&gt;Dylan: True. Were you going to add something, Jade?&lt;/li&gt;
+  &lt;li&gt;Jade: Ummm .. the vehicle gas mileage law?&lt;/li&gt;
+  &lt;li&gt;Taylor: Well-&lt;/li&gt;
+  &lt;li&gt;Dylan: But-you first.&lt;/li&gt;
+  &lt;li&gt;Taylor: Thanks. So, is that something that’s really internal?&lt;/li&gt;
+  &lt;li&gt;Jade: Well, we’ll have to get new vehicles, we’ll have control over which vehicles we get and why. That’s internal.&lt;/li&gt;
+  &lt;li&gt;Taylor: Yes, that’s true, and purchasing new vehicles could be listed as a weakness But also consider that it’s the new law that’s forcing us to buy these vehicles in the first place.&lt;/li&gt;
+  &lt;li&gt;Jade: Oh! And we don’t have any control over the law. So the law is a threat, but the purchase of vehicles is a weakness.&lt;/li&gt;
+  &lt;li&gt;Dylan: That’s right!&lt;/li&gt;
+  &lt;li&gt;Jade: Great! And I put that here.&lt;/li&gt;
+  &lt;li&gt;Taylor: Exactly. Anything else?&lt;/li&gt;
+  &lt;li&gt;Dylan: Hmmm… What about-?&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Strengths locally owned low employee turnover good locations for store within the city fast delivery times good customer service positive reputation What advantages does your organization have? What strengths would others say your company has? What specialized markets or innovative technology can your company take advantage of? What do you do better than your competitors? What unique resources can you draw on that others can’t?</summary></entry><entry><title type="html">Loading states of SwiftUI views</title><link href="https://pfcstyle.github.io/2021/03/14/handling-loading-states-within-swiftui-views/" rel="alternate" type="text/html" title="Loading states of SwiftUI views" /><published>2021-03-14T00:00:00+08:00</published><updated>2021-03-14T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/14/handling-loading-states-within-swiftui-views</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/14/handling-loading-states-within-swiftui-views/">&lt;h1 id=&quot;自加载view&quot;&gt;自加载View&lt;/h1&gt;
 
 &lt;p&gt;这是一种最为简单的情况，在view中调用异步数据加载并更新到view上去。下面的实例代码中，我们假设有一个异步的loader,通过view的生命周期函数调用loader并更新。&lt;/p&gt;
 
@@ -538,7 +615,52 @@ had better, it’s a very formal phrase and its mood is very strong. If your bos
   &lt;li&gt;Maureen: Hmm, well… It’s good idea to make changes slowly. You might want to eat more fruit and vegetables, and drink more water-staying hydrated is really important and gives you energy.&lt;/li&gt;
   &lt;li&gt;Doris: Yes, it’s hard to exercise when you’re tired all the time. Can drinking water really help?&lt;/li&gt;
   &lt;li&gt;Maureen: Oh yes! You have to drink water, especially when you exercise. But you know what you should really do? Laugh! Seriously, it’s proven to reduce stress, which is about the worst thing for you! Laughter really is the best medicine.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key phrases</summary></entry><entry><title type="html">Reminiscing</title><link href="https://pfcstyle.github.io/2021/03/11/reminiscing/" rel="alternate" type="text/html" title="Reminiscing" /><published>2021-03-11T00:00:00+08:00</published><updated>2021-03-11T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/11/reminiscing</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/11/reminiscing/">&lt;h1 id=&quot;the-order-of-telling-a-personal-anecdote&quot;&gt;The order of telling a personal anecdote&lt;/h1&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key phrases</summary></entry><entry><title type="html">Discussing gender</title><link href="https://pfcstyle.github.io/2021/03/11/discussing-gender/" rel="alternate" type="text/html" title="Discussing gender" /><published>2021-03-11T00:00:00+08:00</published><updated>2021-03-11T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/11/discussing-gender</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/11/discussing-gender/">&lt;h1 id=&quot;key-grammar&quot;&gt;Key grammar&lt;/h1&gt;
+
+&lt;p&gt;When you say it’s ‘common knowledge’:
+    - are you sure about that?
+    - are you referring to the financial scandal?
+    - what exactly do you mean?
+    - I don’t think that’s quite right
+    - do you mean that everyone knows?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Hang on a second&lt;/strong&gt;: Stopping a speaker in order to challenge their ideas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;You mean to say that&lt;/strong&gt;: Checking if you understand the other person’s ideas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;But there again, …&lt;/strong&gt;: Reminding someone if a point you have made previously&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;I’ll tell you what, though&lt;/strong&gt;: introducing your own point&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Coming back to your point…&lt;/strong&gt;: Returning to an argument the other speaker made.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;Melissa: Did you see that interview on BNN about the new foreign minister? Terrible.&lt;/li&gt;
+  &lt;li&gt;Winston: What was wrong with it?&lt;/li&gt;
+  &lt;li&gt;Melissa: Oh, it was just the questions they were asking, the way they describe her.&lt;/li&gt;
+  &lt;li&gt;What she likes to wear, how often she’s changed her hairstyle, what kind of a mother she is - I mean, why should any of that matter?&lt;/li&gt;
+  &lt;li&gt;Winston: Well, I guess they’re trying to build up a character profile, aren’t they?&lt;/li&gt;
+  &lt;li&gt;And that’s part of what you’d want to know about someone like that.&lt;/li&gt;
+  &lt;li&gt;Melissa: You mean to say that if it were a man in that position you’d be interested in what type of suit he wears?&lt;/li&gt;
+  &lt;li&gt;Which kind of school he sends his kids to?&lt;/li&gt;
+  &lt;li&gt;Winston: Well, not necessarily, but then again maybe people are interested in learning different things about different types of politicians.&lt;/li&gt;
+  &lt;li&gt;Melissa: I’ll tell you what, though.&lt;/li&gt;
+  &lt;li&gt;You see a lot more of this stuff about women than you do about men.&lt;/li&gt;
+  &lt;li&gt;There’s definitely a tendency to -&lt;/li&gt;
+  &lt;li&gt;Winston: Well, hang on a second.&lt;/li&gt;
+  &lt;li&gt;When you say ‘a lot more’-I mean, are you sure about that?&lt;/li&gt;
+  &lt;li&gt;They were talking about the prime minister the other day-showing how much his hair has gone grey, and all the wrinkles and things he’s got since he was first elected&lt;/li&gt;
+  &lt;li&gt;And I’m pretty sure he’s a man.&lt;/li&gt;
+  &lt;li&gt;Melissa: Yes, but you’ve got to look at the overall picture, don’t you?&lt;/li&gt;
+  &lt;li&gt;One news story about his grey hair two hundred about his politics.&lt;/li&gt;
+  &lt;li&gt;But with the women, it’s just incessant, the focus on their image, on their personal lives.&lt;/li&gt;
+  &lt;li&gt;They can barely get a word in about what their actual policies are.&lt;/li&gt;
+  &lt;li&gt;Winston: But there again-i mean, what if that’s just what people want to know?&lt;/li&gt;
+  &lt;li&gt;Melissa: Well, it’s certainly not what I want to know.&lt;/li&gt;
+  &lt;li&gt;She’s going to be in charge of our foreign policy.&lt;/li&gt;
+  &lt;li&gt;There’s much more to worry about than her thoughts on motherhood.&lt;/li&gt;
+  &lt;li&gt;But, uh, coming back to your point-i do think if that is what people want to know, then it’s part of a cycle where we’re told that’s what’s important about women, so that’s what we expect to hear about them.&lt;/li&gt;
+  &lt;li&gt;There’s no reason that should be the case, though, and the media could play a role in changing things.&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key grammar</summary></entry><entry><title type="html">Reminiscing</title><link href="https://pfcstyle.github.io/2021/03/11/reminiscing/" rel="alternate" type="text/html" title="Reminiscing" /><published>2021-03-11T00:00:00+08:00</published><updated>2021-03-11T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/11/reminiscing</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/11/reminiscing/">&lt;h1 id=&quot;the-order-of-telling-a-personal-anecdote&quot;&gt;The order of telling a personal anecdote&lt;/h1&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;Lead-in&lt;/strong&gt;: That reminds me of my first trep abroad.&lt;/li&gt;
@@ -822,249 +944,4 @@ had better, it’s a very formal phrase and its mood is very strong. If your bos
 &lt;ul&gt;
   &lt;li&gt;默认，SwiftUI允许每个视图根据其渲染的容器选择自己的大小，然后将其居中于其父对象中。&lt;/li&gt;
   &lt;li&gt;Modifier实际上是将调用的视图包装到了另外一个视图中&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><summary type="html">布局基础规则</summary></entry><entry><title type="html">Combine详解（1）</title><link href="https://pfcstyle.github.io/2021/02/24/iOS-combine1/" rel="alternate" type="text/html" title="Combine详解（1）" /><published>2021-02-24T00:00:00+08:00</published><updated>2021-02-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/24/iOS-combine1</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/24/iOS-combine1/">&lt;h1 id=&quot;combine基础&quot;&gt;Combine基础&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Publisher是发布者，作为数据生产者，会定义一个Output和Failure类型。&lt;/li&gt;
-  &lt;li&gt;Subscriber是订阅者，作为数据消费者，会定义一个Input合Failure类型。&lt;/li&gt;
-  &lt;li&gt;Operator是操作者，可以更改Publisher Output类型，产生新的Publisher。&lt;/li&gt;
-  &lt;li&gt;Publisher的Output类型和Subsciber的Input类型需要相同&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;订阅操作是通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Publisher.subscribe(Subscriber)&lt;/code&gt;来完成的
-获取到Subscribtion(Publisher.subscibe()返回)实例，可以调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.cancel()&lt;/code&gt;取消&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sub?.cancel()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;内置subscriber&quot;&gt;内置Subscriber&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;sink(receiveCompletion:receiveValue:)&lt;/strong&gt;: 常用于publisher和sink一起执行的时候，比如request请求，返回的response会在sink中处理&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;assign(to:on:)&lt;/strong&gt;: 通过key path将收到的值赋值到model&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;// publisher之后直接sink
-let sub = NotificationCenter.default
-    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
-    .sink(receiveCompletion: { print ($0) },
-          receiveValue: { print ($0) })
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;let sub = NotificationCenter.default
-    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
-    .map( { ($0.object as! NSTextField).stringValue } )
-    .assign(to: \MyViewModel.filterString, on: myViewModel)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1 id=&quot;通过operator定制publisher&quot;&gt;通过operator定制publisher&lt;/h1&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let sub = NotificationCenter.default
-    .publisher(for: NSControl.textDidChangeNotification, object: filterField)
-    .map( { ($0.object as! NSTextField).stringValue } )
-    // 过滤非字母和数字字符
-    .filter( { $0.unicodeScalars.allSatisfy({CharacterSet.alphanumerics.contains($0)}) } )
-    // 防抖
-    .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
-    // receive方法可以让combine在指定线程里调用subscriber
-    .receive(on: RunLoop.main)
-    .assign(to:\MyViewModel.filterString, on: myViewModel)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;share-operator&quot;&gt;share() operator&lt;/h1&gt;
-
-&lt;p&gt;大多publishers都是struct, 是值类型，每一次订阅，实际上都是订阅了一个副本。share operator则可以赋予它们引用语义。&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// PassthroughSubject是class类型，但是经过scan operator之后生成的是struct类型&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PassthroughSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 这里每次emit value, 第一个参数都会累加&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;publisher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// subscribe一个&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sink&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c1:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// output&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// 再次subscribe&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;c2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sink&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c2:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// output  可以发现，对两个subscriber来说，是两个struct, 上述的第一个参数会从0重新开始累加&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;c2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// 如果加上share&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;publisher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;scan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;share&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// output&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;c1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;c2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;connectable-publishers&quot;&gt;Connectable Publishers&lt;/h1&gt;
-
-&lt;p&gt;有时会遇到如下图的问题，多个subscriber订阅同一个publisher，新的subscriber在订阅时，publisher可能已经emit一部分数据了。为了保证所有的subsciber都订阅以后publisher再开始执行，这就需要用到Connectable Publishers.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../img/post/2021-02-24/connectable-publisher.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;想要生成Connectable Publishers，只需要让publisher执行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;makeConnectable()&lt;/code&gt;operator即可，如下代码所示。当所有的subscriber都注册好之后，执行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.connect&lt;/code&gt;函数即可让publisher开始执行&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let url = URL(string: &quot;https://example.com/&quot;)!
-let connectable = URLSession.shared
-    .dataTaskPublisher(for: url)
-    .map() { $0.data }
-    .catch() { _ in Just(Data() )}
-    .share()
-    .makeConnectable()
-
-cancellable1 = connectable
-    .sink(receiveCompletion: { print(&quot;Received completion 1: \($0).&quot;) },
-          receiveValue: { print(&quot;Received data 1: \($0.count) bytes.&quot;) })
-
-DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-    self.cancellable2 = connectable
-        .sink(receiveCompletion: { print(&quot;Received completion 2: \($0).&quot;) },
-              receiveValue: { print(&quot;Received data 2: \($0.count) bytes.&quot;) })
-}
-
-DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-    self.connection = connectable.connect()
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;另外有一些内置的Connectable Publisher, 如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Publishers.Multicast&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Timer.TimerPublisher&lt;/code&gt;, 这些必须手动调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.connect()&lt;/code&gt;才可以执行，有时也会造成问题。这时，可以调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.autoconnect()&lt;/code&gt;, 那么subscriber可以立刻执行。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let cancellable = Timer.publish(every: 1, on: .main, in: .default)
-    .autoconnect()
-    .sink() { date in
-        print (&quot;Date now: \(date)&quot;)
-     }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;可以调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.cancel()&lt;/code&gt;取消publisher&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;subscriber控制接收publisher-elements的数量&quot;&gt;Subscriber控制接收Publisher elements的数量&lt;/h1&gt;
-&lt;p&gt;有两种方法&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;request(_:)&lt;/li&gt;
-  &lt;li&gt;当publisher调用subscriber的receive(:)方法时返回一个新的demand&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;常用的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sink&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assign&lt;/code&gt;默认是声明了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unlimited&lt;/code&gt;demand， 一旦声明了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unlimited&lt;/code&gt;就无法再更改了。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;// Publisher: Uses a timer to emit the date once per second.
-let timerPub = Timer.publish(every: 1, on: .main, in: .default)
-    .autoconnect()
-
-// Subscriber: Waits 5 seconds after subscription, then requests a
-// maximum of 3 values.
-class MySubscriber: Subscriber {
-    typealias Input = Date
-    typealias Failure = Never
-    var subscription: Subscription?
-    
-    func receive(subscription: Subscription) {
-        print(&quot;published                             received&quot;)
-        self.subscription = subscription
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            // request请求新的demand, 可以累加
-            subscription.request(.max(3))
-        }
-    }
-    
-    func receive(_ input: Date) -&amp;gt; Subscribers.Demand {
-        print(&quot;\(input)             \(Date())&quot;)
-        // 直接返回新的Demand
-        return Subscribers.Demand.none
-    }
-    
-    func receive(completion: Subscribers.Completion&amp;lt;Never&amp;gt;) {
-        print (&quot;--done--&quot;)
-    }
-}
-
-// Subscribe to timerPub.
-let mySub = MySubscriber()
-print (&quot;Subscribing at \(Date())&quot;)
-timerPub.subscribe(mySub)
-
-// Output
-
-Subscribing at 2019-12-09 18:57:06 +0000
-published                             received
-2019-12-09 18:57:11 +0000             2019-12-09 18:57:11 +0000
-2019-12-09 18:57:12 +0000             2019-12-09 18:57:12 +0000
-2019-12-09 18:57:13 +0000             2019-12-09 18:57:13 +0000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;通过back-pressure反压-operator控制unlimited-demand&quot;&gt;通过Back-Pressure(反压) Operator控制Unlimited Demand&lt;/h2&gt;
-&lt;p&gt;不自定义Subscriber也是可以控制需求的（作用到publisher上）&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;buffer(size:prefetch:whenFull:)： 控制到一个固定数量，当数量满了之后，可以选择报错，丢弃等操作&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;debounce(for:scheduler:options:)： 防抖，当publisher停止publish达到某个时间后才会收到数据&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;throttle(for:scheduler:latest:)： 减流，会有一个最大产生数据的速率，如果收到太多，会只发送最新或最老的数据&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;collect(&lt;em&gt;:)和collect(&lt;/em&gt;:options:)： 将指定数量或时间的所有元素打包成一个数组一次性发送给订阅者&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><category term="Combine" /><summary type="html">Combine基础</summary></entry><entry><title type="html">Communicating Clearly</title><link href="https://pfcstyle.github.io/2021/02/20/communicating-clearly/" rel="alternate" type="text/html" title="Communicating Clearly" /><published>2021-02-20T00:00:00+08:00</published><updated>2021-02-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/02/20/communicating-clearly</id><content type="html" xml:base="https://pfcstyle.github.io/2021/02/20/communicating-clearly/">&lt;h1 id=&quot;example&quot;&gt;Example&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;A po’boy
-    &lt;ol&gt;
-      &lt;li&gt;Let’s have a po’boy for launch!&lt;/li&gt;
-      &lt;li&gt;A po’boy? Is that a kind of sandwich?&lt;/li&gt;
-      &lt;li&gt;Yes, it’s a traditional submarine sandwich.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;key-grammar&quot;&gt;Key grammar&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;It’s a &lt;strong&gt;way of greeting&lt;/strong&gt; someone, commonly used in Japan.&lt;/li&gt;
-  &lt;li&gt;It’s &lt;strong&gt;what&lt;/strong&gt; you need &lt;strong&gt;if&lt;/strong&gt; you want to travel to another country.&lt;/li&gt;
-  &lt;li&gt;It’s &lt;strong&gt;kind of&lt;/strong&gt; a dog, but it’s a little bigger and lives in the wild.&lt;/li&gt;
-  &lt;li&gt;It’s &lt;strong&gt;the way you feel&lt;/strong&gt; when you do something wrong and feel bad about it.&lt;/li&gt;
-  &lt;li&gt;It’s &lt;strong&gt;where&lt;/strong&gt; you can go to play card games and win money.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Frances: Yeah, I’m kind of nervous about my first day.&lt;/li&gt;
-  &lt;li&gt;Do you have any idea what it will be like?&lt;/li&gt;
-  &lt;li&gt;Martin: Well, because you’re an overseas student I’m not sure, but I think you’ll probably start off with a powhiri in the morning, and then youu can go for walk around campus after lunch.&lt;/li&gt;
-  &lt;li&gt;Frances: Oh yeah, my agent told me about that, but &lt;strong&gt;what exactly&lt;/strong&gt; is a powhiri?&lt;/li&gt;
-  &lt;li&gt;Martin: It’s a &lt;strong&gt;kind of&lt;/strong&gt; welcoming ceremony with speeches, dancing, singing, that kind of thing.&lt;/li&gt;
-  &lt;li&gt;It can be a little intimidating at first, but just follow the instructions and I’m sure you’ll be fine.&lt;/li&gt;
-  &lt;li&gt;Frances: And where will that be held?&lt;/li&gt;
-  &lt;li&gt;Martin: Oh they always hold that at the marae.&lt;/li&gt;
-  &lt;li&gt;Frances: The marae? &lt;strong&gt;Is that a kind of church&lt;/strong&gt;?&lt;/li&gt;
-  &lt;li&gt;Martin: More of a town hall, I guess.&lt;/li&gt;
-  &lt;li&gt;It’s where people go to perform ceremonies, have meetings, or even do some crafts or community activities.&lt;/li&gt;
-  &lt;li&gt;Frances: Well, I’m looking forward to checking that out.&lt;/li&gt;
-  &lt;li&gt;Martin: But, I would just say be careful about how you behave there.&lt;/li&gt;
-  &lt;li&gt;In New Zealand we have this idea of mana- it’s kind of like a source of authority.&lt;/li&gt;
-  &lt;li&gt;And that’s really important on the marae.&lt;/li&gt;
-  &lt;li&gt;Frances: So &lt;strong&gt;it’s like&lt;/strong&gt; a law?&lt;/li&gt;
-  &lt;li&gt;Martin: Hmm, &lt;strong&gt;not really&lt;/strong&gt;, it’s more spiritual.&lt;/li&gt;
-  &lt;li&gt;It’s &lt;strong&gt;a way of showing&lt;/strong&gt; respect to a special person or place&lt;/li&gt;
-  &lt;li&gt;Frances: So will I have to do anything special?&lt;/li&gt;
-  &lt;li&gt;Martin: Oh, no, for the powhiri it’s just basic courtesy stuff really.&lt;/li&gt;
-  &lt;li&gt;Turn your phone off, stay quiet while they’re giving the speeches, you know, don’t wander off, that kind of thing.&lt;/li&gt;
-  &lt;li&gt;Frances: Well, my agent told me we’d have guides, so I guess I’ll just do what they say.&lt;/li&gt;
-  &lt;li&gt;Martin: Yeah, don’t worry, I’m sure you’ll have a great time!&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Example</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><summary type="html">布局基础规则</summary></entry></feed>
