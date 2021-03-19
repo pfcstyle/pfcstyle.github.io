@@ -2,13 +2,23 @@
 layout:		post
 title:		"Evaluating business proposals"
 description: "Evaluate a simple proposal for a new business"
-date:		2021-03-11
+date:		2021-02-01
 author:		"Yawei"
 categories: "English"
 keywords:
     - English
     - Communicating
 ---
+
+# Key vocabulary
+
+1. Be prepared for a lot of **red tape**, as building regulations are very strict around here.
+2. There aren't enough young people in this town to support your business-try to expand your **customer base**.
+3. That **price point** seems little low for a luxury service.
+4. I'm not convinced there's a **gap in the market**, since not many people are interested in comic books here.
+5. Your equipment will need insurance and regular maintenance-those are two major **hidden costs**, that you haven't accounted for here.
+6. Because you are mainly delivering within the inner city, I don't anticipate too many **logistical challenges**
+
 # Proposals
 A. Organicare will market high-end skincare and cosmetics to young women aged 18-25. We will ensure our products use 100% natural ingredients sourced from countries around the world. The price point will be quite high-around $90 for a face wash-but our customers will be drawn to our luxury image.
 
