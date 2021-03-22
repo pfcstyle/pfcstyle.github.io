@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-22T16:44:11+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Changing the topic</title><link href="https://pfcstyle.github.io/2021/03/19/changing-the-topic/" rel="alternate" type="text/html" title="Changing the topic" /><published>2021-03-19T00:00:00+08:00</published><updated>2021-03-19T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/19/changing-the-topic</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/19/changing-the-topic/">&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-22T17:13:02+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Changing the topic</title><link href="https://pfcstyle.github.io/2021/03/19/changing-the-topic/" rel="alternate" type="text/html" title="Changing the topic" /><published>2021-03-19T00:00:00+08:00</published><updated>2021-03-19T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/19/changing-the-topic</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/19/changing-the-topic/">&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
 &lt;ol&gt;
   &lt;li&gt;Jonathan: It was a nice day today, wasn’t it?&lt;/li&gt;
   &lt;li&gt;Linda: Yes, it really was. I love these sunny spring days.&lt;/li&gt;
@@ -767,7 +767,8 @@ had better, it’s a very formal phrase and its mood is very strong. If your bos
   &lt;li&gt;Maria: Yep. Anyway, what about you, Lucy?&lt;/li&gt;
   &lt;li&gt;Were you saying that you went on a student exchange too?&lt;/li&gt;
   &lt;li&gt;Lucy: Well, it wasn’t an exchange as such, but yes, when I was….&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">The order of telling a personal anecdote</summary></entry><entry><title type="html">Re-Add storyboard</title><link href="https://pfcstyle.github.io/2021/03/08/readd-storyboard/" rel="alternate" type="text/html" title="Re-Add storyboard" /><published>2021-03-08T00:00:00+08:00</published><updated>2021-03-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/08/readd-storyboard</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/08/readd-storyboard/">&lt;ol&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">The order of telling a personal anecdote</summary></entry><entry><title type="html">Re-Add storyboard</title><link href="https://pfcstyle.github.io/2021/03/08/iOS-readd-storyboard-xib/" rel="alternate" type="text/html" title="Re-Add storyboard" /><published>2021-03-08T00:00:00+08:00</published><updated>2021-03-08T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/08/iOS-readd-storyboard-xib</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/08/iOS-readd-storyboard-xib/">&lt;h1 id=&quot;storyboard&quot;&gt;Storyboard&lt;/h1&gt;
+&lt;ol&gt;
   &lt;li&gt;AppDelegate可以什么逻辑都没有&lt;/li&gt;
   &lt;li&gt;SceneDelegate可以什么相关逻辑都没有&lt;/li&gt;
   &lt;li&gt;Info.plist
@@ -775,4 +776,11 @@ had better, it’s a very formal phrase and its mood is very strong. If your bos
   &lt;li&gt;Storyboard设置
 &lt;img src=&quot;../img/post/2021-03-08/viewcontroller.jpg&quot; alt=&quot;viewcontroller&quot; /&gt;
 &lt;img src=&quot;../img/post/2021-03-08/entrypoint.jpg&quot; alt=&quot;entrypoint&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><summary type="html">AppDelegate可以什么逻辑都没有 SceneDelegate可以什么相关逻辑都没有 Info.plist Storyboard设置</summary></entry></feed>
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;xib&quot;&gt;Xib&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Xib-&amp;gt;File’s Owner-&amp;gt;右侧identify inspect-&amp;gt;Class选项选择自己的ViewController&lt;/li&gt;
+  &lt;li&gt;Xib-&amp;gt;左侧根View-&amp;gt;右侧Connection inspect-&amp;gt;Referencing Outlets-&amp;gt;连线到File’s Owner&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="Swift" /><summary type="html">Storyboard AppDelegate可以什么逻辑都没有 SceneDelegate可以什么相关逻辑都没有 Info.plist Storyboard设置</summary></entry></feed>

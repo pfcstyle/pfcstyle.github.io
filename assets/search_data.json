@@ -485,8 +485,8 @@
     {
       "title"    : "Re-Add storyboard",
       "category" : "iOS",
-      "content": " AppDelegate可以什么逻辑都没有 SceneDelegate可以什么相关逻辑都没有 Info.plist Storyboard设置 ",
-      "url"      : "https://pfcstyle.github.io/2021/03/08/readd-storyboard/",
+      "content": "Storyboard AppDelegate可以什么逻辑都没有 SceneDelegate可以什么相关逻辑都没有 Info.plist Storyboard设置  Xib  Xib-&gt;File’s Owner-&gt;右侧identify inspect-&gt;Class选项选择自己的ViewController Xib-&gt;左侧根View-&gt;右侧Connection inspect-&gt;Referencing Outlets-&gt;连线到File’s Owner ",
+      "url"      : "https://pfcstyle.github.io/2021/03/08/iOS-readd-storyboard-xib/",
       "keywords" : "[&quot;iOS&quot;, &quot;Swift&quot;, &quot;Storyboard&quot;]"
     } ,
   
