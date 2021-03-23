@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-23T15:26:18+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">kubernetes 问题汇总</title><link href="https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/" rel="alternate" type="text/html" title="kubernetes 问题汇总" /><published>2021-03-23T00:00:00+08:00</published><updated>2021-03-23T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/">&lt;h1 id=&quot;突然所有服务无法访问&quot;&gt;突然所有服务无法访问&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-23T18:52:29+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">kubernetes 问题汇总</title><link href="https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/" rel="alternate" type="text/html" title="kubernetes 问题汇总" /><published>2021-03-23T00:00:00+08:00</published><updated>2021-03-23T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/">&lt;h1 id=&quot;突然所有服务无法访问&quot;&gt;突然所有服务无法访问&lt;/h1&gt;
 &lt;p&gt;因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# ubuntu18&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;netplan apply
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">突然所有服务无法访问 因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。 # ubuntu18 sudo netplan apply</summary></entry><entry><title type="html">-[** copyWithZone:] unrecognized selector sent to instance</title><link href="https://pfcstyle.github.io/2021/03/20/iOS-swift-copy/" rel="alternate" type="text/html" title="-[** copyWithZone:] unrecognized selector sent to instance" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/20/iOS-swift-copy</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/20/iOS-swift-copy/">&lt;p&gt;很多OC的class, 内部属性声明使用的@property (nonatomic, &lt;strong&gt;copy&lt;/strong&gt;),导致在赋值使用时，自动调用copyWithZone:方法，如果这时传入的对象没有实现这个方法，就会报找不到的错误。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">突然所有服务无法访问 因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。 # ubuntu18 sudo netplan apply</summary></entry><entry><title type="html">-[** copyWithZone:] unrecognized selector sent to instance</title><link href="https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy/" rel="alternate" type="text/html" title="-[** copyWithZone:] unrecognized selector sent to instance" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy/">&lt;p&gt;很多OC的class, 内部属性声明使用的@property (nonatomic, &lt;strong&gt;copy&lt;/strong&gt;),导致在赋值使用时，自动调用copyWithZone:方法，如果这时传入的对象没有实现这个方法，就会报找不到的错误。&lt;/p&gt;
 
 &lt;h1 id=&quot;解决方法&quot;&gt;解决方法&lt;/h1&gt;
 
@@ -63,7 +63,46 @@
   &lt;li&gt;You really shouldn’t say that in public&lt;/li&gt;
   &lt;li&gt;You made me feel so stupid&lt;/li&gt;
   &lt;li&gt;You have MADE ME LOSE FACE with everyone&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key phrases for apologize</summary></entry><entry><title type="html">Changing the topic</title><link href="https://pfcstyle.github.io/2021/03/19/changing-the-topic/" rel="alternate" type="text/html" title="Changing the topic" /><published>2021-03-19T00:00:00+08:00</published><updated>2021-03-19T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/19/changing-the-topic</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/19/changing-the-topic/">&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key phrases for apologize</summary></entry><entry><title type="html">WKWebview set user agent and JS handler</title><link href="https://pfcstyle.github.io/2021/03/20/iOS-webview-useragent/" rel="alternate" type="text/html" title="WKWebview set user agent and JS handler" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/20/iOS-webview-useragent</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/20/iOS-webview-useragent/">&lt;blockquote&gt;
+  &lt;p&gt;注意，下面的代码都不要在webview init中写，不会生效，需要在view did load之后才生效&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;直接上代码&lt;/p&gt;
+
+&lt;h1 id=&quot;设置js-handler&quot;&gt;设置JS Handler&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Swift&quot;&gt;// 防止循环应用
+class LeakAvoider: NSObject {
+    weak var delegate: WKScriptMessageHandler?
+
+    init(delegate: WKScriptMessageHandler) {
+        super.init()
+        self.delegate = delegate
+    }
+}
+
+extension LeakAvoider: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        delegate?.userContentController(userContentController, didReceive: message)
+    }
+}
+
+// 我这里继承的WKWebview, delegate的实现也可以放view controller
+extension SparkPageWebView: WKScriptMessageHandler{
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        // message.body.type
+    }
+}
+
+// 最后为webview设置代理, 注意要在view did load之后设置才会生效
+self.configuration.userContentController.add(LeakAvoider(delegate: self), name: &quot;xxx&quot;)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&quot;设置user-agent&quot;&gt;设置user agent&lt;/h1&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;customUserAgent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Custom_User_Agent&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">注意，下面的代码都不要在webview init中写，不会生效，需要在view did load之后才生效</summary></entry><entry><title type="html">Changing the topic</title><link href="https://pfcstyle.github.io/2021/03/19/changing-the-topic/" rel="alternate" type="text/html" title="Changing the topic" /><published>2021-03-19T00:00:00+08:00</published><updated>2021-03-19T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/19/changing-the-topic</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/19/changing-the-topic/">&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
 &lt;ol&gt;
   &lt;li&gt;Jonathan: It was a nice day today, wasn’t it?&lt;/li&gt;
   &lt;li&gt;Linda: Yes, it really was. I love these sunny spring days.&lt;/li&gt;
@@ -704,47 +743,4 @@
         &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="SwfitUI" /><summary type="html">```swift struct ArticleView: View { var iconName: String var title: String var authorName: String var description: String</summary></entry><entry><title type="html">Giving a speech in the workspace</title><link href="https://pfcstyle.github.io/2021/03/12/giving-a-speech-in-the-workspace/" rel="alternate" type="text/html" title="Giving a speech in the workspace" /><published>2021-03-12T00:00:00+08:00</published><updated>2021-03-12T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/12/giving-a-speech-in-the-workspace</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/12/giving-a-speech-in-the-workspace/">&lt;h1 id=&quot;key-vocabulary&quot;&gt;Key Vocabulary&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;show contract&lt;/strong&gt;: instead, on the contrary, at the same time, nevertheless&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Add to an idea&lt;/strong&gt;: indeed, furthermore, in addition, moreover&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Show effects and results&lt;/strong&gt;: therefore, consequently, thus&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Restate your ideas briefly&lt;/strong&gt;: in summary, essentially, in conclusion&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;sample-speech&quot;&gt;Sample speech&lt;/h1&gt;
-&lt;p&gt;The future of America is with its people, the fighters who are willing to sacrifice to make their dreams come
-true. True optimists are not those who deny the harsh difficulties we face. Optimists are those who recognize
-challenges and work hard to overcome them. I seek to create an America where the hopeful will not be disappointed.&lt;/p&gt;
-
-&lt;p&gt;And the future is with the children. We must invest in our children by giving them the best education. We
-need to establish a safe environment for our children. They are the future leaders, doctors, teachers, and
-parents. We can’t deny our children the hope in the future they deserve. We must listen to their dreams and
-give them tools and resources to see those dreams come to fruition. I want to create an America for the
-children.&lt;/p&gt;
-
-&lt;p&gt;We must not neglect the elderly. We should take care of those who have taken care of us. I believe in a future
-that is welcoming to all generations.
-A vote for me is vote for optimism; it is vote for the future. promise to strive for that better future that
-includes all of us. As we learn from the past, and dream of the future, I believe that we can build America as it
-was always meant to be.&lt;/p&gt;
-
-&lt;h1 id=&quot;sample-speechwith-discourse-markers-added&quot;&gt;Sample speech(with discourse markers added)&lt;/h1&gt;
-&lt;p&gt;The future of America is with its people. &lt;strong&gt;Moreover&lt;/strong&gt;, it is with the hopeful, those who believe in the immense
-possibilities of our nation. &lt;strong&gt;In addition&lt;/strong&gt;, it is with the fighters, the ones who are willing to sacrifice to bring forth the dream that they have for the future. &lt;strong&gt;Indeed&lt;/strong&gt;, the true optimists are not those who deny the harsh difficulties we face at the moment: &lt;strong&gt;on the contrary&lt;/strong&gt;, they are the people who recognize the daunting challenges before them, and nevertheless press on to overcome them. &lt;strong&gt;In summary&lt;/strong&gt;, they are the core of what America can be, what America should be, what America will be. &lt;strong&gt;Therefore&lt;/strong&gt;, I seek to create an America where the hopeful will not be disappointed.&lt;/p&gt;
-
-&lt;p&gt;The future of America is with its children. &lt;strong&gt;Consequently&lt;/strong&gt;, we must invest in our children by giving them the
-best education possible. &lt;strong&gt;Furthermore&lt;/strong&gt;, we must invest in our society in order to establish a safe and secure
-environment where the leaders, doctors, teachers, and parents of our future can be nurtured. We must not
-deny our children the hope in the future that they deserve; &lt;strong&gt;instead&lt;/strong&gt;, we must listen to the dreams of their
-youth, and give them the tools and resources to see those dreams come to fruition. &lt;strong&gt;Thus&lt;/strong&gt;, I seek to create an
-America that belongs to the children.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;At the same time&lt;/strong&gt;, in our effort to honor the youth, we must not neglect the elderly. &lt;strong&gt;Indeed&lt;/strong&gt;, we cannot fail to
-take care of those who have taken care of us. &lt;strong&gt;Essentially&lt;/strong&gt;, I seek to create a future that is welcoming to all
-generations.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;In conclusion&lt;/strong&gt;, a vote for me is a vote for optimism, a vote for hope, it is a vote for the future. I promise to
-strive for that better future that includes the children, the youth, and the elderly. As we learn from the past,
-and dream of the future, I believe that we can build America as it was always meant to be.&lt;/p&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key Vocabulary</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="SwfitUI" /><summary type="html">```swift struct ArticleView: View { var iconName: String var title: String var authorName: String var description: String</summary></entry></feed>
