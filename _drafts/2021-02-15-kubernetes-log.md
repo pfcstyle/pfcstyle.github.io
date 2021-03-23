@@ -52,3 +52,133 @@ k8s日志分为两块儿：
 阿里开源日志采集工具，支持动态配置，对容器更加友好。本质上是对静态日志采集工具的包装，目前支持[Fluentd Plugin](https://github.com/AliyunContainerService/log-pilot/blob/master/docs/fluentd/docs.md)和[Filebeat Plugin](https://github.com/AliyunContainerService/log-pilot/blob/master/docs/filebeat/docs.md)
 * 智能的容器日志采集工具
 * 自动发现
+
+## Elasticsearch
+
+```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-api
+  namespace: kube-system
+  labels:
+    name: elasticsearch
+spec:
+  selector:
+    app: es
+  ports:
+  - name: transport
+    port: 9200 #外部端口，http
+    protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-discovery
+  namespace: kube-system
+  labels:
+    name: elasticsearch
+spec:
+  selector:
+    app: es
+  ports:
+  - name: transport
+    port: 9300 #内部端口，tcp
+    protocol: TCP
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: elasticsearch
+  namespace: kube-system
+  labels:
+    kubernetes.io/cluster-service: "true"
+spec:
+# 高可用，至少两个副本，一般需要有三个
+  replicas: 3
+  serviceName: "elasticsearch-service"
+  selector:
+    matchLabels:
+      app: es
+  template:
+    metadata:
+      labels:
+        app: es
+    spec:
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master # 允许调度在master节点
+      serviceAccountName: dashboard-admin
+      initContainers:
+      - name: init-sysctl
+        image: busybox:1.27
+        command:
+        - sysctl
+        - -w
+        - vm.max_map_count=262144
+        securityContext:
+          privileged: true
+      containers:
+      - name: elasticsearch
+        image: registry.cn-hangzhou.aliyuncs.com/imooc/elasticsearch:5.5.1
+        ports:
+        - containerPort: 9200
+          protocol: TCP
+        - containerPort: 9300
+          protocol: TCP
+        securityContext:
+          capabilities:
+            add:
+              - IPC_LOCK
+              - SYS_RESOURCE
+        resources:
+          limits:
+            memory: 4000Mi
+          requests:
+            cpu: 100m
+            memory: 2000Mi
+        env:
+          - name: "http.host"
+            value: "0.0.0.0"
+          - name: "network.host"
+            value: "_eth0_"
+          - name: "cluster.name"
+            value: "docker-cluster"
+          - name: "bootstrap.memory_lock"
+            value: "false"
+          - name: "discovery.zen.ping.unicast.hosts"
+            value: "elasticsearch-discovery"
+          - name: "discovery.zen.ping.unicast.hosts.resolve_timeout"
+            value: "10s"
+          - name: "discovery.zen.ping_timeout"
+            value: "6s"
+          - name: "discovery.zen.minimum_master_nodes"
+            value: "2"
+          - name: "discovery.zen.fd.ping_interval"
+            value: "2s"
+          - name: "discovery.zen.no_master_block"
+            value: "write"
+          - name: "gateway.expected_nodes"
+            value: "2"
+          - name: "gateway.expected_master_nodes"
+            value: "1"
+          - name: "transport.tcp.connect_timeout"
+            value: "60s"
+          - name: "ES_JAVA_OPTS"
+            value: "-Xms2g -Xmx2g"
+        livenessProbe:
+          tcpSocket:
+            port: transport
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - name: es-data
+          mountPath: /data
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: es-data
+        hostPath:
+          path: /es-data
+
+```
