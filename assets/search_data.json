@@ -597,6 +597,14 @@
     } ,
   
     {
+      "title"    : "kubernetes 问题汇总",
+      "category" : "kubernetes",
+      "content": "突然所有服务无法访问 因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。 # ubuntu18 sudo netplan apply ",
+      "url"      : "https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/",
+      "keywords" : "[&quot;k8s&quot;, &quot;kubernetes&quot;, &quot;坑&quot;]"
+    } ,
+  
+    {
       "title"    : "Badminton",
       "category" : "Hobbies",
       "content": "视频  李在福《Play To Win》完整版   李在福《追球》全集 图文  超全羽毛球技术图解 公众号  和蔡赟聊羽毛球 微信号：caiyunliaoyumaoqiu   羽毛球 微信号：yu-mao-qiu  ",
