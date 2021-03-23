@@ -37,7 +37,7 @@ keywords:
 * Thank you for your forgiveness
 
 
-# For present angry
+# For presenting angry
 * You really EMBARRASED ME in the meeting.
 * The made me so irrated
 * I don't think you TOOK me into consideration at all.
