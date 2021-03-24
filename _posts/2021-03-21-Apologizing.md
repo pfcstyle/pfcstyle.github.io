@@ -12,7 +12,7 @@ keywords:
 
 # Key phrases for apologize
 
-* I'm asfully sorry for the terrible.
+* I'm awfully sorry for the terrible.
 * I do regret making irated 
 * I terribly sorry for ....
 * I shouldn't have treated you like this.
