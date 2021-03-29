@@ -1,4 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-29T17:48:59+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">DSP-FFT（快速傅里叶变换）使用解释</title><link href="https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret/" rel="alternate" type="text/html" title="DSP-FFT（快速傅里叶变换）使用解释" /><published>2021-03-24T00:00:00+08:00</published><updated>2021-03-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-29T19:05:44+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">DSP-傅里叶变换-Z变换-拉普拉斯变换-小波变换-都干啥的</title><link href="https://pfcstyle.github.io/2021/03/29/DSP-FFT-ZT-LPLS-Small/" rel="alternate" type="text/html" title="DSP-傅里叶变换-Z变换-拉普拉斯变换-小波变换-都干啥的" /><published>2021-03-29T00:00:00+08:00</published><updated>2021-03-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/29/DSP-FFT-ZT-LPLS-Small</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/29/DSP-FFT-ZT-LPLS-Small/">&lt;p&gt;傅里叶变换是为了将信号从时域分解为频域&lt;/p&gt;
+
+&lt;p&gt;Z变换是离散信号的傅里叶变换，为计算机处理信号而生&lt;/p&gt;
+
+&lt;p&gt;拉普拉斯变换是因为傅里叶变换无法解决某些特殊波形，比如爆炸式增长的曲线（因为傅里叶变换是以正弦波拟合为基础，都是趴着的），才出现的。拉普拉斯基于傅里叶变换乘以一个衰减因子，让波形变为了可以傅里叶可以处理的波形。&lt;/p&gt;
+
+&lt;p&gt;小波变换，傅里叶变换因为无法得知某一个频率是什么时候开始产生的，即在频域中没有时间信息。小波变换让傅里叶变换后的频域具备了时间信息，可以得知频率是什么时候添加进去的。&lt;/p&gt;</content><author><name>Yawei</name></author><category term="DSP" /><summary type="html">傅里叶变换是为了将信号从时域分解为频域</summary></entry><entry><title type="html">DSP-FFT（快速傅里叶变换）使用解释</title><link href="https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret/" rel="alternate" type="text/html" title="DSP-FFT（快速傅里叶变换）使用解释" /><published>2021-03-24T00:00:00+08:00</published><updated>2021-03-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret/">&lt;blockquote&gt;
   &lt;p&gt;各种算法真是太多了，我只求怎么用，真的一点也不想知道其内部原理。很多文件把内部原理和理解说的很通透，但最后我却仍然不知道怎么用！很简单，告诉我这个函数的各个参数是什么，返回值都是啥意思就ok了，怎么就这么难？&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -321,50 +327,4 @@ self.configuration.userContentController.add(LeakAvoider(delegate: self), name: 
   &lt;li&gt;There’s much more to worry about than her thoughts on motherhood.&lt;/li&gt;
   &lt;li&gt;But, uh, coming back to your point-i do think if that is what people want to know, then it’s part of a cycle where we’re told that’s what’s important about women, so that’s what we expect to hear about them.&lt;/li&gt;
   &lt;li&gt;There’s no reason that should be the case, though, and the media could play a role in changing things.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key grammar</summary></entry><entry><title type="html">Practicing for a job interview</title><link href="https://pfcstyle.github.io/2021/03/15/practicing-for-a-job-interview/" rel="alternate" type="text/html" title="Practicing for a job interview" /><published>2021-03-15T00:00:00+08:00</published><updated>2021-03-15T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/15/practicing-for-a-job-interview</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/15/practicing-for-a-job-interview/">&lt;h1 id=&quot;key-grammar&quot;&gt;Key grammar&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;I’d like to know if there is a canteen on the premises?&lt;/li&gt;
-  &lt;li&gt;Could you tell me if you provide a car?&lt;/li&gt;
-  &lt;li&gt;Would you mind telling me where you studied?&lt;/li&gt;
-  &lt;li&gt;May I ask what your rules for sick leave are?&lt;/li&gt;
-  &lt;li&gt;Do you mind me asking what the salary is?&lt;/li&gt;
-  &lt;li&gt;I was wondering if you’d mind telling me the start date?&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;B: Example questions:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;May I ask what my main duties will be?&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Mostly answering the phone and making coffee.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Would you mind telling me if overtime is paid?&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Yes, overtime is paid.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;May I ask when you will be able to confirm whether or not I’ve got the job?&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Probably the beginning of August.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Could you tell me if I will receive training?&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Yes, there’s a full training program.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Could you tell me what the salary is?&lt;/li&gt;
-  &lt;li&gt;50,000 per month.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;general-type&quot;&gt;General type&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;salary&lt;/li&gt;
-  &lt;li&gt;dress code&lt;/li&gt;
-  &lt;li&gt;colleagues&lt;/li&gt;
-  &lt;li&gt;training&lt;/li&gt;
-  &lt;li&gt;start date&lt;/li&gt;
-  &lt;li&gt;pension&lt;/li&gt;
-  &lt;li&gt;company car&lt;/li&gt;
-  &lt;li&gt;promotion&lt;/li&gt;
-  &lt;li&gt;responsibilities&lt;/li&gt;
-  &lt;li&gt;paid overtime&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key grammar</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key grammar</summary></entry></feed>
