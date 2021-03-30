@@ -90,6 +90,8 @@
   
   
   
+  
+  
 
   
     {
@@ -330,6 +332,22 @@
       "content": "常用方法 Class 反射创建 通过字符串创建类：Class // 方式1 NSClassFromString(@NSObject); // 方式2 objc_getClass(NSObject); SEL 反射创建 通过字符串创建方法 selector // 方式1 @selector(init); // 方式2 sel_registerName(init); // 方式3 NSSelectorFromString(@init); 方法替换/交换 方法替换：class_replaceMethod 方法交换：method_exchangeImplementations // 方法替换 - (void)methodReplace {  Method methodA = class_getInstanceMethod(self.class, @selector(myMethodA));  IMP impA = method_getImplementation(methodA);  class_replaceMethod(self.class, @selector(myMethodC), impA, method_getTypeEncoding(methodA));  // print: myMethodA  [self myMethodC]; } // 方法交换 - (void)methodExchange {  Method methodA = class_getInstanceMethod(self.class, @selector(myMethodA));  Method methodB = class_getInstanceMethod(self.class, @selector(myMethodB));  method_exchangeImplementations(methodA, methodB);  // print: myMethodB  [self myMethodA];  // print: myMethodA  [self myMethodB]; } - (void)myMethodA {  NSLog(@myMethodA); } - (void)myMethodB {  NSLog(@myMethodB); } - (void)myMethodC {  NSLog(@myMethodC); } 新增类 通过字符串动态新增一个类  首先创建新类：objc_allocateClassPair 然后注册新创建的类：objc_registerClassPair 这里有个小知识点，为什么类创建的方法名是objc_allocateClassPair，而不是objc_allocateClass呢？这是因为它同时创建了一个类(class)和元类(metaclass)。关于元类可以看这篇文章：What is a meta-class in Objective-C? - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  [self addNewClassPair];  Class MyObject = NSClassFromString(@MyObject);  NSObject *myObj = [[MyObject alloc] init];  [myObj performSelector:@selector(sayHello)]; return YES; } - (void)addNewClassPair {  Class myCls = objc_allocateClassPair([NSObject class], MyObject, 0);  objc_registerClassPair(myCls);  [self addNewMethodWithClass:myCls]; } 新增方法 新增方法：class_addMethod 这里也有个小知识点，就是使用特定字符串描述方法返回值和参数，例如：v@:。其具体映射关系请移步：Type Encodings void sayHello(id self, SEL _cmd) {  NSLog(@%@ %s, self, __func__); } - (void)addNewMethodWithClass:(Class)targetClass {  class_addMethod(targetClass, @selector(sayHello), (IMP)sayHello, v@:); } 消息转发 当给对象发送消息时，如果对象没有找到对应的方法实现，那么就会进入正常的消息转发流程。其主要流程如下： // 1.运行时动态添加方法 + (BOOL)resolveInstanceMethod:(SEL)sel // 2.快速转发 - (id)forwardingTargetForSelector:(SEL)aSelector // 3.构建方法签名 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector // 4.消息转发 - (void)forwardInvocation:(NSInvocation *)anInvocation 其中最后的forwardInvocation:会传递一个NSInvocation对象（Ps：NSInvocation 可以理解为是消息发送objc_msgSend(void id self, SEL op, ... )的对象）。NSInvocation 包含了这个方法调用的所有信息：selector、参数类型、参数值和返回值类型。此外，你还可以去更改参数值和返回值。 除了上面的正常消息转发，我们还可以借助_objc_msgForward方法让消息强制转发。 Method methodA = class_getInstanceMethod(self.class, @selector(myMethodA)); IMP impA = method_getImplementation(methodA); IMP msgForwardIMP = _objc_msgForward; // 替换 myMethodA 的实现后，每次调用 myMethodA 都会进入消息转发 class_replaceMethod(self.class, @selector(myMethodC), msgForwardIMP, method_getTypeEncoding(methodA)); Method 调用方式  常规调用 反射调用 objc_msgSend C 函数调用 NSInvocation 调用 @interface People : NSObject - (void)helloWorld; @end // 常规调用 People *people = [[People alloc] init]; [people helloWorld]; // 反射调用  Class cls = NSClassFromString(@People); id obj = [[cls alloc] init]; [obj performSelector:NSSelectorFromString(@helloWorld)]; // objc_msgSend ((void(*)(id, SEL))objc_msgSend)(people, sel_registerName(helloWorld)); // C 函数调用 Method initMethod = class_getInstanceMethod([People class], @selector(helloWorld)); IMP imp = method_getImplementation(initMethod); ((void (*) (id, SEL))imp)(people, @selector(helloWorld)); // NSInvocation 调用 NSMethodSignature *sig = [[People class] instanceMethodSignatureForSelector:sel_registerName(helloWorld)]; NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig]; invocation.target = people; invocation.selector = sel_registerName(helloWorld); [invocation invoke]; 第五种 NSInvocation 调用 是热修复调用任意OC方法的核心基础。通过 NSInvocation 不但可以自定义函数的参数值和返回值，而且还可以自定义方法：selector 和消息接收对象：target。因此，我们可以通过字符串的方式构建任意OC方法调用。 ",
       "url"      : "https://pfcstyle.github.io/2017/01/07/iOS-oc-runtime-2/",
       "keywords" : "[&quot;iOS&quot;, &quot;OC&quot;, &quot;Runtime&quot;]"
+    } ,
+  
+    {
+      "title"    : "Brand loyalty and recognition",
+      "category" : "English",
+      "content": "Examples Example 1: When asked to name famous car companies, a consumer can think of 4-5 companies immediately. Example 2: A business traveler collects air miles from Delta Airlines and finds that the company gives her perks such as upgrades due to her status. She actively looks for flights on Delta and rarely flies with a competitor. Example 5: A customer has found Apple products to be reliable based on multiple purchases. All these products have lasted an unusually long time despite rough treatment. This customer now won’t buy other brands of electronics. ",
+      "url"      : "https://pfcstyle.github.io/2019/07/30/Brand-loyalty-and-recognition/",
+      "keywords" : "[&quot;English&quot;, &quot;Communicating&quot;]"
+    } ,
+  
+    {
+      "title"    : "Cooperation",
+      "category" : "English",
+      "content": "Key gramma  Compensate To give a customer something, usually money, because a product was damaged or broken.   manufacturer A person or company that makes things in large amounts.   notify To fomally tell somebody about something.   warranty //保修，保证书 A written promise that the company will repair or replace a broken product within a specified time period.   I think we can all agree that…   Maybe Mike can share his thoughts?   I know you’ve all been working on the issue with the XK5 phone.   After reviewing the reports submitted by each department, we’ve decide to go ahead with the recall.   Please let me know what you and your department will be doing to manage this. Dialogue  Anna: As mentioned in my email, we’ve received some customer complaints recently about our XK5 phones overheating. We’ve already issued refunds for those cases, but I want to see if there’s a problem with the phones themselves. Dillon: Sure, we can do a few tests on the XK5. But if there really is something wrong, we should probably recall the phones. Lucas: Isn’t it a bit too early to have that conversation? If I may, we need to remember that our reputation is at stake here. If we start recalling phones, that could have a negative impact on all of our other products. We’re already struggling to meet the sales target this quarter. I don’t think we should recall anything unless we absolutely have to. Dillon: Sure. I think we can all agree that we should avoid that, but if there really is something wrong with our phones it’d be better to do something about it now than to ignore it. Lucas: What’s your opinion, Anna? It’s your team that’s been dealing directly with the customers so far after all. Anna: Well, I think we definitely need to run some tests as soon as possible. Then my staff can at least say we’re looking into the problem. And if Dillon’s team could get us some questions to ask when customers complain, perhaps we can help resolve this issue. agree that it’s too early to consider a recall, but Lucas, I think it would be a good idea to let your team know about this so they can make other recommendations to customers for now. Lucas: Sure. Dillon: And we’ll get you a list of questions by the end of the day Anna: Okay, great! Thanks! Let’s have another meeting on Friday to review the situation and figure out next steps, shall we? Lucas&amp; Dillion:sure. ",
+      "url"      : "https://pfcstyle.github.io/2019/07/31/Cooperation/",
+      "keywords" : "[&quot;English&quot;, &quot;Communicating&quot;]"
     } ,
   
     {
@@ -613,14 +631,6 @@
     } ,
   
     {
-      "title"    : "Apologizing",
-      "category" : "English",
-      "content": "Key gramma No spliting No smoking Shouldn’t throw litter about Shouldn’t split in public places or throw litter about Cover mouth when you want to sneeze With people I have dinner with. It will make me feel You should consider your partner’s feelings. When someone wants to enter you room, he has to knock at the door. What(not how) do you think of her behaviour. If I were you, I wouldn’t have done that. ",
-      "url"      : "https://pfcstyle.github.io/2021/03/20/manner/",
-      "keywords" : "[&quot;English&quot;, &quot;Communicating&quot;]"
-    } ,
-  
-    {
       "title"    : "WKWebview set user agent and JS handler",
       "category" : "iOS",
       "content": " 注意，下面的代码都不要在webview init中写，不会生效，需要在view did load之后才生效 直接上代码 设置JS Handler // 防止循环应用 class LeakAvoider: NSObject {  weak var delegate: WKScriptMessageHandler? init(delegate: WKScriptMessageHandler) {  super.init()  self.delegate = delegate  } } extension LeakAvoider: WKScriptMessageHandler {  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {  delegate?.userContentController(userContentController, didReceive: message)  } } // 我这里继承的WKWebview, delegate的实现也可以放view controller extension SparkPageWebView: WKScriptMessageHandler{  public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {  // message.body.type  } } // 最后为webview设置代理, 注意要在view did load之后设置才会生效 self.configuration.userContentController.add(LeakAvoider(delegate: self), name: xxx) 设置user agent customUserAgent = Custom_User_Agent ",
@@ -634,6 +644,14 @@
       "content": "突然所有服务无法访问 因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。 # ubuntu18 sudo netplan apply ",
       "url"      : "https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/",
       "keywords" : "[&quot;k8s&quot;, &quot;kubernetes&quot;, &quot;坑&quot;]"
+    } ,
+  
+    {
+      "title"    : "Apologizing",
+      "category" : "English",
+      "content": "Key gramma No spliting No smoking Shouldn’t throw litter about Shouldn’t split in public places or throw litter about Cover mouth when you want to sneeze With people I have dinner with. It will make me feel You should consider your partner’s feelings. When someone wants to enter you room, he has to knock at the door. What(not how) do you think of her behaviour. If I were you, I wouldn’t have done that. ",
+      "url"      : "https://pfcstyle.github.io/2021/03/23/manner/",
+      "keywords" : "[&quot;English&quot;, &quot;Communicating&quot;]"
     } ,
   
     {
