@@ -69,7 +69,7 @@ spec:
     app: es
   ports:
   - name: transport
-    port: 9200 #外部端口，http
+    port: 9200
     protocol: TCP
 ---
 apiVersion: v1
@@ -84,10 +84,10 @@ spec:
     app: es
   ports:
   - name: transport
-    port: 9300 #内部端口，tcp
+    port: 9300
     protocol: TCP
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch
@@ -95,7 +95,6 @@ metadata:
   labels:
     kubernetes.io/cluster-service: "true"
 spec:
-# 高可用，至少两个副本，一般需要有三个
   replicas: 3
   serviceName: "elasticsearch-service"
   selector:
@@ -108,8 +107,8 @@ spec:
     spec:
       tolerations:
       - effect: NoSchedule
-        key: node-role.kubernetes.io/master # 允许调度在master节点
-      serviceAccountName: dashboard-admin
+        key: node-role.kubernetes.io/master
+      serviceAccountName: kubernetes-dashboard
       initContainers:
       - name: init-sysctl
         image: busybox:1.27
@@ -121,7 +120,7 @@ spec:
           privileged: true
       containers:
       - name: elasticsearch
-        image: registry.cn-hangzhou.aliyuncs.com/imooc/elasticsearch:5.5.1
+        image: elasticsearch:5.5.1
         ports:
         - containerPort: 9200
           protocol: TCP
@@ -181,4 +180,8 @@ spec:
         hostPath:
           path: /es-data
 
+
 ```
+
+# log-pilot
+
