@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-31T11:49:28+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">shell命令-chmod, chown, chgrp</title><link href="https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp/" rel="alternate" type="text/html" title="shell命令-chmod, chown, chgrp" /><published>2021-03-30T00:00:00+08:00</published><updated>2021-03-30T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp/">&lt;h1 id=&quot;chmod&quot;&gt;chmod&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-03-31T14:25:11+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Auto generate init for swift class and struct</title><link href="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/" rel="alternate" type="text/html" title="Auto generate init for swift class and struct" /><published>2021-03-31T00:00:00+08:00</published><updated>2021-03-31T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/">&lt;p&gt;鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Generate Memberwise Initializer&lt;/code&gt;即可。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../img/post/2021-03-31/generate-init.png&quot; alt=&quot;1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../img/post/2021-03-31/auto-genarate-init-result.png&quot; alt=&quot;2&quot; /&gt;&lt;/p&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="swift" /><summary type="html">鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择Generate Memberwise Initializer即可。</summary></entry><entry><title type="html">shell命令-chmod, chown, chgrp</title><link href="https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp/" rel="alternate" type="text/html" title="shell命令-chmod, chown, chgrp" /><published>2021-03-30T00:00:00+08:00</published><updated>2021-03-30T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp/">&lt;h1 id=&quot;chmod&quot;&gt;chmod&lt;/h1&gt;
 &lt;p&gt;此命令用来更改某个文件对于&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;文件所有者&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;群组&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;其他人&lt;/code&gt;三种角色的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;读&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;写&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;执行&lt;/code&gt;权限。权限表示：&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;r(Read，读取，权限值为4)：对文件而言，具有读取文件内容的权限；对目录来说，具有浏览目 录的权限。
@@ -39,7 +43,7 @@ chgrp -R users ~/test /usr/local/bin
 
 &lt;p&gt;小波变换，傅里叶变换因为无法得知某一个频率是什么时候开始产生的，即在频域中没有时间信息。小波变换让傅里叶变换后的频域具备了时间信息，可以得知频率是什么时候添加进去的。&lt;/p&gt;
 
-&lt;p&gt;离散余弦变换是离散傅里叶变换的一种特殊形式，当输入信号是实偶函数时，离散傅里叶变换公式可以简化为离散余弦变换。&lt;/p&gt;</content><author><name>Yawei</name></author><category term="DSP" /><summary type="html">傅里叶变换是为了将信号从时域分解为频域</summary></entry><entry><title type="html">DSP-FFT（快速傅里叶变换）使用解释</title><link href="https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret/" rel="alternate" type="text/html" title="DSP-FFT（快速傅里叶变换）使用解释" /><published>2021-03-24T00:00:00+08:00</published><updated>2021-03-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/24/DSP-FFT-Interpret/">&lt;blockquote&gt;
+&lt;p&gt;离散余弦变换是离散傅里叶变换的一种特殊形式，当输入信号是实偶函数时，离散傅里叶变换公式可以简化为离散余弦变换。&lt;/p&gt;</content><author><name>Yawei</name></author><category term="DSP" /><summary type="html">傅里叶变换是为了将信号从时域分解为频域</summary></entry><entry><title type="html">DSP-FFT（快速傅里叶变换）使用解释</title><link href="https://pfcstyle.github.io/2021/03/25/DSP-FFT-Interpret/" rel="alternate" type="text/html" title="DSP-FFT（快速傅里叶变换）使用解释" /><published>2021-03-25T00:00:00+08:00</published><updated>2021-03-25T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/25/DSP-FFT-Interpret</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/25/DSP-FFT-Interpret/">&lt;blockquote&gt;
   &lt;p&gt;各种算法真是太多了，我只求怎么用，真的一点也不想知道其内部原理。很多文件把内部原理和理解说的很通透，但最后我却仍然不知道怎么用！很简单，告诉我这个函数的各个参数是什么，返回值都是啥意思就ok了，怎么就这么难？&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -99,91 +103,7 @@ chgrp -R users ~/test /usr/local/bin
       &lt;li&gt;频谱宽度=(频率 * 采样率 / 2) / (n / 2)) = 频率 * 采样率 / n&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="DSP" /><category term="iOS" /><summary type="html">各种算法真是太多了，我只求怎么用，真的一点也不想知道其内部原理。很多文件把内部原理和理解说的很通透，但最后我却仍然不知道怎么用！很简单，告诉我这个函数的各个参数是什么，返回值都是啥意思就ok了，怎么就这么难？</summary></entry><entry><title type="html">kubernetes 问题汇总</title><link href="https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/" rel="alternate" type="text/html" title="kubernetes 问题汇总" /><published>2021-03-23T00:00:00+08:00</published><updated>2021-03-23T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/">&lt;h1 id=&quot;突然所有服务无法访问&quot;&gt;突然所有服务无法访问&lt;/h1&gt;
-&lt;p&gt;因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# ubuntu18&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;netplan apply
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">突然所有服务无法访问 因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。 # ubuntu18 sudo netplan apply</summary></entry><entry><title type="html">Apologizing</title><link href="https://pfcstyle.github.io/2021/03/23/manner/" rel="alternate" type="text/html" title="Apologizing" /><published>2021-03-23T00:00:00+08:00</published><updated>2021-03-23T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/23/manner</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/23/manner/">&lt;h1 id=&quot;key-gramma&quot;&gt;Key gramma&lt;/h1&gt;
-
-&lt;p&gt;No spliting
-No smoking
-Shouldn’t throw litter about
-Shouldn’t split in public places or throw litter about&lt;/p&gt;
-
-&lt;p&gt;Cover mouth when you want to sneeze&lt;/p&gt;
-
-&lt;p&gt;With people I have dinner with.&lt;/p&gt;
-
-&lt;p&gt;It will make me feel&lt;/p&gt;
-
-&lt;p&gt;You should consider your partner’s feelings.&lt;/p&gt;
-
-&lt;p&gt;When someone wants to enter you room, he has to knock at the door.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What&lt;/strong&gt;(not how) do you think of her behaviour.&lt;/p&gt;
-
-&lt;p&gt;If I were you, I wouldn’t have done that.&lt;/p&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key gramma</summary></entry><entry><title type="html">-[** copyWithZone:] unrecognized selector sent to instance</title><link href="https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy/" rel="alternate" type="text/html" title="-[** copyWithZone:] unrecognized selector sent to instance" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy/">&lt;p&gt;很多OC的class, 内部属性声明使用的@property (nonatomic, &lt;strong&gt;copy&lt;/strong&gt;),导致在赋值使用时，自动调用copyWithZone:方法，如果这时传入的对象没有实现这个方法，就会报找不到的错误。&lt;/p&gt;
-
-&lt;h1 id=&quot;解决方法&quot;&gt;解决方法&lt;/h1&gt;
-
-&lt;h2 id=&quot;第一种方法实现copywithzone&quot;&gt;第一种方法：实现copyWithZone&lt;/h2&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class SparkAppService: NSCopying{
-    var vendorId: NSCopying
-    func copy(with zone: NSZone? = nil) -&amp;gt; Any {
-        let c = SparkAppService()
-        c.vendorId = self.vendorId.copy(with: zone) as! NSCopying
-        return c
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;第二种方法继承nsobject&quot;&gt;第二种方法：继承NSObject&lt;/h2&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@objc class SparkAppService: NSObject{
-    override init() {
-        super.init()
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">很多OC的class, 内部属性声明使用的@property (nonatomic, copy),导致在赋值使用时，自动调用copyWithZone:方法，如果这时传入的对象没有实现这个方法，就会报找不到的错误。</summary></entry><entry><title type="html">Apologizing</title><link href="https://pfcstyle.github.io/2021/03/20/Apologizing/" rel="alternate" type="text/html" title="Apologizing" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/20/Apologizing</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/20/Apologizing/">&lt;h1 id=&quot;key-phrases-for-apologize&quot;&gt;Key phrases for apologize&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;I’m awfully sorry for the terrible.&lt;/li&gt;
-  &lt;li&gt;I do regret making irated&lt;/li&gt;
-  &lt;li&gt;I terribly sorry for ….&lt;/li&gt;
-  &lt;li&gt;I shouldn’t have treated you like this.&lt;/li&gt;
-  &lt;li&gt;I’m so sorry&lt;/li&gt;
-  &lt;li&gt;I should have taken (this) into consideration.&lt;/li&gt;
-  &lt;li&gt;I’m so sorry, that was not intentional&lt;/li&gt;
-  &lt;li&gt;I didn’t intend to do that.&lt;/li&gt;
-  &lt;li&gt;My apologies&lt;/li&gt;
-  &lt;li&gt;I didn’t realize what I was doing;&lt;/li&gt;
-  &lt;li&gt;Look, I know it was wrong of me to be like that;&lt;/li&gt;
-  &lt;li&gt;I guess I could’ve done (more to support you in front of the boss);&lt;/li&gt;
-  &lt;li&gt;Would you please forgive me?;&lt;/li&gt;
-  &lt;li&gt;I promise I’ll make it up to you.&lt;/li&gt;
-  &lt;li&gt;I guess I could have been (more aware of what I was saying.)&lt;/li&gt;
-  &lt;li&gt;I shouldn’t say that in public.&lt;/li&gt;
-  &lt;li&gt;Can we talk about this in private.&lt;/li&gt;
-  &lt;li&gt;Do this in a more graceful way.&lt;/li&gt;
-  &lt;li&gt;I just did that on impulse.&lt;/li&gt;
-  &lt;li&gt;It’s not JUST your responsibility.&lt;/li&gt;
-  &lt;li&gt;I didn’t mean to say something bad ABOUT you.&lt;/li&gt;
-  &lt;li&gt;I realize that I shouldn’t HAVE said those things in public.&lt;/li&gt;
-  &lt;li&gt;Thank you for your forgiveness&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;for-presenting-angry&quot;&gt;For presenting angry&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;You really EMBARRASED ME in the meeting.&lt;/li&gt;
-  &lt;li&gt;The made me so irrated&lt;/li&gt;
-  &lt;li&gt;I don’t think you TOOK me into consideration at all.&lt;/li&gt;
-  &lt;li&gt;I really don’t want to experience such a situation again&lt;/li&gt;
-  &lt;li&gt;it made the design look so RIDICULOUS&lt;/li&gt;
-  &lt;li&gt;You made me look so bad&lt;/li&gt;
-  &lt;li&gt;You really shouldn’t say that in public&lt;/li&gt;
-  &lt;li&gt;You made me feel so stupid&lt;/li&gt;
-  &lt;li&gt;You have MADE ME LOSE FACE with everyone&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key phrases for apologize</summary></entry><entry><title type="html">WKWebview set user agent and JS handler</title><link href="https://pfcstyle.github.io/2021/03/20/iOS-webview-useragent/" rel="alternate" type="text/html" title="WKWebview set user agent and JS handler" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/20/iOS-webview-useragent</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/20/iOS-webview-useragent/">&lt;blockquote&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="DSP" /><category term="iOS" /><summary type="html">各种算法真是太多了，我只求怎么用，真的一点也不想知道其内部原理。很多文件把内部原理和理解说的很通透，但最后我却仍然不知道怎么用！很简单，告诉我这个函数的各个参数是什么，返回值都是啥意思就ok了，怎么就这么难？</summary></entry><entry><title type="html">WKWebview set user agent and JS handler</title><link href="https://pfcstyle.github.io/2021/03/24/iOS-webview-useragent/" rel="alternate" type="text/html" title="WKWebview set user agent and JS handler" /><published>2021-03-24T00:00:00+08:00</published><updated>2021-03-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/24/iOS-webview-useragent</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/24/iOS-webview-useragent/">&lt;blockquote&gt;
   &lt;p&gt;注意，下面的代码都不要在webview init中写，不会生效，需要在view did load之后才生效&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -222,7 +142,91 @@ self.configuration.userContentController.add(LeakAvoider(delegate: self), name: 
 &lt;h1 id=&quot;设置user-agent&quot;&gt;设置user agent&lt;/h1&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;customUserAgent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Custom_User_Agent&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">注意，下面的代码都不要在webview init中写，不会生效，需要在view did load之后才生效</summary></entry><entry><title type="html">Changing the topic</title><link href="https://pfcstyle.github.io/2021/03/19/changing-the-topic/" rel="alternate" type="text/html" title="Changing the topic" /><published>2021-03-19T00:00:00+08:00</published><updated>2021-03-19T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/19/changing-the-topic</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/19/changing-the-topic/">&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">注意，下面的代码都不要在webview init中写，不会生效，需要在view did load之后才生效</summary></entry><entry><title type="html">kubernetes 问题汇总</title><link href="https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/" rel="alternate" type="text/html" title="kubernetes 问题汇总" /><published>2021-03-23T00:00:00+08:00</published><updated>2021-03-23T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/23/kubernetes-problem-collection/">&lt;h1 id=&quot;突然所有服务无法访问&quot;&gt;突然所有服务无法访问&lt;/h1&gt;
+&lt;p&gt;因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# ubuntu18&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;netplan apply
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">突然所有服务无法访问 因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。 # ubuntu18 sudo netplan apply</summary></entry><entry><title type="html">Apologizing</title><link href="https://pfcstyle.github.io/2021/03/23/manner/" rel="alternate" type="text/html" title="Apologizing" /><published>2021-03-23T00:00:00+08:00</published><updated>2021-03-23T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/23/manner</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/23/manner/">&lt;h1 id=&quot;key-gramma&quot;&gt;Key gramma&lt;/h1&gt;
+
+&lt;p&gt;No spliting
+No smoking
+Shouldn’t throw litter about
+Shouldn’t split in public places or throw litter about&lt;/p&gt;
+
+&lt;p&gt;Cover mouth when you want to sneeze&lt;/p&gt;
+
+&lt;p&gt;With people I have dinner with.&lt;/p&gt;
+
+&lt;p&gt;It will make me feel&lt;/p&gt;
+
+&lt;p&gt;You should consider your partner’s feelings.&lt;/p&gt;
+
+&lt;p&gt;When someone wants to enter you room, he has to knock at the door.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What&lt;/strong&gt;(not how) do you think of her behaviour.&lt;/p&gt;
+
+&lt;p&gt;If I were you, I wouldn’t have done that.&lt;/p&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key gramma</summary></entry><entry><title type="html">Apologizing</title><link href="https://pfcstyle.github.io/2021/03/21/Apologizing/" rel="alternate" type="text/html" title="Apologizing" /><published>2021-03-21T00:00:00+08:00</published><updated>2021-03-21T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/21/Apologizing</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/21/Apologizing/">&lt;h1 id=&quot;key-phrases-for-apologize&quot;&gt;Key phrases for apologize&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I’m awfully sorry for the terrible.&lt;/li&gt;
+  &lt;li&gt;I do regret making irated&lt;/li&gt;
+  &lt;li&gt;I terribly sorry for ….&lt;/li&gt;
+  &lt;li&gt;I shouldn’t have treated you like this.&lt;/li&gt;
+  &lt;li&gt;I’m so sorry&lt;/li&gt;
+  &lt;li&gt;I should have taken (this) into consideration.&lt;/li&gt;
+  &lt;li&gt;I’m so sorry, that was not intentional&lt;/li&gt;
+  &lt;li&gt;I didn’t intend to do that.&lt;/li&gt;
+  &lt;li&gt;My apologies&lt;/li&gt;
+  &lt;li&gt;I didn’t realize what I was doing;&lt;/li&gt;
+  &lt;li&gt;Look, I know it was wrong of me to be like that;&lt;/li&gt;
+  &lt;li&gt;I guess I could’ve done (more to support you in front of the boss);&lt;/li&gt;
+  &lt;li&gt;Would you please forgive me?;&lt;/li&gt;
+  &lt;li&gt;I promise I’ll make it up to you.&lt;/li&gt;
+  &lt;li&gt;I guess I could have been (more aware of what I was saying.)&lt;/li&gt;
+  &lt;li&gt;I shouldn’t say that in public.&lt;/li&gt;
+  &lt;li&gt;Can we talk about this in private.&lt;/li&gt;
+  &lt;li&gt;Do this in a more graceful way.&lt;/li&gt;
+  &lt;li&gt;I just did that on impulse.&lt;/li&gt;
+  &lt;li&gt;It’s not JUST your responsibility.&lt;/li&gt;
+  &lt;li&gt;I didn’t mean to say something bad ABOUT you.&lt;/li&gt;
+  &lt;li&gt;I realize that I shouldn’t HAVE said those things in public.&lt;/li&gt;
+  &lt;li&gt;Thank you for your forgiveness&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;for-presenting-angry&quot;&gt;For presenting angry&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;You really EMBARRASED ME in the meeting.&lt;/li&gt;
+  &lt;li&gt;The made me so irrated&lt;/li&gt;
+  &lt;li&gt;I don’t think you TOOK me into consideration at all.&lt;/li&gt;
+  &lt;li&gt;I really don’t want to experience such a situation again&lt;/li&gt;
+  &lt;li&gt;it made the design look so RIDICULOUS&lt;/li&gt;
+  &lt;li&gt;You made me look so bad&lt;/li&gt;
+  &lt;li&gt;You really shouldn’t say that in public&lt;/li&gt;
+  &lt;li&gt;You made me feel so stupid&lt;/li&gt;
+  &lt;li&gt;You have MADE ME LOSE FACE with everyone&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key phrases for apologize</summary></entry><entry><title type="html">-[** copyWithZone:] unrecognized selector sent to instance</title><link href="https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy/" rel="alternate" type="text/html" title="-[** copyWithZone:] unrecognized selector sent to instance" /><published>2021-03-20T00:00:00+08:00</published><updated>2021-03-20T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/20/iOS-swift-nscopy/">&lt;p&gt;很多OC的class, 内部属性声明使用的@property (nonatomic, &lt;strong&gt;copy&lt;/strong&gt;),导致在赋值使用时，自动调用copyWithZone:方法，如果这时传入的对象没有实现这个方法，就会报找不到的错误。&lt;/p&gt;
+
+&lt;h1 id=&quot;解决方法&quot;&gt;解决方法&lt;/h1&gt;
+
+&lt;h2 id=&quot;第一种方法实现copywithzone&quot;&gt;第一种方法：实现copyWithZone&lt;/h2&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class SparkAppService: NSCopying{
+    var vendorId: NSCopying
+    func copy(with zone: NSZone? = nil) -&amp;gt; Any {
+        let c = SparkAppService()
+        c.vendorId = self.vendorId.copy(with: zone) as! NSCopying
+        return c
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;第二种方法继承nsobject&quot;&gt;第二种方法：继承NSObject&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@objc class SparkAppService: NSObject{
+    override init() {
+        super.init()
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">很多OC的class, 内部属性声明使用的@property (nonatomic, copy),导致在赋值使用时，自动调用copyWithZone:方法，如果这时传入的对象没有实现这个方法，就会报找不到的错误。</summary></entry><entry><title type="html">Changing the topic</title><link href="https://pfcstyle.github.io/2021/03/19/changing-the-topic/" rel="alternate" type="text/html" title="Changing the topic" /><published>2021-03-19T00:00:00+08:00</published><updated>2021-03-19T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/19/changing-the-topic</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/19/changing-the-topic/">&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
 &lt;ol&gt;
   &lt;li&gt;Jonathan: It was a nice day today, wasn’t it?&lt;/li&gt;
   &lt;li&gt;Linda: Yes, it really was. I love these sunny spring days.&lt;/li&gt;
@@ -240,81 +244,4 @@ self.configuration.userContentController.add(LeakAvoider(delegate: self), name: 
   &lt;li&gt;I remember when the streets used to be so quiet and peaceful.&lt;/li&gt;
   &lt;li&gt;It was much more romantic here a couple of years ago.&lt;/li&gt;
   &lt;li&gt;Linda: I feel exactly the same way!&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Dialogue Jonathan: It was a nice day today, wasn’t it? Linda: Yes, it really was. I love these sunny spring days. Which reminds me: if it’s like this tomorrow, I’m going to go to the beach. Jonathan: Oh, you like the beach? I love the beach! Did I tell you?- I took surfing lessons a couple of years ago. I can’t wait to get back out there! Linda: Wow, I could never go surfing. I really admire anyone for doing something so exciting and risky. The most dangerous thing I ever do is ride a bike in the city. Jonathan: Well, I would be scared to do that with all the crazy drivers around. Linda: I know exactly what you mean- there are some crazy drivers out there. Jonathan: Speaking of which, have you noticed how much more traffic there is lately? I remember when the streets used to be so quiet and peaceful. It was much more romantic here a couple of years ago. Linda: I feel exactly the same way!</summary></entry><entry><title type="html">Doing a SWOT analysis</title><link href="https://pfcstyle.github.io/2021/03/18/doing-a-swot-analysis/" rel="alternate" type="text/html" title="Doing a SWOT analysis" /><published>2021-03-18T00:00:00+08:00</published><updated>2021-03-18T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/18/doing-a-swot-analysis</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/18/doing-a-swot-analysis/">&lt;ul&gt;
-  &lt;li&gt;Strengths
-    &lt;ul&gt;
-      &lt;li&gt;locally owned&lt;/li&gt;
-      &lt;li&gt;low employee turnover&lt;/li&gt;
-      &lt;li&gt;good locations for store within the city&lt;/li&gt;
-      &lt;li&gt;fast delivery times&lt;/li&gt;
-      &lt;li&gt;good customer service&lt;/li&gt;
-      &lt;li&gt;positive reputation&lt;/li&gt;
-      &lt;li&gt;What advantages does your organization have?&lt;/li&gt;
-      &lt;li&gt;What strengths would others say your company has?&lt;/li&gt;
-      &lt;li&gt;What specialized markets or innovative technology can your company take advantage of?&lt;/li&gt;
-      &lt;li&gt;What do you do better than your competitors?&lt;/li&gt;
-      &lt;li&gt;What unique resources can you draw on that others can’t?&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Weakness
-    &lt;ul&gt;
-      &lt;li&gt;not the market leader&lt;/li&gt;
-      &lt;li&gt;not well known compared to competitors&lt;/li&gt;
-      &lt;li&gt;more expensive prices, smaller selection&lt;/li&gt;
-      &lt;li&gt;relies on word of mouth for advertising&lt;/li&gt;
-      &lt;li&gt;what could be better about your company?&lt;/li&gt;
-      &lt;li&gt;What are some of your competrors’’ weaknesses?&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Opportunities
-    &lt;ul&gt;
-      &lt;li&gt;the two major competitors attack each other intheir ads&lt;/li&gt;
-      &lt;li&gt;overall the econonmy is doing well&lt;/li&gt;
-      &lt;li&gt;small increase in home-buyers in recent years&lt;/li&gt;
-      &lt;li&gt;What are some market trends you could take advantage of?&lt;/li&gt;
-      &lt;li&gt;What are some challenges your&lt;/li&gt;
-      &lt;li&gt;What might be changing about your company? Your competitor?&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Threats
-    &lt;ul&gt;
-      &lt;li&gt;all companies target the same demographics&lt;/li&gt;
-      &lt;li&gt;competitors are stable&lt;/li&gt;
-      &lt;li&gt;What are your competitors doing?&lt;/li&gt;
-      &lt;li&gt;What are some challenges your company faces?&lt;/li&gt;
-      &lt;li&gt;What does your company need to avoid?&lt;/li&gt;
-      &lt;li&gt;What might be some effects that your company has no control over&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
-&lt;ol&gt;
-  &lt;li&gt;Taylor:okay, so that covers opportunities box, now on to our weaknesses.&lt;/li&gt;
-  &lt;li&gt;Jade: Um, I’m sorry but where do I put eco-friendly appliances?&lt;/li&gt;
-  &lt;li&gt;Dylan: Oh that’s a strength, you should put it here.&lt;/li&gt;
-  &lt;li&gt;Jade: Great, thanks!&lt;/li&gt;
-  &lt;li&gt;Taylor: Wait, that isn’t really a strength. It’s more like an opportunity.&lt;/li&gt;
-  &lt;li&gt;Dylan: Hmmm .. I see what you mean.&lt;/li&gt;
-  &lt;li&gt;Jade: Why?&lt;/li&gt;
-  &lt;li&gt;Taylor: Strengths are more internal opportunities are external.&lt;/li&gt;
-  &lt;li&gt;Dylan: Yeah, put it here instead.&lt;/li&gt;
-  &lt;li&gt;Jade: Okay. But aren’t we selling those appliances? That’s internal, isn’t it?&lt;/li&gt;
-  &lt;li&gt;Dylan: That is one way of looking at it, but ask yourself- do we ultimately have any control of how eco-friendly the appliances are? Are we the ones making those appliances?&lt;/li&gt;
-  &lt;li&gt;Jade: No, I guess not… So external things are things we have no control over?&lt;/li&gt;
-  &lt;li&gt;Taylor: That’s right. Okay, now how about our weaknesses?&lt;/li&gt;
-  &lt;li&gt;Dylan: Our loans?&lt;/li&gt;
-  &lt;li&gt;Taylor: Yep, and let’s not forget that we’ve only been in business for two years so that also affects things.&lt;/li&gt;
-  &lt;li&gt;Dylan: True. Were you going to add something, Jade?&lt;/li&gt;
-  &lt;li&gt;Jade: Ummm .. the vehicle gas mileage law?&lt;/li&gt;
-  &lt;li&gt;Taylor: Well-&lt;/li&gt;
-  &lt;li&gt;Dylan: But-you first.&lt;/li&gt;
-  &lt;li&gt;Taylor: Thanks. So, is that something that’s really internal?&lt;/li&gt;
-  &lt;li&gt;Jade: Well, we’ll have to get new vehicles, we’ll have control over which vehicles we get and why. That’s internal.&lt;/li&gt;
-  &lt;li&gt;Taylor: Yes, that’s true, and purchasing new vehicles could be listed as a weakness But also consider that it’s the new law that’s forcing us to buy these vehicles in the first place.&lt;/li&gt;
-  &lt;li&gt;Jade: Oh! And we don’t have any control over the law. So the law is a threat, but the purchase of vehicles is a weakness.&lt;/li&gt;
-  &lt;li&gt;Dylan: That’s right!&lt;/li&gt;
-  &lt;li&gt;Jade: Great! And I put that here.&lt;/li&gt;
-  &lt;li&gt;Taylor: Exactly. Anything else?&lt;/li&gt;
-  &lt;li&gt;Dylan: Hmmm… What about-?&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Strengths locally owned low employee turnover good locations for store within the city fast delivery times good customer service positive reputation What advantages does your organization have? What strengths would others say your company has? What specialized markets or innovative technology can your company take advantage of? What do you do better than your competitors? What unique resources can you draw on that others can’t?</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Dialogue Jonathan: It was a nice day today, wasn’t it? Linda: Yes, it really was. I love these sunny spring days. Which reminds me: if it’s like this tomorrow, I’m going to go to the beach. Jonathan: Oh, you like the beach? I love the beach! Did I tell you?- I took surfing lessons a couple of years ago. I can’t wait to get back out there! Linda: Wow, I could never go surfing. I really admire anyone for doing something so exciting and risky. The most dangerous thing I ever do is ride a bike in the city. Jonathan: Well, I would be scared to do that with all the crazy drivers around. Linda: I know exactly what you mean- there are some crazy drivers out there. Jonathan: Speaking of which, have you noticed how much more traffic there is lately? I remember when the streets used to be so quiet and peaceful. It was much more romantic here a couple of years ago. Linda: I feel exactly the same way!</summary></entry></feed>
