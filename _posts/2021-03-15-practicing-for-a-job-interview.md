@@ -36,6 +36,23 @@ B: Example questions:
 * Could you tell me what the salary is?
 * 50,000 per month.
 
+- Could you tell me when I have to start? Is it possible to tell me when I have to start?
+- In July or August. We will discuss this with you if you are successful.
+
+- Could/ can you tell me if you pay overtime? May ask if you pay overtime?
+- No, we don't pay overtime. The position is salaried
+
+- Can / Could you tell me if you help your employees to pay for their studies?
+- May ask if you help employees pay for their studies?
+- Yes, we do offer financial help, and for some employees we have paid for full courses.
+
+- May I ask what the career advancement prospects in your company are? 
+- May I ask what the possibilities for promotion are?
+- That will depend on you-we like to see people in our company move up and go on to become senior employees.
+
+- May I ask what the salary is? Is it possible to tell me what the salary is?
+- I cannot tell you right now. It depends on your experience and qualifications
+
 
 # General type
 * salary
