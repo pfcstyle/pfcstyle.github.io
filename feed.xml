@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-04-12T00:37:05+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Auto generate init for swift class and struct</title><link href="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/" rel="alternate" type="text/html" title="Auto generate init for swift class and struct" /><published>2021-03-31T00:00:00+08:00</published><updated>2021-03-31T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/">&lt;p&gt;鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Generate Memberwise Initializer&lt;/code&gt;即可。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-04-12T09:45:13+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Auto generate init for swift class and struct</title><link href="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/" rel="alternate" type="text/html" title="Auto generate init for swift class and struct" /><published>2021-03-31T00:00:00+08:00</published><updated>2021-03-31T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/">&lt;p&gt;鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Generate Memberwise Initializer&lt;/code&gt;即可。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../img/post/2021-03-31/generate-init.png&quot; alt=&quot;1&quot; /&gt;&lt;/p&gt;
 
@@ -146,26 +146,20 @@ self.configuration.userContentController.add(LeakAvoider(delegate: self), name: 
 &lt;p&gt;因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# ubuntu18&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;netplan apply
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">突然所有服务无法访问 因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。 # ubuntu18 sudo netplan apply</summary></entry><entry><title type="html">Apologizing</title><link href="https://pfcstyle.github.io/2021/03/23/manner/" rel="alternate" type="text/html" title="Apologizing" /><published>2021-03-23T00:00:00+08:00</published><updated>2021-03-23T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/23/manner</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/23/manner/">&lt;h1 id=&quot;key-gramma&quot;&gt;Key gramma&lt;/h1&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="kubernetes" /><summary type="html">突然所有服务无法访问 因为是使用的公司虚拟机集群搭建的k8s集群，发现公司虚拟机即使配置了静态ip，仍然会发生改变！所以重新apply一下静态ip配置，恢复原ip即可。 # ubuntu18 sudo netplan apply</summary></entry><entry><title type="html">Manner</title><link href="https://pfcstyle.github.io/2021/03/23/manner/" rel="alternate" type="text/html" title="Manner" /><published>2021-03-23T00:00:00+08:00</published><updated>2021-03-23T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/23/manner</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/23/manner/">&lt;h1 id=&quot;key-gramma&quot;&gt;Key gramma&lt;/h1&gt;
 
-&lt;p&gt;No spliting
-No smoking
-Shouldn’t throw litter about
-Shouldn’t split in public places or throw litter about&lt;/p&gt;
-
-&lt;p&gt;Cover mouth when you want to sneeze&lt;/p&gt;
-
-&lt;p&gt;With people I have dinner with.&lt;/p&gt;
-
-&lt;p&gt;It will make me feel&lt;/p&gt;
-
-&lt;p&gt;You should consider your partner’s feelings.&lt;/p&gt;
-
-&lt;p&gt;When someone wants to enter you room, he has to knock at the door.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What&lt;/strong&gt;(not how) do you think of her behaviour.&lt;/p&gt;
-
-&lt;p&gt;If I were you, I wouldn’t have done that.&lt;/p&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key gramma</summary></entry><entry><title type="html">Apologizing</title><link href="https://pfcstyle.github.io/2021/03/21/Apologizing/" rel="alternate" type="text/html" title="Apologizing" /><published>2021-03-21T00:00:00+08:00</published><updated>2021-03-21T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/21/Apologizing</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/21/Apologizing/">&lt;h1 id=&quot;key-phrases-for-apologize&quot;&gt;Key phrases for apologize&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;No spliting&lt;/li&gt;
+  &lt;li&gt;No smoking&lt;/li&gt;
+  &lt;li&gt;Shouldn’t throw litter about&lt;/li&gt;
+  &lt;li&gt;Shouldn’t split in public places or throw litter about&lt;/li&gt;
+  &lt;li&gt;Cover mouth when you want to sneeze&lt;/li&gt;
+  &lt;li&gt;It will make me feel&lt;/li&gt;
+  &lt;li&gt;You should consider your partner’s feelings.&lt;/li&gt;
+  &lt;li&gt;When someone wants to enter you room, he has to knock at the door.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;What&lt;/strong&gt;(not how) do you think of her behaviour.&lt;/li&gt;
+  &lt;li&gt;If I were you, I wouldn’t have done that.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key gramma</summary></entry><entry><title type="html">Apologizing</title><link href="https://pfcstyle.github.io/2021/03/21/Apologizing/" rel="alternate" type="text/html" title="Apologizing" /><published>2021-03-21T00:00:00+08:00</published><updated>2021-03-21T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/21/Apologizing</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/21/Apologizing/">&lt;h1 id=&quot;key-phrases-for-apologize&quot;&gt;Key phrases for apologize&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;I’m awfully sorry for the terrible.&lt;/li&gt;
@@ -180,7 +174,7 @@ Shouldn’t split in public places or throw litter about&lt;/p&gt;
   &lt;li&gt;I didn’t realize what I was doing;&lt;/li&gt;
   &lt;li&gt;Look, I know it was wrong of me to be like that;&lt;/li&gt;
   &lt;li&gt;I guess I could’ve done (more to support you in front of the boss);&lt;/li&gt;
-  &lt;li&gt;Would you please forgive me?;&lt;/li&gt;
+  &lt;li&gt;Would you please forgive me?&lt;/li&gt;
   &lt;li&gt;I promise I’ll make it up to you.&lt;/li&gt;
   &lt;li&gt;I guess I could have been (more aware of what I was saying.)&lt;/li&gt;
   &lt;li&gt;I shouldn’t say that in public.&lt;/li&gt;
