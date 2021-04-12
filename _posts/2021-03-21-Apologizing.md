@@ -24,7 +24,7 @@ keywords:
 * I didn’t realize what I was doing; 
 * Look, I know it was wrong of me to be like that;  
 * I guess I could’ve done (more to support you in front of the boss);  
-* Would you please forgive me?;  
+* Would you please forgive me? 
 * I promise I’ll make it up to you.
 * I guess I could have been (more aware of what I was saying.)
 * I shouldn't say that in public.
