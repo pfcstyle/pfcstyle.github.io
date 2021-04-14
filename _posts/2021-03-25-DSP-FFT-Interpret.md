@@ -49,8 +49,9 @@ FFTSetup vDSP_create_fftsetup(vDSP_Length __Log2n, FFTRadix __Radix);
 
 * vDSP_fft_zrip输出解释：(注意这里的n为信号长度的一半)
 1. 复数索引0，DC的虚部填上了Nyquist的实部
-2. 复数索引从1到n, 包含频域值
+2. 复数索引从1到n, 记录了频域值
 ![图2](/img/post/2021-03-25/output.png)
 * 输出的使用：
-  1. 频率=sqrt(real * real + imag * imag)
-  2. 频谱宽度=(频率 * 采样率 / 2) / (n / 2)) = 频率 * 采样率 / n
+  1. magnitude[i] = sqrt(real[i] * real[i] + imag[i] * imag[i]), 可以用来表示信号能量强度
+  2. 如果信号的频率分量都为整数，那么imag[i]小于-1的索引即为频率值
+  3. magnitude做y, i为x画曲线，极值(可能多个)索引记为peakI，采样率记为rate,信号长度为n. 频率≈peakI * rate / n
