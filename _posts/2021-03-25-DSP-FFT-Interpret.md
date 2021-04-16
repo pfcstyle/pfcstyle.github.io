@@ -42,16 +42,18 @@ FFTSetup vDSP_create_fftsetup(vDSP_Length __Log2n, FFTRadix __Radix);
 * 输出：第二个参数为inout类型，因此输出也是存储在第二个参数中。输出的是频域的复数表示。
   
 * fft输出解释：(这里的n为信号长度)
-1. 复数索引0，实部为DC(时域值的和)，虚部为0
+1. 复数索引0，实部为DC(时域值的和 * 2)，虚部为0
 2. 复数索引从1到n/2, 包含频域值
 3. 复数索引n/2+1为Nyquist部分，实部为余弦分量系数，虚部为0
 4. 剩余的部分为第二部分的共轭（镜像）
 
-* vDSP_fft_zrip输出解释：(注意这里的n为信号长度的一半)
+* vDSP_fft_zrip输出解释：(注意这里的n为信号长度的一半,即复数形式长度)
 1. 复数索引0，DC的虚部填上了Nyquist的实部
 2. 复数索引从1到n, 记录了频域值
 ![图2](/img/post/2021-03-25/output.png)
 * 输出的使用：
-  1. magnitude[i] = sqrt(real[i] * real[i] + imag[i] * imag[i]), 可以用来表示信号能量强度
-  2. 如果信号的频率分量都为整数，那么imag[i]小于-1的索引即为频率值
-  3. magnitude做y, i为x画曲线，极值(可能多个)索引记为peakI，采样率记为rate,信号长度为n. 频率≈peakI * rate / n
+  1. 功率（能量）计算：magnitude[i] = sqrt(real[i] * real[i] + imag[i] * imag[i]), 可以用来表示信号能量强度
+  2. 频率计算：
+     - i=0为直流分量，即0HZ量，后面从第二个复数开始，频率为0+频谱分辨率,每隔一个加一次。
+     - 频谱分辨率deltaF=采样率/n
+  3. 幅度计算: a = sqrt(real[i] * real[i] + imag[i] * imag[i]) / (n * 2)
