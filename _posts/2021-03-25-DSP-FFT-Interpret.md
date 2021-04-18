@@ -50,10 +50,12 @@ FFTSetup vDSP_create_fftsetup(vDSP_Length __Log2n, FFTRadix __Radix);
 * vDSP_fft_zrip输出解释：(注意这里的n为信号长度的一半,即复数形式长度)
 1. 复数索引0，DC的虚部填上了Nyquist的实部
 2. 复数索引从1到n, 记录了频域值
+  
 ![图2](/img/post/2021-03-25/output.png)
 * 输出的使用：
   1. 功率（能量）计算：magnitude[i] = sqrt(real[i] * real[i] + imag[i] * imag[i]), 可以用来表示信号能量强度
   2. 频率计算：
      - i=0为直流分量，即0HZ量，后面从第二个复数开始，频率为0+频谱分辨率,每隔一个加一次。
      - 频谱分辨率deltaF=采样率/n
+     - frequency = deltaF * i
   3. 幅度计算: a = sqrt(real[i] * real[i] + imag[i] * imag[i]) / (n * 2)
