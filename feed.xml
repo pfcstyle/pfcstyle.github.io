@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-04-16T18:41:51+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Auto generate init for swift class and struct</title><link href="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/" rel="alternate" type="text/html" title="Auto generate init for swift class and struct" /><published>2021-03-31T00:00:00+08:00</published><updated>2021-03-31T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/">&lt;p&gt;鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Generate Memberwise Initializer&lt;/code&gt;即可。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-04-18T14:43:06+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Auto generate init for swift class and struct</title><link href="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/" rel="alternate" type="text/html" title="Auto generate init for swift class and struct" /><published>2021-03-31T00:00:00+08:00</published><updated>2021-03-31T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/31/iOS-Swift-auto-generate-init/">&lt;p&gt;鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Generate Memberwise Initializer&lt;/code&gt;即可。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../img/post/2021-03-31/generate-init.png&quot; alt=&quot;1&quot; /&gt;&lt;/p&gt;
 
@@ -93,10 +93,13 @@ chgrp -R users ~/test /usr/local/bin
   &lt;li&gt;vDSP_fft_zrip输出解释：(注意这里的n为信号长度的一半,即复数形式长度)
     &lt;ol&gt;
       &lt;li&gt;复数索引0，DC的虚部填上了Nyquist的实部&lt;/li&gt;
-      &lt;li&gt;复数索引从1到n, 记录了频域值
-&lt;img src=&quot;/img/post/2021-03-25/output.png&quot; alt=&quot;图2&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;复数索引从1到n, 记录了频域值&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/post/2021-03-25/output.png&quot; alt=&quot;图2&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
   &lt;li&gt;输出的使用：
     &lt;ol&gt;
       &lt;li&gt;功率（能量）计算：magnitude[i] = sqrt(real[i] * real[i] + imag[i] * imag[i]), 可以用来表示信号能量强度&lt;/li&gt;
@@ -104,6 +107,7 @@ chgrp -R users ~/test /usr/local/bin
         &lt;ul&gt;
           &lt;li&gt;i=0为直流分量，即0HZ量，后面从第二个复数开始，频率为0+频谱分辨率,每隔一个加一次。&lt;/li&gt;
           &lt;li&gt;频谱分辨率deltaF=采样率/n&lt;/li&gt;
+          &lt;li&gt;frequency = deltaF * i&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;幅度计算: a = sqrt(real[i] * real[i] + imag[i] * imag[i]) / (n * 2)&lt;/li&gt;
