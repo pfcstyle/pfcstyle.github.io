@@ -859,6 +859,14 @@
     } ,
   
     {
+      "title"    : "iOS URL Scheme 如何配置",
+      "category" : "iOS",
+      "content": "info.plist 选择Open As -&gt; Source code, 复制如下内容(dict标签下)： 其中CFBundleURLName需要参考接入的第三方要求，比如wechat是’wx+AppId’, 有的则可以是任意值; 最重要的是CFBundleURLSchemes, 需要配置与第三方后台的RedirectURI一致才可以。 &lt;dict&gt;  &lt;!-- *** ADD *** --&gt;  &lt;key&gt;CFBundleURLTypes&lt;/key&gt;  &lt;array&gt;  &lt;dict&gt;  &lt;key&gt;CFBundleTypeRole&lt;/key&gt;  &lt;string&gt;Editor&lt;/string&gt;  &lt;key&gt;CFBundleURLName&lt;/key&gt;  &lt;string&gt;identifyId&lt;/string&gt;  &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;  &lt;array&gt;   &lt;string&gt;my-app&lt;/string&gt;  &lt;/array&gt;  &lt;/dict&gt;  &lt;/array&gt; AppDelegate.swift 下面的函数会在从第三方登录回到本app时， 并且没有使用SceneDelegate时执行， 如果使用了SceneDelegate， 参考下面的SceneDelegate.swift。判断依据是url是否是你自己配置的url scheme func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -&gt; Bool {  if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),  AppConfiguration.urlScheme == urlComponents.scheme,  AppConfiguration.urlAuthPath == urlComponents.host {  //这里以arcgis runtime为例  AGSApplicationDelegate.shared().application(app, open: url, options: options)  }  return true } SceneDelegate.swift 如果使用了SceneDelegate, 则需要在SceneDelegate.swift的回调中处理 func scene(_ scene: UIScene, openURLContexts URLContexts: Set&lt;UIOpenURLContext&gt;) {  if let url = URLContexts.first?.url{   if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),   AppConfiguration.urlScheme == urlComponents.scheme,   AppConfiguration.urlAuthPath == urlComponents.host {    let contextOptions = URLContexts.first?.options    var options: [UIApplication.OpenURLOptionsKey: Any] = [:]    if contextOptions?.openInPlace != nil {    options[.openInPlace] = contextOptions!.openInPlace    }    if contextOptions?.annotation != nil {    options[.annotation] = contextOptions!.annotation    }    if contextOptions?.sourceApplication != nil {    options[.sourceApplication] = contextOptions!.sourceApplication    }   AGSApplicationDelegate.shared().application(UIApplication.shared, open: url, options: options)  }  }   } ",
+      "url"      : "https://pfcstyle.github.io/2021/04/22/iOS-Swift-url-scheme/",
+      "keywords" : "[&quot;iOS&quot;, &quot;swift&quot;, &quot;URL Schemes&quot;]"
+    } ,
+  
+    {
       "title"    : "Badminton",
       "category" : "Hobbies",
       "content": "视频  李在福《Play To Win》完整版   李在福《追球》全集 图文  超全羽毛球技术图解 公众号  和蔡赟聊羽毛球 微信号：caiyunliaoyumaoqiu   羽毛球 微信号：yu-mao-qiu  ",
