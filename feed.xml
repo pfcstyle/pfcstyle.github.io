@@ -1,4 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-04-22T11:31:53+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">iOS URL Scheme 如何配置</title><link href="https://pfcstyle.github.io/2021/04/22/iOS-Swift-url-scheme/" rel="alternate" type="text/html" title="iOS URL Scheme 如何配置" /><published>2021-04-22T00:00:00+08:00</published><updated>2021-04-22T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/04/22/iOS-Swift-url-scheme</id><content type="html" xml:base="https://pfcstyle.github.io/2021/04/22/iOS-Swift-url-scheme/">&lt;h1 id=&quot;infoplist&quot;&gt;info.plist&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-04-24T13:47:08+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Talking about a book you’ve read</title><link href="https://pfcstyle.github.io/2021/04/24/talking-about-a-book/" rel="alternate" type="text/html" title="Talking about a book you’ve read" /><published>2021-04-24T00:00:00+08:00</published><updated>2021-04-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/04/24/talking-about-a-book</id><content type="html" xml:base="https://pfcstyle.github.io/2021/04/24/talking-about-a-book/">&lt;h1 id=&quot;key-gramma&quot;&gt;Key gramma&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Once upon a time, ago&lt;/li&gt;
+  &lt;li&gt;It’s my favorite book of all time&lt;/li&gt;
+  &lt;li&gt;It’s about Elizabeth, an honest, lively, witty girl&lt;/li&gt;
+  &lt;li&gt;She almost missed her opportunity.&lt;/li&gt;
+  &lt;li&gt;Make a bad first impression&lt;/li&gt;
+  &lt;li&gt;Although those who know him well  konw that he is kindhearted&lt;/li&gt;
+  &lt;li&gt;They are meant to be together&lt;/li&gt;
+  &lt;li&gt;They both tend judge people too quickly&lt;/li&gt;
+  &lt;li&gt;Get over their initial impressions of each other&lt;/li&gt;
+  &lt;li&gt;Something is bringing them together. //天意让他们走到了一起&lt;/li&gt;
+  &lt;li&gt;Who wouldn’t want the perfect ending?&lt;/li&gt;
+  &lt;li&gt;Darcy sees Elizabeth as cold and sharp tongued&lt;/li&gt;
+  &lt;li&gt;She does say some mean things to him&lt;/li&gt;
+  &lt;li&gt;The funny thing is, they keep running into each other.  // 有趣的是，他们老是相遇。&lt;/li&gt;
+  &lt;li&gt;They fall in love and live happily ever after.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I can appreciate a perfect ending in a book, but it rarely seems believable.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;He heard a knock at the door, so he opened it.&lt;/li&gt;
+  &lt;li&gt;I’ve been reading an amazing book. Right now, the characters are lost in a mysterious, dark forest.&lt;/li&gt;
+  &lt;li&gt;All of the characters have eaten way too much. Suddenly, one of them burps.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;He said that they were meant to be together. Now he has proposed marriage.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;What kind of book is it?&lt;/li&gt;
+  &lt;li&gt;Social commentary.   Romance.   Fiction.  It’s part social commentary, part fantasy.&lt;/li&gt;
+  &lt;li&gt;What’s the plot?&lt;/li&gt;
+  &lt;li&gt;The setting is Oklahoma during the Great Depression. It’s about a farming family that leaves its home to look for a better future in California.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It’s a love story about a young woman, but it’s really about human behavior. It takes place in Alabama in the mid-1930s.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;theme&lt;/li&gt;
+  &lt;li&gt;One of the themes is how your family can save you from the difficulties of daily life.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key gramma</summary></entry><entry><title type="html">iOS URL Scheme 如何配置</title><link href="https://pfcstyle.github.io/2021/04/22/iOS-Swift-url-scheme/" rel="alternate" type="text/html" title="iOS URL Scheme 如何配置" /><published>2021-04-22T00:00:00+08:00</published><updated>2021-04-22T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/04/22/iOS-Swift-url-scheme</id><content type="html" xml:base="https://pfcstyle.github.io/2021/04/22/iOS-Swift-url-scheme/">&lt;h1 id=&quot;infoplist&quot;&gt;info.plist&lt;/h1&gt;
 
 &lt;p&gt;选择Open As -&amp;gt; Source code, 复制如下内容(dict标签下)：&lt;/p&gt;
 
@@ -400,74 +436,4 @@ chgrp -R users ~/test /usr/local/bin
 
 &lt;p&gt;小波变换，傅里叶变换因为无法得知某一个频率是什么时候开始产生的，即在频域中没有时间信息。小波变换让傅里叶变换后的频域具备了时间信息，可以得知频率是什么时候添加进去的。&lt;/p&gt;
 
-&lt;p&gt;离散余弦变换是离散傅里叶变换的一种特殊形式，当输入信号是实偶函数时，离散傅里叶变换公式可以简化为离散余弦变换。&lt;/p&gt;</content><author><name>Yawei</name></author><category term="DSP" /><summary type="html">傅里叶变换是为了将信号从时域分解为频域</summary></entry><entry><title type="html">DSP-FFT（快速傅里叶变换）使用解释</title><link href="https://pfcstyle.github.io/2021/03/25/DSP-FFT-Interpret/" rel="alternate" type="text/html" title="DSP-FFT（快速傅里叶变换）使用解释" /><published>2021-03-25T00:00:00+08:00</published><updated>2021-03-25T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/25/DSP-FFT-Interpret</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/25/DSP-FFT-Interpret/">&lt;blockquote&gt;
-  &lt;p&gt;各种算法真是太多了，我只求怎么用，真的一点也不想知道其内部原理。很多文件把内部原理和理解说的很通透，但最后我却仍然不知道怎么用！很简单，告诉我这个函数的各个参数是什么，返回值都是啥意思就ok了，怎么就这么难？&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;构造fft&quot;&gt;构造FFT&lt;/h1&gt;
-
-&lt;p&gt;我们以iOS vDSP中&lt;a href=&quot;https://developer.apple.com/documentation/kernel/1579997-vdsp_fft_zrip?language=occ&quot;&gt;vDSP_fft_zrip&lt;/a&gt;为例，其第一个参数需要使用&lt;a href=&quot;https://developer.apple.com/documentation/kernel/1580009-vdsp_create_fftsetup?language=occ&quot;&gt;vDSP_create_fftsetup&lt;/a&gt;来构造设置选项。&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;vDSP_fft_zrip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;FFTSetup&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__Setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DSPSplitComplex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vDSP_Stride&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__IC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vDSP_Length&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__Log2N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FFTDirection&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__Direction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;kt&quot;&gt;FFTSetup&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;vDSP_create_fftsetup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vDSP_Length&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__Log2n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;FFTRadix&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__Radix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;注意，并不是所有DSP库都会提供fft的构建选项，很多都是内置了默认Radix为2，所以使用时，直接传入需要变换的信号即可，如python的scipy.fft(signal)。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vDSP_create_fftsetup&lt;/code&gt;使用解释：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;第一个参数：信号的最大长度，要求必须是2的n次方或2的n次方的倍数，比如radix3就是(3*2**Log2n)。实际信号的长度可以小于这个值, 但必须是2的n次方&lt;/li&gt;
-  &lt;li&gt;第二个参数：fft的基数，基数越大，速度越快，但对硬件要求越高&lt;/li&gt;
-  &lt;li&gt;返回值：这是一个用于在fft计算过程中使用的数据结构，它的构建效率比较低，因此建议初始化一次，多个fft共用，取最长的信号长度即可。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vDSP_fft_zrip&lt;/code&gt;使用解释：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;第一个参数：setup，参见上文&lt;/li&gt;
-  &lt;li&gt;第二个参数：信号的复数形式表示，如何转换为复数，见下图，参照：https://developer.apple.com/documentation/accelerate/data_packing_for_fourier_transforms&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2021-03-25/complex.png&quot; alt=&quot;图1&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;第三个参数：步长，就是从第二个参数(信号)每隔几个读取一次，交叉存储的数据结构，性能较低。所以一般都是顺序存储，步长为1。&lt;/li&gt;
-  &lt;li&gt;第四个参数：信号长度&lt;/li&gt;
-  &lt;li&gt;第五个参数：方向。正向(时域转频域)或反向(频域转时域)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;输出：第二个参数为inout类型，因此输出也是存储在第二个参数中。输出的是频域的复数表示。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;fft输出解释：(这里的n为信号长度)
-    &lt;ol&gt;
-      &lt;li&gt;复数索引0，实部为DC(时域值的和 * 2)，虚部为0&lt;/li&gt;
-      &lt;li&gt;复数索引从1到n/2, 包含频域值&lt;/li&gt;
-      &lt;li&gt;复数索引n/2+1为Nyquist部分，实部为余弦分量系数，虚部为0&lt;/li&gt;
-      &lt;li&gt;剩余的部分为第二部分的共轭（镜像）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;vDSP_fft_zrip输出解释：(注意这里的n为信号长度的一半,即复数形式长度)
-    &lt;ol&gt;
-      &lt;li&gt;复数索引0，DC的虚部填上了Nyquist的实部&lt;/li&gt;
-      &lt;li&gt;复数索引从1到n, 记录了频域值&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/post/2021-03-25/output.png&quot; alt=&quot;图2&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;输出的使用：
-    &lt;ol&gt;
-      &lt;li&gt;功率（能量）计算：magnitude[i] = sqrt(real[i] * real[i] + imag[i] * imag[i]), 可以用来表示信号能量强度&lt;/li&gt;
-      &lt;li&gt;频率计算：
-        &lt;ul&gt;
-          &lt;li&gt;i=0为直流分量，即0HZ量，后面从第二个复数开始，频率为0+频谱分辨率,每隔一个加一次。&lt;/li&gt;
-          &lt;li&gt;频谱分辨率deltaF=采样率/n&lt;/li&gt;
-          &lt;li&gt;frequency = deltaF * i&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;幅度计算: a = sqrt(real[i] * real[i] + imag[i] * imag[i]) / (n * 2)&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="DSP" /><category term="iOS" /><summary type="html">各种算法真是太多了，我只求怎么用，真的一点也不想知道其内部原理。很多文件把内部原理和理解说的很通透，但最后我却仍然不知道怎么用！很简单，告诉我这个函数的各个参数是什么，返回值都是啥意思就ok了，怎么就这么难？</summary></entry></feed>
+&lt;p&gt;离散余弦变换是离散傅里叶变换的一种特殊形式，当输入信号是实偶函数时，离散傅里叶变换公式可以简化为离散余弦变换。&lt;/p&gt;</content><author><name>Yawei</name></author><category term="DSP" /><summary type="html">傅里叶变换是为了将信号从时域分解为频域</summary></entry></feed>
