@@ -875,6 +875,14 @@
     } ,
   
     {
+      "title"    : "Remove profile in xcode",
+      "category" : "iOS",
+      "content": "https://stackoverflow.com/questions/26732251/how-to-remove-provisioning-profiles-from-xcode rm ~/Library/MobileDevice/Provisioning   Profiles/*.mobileprovision ",
+      "url"      : "https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode/",
+      "keywords" : "[&quot;iOS&quot;, &quot;profile&quot;]"
+    } ,
+  
+    {
       "title"    : "Badminton",
       "category" : "Hobbies",
       "content": "视频  李在福《Play To Win》完整版   李在福《追球》全集 图文  超全羽毛球技术图解 公众号  和蔡赟聊羽毛球 微信号：caiyunliaoyumaoqiu   羽毛球 微信号：yu-mao-qiu  ",
