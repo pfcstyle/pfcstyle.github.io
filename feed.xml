@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-05-09T12:37:19+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Remove profile in xcode</title><link href="https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode/" rel="alternate" type="text/html" title="Remove profile in xcode" /><published>2021-05-09T00:00:00+08:00</published><updated>2021-05-09T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode/">&lt;p&gt;https://stackoverflow.com/questions/26732251/how-to-remove-provisioning-profiles-from-xcode&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-05-17T19:53:07+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Unable to see XCode/SwiftUI Previews within CocoaPods frameworks</title><link href="https://pfcstyle.github.io/2021/05/17/preview-in-framework/" rel="alternate" type="text/html" title="Unable to see XCode/SwiftUI Previews within CocoaPods frameworks" /><published>2021-05-17T00:00:00+08:00</published><updated>2021-05-17T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/17/preview-in-framework</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/17/preview-in-framework/">&lt;p&gt;https://github.com/CocoaPods/CocoaPods/issues/9275#issuecomment-691032405&lt;/p&gt;
+
+&lt;p&gt;Add this code in your Podfile:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;source 'https://github.com/CocoaPods/Specs.git'
+
+# Add this part ====================================
+class Pod::Target::BuildSettings::AggregateTargetSettings
+  alias_method :ld_runpath_search_paths_original, :ld_runpath_search_paths
+
+  def ld_runpath_search_paths
+      return ld_runpath_search_paths_original unless configuration_name == &quot;Debug&quot;
+      return (ld_runpath_search_paths_original || []) + (framework_search_paths || [])
+  end
+end
+
+class Pod::Target::BuildSettings::PodTargetSettings
+  alias_method :ld_runpath_search_paths_original, :ld_runpath_search_paths
+
+  def ld_runpath_search_paths
+      return (ld_runpath_search_paths_original || []) + (framework_search_paths || [])
+  end
+end
+
+# Add this part ===========================
+
+...
+
+platform :ios, '14.1'
+
+# Write CommonPods dependencies here
+pod 'ArcGIS-Runtime-SDK-iOS', '100.10'
+pod 'Alamofire', '~&amp;gt; 5.2'
+...
+
+target 'yourFramework' do
+...
+
+end
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">https://github.com/CocoaPods/CocoaPods/issues/9275#issuecomment-691032405</summary></entry><entry><title type="html">Remove profile in xcode</title><link href="https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode/" rel="alternate" type="text/html" title="Remove profile in xcode" /><published>2021-05-09T00:00:00+08:00</published><updated>2021-05-09T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode/">&lt;p&gt;https://stackoverflow.com/questions/26732251/how-to-remove-provisioning-profiles-from-xcode&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rm ~/Library/MobileDevice/Provisioning\ Profiles/*.mobileprovision  
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">https://stackoverflow.com/questions/26732251/how-to-remove-provisioning-profiles-from-xcode</summary></entry><entry><title type="html">Talking about a book you’ve read</title><link href="https://pfcstyle.github.io/2021/04/24/talking-about-a-book/" rel="alternate" type="text/html" title="Talking about a book you’ve read" /><published>2021-04-24T00:00:00+08:00</published><updated>2021-04-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/04/24/talking-about-a-book</id><content type="html" xml:base="https://pfcstyle.github.io/2021/04/24/talking-about-a-book/">&lt;h1 id=&quot;key-gramma&quot;&gt;Key gramma&lt;/h1&gt;
@@ -398,37 +438,4 @@
 
 &lt;p&gt;&lt;img src=&quot;../img/post/2021-03-31/generate-init.png&quot; alt=&quot;1&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../img/post/2021-03-31/auto-genarate-init-result.png&quot; alt=&quot;2&quot; /&gt;&lt;/p&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="swift" /><summary type="html">鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择Generate Memberwise Initializer即可。</summary></entry><entry><title type="html">shell命令-chmod, chown, chgrp</title><link href="https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp/" rel="alternate" type="text/html" title="shell命令-chmod, chown, chgrp" /><published>2021-03-30T00:00:00+08:00</published><updated>2021-03-30T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp</id><content type="html" xml:base="https://pfcstyle.github.io/2021/03/30/shell-chmod-chown-chgrp/">&lt;h1 id=&quot;chmod&quot;&gt;chmod&lt;/h1&gt;
-&lt;p&gt;此命令用来更改某个文件对于&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;文件所有者&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;群组&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;其他人&lt;/code&gt;三种角色的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;读&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;写&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;执行&lt;/code&gt;权限。权限表示：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;r(Read，读取，权限值为4)：对文件而言，具有读取文件内容的权限；对目录来说，具有浏览目 录的权限。
-w(Write,写入，权限值为2)：对文件而言，具有新增、修改文件内容的权限；对目录来说，具有删除、移动目录内文件的权限。
-x(eXecute，执行，权限值为1)：对文件而言，具有执行文件的权限；对目录了来说该用户具有进入目录的权限。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;对于每一个角色，都包含rwx三种权限，如下表：
-rwx rw- r–	764
-rw- r– r–	644
-rw- rw- r–	664&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 对单文件&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;chmod &lt;/span&gt;777 test.out
-
-&lt;span class=&quot;c&quot;&gt;# 对文件夹&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; 764 ~/test/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;chown&quot;&gt;chown&lt;/h1&gt;
-&lt;p&gt;此命令用来修改文件所属组或用户&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# 将test.out的owner改为yusi
-chown yusi test.out
-# 将test目录及其子目录（包括文件）的owner改为user, 把所属组改为users
-chown -R user.users ~/test/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;chgrp&quot;&gt;chgrp&lt;/h1&gt;
-&lt;p&gt;此命令专门更改所属组&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# 将 ~/test 和 /usr/local/bin两个文件目录的属组更改为users
-chgrp -R users ~/test /usr/local/bin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="shell" /><category term="linux" /><summary type="html">chmod 此命令用来更改某个文件对于文件所有者, 群组和其他人三种角色的读, 写和执行权限。权限表示：</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;../img/post/2021-03-31/auto-genarate-init-result.png&quot; alt=&quot;2&quot; /&gt;&lt;/p&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="swift" /><summary type="html">鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择Generate Memberwise Initializer即可。</summary></entry></feed>
