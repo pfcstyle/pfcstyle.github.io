@@ -96,6 +96,8 @@
   
   
   
+  
+  
 
   
     {
@@ -895,6 +897,22 @@
       "category" : "English",
       "content": " Where do you live? I’m an only child. Frank dances / doesn’t dance. 弗兰克会/不会跳舞 不需要can What does he look like? Who? What dose who look like? ",
       "url"      : "https://pfcstyle.github.io/2021/05/23/life-sentence/",
+      "keywords" : "[&quot;English&quot;, &quot;Communicating&quot;]"
+    } ,
+  
+    {
+      "title"    : "SwiftUI Property Wrapper使用注意",
+      "category" : "swift",
+      "content": " @Binding改变不会触发SwiftUI的更新, 这只取决于根变量是否是类似@State, Publisher或者ObservableObject等 @State可以再init中初始化  //这俩暂未发现不同 _stateVar = State(initialValue: settingItem.wrappedValue) _stateVar = State(wrappedValue: settingItem.wrappedValue)   使用@Binding希望内部组件更新  @Binding var settingItem: SparkFormItem{ willSet{ settingItemState = newValue // settingItemState是@State变量 } }   @Binding定义的变量，在初始化时，不会改变wrapper值  @Binding var settingItem: SparkFormItem init(settingItem: Binding&lt;SparkFormItem&gt;) { _settingItem = settingItem // 这里_settingItem的初始化不会改变self.settingItem的值 }   @environment和@environmentObject同样不会触发ui的刷新，需要Publisher或者ObservableObject等支持 @environment和@environmentObject可以在整个view结构中共享，但是遇到navigation link时就会断掉 ",
+      "url"      : "https://pfcstyle.github.io/2021/05/26/iOS-SwiftUI-property-wrapper-skill/",
+      "keywords" : "[&quot;iOS&quot;, &quot;swift&quot;, &quot;SwiftUI&quot;, &quot;@Binding&quot;]"
+    } ,
+  
+    {
+      "title"    : "Describe a challenge",
+      "category" : "English",
+      "content": "The hardest thing I’ve ever had to do… key words and phrases In spite of … Regardless of …  Despite … determined resolute steadfast unshakeable unwavering Example In spite of the fact that increasing weight is very hard, I will be unwavering until I increase my weight. In spite of the fact there are a lot of words and grammar in English, my determination to learn English is unshakeable. In spite of the journey being challenging, I’m determined to keep moving. Regardles of the fact that the day is rainy, I’ll hang out with my friends. ",
+      "url"      : "https://pfcstyle.github.io/2021/05/27/describe-a-challenge/",
       "keywords" : "[&quot;English&quot;, &quot;Communicating&quot;]"
     } ,
   
