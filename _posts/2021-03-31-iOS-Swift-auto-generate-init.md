@@ -13,6 +13,6 @@ keywords:
 
 鼠标放在class或者struct名称上，按住cmd+鼠标右键，选择`Generate Memberwise Initializer`即可。
 
-![1](../img/post/2021-03-31/generate-init.png)
+![1](/img/post/2021-03-31/generate-init.png)
 
-![2](../img/post/2021-03-31/auto-genarate-init-result.png)
+![2](/img/post/2021-03-31/auto-genarate-init-result.png)

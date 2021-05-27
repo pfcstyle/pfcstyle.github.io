@@ -35,7 +35,7 @@ keywords:
 
 # 测试结果
 
-![result](../img/post/2021-02-19/compare-result.png)
+![result](/img/post/2021-02-19/compare-result.png)
 
 # 对比总结
 

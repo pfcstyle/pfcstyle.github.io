@@ -97,7 +97,7 @@ c2: (3, "c")
 
 有时会遇到如下图的问题，多个subscriber订阅同一个publisher，新的subscriber在订阅时，publisher可能已经emit一部分数据了。为了保证所有的subsciber都订阅以后publisher再开始执行，这就需要用到Connectable Publishers.
 
-![](../img/post/2021-02-24/connectable-publisher.png)
+![](/img/post/2021-02-24/connectable-publisher.png)
 
 想要生成Connectable Publishers，只需要让publisher执行`makeConnectable()`operator即可，如下代码所示。当所有的subscriber都注册好之后，执行`.connect`函数即可让publisher开始执行
 
