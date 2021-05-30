@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-05-29T22:07:06+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Describe a challenge</title><link href="https://pfcstyle.github.io/2021/05/29/describe-a-scary-story/" rel="alternate" type="text/html" title="Describe a challenge" /><published>2021-05-29T00:00:00+08:00</published><updated>2021-05-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/29/describe-a-scary-story</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/29/describe-a-scary-story/">&lt;h1 id=&quot;elements-of-a-scary-story&quot;&gt;Elements of a scary story&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-05-30T21:01:25+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Describe a challenge</title><link href="https://pfcstyle.github.io/2021/05/29/describe-a-scary-story/" rel="alternate" type="text/html" title="Describe a challenge" /><published>2021-05-29T00:00:00+08:00</published><updated>2021-05-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/29/describe-a-scary-story</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/29/describe-a-scary-story/">&lt;h1 id=&quot;elements-of-a-scary-story&quot;&gt;Elements of a scary story&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;weird atmosphere&lt;/li&gt;
@@ -36,7 +36,15 @@
   &lt;li&gt;&lt;del&gt;I was happen.&lt;/del&gt; It happened.&lt;/li&gt;
   &lt;li&gt;&lt;del&gt;It is very scared.&lt;/del&gt; It is very scary.&lt;/li&gt;
   &lt;li&gt;Whisper in someone’s ear.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Elements of a scary story</summary></entry><entry><title type="html">Describe a challenge</title><link href="https://pfcstyle.github.io/2021/05/27/describe-a-challenge/" rel="alternate" type="text/html" title="Describe a challenge" /><published>2021-05-27T00:00:00+08:00</published><updated>2021-05-27T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/27/describe-a-challenge</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/27/describe-a-challenge/">&lt;p&gt;The hardest thing I’ve ever had to do…&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Elements of a scary story</summary></entry><entry><title type="html">Describe a challenge</title><link href="https://pfcstyle.github.io/2021/05/29/who-does-chores/" rel="alternate" type="text/html" title="Describe a challenge" /><published>2021-05-29T00:00:00+08:00</published><updated>2021-05-29T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/29/who-does-chores</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/29/who-does-chores/">&lt;h1 id=&quot;elements-of-a-scary-story&quot;&gt;Elements of a scary story&lt;/h1&gt;
+
+&lt;p&gt;In my home both my husband and myself do the chores.&lt;/p&gt;
+
+&lt;p&gt;I hire people to the painting.&lt;/p&gt;
+
+&lt;p&gt;She had the windows washed yesterday. // This means she hired someone to wash the window&lt;/p&gt;
+
+&lt;p&gt;I washed the windows yesterday. // This means I washed the window myself.&lt;/p&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Elements of a scary story</summary></entry><entry><title type="html">Describe a challenge</title><link href="https://pfcstyle.github.io/2021/05/27/describe-a-challenge/" rel="alternate" type="text/html" title="Describe a challenge" /><published>2021-05-27T00:00:00+08:00</published><updated>2021-05-27T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/27/describe-a-challenge</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/27/describe-a-challenge/">&lt;p&gt;The hardest thing I’ve ever had to do…&lt;/p&gt;
 &lt;h1 id=&quot;key-words-and-phrases&quot;&gt;key words and phrases&lt;/h1&gt;
 &lt;ul&gt;
   &lt;li&gt;In spite of …&lt;/li&gt;
@@ -238,41 +246,4 @@ end
 
 &lt;h1 id=&quot;如何使用&quot;&gt;如何使用&lt;/h1&gt;
 
-&lt;p&gt;异步函数的闭包，就使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@escaping&lt;/code&gt;，比如网络请求，response应该放在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@escaping&lt;/code&gt;闭包中。同步函数则直接使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@nonescaping&lt;/code&gt;&lt;/p&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="swift" /><summary type="html">@escaping closure</summary></entry><entry><title type="html">Facilitating an online meeting</title><link href="https://pfcstyle.github.io/2021/04/18/Facilitating-an-online-meeting/" rel="alternate" type="text/html" title="Facilitating an online meeting" /><published>2021-04-18T00:00:00+08:00</published><updated>2021-04-18T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/04/18/Facilitating-an-online-meeting</id><content type="html" xml:base="https://pfcstyle.github.io/2021/04/18/Facilitating-an-online-meeting/">&lt;h1 id=&quot;key-words&quot;&gt;Key words&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;There’s a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;15-hour&lt;/code&gt; &lt;strong&gt;time difference&lt;/strong&gt; between Los Angeles and Shanghai.&lt;/li&gt;
-  &lt;li&gt;We had some problems with the &lt;strong&gt;connection&lt;/strong&gt; in the meeting.&lt;/li&gt;
-  &lt;li&gt;Sorry, but I’m hearing an &lt;strong&gt;echo&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Could you please &lt;strong&gt;mute your mike&lt;/strong&gt; when you’re not speaking?&lt;/li&gt;
-  &lt;li&gt;Excuse me, but I can hear someone &lt;strong&gt;typing&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Give me a minute while I adjust my &lt;strong&gt;headset&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;dialogue&quot;&gt;Dialogue&lt;/h1&gt;
-
-&lt;p&gt;JAKE: Good morning over there. Who’s on your end ?&lt;/p&gt;
-
-&lt;p&gt;TERRY: Terry here, Jake. Good evening to you. Helen’s in the room with me as well.&lt;/p&gt;
-
-&lt;p&gt;HELEN: Yeah, good evening.&lt;/p&gt;
-
-&lt;p&gt;JAKE: Great. Can you two hear me all right?&lt;/p&gt;
-
-&lt;p&gt;HELEN: Yeah, pretty good connection. A little bit of an echo, but not too bad.&lt;/p&gt;
-
-&lt;p&gt;JAKE: OK, so let’s get started. We only have two items on the agenda , but I wanted to make sure I spoke to you in person on the second point. And if you could do me a favor, please mute your mike when you’re not speaking. I can hear someone typing.&lt;/p&gt;
-
-&lt;p&gt;TERRY: Sorry about that.&lt;/p&gt;
-
-&lt;p&gt;JAKE: No problem. My headset is really sensitive. Anyway, the two items I’d like to discuss with you today are the software project and also some news regarding our CFO. Did either of you have anything you’d like to add to the agenda?&lt;/p&gt;
-
-&lt;p&gt;HELEN: Not me.&lt;/p&gt;
-
-&lt;p&gt;TERRY: Me neither.&lt;/p&gt;
-
-&lt;h1 id=&quot;other-sentences&quot;&gt;other sentences&lt;/h1&gt;
-
-&lt;p&gt;To recap(In conclusion), we’re looking for a new CFO&lt;/p&gt;
-
-&lt;p&gt;Let’s move on to the second point&lt;/p&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key words</summary></entry></feed>
+&lt;p&gt;异步函数的闭包，就使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@escaping&lt;/code&gt;，比如网络请求，response应该放在&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@escaping&lt;/code&gt;闭包中。同步函数则直接使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@nonescaping&lt;/code&gt;&lt;/p&gt;</content><author><name>Yawei</name></author><category term="iOS" /><category term="swift" /><summary type="html">@escaping closure</summary></entry></feed>
