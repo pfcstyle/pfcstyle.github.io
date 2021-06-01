@@ -48,12 +48,11 @@ k8s日志分为两块儿：
 ## LogAgent方案实践
 ![remote store](/img/post/2021-02-15/agent-practice.png)
 
-### [LogPilot](https://github.com/AliyunContainerService/log-pilot)
-阿里开源日志采集工具，支持动态配置，对容器更加友好。本质上是对静态日志采集工具的包装，目前支持[Fluentd Plugin](https://github.com/AliyunContainerService/log-pilot/blob/master/docs/fluentd/docs.md)和[Filebeat Plugin](https://github.com/AliyunContainerService/log-pilot/blob/master/docs/filebeat/docs.md)
+[LogPilot](https://github.com/AliyunContainerService/log-pilot)是阿里开源日志采集工具，支持动态配置，对容器更加友好。本质上是对静态日志采集工具的包装，目前支持[Fluentd Plugin](https://github.com/AliyunContainerService/log-pilot/blob/master/docs/fluentd/docs.md)和[Filebeat Plugin](https://github.com/AliyunContainerService/log-pilot/blob/master/docs/filebeat/docs.md)
 * 智能的容器日志采集工具
 * 自动发现
 
-## Elasticsearch
+### Elasticsearch
 
 ```yaml
 ---
@@ -122,9 +121,9 @@ spec:
       - name: elasticsearch
         image: elasticsearch:5.5.1
         ports:
-        - containerPort: 9200
+        - containerPort: 9200 #外部resetfutl接口
           protocol: TCP
-        - containerPort: 9300
+        - containerPort: 9300 #内部通信接口
           protocol: TCP
         securityContext:
           capabilities:
@@ -183,5 +182,103 @@ spec:
 
 ```
 
-# log-pilot
+#### 部署es
 
+```bash
+kubectl apply -f elasticsearch.yaml
+
+# 检查部署
+kubectl get svc -n kube-system
+kubectl get statefulset -n kube-system
+```
+![es检查](/img/post/2021-02-15/es-check.png)
+
+### log-pilot
+```yaml
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: log-pilot
+  namespace: kube-system
+  labels:
+    k8s-app: log-pilot
+    kubernetes.io/cluster-service: "true"
+spec:
+  selector:
+    matchLabels:
+      k8s-app: log-es # must specify a pod selector (spec.selector) that matches the labels of the (.spec.template.metadata.labels)
+  template:
+    metadata:
+      labels:
+        k8s-app: log-es # <------ matches this one
+        kubernetes.io/cluster-service: "true"
+        version: v1.22
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      serviceAccountName: kubernetes-dashboard
+      containers:
+      - name: log-pilot
+        image: log-pilot:0.9-filebeat
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        env:
+          - name: "FILEBEAT_OUTPUT"
+            value: "elasticsearch"
+          - name: "ELASTICSEARCH_HOST"
+            value: "elasticsearch-api"
+          - name: "ELASTICSEARCH_PORT"
+            value: "9200"
+          - name: "ELASTICSEARCH_USER"
+            value: "elastic"
+          - name: "ELASTICSEARCH_PASSWORD"
+            value: "changeme"
+        volumeMounts:
+        - name: sock
+          mountPath: /var/run/docker.sock
+        - name: root
+          mountPath: /host
+          readOnly: true
+        - name: varlib
+          mountPath: /var/lib/filebeat
+        - name: varlog
+          mountPath: /var/log/filebeat
+        securityContext:
+          capabilities:
+            add:
+            - SYS_ADMIN
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: sock
+        hostPath:
+          path: /var/run/docker.sock
+      - name: root
+        hostPath:
+          path: /
+      - name: varlib
+        hostPath:
+          path: /var/lib/filebeat
+          type: DirectoryOrCreate
+      - name: varlog
+        hostPath:
+          path: /var/log/filebeat
+          type: DirectoryOrCreate
+
+
+```
+#### log-pilot 部署
+
+```bash
+kubectl apply -f log-pilot.yaml
+
+# 检查
+kubectl get ds -n kube-system
+```
+> 第一次需要下载镜像，因此会比较慢，可以使用`kubectl describe ds log-pilot -n kube-system`查看状态
+![logpilot检查](/img/post/2021-02-15/logpilot-check.png)
