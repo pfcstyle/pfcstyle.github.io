@@ -14,3 +14,4 @@ keywords:
 - I'm an only child.
 - Frank dances / doesn't dance. 弗兰克会/不会跳舞 `不需要can`
 - What does he look like? Who? What dose who look like?
+- Variety show

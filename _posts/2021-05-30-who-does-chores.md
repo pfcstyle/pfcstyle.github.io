@@ -1,8 +1,8 @@
 ---
 layout:		post
-title:		"Describe a challenge"
+title:		"Who does chores"
 description: ""
-date:		2021-05-29
+date:		2021-05-30
 author:		"Yawei"
 categories: "English"
 keywords:
@@ -10,7 +10,7 @@ keywords:
     - Communicating
 ---
 
-# Elements of a scary story
+# Some sentences
 
 In my home both my husband and myself do the chores.
 
