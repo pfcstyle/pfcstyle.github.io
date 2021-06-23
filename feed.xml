@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-06-15T18:08:14+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Xcode: unsupported OS version for new iOS</title><link href="https://pfcstyle.github.io/2021/06/10/xcode-unsupported-os-version/" rel="alternate" type="text/html" title="Xcode: unsupported OS version for new iOS" /><published>2021-06-10T00:00:00+08:00</published><updated>2021-06-10T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/06/10/xcode-unsupported-os-version</id><content type="html" xml:base="https://pfcstyle.github.io/2021/06/10/xcode-unsupported-os-version/">&lt;p&gt;You can download device support file from &lt;a href=&quot;https://github.com/iGhibli/iOS-DeviceSupport/tree/master/DeviceSupport&quot;&gt;GitHub&lt;/a&gt;, then add it in path &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/Applications/Xcode.app/contents/Developer/platform/iPhoneOS.platform/DeviceSupport&lt;/code&gt;&lt;/p&gt;</content><author><name>Yawei</name></author><category term="Xcode" /><summary type="html">You can download device support file from GitHub, then add it in path /Applications/Xcode.app/contents/Developer/platform/iPhoneOS.platform/DeviceSupport</summary></entry><entry><title type="html">Describe your hometown</title><link href="https://pfcstyle.github.io/2021/06/06/describe-your-home/" rel="alternate" type="text/html" title="Describe your hometown" /><published>2021-06-06T00:00:00+08:00</published><updated>2021-06-06T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/06/06/describe-your-home</id><content type="html" xml:base="https://pfcstyle.github.io/2021/06/06/describe-your-home/">&lt;p&gt;scenic spot&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://pfcstyle.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://pfcstyle.github.io/" rel="alternate" type="text/html" /><updated>2021-06-23T13:54:47+08:00</updated><id>https://pfcstyle.github.io/feed.xml</id><title type="html">01手记</title><subtitle>Will的个人手记</subtitle><author><name>Yawei Wang</name></author><entry><title type="html">Android Reverse - Edit package name</title><link href="https://pfcstyle.github.io/2021/06/21/android-reverse-edit-package-name/" rel="alternate" type="text/html" title="Android Reverse - Edit package name" /><published>2021-06-21T00:00:00+08:00</published><updated>2021-06-21T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/06/21/android-reverse-edit-package-name</id><content type="html" xml:base="https://pfcstyle.github.io/2021/06/21/android-reverse-edit-package-name/">&lt;ol&gt;
+  &lt;li&gt;修改Manifest.xml中的package标签&lt;/li&gt;
+  &lt;li&gt;修改Manifest.xml中的所有Provider标签下的所有包名和package一致&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="Android" /><category term="Reverse" /><summary type="html">修改Manifest.xml中的package标签 修改Manifest.xml中的所有Provider标签下的所有包名和package一致</summary></entry><entry><title type="html">Android Reverse - Remove AD</title><link href="https://pfcstyle.github.io/2021/06/21/android-reverse-remove-ad/" rel="alternate" type="text/html" title="Android Reverse - Remove AD" /><published>2021-06-21T00:00:00+08:00</published><updated>2021-06-21T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/06/21/android-reverse-remove-ad</id><content type="html" xml:base="https://pfcstyle.github.io/2021/06/21/android-reverse-remove-ad/">&lt;ol&gt;
+  &lt;li&gt;删除网络权限&lt;/li&gt;
+  &lt;li&gt;对于入口广告，可以从Main Activity入手，直接替换掉广告Activity&lt;/li&gt;
+  &lt;li&gt;替换广告URL&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Yawei</name></author><category term="Android" /><category term="Reverse" /><summary type="html">删除网络权限 对于入口广告，可以从Main Activity入手，直接替换掉广告Activity 替换广告URL</summary></entry><entry><title type="html">Xcode: unsupported OS version for new iOS</title><link href="https://pfcstyle.github.io/2021/06/10/xcode-unsupported-os-version/" rel="alternate" type="text/html" title="Xcode: unsupported OS version for new iOS" /><published>2021-06-10T00:00:00+08:00</published><updated>2021-06-10T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/06/10/xcode-unsupported-os-version</id><content type="html" xml:base="https://pfcstyle.github.io/2021/06/10/xcode-unsupported-os-version/">&lt;p&gt;You can download device support file from &lt;a href=&quot;https://github.com/iGhibli/iOS-DeviceSupport/tree/master/DeviceSupport&quot;&gt;GitHub&lt;/a&gt;, then add it in path &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/Applications/Xcode.app/contents/Developer/platform/iPhoneOS.platform/DeviceSupport&lt;/code&gt;&lt;/p&gt;</content><author><name>Yawei</name></author><category term="Xcode" /><summary type="html">You can download device support file from GitHub, then add it in path /Applications/Xcode.app/contents/Developer/platform/iPhoneOS.platform/DeviceSupport</summary></entry><entry><title type="html">Describe your hometown</title><link href="https://pfcstyle.github.io/2021/06/06/describe-your-home/" rel="alternate" type="text/html" title="Describe your hometown" /><published>2021-06-06T00:00:00+08:00</published><updated>2021-06-06T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/06/06/describe-your-home</id><content type="html" xml:base="https://pfcstyle.github.io/2021/06/06/describe-your-home/">&lt;p&gt;scenic spot&lt;/p&gt;
 
 &lt;p&gt;flat area&lt;/p&gt;
 
@@ -148,43 +155,4 @@ target 'yourFramework' do
 
 end
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">https://github.com/CocoaPods/CocoaPods/issues/9275#issuecomment-691032405</summary></entry><entry><title type="html">Remove profile in xcode</title><link href="https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode/" rel="alternate" type="text/html" title="Remove profile in xcode" /><published>2021-05-09T00:00:00+08:00</published><updated>2021-05-09T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode</id><content type="html" xml:base="https://pfcstyle.github.io/2021/05/09/remove-profile-in-xcode/">&lt;p&gt;https://stackoverflow.com/questions/26732251/how-to-remove-provisioning-profiles-from-xcode&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rm ~/Library/MobileDevice/Provisioning\ Profiles/*.mobileprovision  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">https://stackoverflow.com/questions/26732251/how-to-remove-provisioning-profiles-from-xcode</summary></entry><entry><title type="html">Talking about a book you’ve read</title><link href="https://pfcstyle.github.io/2021/04/24/talking-about-a-book/" rel="alternate" type="text/html" title="Talking about a book you’ve read" /><published>2021-04-24T00:00:00+08:00</published><updated>2021-04-24T00:00:00+08:00</updated><id>https://pfcstyle.github.io/2021/04/24/talking-about-a-book</id><content type="html" xml:base="https://pfcstyle.github.io/2021/04/24/talking-about-a-book/">&lt;h1 id=&quot;key-gramma&quot;&gt;Key gramma&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Once upon a time, ago&lt;/li&gt;
-  &lt;li&gt;It’s my favorite book of all time&lt;/li&gt;
-  &lt;li&gt;It’s about Elizabeth, an honest, lively, witty girl&lt;/li&gt;
-  &lt;li&gt;She almost missed her opportunity.&lt;/li&gt;
-  &lt;li&gt;Make a bad first impression&lt;/li&gt;
-  &lt;li&gt;Although those who know him well  konw that he is kindhearted&lt;/li&gt;
-  &lt;li&gt;They are meant to be together&lt;/li&gt;
-  &lt;li&gt;They both tend judge people too quickly&lt;/li&gt;
-  &lt;li&gt;Get over their initial impressions of each other&lt;/li&gt;
-  &lt;li&gt;Something is bringing them together. //天意让他们走到了一起&lt;/li&gt;
-  &lt;li&gt;Who wouldn’t want the perfect ending?&lt;/li&gt;
-  &lt;li&gt;Darcy sees Elizabeth as cold and sharp tongued&lt;/li&gt;
-  &lt;li&gt;She does say some mean things to him&lt;/li&gt;
-  &lt;li&gt;The funny thing is, they keep running into each other.  // 有趣的是，他们老是相遇。&lt;/li&gt;
-  &lt;li&gt;They fall in love and live happily ever after.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;I can appreciate a perfect ending in a book, but it rarely seems believable.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;He heard a knock at the door, so he opened it.&lt;/li&gt;
-  &lt;li&gt;I’ve been reading an amazing book. Right now, the characters are lost in a mysterious, dark forest.&lt;/li&gt;
-  &lt;li&gt;All of the characters have eaten way too much. Suddenly, one of them burps.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;He said that they were meant to be together. Now he has proposed marriage.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;What kind of book is it?&lt;/li&gt;
-  &lt;li&gt;Social commentary.   Romance.   Fiction.  It’s part social commentary, part fantasy.&lt;/li&gt;
-  &lt;li&gt;What’s the plot?&lt;/li&gt;
-  &lt;li&gt;The setting is Oklahoma during the Great Depression. It’s about a farming family that leaves its home to look for a better future in California.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;It’s a love story about a young woman, but it’s really about human behavior. It takes place in Alabama in the mid-1930s.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;theme&lt;/li&gt;
-  &lt;li&gt;One of the themes is how your family can save you from the difficulties of daily life.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Yawei</name></author><category term="English" /><summary type="html">Key gramma</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Yawei</name></author><category term="iOS" /><summary type="html">https://github.com/CocoaPods/CocoaPods/issues/9275#issuecomment-691032405</summary></entry></feed>

@@ -957,6 +957,22 @@
     } ,
   
     {
+      "title"    : "Android Reverse - Edit package name",
+      "category" : "Android",
+      "content": " 修改Manifest.xml中的package标签 修改Manifest.xml中的所有Provider标签下的所有包名和package一致 ",
+      "url"      : "https://pfcstyle.github.io/2021/06/21/android-reverse-edit-package-name/",
+      "keywords" : "[&quot;Android Reverse&quot;]"
+    } ,
+  
+    {
+      "title"    : "Android Reverse - Remove AD",
+      "category" : "Android",
+      "content": " 删除网络权限 对于入口广告，可以从Main Activity入手，直接替换掉广告Activity 替换广告URL ",
+      "url"      : "https://pfcstyle.github.io/2021/06/21/android-reverse-remove-ad/",
+      "keywords" : "[&quot;Android Reverse&quot;]"
+    } ,
+  
+    {
       "title"    : "Badminton",
       "category" : "Hobbies",
       "content": "视频  李在福《Play To Win》完整版   李在福《追球》全集 图文  超全羽毛球技术图解 公众号  和蔡赟聊羽毛球 微信号：caiyunliaoyumaoqiu   羽毛球 微信号：yu-mao-qiu  ",
