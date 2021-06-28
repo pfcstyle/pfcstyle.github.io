@@ -98,6 +98,8 @@
   
   
   
+  
+  
 
   
     {
@@ -338,6 +340,30 @@
       "content": "常用方法 Class 反射创建 通过字符串创建类：Class // 方式1 NSClassFromString(@NSObject); // 方式2 objc_getClass(NSObject); SEL 反射创建 通过字符串创建方法 selector // 方式1 @selector(init); // 方式2 sel_registerName(init); // 方式3 NSSelectorFromString(@init); 方法替换/交换 方法替换：class_replaceMethod 方法交换：method_exchangeImplementations // 方法替换 - (void)methodReplace {  Method methodA = class_getInstanceMethod(self.class, @selector(myMethodA));  IMP impA = method_getImplementation(methodA);  class_replaceMethod(self.class, @selector(myMethodC), impA, method_getTypeEncoding(methodA));  // print: myMethodA  [self myMethodC]; } // 方法交换 - (void)methodExchange {  Method methodA = class_getInstanceMethod(self.class, @selector(myMethodA));  Method methodB = class_getInstanceMethod(self.class, @selector(myMethodB));  method_exchangeImplementations(methodA, methodB);  // print: myMethodB  [self myMethodA];  // print: myMethodA  [self myMethodB]; } - (void)myMethodA {  NSLog(@myMethodA); } - (void)myMethodB {  NSLog(@myMethodB); } - (void)myMethodC {  NSLog(@myMethodC); } 新增类 通过字符串动态新增一个类  首先创建新类：objc_allocateClassPair 然后注册新创建的类：objc_registerClassPair 这里有个小知识点，为什么类创建的方法名是objc_allocateClassPair，而不是objc_allocateClass呢？这是因为它同时创建了一个类(class)和元类(metaclass)。关于元类可以看这篇文章：What is a meta-class in Objective-C? - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  [self addNewClassPair];  Class MyObject = NSClassFromString(@MyObject);  NSObject *myObj = [[MyObject alloc] init];  [myObj performSelector:@selector(sayHello)]; return YES; } - (void)addNewClassPair {  Class myCls = objc_allocateClassPair([NSObject class], MyObject, 0);  objc_registerClassPair(myCls);  [self addNewMethodWithClass:myCls]; } 新增方法 新增方法：class_addMethod 这里也有个小知识点，就是使用特定字符串描述方法返回值和参数，例如：v@:。其具体映射关系请移步：Type Encodings void sayHello(id self, SEL _cmd) {  NSLog(@%@ %s, self, __func__); } - (void)addNewMethodWithClass:(Class)targetClass {  class_addMethod(targetClass, @selector(sayHello), (IMP)sayHello, v@:); } 消息转发 当给对象发送消息时，如果对象没有找到对应的方法实现，那么就会进入正常的消息转发流程。其主要流程如下： // 1.运行时动态添加方法 + (BOOL)resolveInstanceMethod:(SEL)sel // 2.快速转发 - (id)forwardingTargetForSelector:(SEL)aSelector // 3.构建方法签名 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector // 4.消息转发 - (void)forwardInvocation:(NSInvocation *)anInvocation 其中最后的forwardInvocation:会传递一个NSInvocation对象（Ps：NSInvocation 可以理解为是消息发送objc_msgSend(void id self, SEL op, ... )的对象）。NSInvocation 包含了这个方法调用的所有信息：selector、参数类型、参数值和返回值类型。此外，你还可以去更改参数值和返回值。 除了上面的正常消息转发，我们还可以借助_objc_msgForward方法让消息强制转发。 Method methodA = class_getInstanceMethod(self.class, @selector(myMethodA)); IMP impA = method_getImplementation(methodA); IMP msgForwardIMP = _objc_msgForward; // 替换 myMethodA 的实现后，每次调用 myMethodA 都会进入消息转发 class_replaceMethod(self.class, @selector(myMethodC), msgForwardIMP, method_getTypeEncoding(methodA)); Method 调用方式  常规调用 反射调用 objc_msgSend C 函数调用 NSInvocation 调用 @interface People : NSObject - (void)helloWorld; @end // 常规调用 People *people = [[People alloc] init]; [people helloWorld]; // 反射调用  Class cls = NSClassFromString(@People); id obj = [[cls alloc] init]; [obj performSelector:NSSelectorFromString(@helloWorld)]; // objc_msgSend ((void(*)(id, SEL))objc_msgSend)(people, sel_registerName(helloWorld)); // C 函数调用 Method initMethod = class_getInstanceMethod([People class], @selector(helloWorld)); IMP imp = method_getImplementation(initMethod); ((void (*) (id, SEL))imp)(people, @selector(helloWorld)); // NSInvocation 调用 NSMethodSignature *sig = [[People class] instanceMethodSignatureForSelector:sel_registerName(helloWorld)]; NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig]; invocation.target = people; invocation.selector = sel_registerName(helloWorld); [invocation invoke]; 第五种 NSInvocation 调用 是热修复调用任意OC方法的核心基础。通过 NSInvocation 不但可以自定义函数的参数值和返回值，而且还可以自定义方法：selector 和消息接收对象：target。因此，我们可以通过字符串的方式构建任意OC方法调用。 ",
       "url"      : "https://pfcstyle.github.io/2017/01/07/iOS-oc-runtime-2/",
       "keywords" : "[&quot;iOS&quot;, &quot;OC&quot;, &quot;Runtime&quot;]"
+    } ,
+  
+    {
+      "title"    : "Android Reverse - Edit package name",
+      "category" : "Android",
+      "content": " 修改Manifest.xml中的package标签 修改Manifest.xml中的所有Provider标签下的所有包名和package一致 ",
+      "url"      : "https://pfcstyle.github.io/2017/01/14/android-reverse-edit-package-name/",
+      "keywords" : "[&quot;Android Reverse&quot;]"
+    } ,
+  
+    {
+      "title"    : "Android Reverse - Remove AD",
+      "category" : "Android",
+      "content": " 删除网络权限 对于入口广告，可以从Main Activity入手，直接替换掉广告Activity 替换广告URL ",
+      "url"      : "https://pfcstyle.github.io/2017/01/21/android-reverse-remove-ad-copy/",
+      "keywords" : "[&quot;Android Reverse&quot;]"
+    } ,
+  
+    {
+      "title"    : "Android Reverse - Dynamic Debug by Android studio and ideasmali",
+      "category" : "Android",
+      "content": "工具准备  Android Studio安装 ideasmali插件下载：https://github.com/JesusFreke/smalidea 前置操作 在使用Android Studio动态调试前，需要先获得smali代码工程，可以选择使用AndroidKiller(APK改之理)或者Jadx。 AndroidKiller生成smali项目默认路径：AndroidKiller安装目录/projects/[应用名]/Project Jadx: 导出gradle工程： File -&gt; Save as gradle project 记得先修改这些工程的manifest文件，添加上android:debuggable=true 安装ideasmali插件 需要注意的是，新版本的Android Studio已经内置了smali的插件，这会覆盖smaliidea，导致在动态调试时看不到变量值。 根据下图，删除上面这个smali的.smali配置，为下面这个smali配置上.smali。 Android Studio导入smali工程并调试 选择File-&gt;New-&gt;Import Project，选择Gradle工程，导入smaili项目即可。 右键将根目录标记为Source Root File-&gt;Project Structure设置Android SDK版本与手机系统版本相同 配置调试 这里的核心关键是要使Attach debugger按钮能用，所以只需要添加一个Android app的配置项即可 开始调试  安装apk到手机或模拟器 adb install output.apk   启动调试 ``` adb shell am start -D -n 包名/activity全名 Example adb shell am start -D -n com.test.example/com.test.example.SplashActivity ``` Attach到progress 添加断点运行到指定位置就会自动断下来了 ",
+      "url"      : "https://pfcstyle.github.io/2019/01/22/android-reverse-AS-smali/",
+      "keywords" : "[&quot;Android Reverse&quot;, &quot;Android Studio&quot;, &quot;smaliidea&quot;]"
     } ,
   
     {
@@ -957,18 +983,10 @@
     } ,
   
     {
-      "title"    : "Android Reverse - Edit package name",
+      "title"    : "Android Reverse - The APK exported from AndroidKiller can&#39;t be installed",
       "category" : "Android",
-      "content": " 修改Manifest.xml中的package标签 修改Manifest.xml中的所有Provider标签下的所有包名和package一致 ",
-      "url"      : "https://pfcstyle.github.io/2021/06/21/android-reverse-edit-package-name/",
-      "keywords" : "[&quot;Android Reverse&quot;]"
-    } ,
-  
-    {
-      "title"    : "Android Reverse - Remove AD",
-      "category" : "Android",
-      "content": " 删除网络权限 对于入口广告，可以从Main Activity入手，直接替换掉广告Activity 替换广告URL ",
-      "url"      : "https://pfcstyle.github.io/2021/06/21/android-reverse-remove-ad/",
+      "content": "问题 使用AndroidKiller编译签名的apk无法安装，报错： Targeting R+ (version 30 and above) requires the resources.arsc of installed APKs to be stored uncompressed and aligned on a 4-byte boundary 这是因为没有4k对齐导致的问题，可以通过使用zipalign工具手动对齐 zipalign工具目录：G:  AndroidSDK  build-tools  30.0.2, 基本各个版本的Android都有，选一个即可 zipalign -f -p 4 input.apk output.apk 注意，需要先对齐，再签名。因为新版现在都要求使用v2及以上的签名版本，新版本是对所有包内内容进行的hash,对齐会导致hash变化从而导致签名验证失败。 签名命令： # apksigner与zipalign在同一目录 apksigner sign --ks welltory.jks --ks-pass pass:123456 --v2-signing-enabled true output.apk ",
+      "url"      : "https://pfcstyle.github.io/2021/06/23/android-reverse-android-killer-apk-install/",
       "keywords" : "[&quot;Android Reverse&quot;]"
     } ,
   
