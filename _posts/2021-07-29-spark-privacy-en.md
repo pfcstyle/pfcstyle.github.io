@@ -1,6 +1,6 @@
 ---
 layout:		post
-title:		"ArcGIS Spark 隐私政策"
+title:		"ArcGIS Spark Privacy"
 description: ""
 date:		2021-07-29
 author:		"Yawei"
