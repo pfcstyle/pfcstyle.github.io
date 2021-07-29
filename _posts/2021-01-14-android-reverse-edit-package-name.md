@@ -2,7 +2,7 @@
 layout:		post
 title:		"Android Reverse - Edit package name"
 description: ""
-date:		2021-06-21
+date:		2017-01-14
 author:		"Yawei"
 categories: "Android Reverse"
 keywords:

@@ -2,7 +2,7 @@
 layout:		post
 title:		"Android Reverse - Remove AD"
 description: ""
-date:		2021-06-21
+date:		2017-01-21
 author:		"Yawei"
 categories: "Android Reverse"
 keywords:
