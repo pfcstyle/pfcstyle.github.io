@@ -8,15 +8,17 @@ menu: 关于
 permalink: /about/
 ---
 
-王亚威
+王亚威(Yawei Wang)
 
 思考 + 前进
 
-## 联系
+Thinking And Forward
+
+## 联系(Contact)
 
 <ul>
 {% for website in site.data.social %}
-<li>{{website.sitename }}：<a href="{{ website.url }}" target="_blank">@{{ website.name }}</a></li>
+<li>{{website.sitename }}：<a href="{{ website.url }}" target="_blank">{{ website.name }}</a></li>
 {% endfor %}
 {% if site.url contains 'pfcstyle.github.io' %}
 <!-- <li>

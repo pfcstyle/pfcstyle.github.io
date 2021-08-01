@@ -18,6 +18,8 @@ keywords:
 sudo netplan apply
 ```
 
+> 注意关闭浏览器代理
+
 # 查看部署错误日志
 ```
 kubectl describe deploy [deployname]

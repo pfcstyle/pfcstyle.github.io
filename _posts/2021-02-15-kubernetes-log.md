@@ -182,7 +182,7 @@ spec:
 
 ```
 
-#### 部署es
+### 部署es
 
 ```bash
 kubectl apply -f elasticsearch.yaml
@@ -272,7 +272,6 @@ spec:
 
 
 ```
-#### log-pilot 部署
 
 ```bash
 kubectl apply -f log-pilot.yaml
@@ -282,3 +281,153 @@ kubectl get ds -n kube-system
 ```
 > 第一次需要下载镜像，因此会比较慢，可以使用`kubectl describe ds log-pilot -n kube-system`查看状态
 ![logpilot检查](/img/post/2021-02-15/logpilot-check.png)
+
+### kibana 部署
+
+```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  namespace: kube-system
+  labels:
+    component: kibana
+spec:
+  selector:
+    component: kibana
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+---
+#ingress
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kibana
+  namespace: kube-system
+spec:
+  rules:
+  - host: kibana.esribj.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kibana
+          servicePort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: kube-system
+  labels:
+    component: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     component: kibana
+  template:
+    metadata:
+      labels:
+        component: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: kibana:5.5.1
+        env:
+        - name: CLUSTER_NAME
+          value: docker-cluster
+        - name: ELASTICSEARCH_URL
+          value: http://elasticsearch-api:9200/
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 100m
+        ports:
+        - containerPort: 5601
+          name: http
+
+
+```
+
+```bash
+kubectl apply -f kibana.yaml
+kubectl get deploy -n kube-system
+```
+配置kibana.esribj.com到hosts, 然后访问http://kibana.esribj.com:30080
+
+## 测试logpilog日志 
+启动一个web demo来测试
+```yaml
+#deploy
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-log-demo
+spec:
+  selector:
+    matchLabels:
+      app: web-log-demo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-log-demo
+    spec:
+      containers:
+      - name: web-log-demo
+        image: yw-worker1.esri.com/kubernetes/web-demo:1.0
+        ports:
+        - containerPort: 8080
+        env: # 配置采集目录
+        # 这里注意命名格式 aliyun_logs_[自定义名称]
+        # 对接es，就是索引；对接kafka，就是topic
+        - name: aliyun_logs_catalina
+          value: "stdout"
+        - name: aliyun_logs_access
+          value: "/usr/local/tomcat/logs/*"
+        volumeMounts:
+        - mountPath: /usr/local/tomcat/logs
+          name: accesslogs
+      volumes:
+      - name: accesslogs
+        emptyDir: {}
+---
+#service
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-log-demo
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: web-log-demo
+  type: ClusterIP
+
+---
+#ingress
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web-log-demo
+spec:
+  rules:
+  - host: web-log.esribj.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web-log-demo
+          servicePort: 80
+
+```
+配置kibana索引
+
+https://github.com/AliyunContainerService/log-pilot
