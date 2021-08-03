@@ -351,10 +351,26 @@
     } ,
   
     {
+      "title"    : "Talking about person",
+      "category" : "English",
+      "content": "Describe a person vocabulary Mouth, Eyes, Hair, Head, Ear, Face, Nose; Sentence Is he tall or short? What does he look like? Is her hair long or short? What color are his eyes? Work person Sales assistant; Doctor; Engineer; Architect: A person whose job is designing buildings; Teacher; FireFighter; Manager; Secretary: A person who works in an office, working for another person, dealing with letters and telephone calls, typing, keeping records, arranging meetings with people, etc. Artist: A person who creates works of art, especially paintings or drawings Followship activity(联谊活动) 在联谊活动中，在短时间内尽可能与越多人见面越好，所以交谈会很快。人们想尽快了解对方的职业，在哪里工作，居住在哪里，看看他们是否有足够的相同点进行进一步的交谈。 What do you do? What company do you work for? Do you like your job? 尽管不建议询问某人是否已婚或是是否有小孩了，但是如果他们谈及到以下话题之一时是可以问以上的问题的。 I live with my wife in New York. What does your wife do? ",
+      "url"      : "https://pfcstyle.github.io/2017/01/30/talking-about-person/",
+      "keywords" : "[&quot;English&quot;, &quot;Communicating&quot;]"
+    } ,
+  
+    {
+      "title"    : "Shopping",
+      "category" : "English",
+      "content": "Shopping Vocabulary  文化注释：在英式英语中， pants 是内裤的意思。在英国，人们说 trousers 。 一些服装的词总是用复数 Trousers; Pants; Jeans; Jacket; Dress; Skirt; Shirt; Sock; Shoe Ingredient wool; cotton; polyester(聚酯纤维) Shop General Department store：百货商店; Mall: 大型购物中心；Clothing store; Shop; Online store Sentence Can I try these on? 当你说起裤子，牛仔裤，袜子和鞋的时候，你可以使用a pair of这个量词。 I have a new pair of pants. Ask for advice: What about this dress? How about those pants? What do you think? Ask about goods What size are you? I’m a medium. What’s it made of? It’s (made of) 100% wool. How much is it? It’s 89.99. It costs 89.99. I’ll take it.  $14.6 – fourteen dollars and sixty cents (fourteen sixty) ",
+      "url"      : "https://pfcstyle.github.io/2017/02/05/shopping/",
+      "keywords" : "[&quot;English&quot;, &quot;Communicating&quot;]"
+    } ,
+  
+    {
       "title"    : "Android Reverse - Remove AD",
       "category" : "Android",
       "content": " 删除网络权限 对于入口广告，可以从Main Activity入手，直接替换掉广告Activity 替换广告URL ",
-      "url"      : "https://pfcstyle.github.io/2017/01/21/android-reverse-remove-ad-copy/",
+      "url"      : "https://pfcstyle.github.io/2019/01/21/android-reverse-remove-ad/",
       "keywords" : "[&quot;Android Reverse&quot;]"
     } ,
   
