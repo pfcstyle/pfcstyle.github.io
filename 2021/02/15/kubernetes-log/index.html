@@ -35,7 +35,7 @@
   <span class="na">name</span><span class="pi">:</span> <span class="s">elasticsearch</span>
   <span class="na">namespace</span><span class="pi">:</span> <span class="s">kube-system</span>
   <span class="na">labels</span><span class="pi">:</span>
-    <span class="s">kubernetes.io/cluster-service</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+    <span class="na">kubernetes.io/cluster-service</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">replicas</span><span class="pi">:</span> <span class="m">3</span>
   <span class="na">serviceName</span><span class="pi">:</span> <span class="s2">"</span><span class="s">elasticsearch-service"</span>
@@ -136,7 +136,7 @@ kubectl get statefulset <span class="nt">-n</span> kube-system
   <span class="na">namespace</span><span class="pi">:</span> <span class="s">kube-system</span>
   <span class="na">labels</span><span class="pi">:</span>
     <span class="na">k8s-app</span><span class="pi">:</span> <span class="s">log-pilot</span>
-    <span class="s">kubernetes.io/cluster-service</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+    <span class="na">kubernetes.io/cluster-service</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">matchLabels</span><span class="pi">:</span>
@@ -145,7 +145,7 @@ kubectl get statefulset <span class="nt">-n</span> kube-system
     <span class="na">metadata</span><span class="pi">:</span>
       <span class="na">labels</span><span class="pi">:</span>
         <span class="na">k8s-app</span><span class="pi">:</span> <span class="s">log-es</span> <span class="c1"># &lt;------ matches this one</span>
-        <span class="s">kubernetes.io/cluster-service</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
+        <span class="na">kubernetes.io/cluster-service</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
         <span class="na">version</span><span class="pi">:</span> <span class="s">v1.22</span>
     <span class="na">spec</span><span class="pi">:</span>
       <span class="na">tolerations</span><span class="pi">:</span>
