@@ -1,6 +1,6 @@
 ---
 layout:		post
-title:		"Piek Privacy"
+title:		"Privacy Policy"
 description: ""
 date:		2023-03-30
 author:		"Yawei"
