@@ -1,6 +1,6 @@
 ---
 layout:		post
-title:		"Myelin Privacy"
+title:		"Piek Privacy"
 description: ""
 date:		2023-03-30
 author:		"Yawei"
@@ -8,7 +8,6 @@ categories: "privacy"
 keywords:
     - Privacy
 ---
-
 This application respects and protects the personal privacy of all service users. In order to provide you with more accurate and personalized services, this application will use and disclose your personal information in accordance with the provisions of this privacy policy. However, this application will treat this information with a high degree of diligence and prudence. Except as otherwise provided in this privacy policy, this application will not disclose or provide this information to third parties without your prior permission. This application will update this privacy policy from time to time. When you agree to this application service use agreement, you are deemed to have agreed to the entire content of this privacy policy. This privacy policy is an integral part of this application service usage agreement.
 
 ## 1. Scope of application
