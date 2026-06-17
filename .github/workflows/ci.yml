@@ -19,6 +19,9 @@ jobs:
           ruby-version: 3.0
 
       - name: Install and Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gem install bundler
           bundle install
